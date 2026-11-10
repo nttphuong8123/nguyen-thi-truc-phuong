@@ -427,7 +427,7 @@ export const PAGE_SEO_META: Record<string, PageSeoConfig> = {
     studyGuidePoints: [
       {
         heading: '1. Quy chuẩn gửi Email trao đổi học tập và nộp bài báo cáo',
-        content: 'Khi gửi email trao đổi học phần hoặc nộp bản thảo đề cương/báo cáo thực tập qua địa chỉ dinhtk@kthcm.edu.vn, sinh viên vui lòng đặt tiêu đề email rõ ràng theo cú pháp: [Lớp - Tên Học Phần/Thực Tập] - [Họ và Tên Sinh Viên] - [MSSV] - [Nội dung cần hỗ trợ]. File đính kèm cần đặt tên không dấu kèm phiên bản ngày nộp để giảng viên phản hồi nhanh nhất.'
+        content: 'Khi gửi email trao đổi học phần hoặc nộp bản thảo đề cương/báo cáo thực tập qua địa chỉ phuongntt@kthcm.edu.vn, sinh viên vui lòng đặt tiêu đề email rõ ràng theo cú pháp: [Lớp - Tên Học Phần/Thực Tập] - [Họ và Tên Sinh Viên] - [MSSV] - [Nội dung cần hỗ trợ]. File đính kèm cần đặt tên không dấu kèm phiên bản ngày nộp để giảng viên phản hồi nhanh nhất.'
       },
       {
         heading: '2. Các kênh video bài giảng và hỗ trợ trực tuyến chính thức',

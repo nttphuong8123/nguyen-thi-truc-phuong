@@ -300,8 +300,7 @@ const seoMeta = getSeoMetaForPath(cleanPath, pageData?.title);
               document.querySelectorAll('.tkd-academic-subpage table, main table').forEach(tbl => {
                 if (tbl.closest('.table-responsive') || tbl.closest('.table-container') || tbl.parentElement?.classList.contains('table-responsive') || tbl.classList.contains('no-scroll') || tbl.classList.contains('table-fixed')) return;
                 const wrapper = document.createElement('div');
-                wrapper.className = 'table-responsive my-3 max-w-full overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-2xs';
-                wrapper.style.webkitOverflowScrolling = 'touch';
+                wrapper.className = 'table-responsive my-3 w-full rounded-xl border border-slate-200 bg-white shadow-2xs';
                 tbl.parentNode?.insertBefore(wrapper, tbl);
                 wrapper.appendChild(tbl);
               });

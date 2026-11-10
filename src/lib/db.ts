@@ -262,13 +262,13 @@ export interface EvaluationCriterion {
 export const DEFAULT_SITE_CONTACT_CONFIG: SiteContactConfig = {
   instructor_name: 'ThS. NGUYỄN THỊ TRÚC PHƯƠNG',
   department: 'Khoa Quản trị - Kinh doanh (HCE)',
-  email: 'dinhtk@kthcm.edu.vn',
-  hotline: '0902 928 928',
-  zalo_url: 'https://zalo.me/0902928928',
-  address: '33 Vĩnh Viễn, Phường Vườn Lài, Tp.HCM',
-  youtube_url: 'https://www.youtube.com/@dinhtran928',
-  tiktok_url: 'https://www.tiktok.com/@thanhks86?_r=1&_t=ZS-99gey46u0C8',
-  office_hours: 'Thứ Ba & Thứ Năm: 08:30 – 11:30 | Thứ Sáu: 13:30 – 16:30 (Hẹn trước qua Email/Zalo)',
+  email: 'phuongntt@kthcm.edu.vn',
+  hotline: '',
+  zalo_url: '',
+  address: '33 Vĩnh Viễn, Phường Vườn Lài, Quận 10, Tp.HCM',
+  youtube_url: '',
+  tiktok_url: '',
+  office_hours: 'Thứ Ba & Thứ Năm: 08:30 – 11:30 | Thứ Sáu: 13:30 – 16:30 (Hẹn trước qua Email)',
 };
 
 export const DEFAULT_YOUTUBE_VIDEOS: YoutubeVideoItem[] = [

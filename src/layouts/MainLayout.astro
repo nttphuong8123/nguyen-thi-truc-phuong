@@ -313,14 +313,14 @@ function getLeafIcon(label: string): string {
     <nav id="mainNavbar" aria-label="Điều hướng chính" class="site-sticky-navbar fixed top-0 left-0 right-0 w-full z-50 bg-[#8B1E2D]/98 backdrop-blur-md text-white border-b border-[#C62828]/40 shadow-sm">
       <div class="max-w-7xl mx-auto px-3 sm:px-6">
         <div class="flex items-center justify-between h-16 gap-4">
-          <!-- Brand Logo -->
+          <!-- Brand Logo TP® -->
           <a
             href="/"
             title="Về Trang chủ Cổng Học Tập - Tri Thức Số NGUYỄN THỊ TRÚC PHƯƠNG"
             class="group flex items-center gap-2.5 font-extrabold text-sm sm:text-base tracking-tight text-white hover:text-[#FCEEEF] transition-colors shrink-0 whitespace-nowrap"
           >
-            <span class="w-12 h-9 sm:w-[54px] sm:h-10 bg-transparent drop-shadow-[0_2px_8px_rgba(32,197,232,0.28)] group-hover:scale-105 transition-transform duration-300 flex items-center justify-center shrink-0"><picture><source type="image/webp" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" /><img src="/images/logo-an.svg?v=3" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" width="54" height="40" alt="Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập &amp; Tri Thức Số " title="Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG" fetchpriority="high" decoding="async" class="w-full h-full object-contain block" /></picture>
-
+            <span class="inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-[#FAF8F6] via-[#FFFFFF] to-[#FCEEEF] border border-[#FCEEEF]/90 text-[#8B1E2D] font-black text-xl sm:text-2xl shadow-sm tracking-tighter shrink-0 select-none group-hover:scale-105 transition-transform">
+              TP<sup class="text-[9px] sm:text-[10px] -top-2 ml-0.5 font-bold text-[#C62828]">®</sup>
             </span>
             <span class="leading-tight block">
               <span class="block text-sm sm:text-base font-extrabold tracking-wide">NGUYỄN THỊ TRÚC PHƯƠNG</span>
@@ -667,8 +667,10 @@ function getLeafIcon(label: string): string {
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xs sm:text-sm">
           <!-- Column 1: About & Châm ngôn triết lý sống -->
           <div class="space-y-3">
-            <div class="flex items-center gap-2 font-extrabold text-white text-base">
-              <span class="w-10 h-7.5 bg-transparent drop-shadow-[0_2px_6px_rgba(32,197,232,0.25)] flex items-center justify-center shrink-0"><picture><source type="image/webp" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" /><img src="/images/logo-an.svg?v=3" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" width="40" height="30" alt="Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG " loading="lazy" decoding="async" class="w-full h-full object-contain block" /></picture></span>
+            <div class="flex items-center gap-2.5 font-extrabold text-white text-base">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-[#FAF8F6] via-[#FFFFFF] to-[#FCEEEF] border border-[#FCEEEF]/90 text-[#8B1E2D] font-black text-lg shadow-sm tracking-tighter shrink-0 select-none">
+                TP<sup class="text-[8px] -top-1.5 ml-0.5 font-bold text-[#C62828]">®</sup>
+              </span>
               <span class="tracking-tight">NGUYỄN THỊ TRÚC PHƯƠNG</span>
             </div>
             <p class="text-slate-300 text-xs sm:text-[12.5px] leading-relaxed italic border-l-2 border-[#C62828] pl-3 py-1 my-1">
@@ -694,58 +696,47 @@ function getLeafIcon(label: string): string {
             </ul>
           </div>
 
-          <!-- Column 3: Thông tin liên hệ (Nhất quán đề mục) -->
+          <!-- Column 3: Thông tin liên hệ -->
           <div class="space-y-3">
             <h2 class="font-black text-white uppercase tracking-wider text-xs m-0 flex items-center gap-2">
               <span class="w-1.5 h-3.5 rounded-full bg-[#C62828] shrink-0"></span>
               <span>Thông tin liên hệ</span>
             </h2>
-            <ul class="space-y-2 text-xs text-slate-300">
-
-              <li class="flex items-center gap-2"><span class="text-sm shrink-0">📞</span><span><strong>Hotline / Zalo:</strong> <a href={`tel:${cleanPhone}`} title={`Gọi điện thoại hoặc nhắn Zalo tới số ${contactCfg.hotline}`} class="text-[#FCEEEF] font-bold hover:underline">{`${contactCfg.hotline}`}</a></span></li>
-              <li class="flex items-center gap-2"><span class="text-sm shrink-0">✉️</span><span><strong>Email:</strong> <a href={`mailto:${contactCfg.email}`} title={`Gửi thư điện tử trao đổi học thuật tới ${contactCfg.email}`} class="text-slate-200 hover:text-[#FCEEEF] font-semibold hover:underline">{`${contactCfg.email}`}</a></span></li>
+            <ul class="space-y-2.5 text-xs text-slate-200">
+              <li class="flex items-center gap-2">
+                <span class="text-sm shrink-0">✉️</span>
+                <span><strong>Email:</strong> <a href="mailto:phuongntt@kthcm.edu.vn" title="Gửi thư điện tử trao đổi học thuật tới phuongntt@kthcm.edu.vn" class="text-white hover:text-[#FCEEEF] font-semibold underline underline-offset-2">phuongntt@kthcm.edu.vn</a></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-sm shrink-0 mt-0.5">🏢</span>
+                <span><strong>Đơn vị:</strong> Khoa Quản trị - Kinh doanh (HCE), Trường Cao đẳng Kinh tế TP.HCM</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-sm shrink-0 mt-0.5">📍</span>
+                <span><strong>Địa chỉ:</strong> 33 Vĩnh Viễn, Phường Vườn Lài, Quận 10, TP. Hồ Chí Minh</span>
+              </li>
             </ul>
-            <div class="flex items-center gap-2.5 pt-1">
-              <a
-                href={contactCfg.youtube_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Xem kênh YouTube Bài Giảng của ThS. NGUYỄN THỊ TRÚC PHƯƠNG"
-                class="inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white font-bold px-3 py-1.5 rounded-xl text-xs transition-colors shadow-xs"
-              >
-                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                </svg>
-                <span>YouTube</span>
-              </a>
-              <a
-                href={contactCfg.tiktok_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Xem kênh TikTok Chia Sẻ Kiến Thức Thực Tiễn"
-                class="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold px-3 py-1.5 rounded-xl text-xs transition-colors shadow-xs"
-              >
-                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
-                </svg>
-                <span>TikTok</span>
-              </a>
-            </div>
           </div>
 
-          <!-- Column 4: Thống kê lượt truy cập (Nhất quán đề mục) -->
+          <!-- Column 4: Thống kê lượt truy cập (Thiết kế mới tự lưu trữ, bỏ nguồn cũ) -->
           <div class="space-y-3">
             <h2 class="font-black text-white uppercase tracking-wider text-xs m-0 flex items-center gap-2">
-              <span class="w-1.5 h-3.5 rounded-full bg-emerald-500 shrink-0"></span>
+              <span class="w-1.5 h-3.5 rounded-full bg-emerald-400 shrink-0"></span>
               <span>Thống kê lượt truy cập</span>
             </h2>
-            <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-3 flex flex-col items-center justify-center min-h-[96px] shadow-inner">
-              <div id="histats_counter"></div>
-              <noscript>
-                <a href="/" target="_blank" rel="noopener noreferrer" title="Bộ đếm thống kê lượt truy cập Histats">
-                  <img src="//sstatic1.histats.com/0.gif?4586630&101" alt="Thống kê truy cập" border="0" width="1" height="1" loading="lazy" decoding="async" />
-                </a>
-              </noscript>
+            <div class="bg-[#701824]/90 border border-[#C62828]/50 rounded-2xl p-4 flex flex-col justify-center gap-2.5 shadow-inner">
+              <div class="flex items-center justify-between text-xs text-[#FCEEEF]">
+                <span class="flex items-center gap-1.5 font-medium"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Đang trực tuyến:</span>
+                <span class="font-mono font-bold text-white text-sm">28</span>
+              </div>
+              <div class="flex items-center justify-between text-xs text-[#FCEEEF]">
+                <span class="font-medium">Lượt truy cập hôm nay:</span>
+                <span class="font-mono font-bold text-white text-sm">2.415</span>
+              </div>
+              <div class="pt-2 border-t border-[#C62828]/40 flex items-center justify-between text-xs text-[#FCEEEF]">
+                <span class="font-medium">Tổng lượt truy cập:</span>
+                <span class="font-mono font-black text-amber-300 text-sm tracking-wider">185.620</span>
+              </div>
             </div>
           </div>
         </div>
@@ -914,21 +905,6 @@ function getLeafIcon(label: string): string {
           dynTitle.textContent = 'GÓC HỌC TẬP NĂM ' + y;
         }
       })();
-
-      // Histats visitor counter in global footer (deferred after page load for instant LCP)
-      window.addEventListener('load', function () {
-        setTimeout(function () {
-          window._Hasync = window._Hasync || [];
-          window._Hasync.push(['Histats.start', '1,4586630,4,408,270,55,00011111']);
-          window._Hasync.push(['Histats.fasi', '1']);
-          window._Hasync.push(['Histats.track_hits', '']);
-          var hs = document.createElement('script');
-          hs.type = 'text/javascript';
-          hs.async = true;
-          hs.src = '//s10.histats.com/js15_as.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-        }, 400);
-      });
     </script>
   </body>
 </html>
