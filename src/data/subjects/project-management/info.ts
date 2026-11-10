@@ -42,7 +42,7 @@ export const projectManagementInfo: SubjectInfo = {
   institution: 'Trường Cao đẳng Kinh tế Thành phố Hồ Chí Minh (HCE)',
   department: 'Khoa Quản trị Kinh doanh',
   targetAudience: 'Sinh viên bậc Cao đẳng & Đại học khối ngành Kinh tế, Quản trị kinh doanh, Kinh doanh quốc tế',
-  prerequisites: 'Quản trị học đại cương, Nguyên lý kế toán, Thống kê kinh doanh',
+  prerequisites: 'Quản trị kinh doanh đại cương, Nguyên lý kế toán, Thống kê kinh doanh',
   description: 'Học phần Quản trị dự án trang bị cho sinh viên hệ thống lý thuyết chuẩn mực và công cụ thực hành quản trị dự án hiện đại từ khâu hình thành ý tưởng, thẩm định lựa chọn dự án (NPV, IRR, PP, PI), thiết lập cơ cấu tổ chức, lập kế hoạch và phân rã công việc (WBS), lập tiến độ (Gantt, CPM, PERT), phân bổ và cân bằng nguồn lực đến kỹ thuật kiểm soát giá trị thu được (EVM) và quy trình nghiệm thu, kết thúc dự án.',
   objectives: {
     knowledge: [

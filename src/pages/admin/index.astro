@@ -3,7 +3,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import db, {
   verifyGateToken,
   getSiteContactConfig,
-  getYoutubeVideos,
   getEvaluationCriteria,
   getEvaluations,
   getSurveys,
@@ -20,7 +19,6 @@ import db, {
   type BirthdayRecipientDetail,
   type NewsArticle,
   type SiteContactConfig,
-  type YoutubeVideoItem,
   type EvaluationCriterion,
   type LecturerEvaluation,
   getTeachingSchedule,
@@ -58,7 +56,6 @@ let newsArticles: NewsArticle[] = [];
 let quizTargets: QuizTargetMeta[] = [];
 let onlineExamConfig: OnlineExamConfig = getOnlineExamConfig();
 let siteContact: SiteContactConfig = getSiteContactConfig();
-let youtubeVideos: YoutubeVideoItem[] = [];
 let evalCriteria: EvaluationCriterion[] = [];
 let evaluations: LecturerEvaluation[] = [];
 let contactMessages: StudentSurvey[] = [];
@@ -82,8 +79,7 @@ if (isAuthenticated) {
   quizTargets = getAllQuizTargetsSummary();
   onlineExamConfig = getOnlineExamConfig();
   siteContact = getSiteContactConfig();
-  youtubeVideos = getYoutubeVideos();
-  evalCriteria = getEvaluationCriteria();
+    evalCriteria = getEvaluationCriteria();
   evaluations = getEvaluations(500);
   contactMessages = getSurveys('contact_message', 500);
   nckhSurveys = getSurveys('nckh', 500);
@@ -488,155 +484,7 @@ if (isAuthenticated) {
             </form>
           </div>
 
-          <!-- Khối Quản lý Danh sách Video Bài Giảng YouTube hiển thị trên Trang chủ -->
-          <div class="bg-white p-5 sm:p-6 rounded-2xl border border-red-200 shadow-xs space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
-              <div>
-                <h3 class="font-extrabold text-sm sm:text-base text-slate-900 flex items-center gap-2">
-                  <span>🎬</span>
-                  <span>Quản Lý Danh Sách Video Bài Giảng YouTube (Hiển Thị Trang Chủ)</span>
-                </h3>
-                <p class="text-xs text-slate-500 mt-0.5">
-                  Nhập mã Video ID (11 ký tự) hoặc dán trực tiếp đường link YouTube (VD: https://www.youtube.com/watch?v=ThWjfeasS8o). Hệ thống tự động lấy ảnh thu nhỏ và trình phát.
-                </p>
-              </div>
-              <button
-                type="button"
-                id="addYoutubeVideoRowBtn"
-                class="px-3.5 py-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 font-bold text-xs cursor-pointer shrink-0 transition-colors"
-              >
-                ➕ Thêm Video Bài Giảng Mới
-              </button>
-            </div>
-            <div id="youtubeVideosAdminList" class="space-y-2.5">
-              {youtubeVideos.map((vid, idx) => (
-                <div class="yt-admin-row grid grid-cols-1 sm:grid-cols-12 gap-2.5 items-center bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs">
-                  <div class="sm:col-span-3">
-                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">
-                      Link / Video ID YouTube #{idx + 1}
-                    </label>
-                    <input
-                      type="text"
-                      value={vid.videoId}
-                      placeholder="VD: ThWjfeasS8o hoặc link YouTube"
-                      class="yt-input-id w-full px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white font-mono font-bold text-red-700"
-                    />
-                  </div>
-                  <div class="sm:col-span-6">
-                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Tiêu đề Video bài giảng</label>
-                    <input
-                      type="text"
-                      value={vid.title}
-                      placeholder="Nhập tiêu đề bài giảng..."
-                      class="yt-input-title w-full px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white font-semibold text-slate-900"
-                    />
-                  </div>
-                  <div class="sm:col-span-2">
-                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Nhãn chuyên đề</label>
-                    <input
-                      type="text"
-                      value={vid.publishedAt}
-                      placeholder="VD: Chuyên đề QTSX"
-                      class="yt-input-badge w-full px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white text-slate-700"
-                    />
-                  </div>
-                  <div class="sm:col-span-1 flex justify-end sm:pt-4">
-                    <button
-                      type="button"
-                      class="del-yt-row-btn px-2.5 py-1.5 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold text-xs cursor-pointer"
-                      title="Xóa video này"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div class="flex justify-end pt-1">
-              <button
-                type="button"
-                id="saveYoutubeVideosBtn"
-                class="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs cursor-pointer shadow-xs transition-colors"
-              >
-                💾 Lưu Danh Sách Video Bài Giảng (Cloudflare D1)
-              </button>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {gates.map((g) => {
-              const codesList = JSON.parse(g.passcodes_json || '[]').join(', ');
-              return (
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
-                  <div>
-                    <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">
-                      {g.gate_key}
-                    </span>
-                    <h3 class="font-bold text-sm sm:text-base text-slate-900 mt-1">{g.gate_name}</h3>
-                    <p class="text-xs text-slate-500 mt-0.5">{g.description}</p>
-                  </div>
-                  <div class="space-y-1.5">
-                    <label class="block text-xs font-bold text-slate-700">
-                      Mã truy cập hợp lệ (cách nhau bằng dấu phẩy):
-                    </label>
-                    <input
-                      type="text"
-                      id={`gate-input-${g.gate_key}`}
-                      value={codesList}
-                      class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-xs font-bold text-sky-900 focus:outline-none focus:border-sky-600"
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    data-save-gate={g.gate_key}
-                    class="save-gate-btn w-full py-2 rounded-xl bg-sky-700 hover:bg-sky-800 text-white font-bold text-xs transition-colors cursor-pointer"
-                  >
-                    💾 Lưu mật khẩu mới
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-
-          <!-- Bảng tra cứu 14 Mã Đề Kiểm Tra Giữa Kỳ (/elearning/exam) -->
-          <div class="bg-white p-5 rounded-2xl border border-sky-200 shadow-xs space-y-3">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div>
-                <h3 class="font-extrabold text-sm sm:text-base text-sky-950">
-                  📋 Danh Sách 14 Mã Mở Đề Kiểm Tra Giữa Kỳ (/elearning/exam)
-                </h3>
-                <p class="text-xs text-slate-500">
-                  Sinh viên nhập Họ tên + MSSV + Mã đề dưới đây tại trang <a href="/elearning/exam" target="_blank" class="text-sky-700 font-bold hover:underline">/elearning/exam</a> để mở đề cá nhân hóa theo MSSV
-                </p>
-              </div>
-              <a
-                href="/elearning/exam"
-                target="_blank"
-                title="Mở trang Kiểm tra giữa kỳ"
-                class="inline-flex items-center gap-1 text-xs font-bold text-sky-700 bg-sky-50 border border-sky-200 px-3 py-1.5 rounded-xl hover:bg-sky-100 shrink-0"
-              >
-                <span>Mở cổng /elearning/exam</span>
-                <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-              <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
-                <p class="font-extrabold text-slate-900 uppercase">🏭 Học phần QTSX &amp; QTSX-DV (Số liệu tự nhảy theo 4 số cuối MSSV):</p>
-                <p class="text-slate-700">
-                  • Dự báo &amp; Hoạch định 6 năm: <code class="font-mono font-bold text-sky-800 bg-white px-1.5 py-0.5 rounded border">QTSXDV20102025@</code>, <code class="font-mono font-bold text-sky-800 bg-white px-1.5 py-0.5 rounded border">2027QTSX7@</code>, <code class="font-mono font-bold text-sky-800 bg-white px-1.5 py-0.5 rounded border">2025QTSXDV5@</code>, <code class="font-mono font-bold text-sky-800 bg-white px-1.5 py-0.5 rounded border">2025QTSXDV72025@</code>, <code class="font-mono font-bold text-sky-800 bg-white px-1.5 py-0.5 rounded border">QTSX5@</code>
-                </p>
-                <p class="text-slate-700">
-                  • Hoạch định tổng hợp theo tháng: <code class="font-mono font-bold text-sky-800 bg-white px-1.5 py-0.5 rounded border">983904</code>, <code class="font-mono font-bold text-sky-800 bg-white px-1.5 py-0.5 rounded border">983905</code>, <code class="font-mono font-bold text-sky-800 bg-white px-1.5 py-0.5 rounded border">983906</code>
-                </p>
-              </div>
-              <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
-                <p class="font-extrabold text-slate-900 uppercase">📚 Học phần Marketing căn bản (Tình huống gắn tên sinh viên):</p>
-                <p class="text-slate-700">
-                  • Mã đề tình huống Marketing: <code class="font-mono font-bold text-indigo-800 bg-white px-1.5 py-0.5 rounded border">NHONYC</code>, <code class="font-mono font-bold text-indigo-800 bg-white px-1.5 py-0.5 rounded border">QTH983902</code>, <code class="font-mono font-bold text-indigo-800 bg-white px-1.5 py-0.5 rounded border">QTH983903</code>, <code class="font-mono font-bold text-indigo-800 bg-white px-1.5 py-0.5 rounded border">QTH983904</code>, <code class="font-mono font-bold text-indigo-800 bg-white px-1.5 py-0.5 rounded border">QTH983905</code>, <code class="font-mono font-bold text-indigo-800 bg-white px-1.5 py-0.5 rounded border">QTH983906</code>
-                </p>
-              </div>
-            </div>
-          </div>
+          <!-- Khối Video Bài Giảng đã được loại bỏ theo yêu cầu thiết kế mới -->
         </section>
 
         <!-- TAB 3: DCCT SYLLABUS CODES -->
@@ -4031,78 +3879,7 @@ if (isAuthenticated) {
       });
     }
 
-    // YouTube Videos Admin Management
-    const ytAdminList = document.getElementById('youtubeVideosAdminList');
-    const addYtRowBtn = document.getElementById('addYoutubeVideoRowBtn');
-    const saveYtVideosBtn = document.getElementById('saveYoutubeVideosBtn');
-
-    function bindYtRowDelete() {
-      document.querySelectorAll('.del-yt-row-btn').forEach((btn) => {
-        btn.onclick = () => {
-          const row = btn.closest('.yt-admin-row');
-          if (row && document.querySelectorAll('.yt-admin-row').length > 1) {
-            row.remove();
-          } else {
-            alert('Cần giữ lại ít nhất 1 video bài giảng!');
-          }
-        };
-      });
-    }
-    bindYtRowDelete();
-
-    if (addYtRowBtn && ytAdminList) {
-      addYtRowBtn.addEventListener('click', () => {
-        const idx = ytAdminList.querySelectorAll('.yt-admin-row').length + 1;
-        const div = document.createElement('div');
-        div.className = 'yt-admin-row grid grid-cols-1 sm:grid-cols-12 gap-2.5 items-center bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs';
-        div.innerHTML = `
-          <div class="sm:col-span-3">
-            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Link / Video ID YouTube #${idx}</label>
-            <input type="text" placeholder="VD: ThWjfeasS8o hoặc link YouTube" class="yt-input-id w-full px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white font-mono font-bold text-red-700" />
-          </div>
-          <div class="sm:col-span-6">
-            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Tiêu đề Video bài giảng</label>
-            <input type="text" placeholder="Nhập tiêu đề bài giảng..." class="yt-input-title w-full px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white font-semibold text-slate-900" />
-          </div>
-          <div class="sm:col-span-2">
-            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Nhãn chuyên đề</label>
-            <input type="text" value="Chuyên đề" placeholder="VD: Chuyên đề QTSX" class="yt-input-badge w-full px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white text-slate-700" />
-          </div>
-          <div class="sm:col-span-1 flex justify-end sm:pt-4">
-            <button type="button" class="del-yt-row-btn px-2.5 py-1.5 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold text-xs cursor-pointer" title="Xóa video này">✕</button>
-          </div>
-        `;
-        ytAdminList.appendChild(div);
-        bindYtRowDelete();
-      });
-    }
-
-    if (saveYtVideosBtn && ytAdminList) {
-      saveYtVideosBtn.addEventListener('click', async () => {
-        const rows = ytAdminList.querySelectorAll('.yt-admin-row');
-        const videos = [];
-        rows.forEach((row) => {
-          const videoId = row.querySelector('.yt-input-id')?.value.trim() || '';
-          const title = row.querySelector('.yt-input-title')?.value.trim() || '';
-          const publishedAt = row.querySelector('.yt-input-badge')?.value.trim() || 'Bài giảng';
-          if (videoId && title) {
-            videos.push({ videoId, title, publishedAt });
-          }
-        });
-        if (videos.length === 0) {
-          alert('Vui lòng nhập ít nhất 1 video hợp lệ (có Link/ID và Tiêu đề).');
-          return;
-        }
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'save_youtube_videos', youtube_videos: videos }),
-        });
-        const data = await resp.json();
-        alert(data.message || 'Đã lưu danh sách video bài giảng!');
-        if (resp.ok) window.location.reload();
-      });
-    }
+    // YouTube Videos Admin Management: removed
   
     // Teaching Schedule Admin Logic
     const schedModal = document.getElementById('scheduleModal');

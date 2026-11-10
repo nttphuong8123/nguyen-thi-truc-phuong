@@ -295,7 +295,7 @@
       "title": "Góc Học Tập Quản Trị Kinh Doanh, Marketing & Kinh Tế Học HCE",
       "category": "Study-Corner",
       "page_type": "content",
-      "html_content": "<div class=\"tkd-page-scope\">\n<!-- Header đồng bộ hệ thống -->\r\n  <header class=\"w-full bg-gradient-to-br from-sky-800 via-sky-700 to-cyan-800 text-white pt-5 pb-5 px-3 text-center shadow-sm\">\r\n    <div class=\"max-w-5xl mx-auto space-y-1.5\">\r\n      <div class=\"inline-flex items-center gap-1.5 bg-sky-900/60 border border-sky-300/30 rounded-full px-2.5 py-0.5 text-xs sm:text-sm font-semibold text-sky-200 uppercase tracking-wide\">\r\n        <svg class=\"w-3 h-3 text-amber-300\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n          <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253\" />\r\n        </svg>\r\n        Tài Liệu Học Tập\r\n      </div>\r\n      <h1 class=\"text-base sm:text-xl font-extrabold tracking-tight uppercase leading-snug\">\r\n        Góc Học Tập \r\n      </h1>\r\n      <p class=\"text-xs sm:text-sm sm:text-xs text-sky-100/90 leading-tight max-w-xl mx-auto\">\r\n        Hệ thống tài liệu tham khảo, bài giảng và tóm tắt kiến thức dành cho sinh viên\r\n      </p>\r\n    </div>\r\n  </header>\r\n\r\n  <div class=\"max-w-5xl mx-auto px-2 sm:px-4 py-4 space-y-4\">\r\n\r\n    <!-- Giới thiệu (Khối Thông Báo) -->\r\n    <section class=\"bg-white rounded-xl shadow-xs border border-sky-200 overflow-hidden\">\r\n      <div class=\"bg-sky-700 px-3 py-1.5 text-white flex items-center justify-between\">\r\n        <h2 class=\"font-bold text-xs sm:text-sm sm:text-sm tracking-tight flex items-center gap-1.5\">\r\n          <svg class=\"w-3.5 h-3.5 text-amber-300\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"/>\r\n          </svg>\r\n          Giới Thiệu\r\n        </h2>\r\n        <span class=\"text-xs sm:text-sm bg-sky-800/80 px-2 py-0.5 rounded text-sky-100 font-medium\">Phi lợi nhuận</span>\r\n      </div>\r\n      <div class=\"p-3 sm:p-4 space-y-2.5 text-xs sm:text-sm sm:text-xs text-slate-700 leading-relaxed\">\r\n        <p>\r\n          Những nội dung và tài liệu trên trang web này được tổng hợp và biên soạn từ nhiều nguồn học thuật chính thống khác nhau, phục vụ cộng đồng bạn đọc và sinh viên hoàn toàn <strong class=\"text-sky-900 font-bold\">MIỄN PHÍ</strong>, cam kết <strong class=\"text-rose-600 font-bold\">KHÔNG THU PHÍ</strong> hay đặt quảng cáo thương mại dưới bất kỳ hình thức nào.\r\n        </p>\r\n        <p>\r\n          Đây là không gian trao đổi học thuật, chia sẻ học liệu và bài tập thực hành dành cho các bộ môn chuyên ngành Quản trị - Kinh doanh (Khởi nghiệp, Marketing căn bản & dịch vụ, Kinh tế vi mô, Khởi nghiệp, Phân tích dữ liệu,...). Đồng thời, trang cung cấp các bảng tóm tắt lý thuyết trọng tâm và đề cương ôn tập giúp người học nhanh chóng nắm vững kiến thức cốt lõi.\r\n        </p>\r\n      </div>\r\n    </section>\r\n\r\n    <!-- Danh mục học liệu -->\r\n    <section class=\"space-y-2.5\">\r\n      <div class=\"bg-sky-900 text-white px-3 py-2 rounded-lg font-extrabold text-xs sm:text-sm uppercase tracking-wide flex items-center justify-between shadow-xs\">\r\n        <span class=\"flex items-center gap-1.5\">\r\n          <svg class=\"w-4 h-4 text-amber-300\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10\"/>\r\n          </svg>\r\n          Học Liệu\r\n        </span>\r\n        <span class=\"text-xs sm:text-sm font-normal text-sky-200\">10 Chuyên Mục</span>\r\n      </div>\r\n\r\n      <div class=\"grid grid-cols-1 sm:grid-cols-2 gap-2.5\">\r\n\r\n        <!-- 1. Kinh tế vi mô -->\r\n        <a href=\"/study-corner/microeconomics\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"subject-card bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between group\" title=\"Mở tài liệu: 01 Kinh Tế Vi Mô Cung cầu, hành vi người tiêu dùng & lý thuyết giá\">\r\n          <div class=\"flex items-center gap-3\">\r\n            <div class=\"w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors\">\r\n              01\r\n            </div>\r\n            <div>\r\n              <h3 class=\"text-xs font-bold text-slate-800 group-hover:text-sky-700 transition-colors\">Kinh Tế Vi Mô</h3>\r\n              <p class=\"text-xs sm:text-sm text-slate-500\">Cung cầu, hành vi người tiêu dùng & lý thuyết giá</p>\r\n            </div>\r\n          </div>\r\n          <svg class=\"w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        </a>\r\n\r\n        <!-- 2. Phân tích dữ liệu -->\r\n        <a href=\"/spss\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"subject-card bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between group\" title=\"Mở tài liệu: 02 Phân Tích Dữ Liệu Thống kê ứng dụng & hướng dẫn thực hành SPSS\">\r\n          <div class=\"flex items-center gap-3\">\r\n            <div class=\"w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors\">\r\n              02\r\n            </div>\r\n            <div>\r\n              <h3 class=\"text-xs font-bold text-slate-800 group-hover:text-sky-700 transition-colors\">Phân Tích Dữ Liệu</h3>\r\n              <p class=\"text-xs sm:text-sm text-slate-500\">Thống kê ứng dụng & hướng dẫn thực hành SPSS</p>\r\n            </div>\r\n          </div>\r\n          <svg class=\"w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        </a>\r\n\r\n        <!-- 4. Khởi nghiệp -->\r\n        <a href=\"/study-corner/management\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"subject-card bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between group\" title=\"Mở tài liệu: 04 Quản Trị Học Hoạch định, tổ chức, lãnh đạo & kiểm soát\">\r\n          <div class=\"flex items-center gap-3\">\r\n            <div class=\"w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors\">\r\n              04\r\n            </div>\r\n            <div>\r\n              <h3 class=\"text-xs font-bold text-slate-800 group-hover:text-sky-700 transition-colors\">Quản Trị Học</h3>\r\n              <p class=\"text-xs sm:text-sm text-slate-500\">Hoạch định, tổ chức, lãnh đạo & kiểm soát</p>\r\n            </div>\r\n          </div>\r\n          <svg class=\"w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        </a>\r\n\r\n        <!-- 5. Marketing căn bản -->\r\n        <a href=\"/study-corner/production-management\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"subject-card bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between group\" title=\"Mở tài liệu: 05 Quản Trị Sản Xuất Bố trí mặt bằng, lập tiến độ & kiểm soát chất lượng\">\r\n          <div class=\"flex items-center gap-3\">\r\n            <div class=\"w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors\">\r\n              05\r\n            </div>\r\n            <div>\r\n              <h3 class=\"text-xs font-bold text-slate-800 group-hover:text-sky-700 transition-colors\">Quản Trị Sản Xuất</h3>\r\n              <p class=\"text-xs sm:text-sm text-slate-500\">Bố trí mặt bằng, lập tiến độ & kiểm soát chất lượng</p>\r\n            </div>\r\n          </div>\r\n          <svg class=\"w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        </a>\r\n\r\n        <!-- 6. Khởi nghiệp -->\r\n        <a href=\"/study-corner/entrepreneurship\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"subject-card bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between group\" title=\"Mở tài liệu: 06 Khởi Nghiệp Đổi Mới Sáng Tạo Xây dựng mô hình kinh doanh & kế hoạch gọi vốn\">\r\n          <div class=\"flex items-center gap-3\">\r\n            <div class=\"w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors\">\r\n              06\r\n            </div>\r\n            <div>\r\n              <h3 class=\"text-xs font-bold text-slate-800 group-hover:text-sky-700 transition-colors\">Khởi Nghiệp Đổi Mới Sáng Tạo</h3>\r\n              <p class=\"text-xs sm:text-sm text-slate-500\">Xây dựng mô hình kinh doanh & kế hoạch gọi vốn</p>\r\n            </div>\r\n          </div>\r\n          <svg class=\"w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        </a>\r\n\r\n        <!-- 7. Marketing căn bản -->\r\n        <a href=\"/study-corner/product-and-service-management\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"subject-card bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between group\" title=\"Mở tài liệu: 07 Quản Trị Sản Xuất & Dịch Vụ Dự báo nhu cầu & bài tập hoạch định tổng hợp\">\r\n          <div class=\"flex items-center gap-3\">\r\n            <div class=\"w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors\">\r\n              07\r\n            </div>\r\n            <div>\r\n              <h3 class=\"text-xs font-bold text-slate-800 group-hover:text-sky-700 transition-colors\">Quản Trị Sản Xuất & Dịch Vụ</h3>\r\n              <p class=\"text-xs sm:text-sm text-slate-500\">Dự báo nhu cầu & bài tập hoạch định tổng hợp</p>\r\n            </div>\r\n          </div>\r\n          <svg class=\"w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        </a>\r\n\r\n        <!-- 8. Kinh tế vi mô -->\r\n        <a href=\"/study-corner/brand-management\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"subject-card bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between group\" title=\"Mở tài liệu: 08 Quản Trị Thương Hiệu Định vị, bản sắc thương hiệu & tài sản thương hiệu\">\r\n          <div class=\"flex items-center gap-3\">\r\n            <div class=\"w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors\">\r\n              08\r\n            </div>\r\n            <div>\r\n              <h3 class=\"text-xs font-bold text-slate-800 group-hover:text-sky-700 transition-colors\">Quản Trị Thương Hiệu</h3>\r\n              <p class=\"text-xs sm:text-sm text-slate-500\">Định vị, bản sắc thương hiệu & tài sản thương hiệu</p>\r\n            </div>\r\n          </div>\r\n          <svg class=\"w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        </a>\r\n\r\n        <!-- 9. Thực tập -->\r\n        <a href=\"/study-corner/internships\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"subject-card bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between group\" title=\"Mở tài liệu: 09 Thực Tập Tốt Nghiệp Hướng dẫn viết báo cáo & quy trình thực tập doanh nghiệp\">\r\n          <div class=\"flex items-center gap-3\">\r\n            <div class=\"w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors\">\r\n              09\r\n            </div>\r\n            <div>\r\n              <h3 class=\"text-xs font-bold text-slate-800 group-hover:text-sky-700 transition-colors\">Thực Tập Tốt Nghiệp</h3>\r\n              <p class=\"text-xs sm:text-sm text-slate-500\">Hướng dẫn viết báo cáo & quy trình thực tập doanh nghiệp</p>\r\n            </div>\r\n          </div>\r\n          <svg class=\"w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        </a>\r\n\r\n        <!-- 10. Truyền thông Marketing tích hợp -->\r\n        <a href=\"/study-corner/imc\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"subject-card bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between group\" title=\"Mở tài liệu: 10 Truyền Thông Marketing Tích Hợp (IMC) Chiến dịch truyền thông, quảng cáo số & PR\">\r\n          <div class=\"flex items-center gap-3\">\r\n            <div class=\"w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors\">\r\n              10\r\n            </div>\r\n            <div>\r\n              <h3 class=\"text-xs font-bold text-slate-800 group-hover:text-sky-700 transition-colors\">Truyền Thông Marketing Tích Hợp (IMC)</h3>\r\n              <p class=\"text-xs sm:text-sm text-slate-500\">Chiến dịch truyền thông, quảng cáo số & PR</p>\r\n            </div>\r\n          </div>\r\n          <svg class=\"w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        </a>\r\n\r\n      </div>\r\n    </section>\r\n\r\n    <!-- Khối Liên hệ & Trao đổi qua TikTok -->\r\n    <section class=\"bg-amber-50/80 rounded-xl p-3 sm:p-4 border border-amber-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left\">\r\n      <div class=\"space-y-0.5\">\r\n        <h4 class=\"text-xs sm:text-sm font-bold text-amber-950 flex items-center justify-center sm:justify-start gap-1.5\">\r\n          <svg class=\"w-4 h-4 text-amber-600\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z\" />\r\n          </svg>\r\n          Thông tin liên hệ\r\n        </h4>\r\n        <p class=\"text-xs sm:text-sm sm:text-xs sm:text-sm text-slate-600\">\r\n          Mọi thắc mắc về bài giảng, tài liệu ôn thi hoặc cần trao đổi học thuật, vui lòng kết nối qua kênh TikTok chính thức.\r\n        </p>\r\n      </div>\r\n\r\n      <a href=\"https://www.tiktok.com/@thanhks86\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"inline-flex items-center gap-2 bg-slate-900 hover:bg-black text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-xs transition-all shrink-0\" title=\"Mở tài liệu: Liên hệ TikTok\">\r\n        <!-- TikTok Icon SVG -->\r\n        <svg class=\"w-4 h-4 fill-current\" viewBox=\"0 0 24 24\">\r\n          <path d=\"M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 2.89 3.5 2.67 1.39-.1 2.6-.96 2.95-2.29.17-.67.16-1.37.16-2.06z\"/>\r\n        </svg>\r\n        <span>Liên hệ TikTok</span>\r\n      </a>\r\n    </section>\r\n\r\n    <!-- Chân trang tự động cập nhật năm -->\r\n    \r\n\r\n  </div></div>",
+      "html_content": "<div class=\"tkd-page-scope\">\n<!-- Header đồng bộ hệ thống -->\r\n  <header class=\"w-full bg-gradient-to-br from-sky-800 via-sky-700 to-cyan-800 text-white pt-5 pb-5 px-3 text-center shadow-sm\">\r\n    <div class=\"max-w-5xl mx-auto space-y-1.5\">\r\n      <div class=\"inline-flex items-center gap-1.5 bg-sky-900/60 border border-sky-300/30 rounded-full px-2.5 py-0.5 text-xs sm:text-sm font-semibold text-sky-200 uppercase tracking-wide\">\r\n        <svg class=\"w-3 h-3 text-amber-300\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n          <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253\" />\r\n        </svg>\r\n        Tài Liệu Học Tập\r\n      </div>\r\n      <h1 class=\"text-base sm:text-xl font-extrabold tracking-tight uppercase leading-snug\">\r\n        Góc Học Tập \r\n      </h1>\r\n      <p class=\"text-xs sm:text-sm sm:text-xs text-sky-100/90 leading-tight max-w-xl mx-auto\">\r\n        Hệ thống tài liệu tham khảo, bài giảng và tóm tắt kiến thức dành cho sinh viên\r\n      </p>\r\n    </div>\r\n  </header>\r\n\r\n  <div class=\"max-w-5xl mx-auto px-2 sm:px-4 py-4 space-y-4\">\r\n\r\n    <!-- Giới thiệu (Khối Thông Báo) -->\r\n    <section class=\"bg-white rounded-xl shadow-xs border border-sky-200 overflow-hidden\">\r\n      <div class=\"bg-sky-700 px-3 py-1.5 text-white flex items-center justify-between\">\r\n        <h2 class=\"font-bold text-xs sm:text-sm sm:text-sm tracking-tight flex items-center gap-1.5\">\r\n          <svg class=\"w-3.5 h-3.5 text-amber-300\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"/>\r\n          </svg>\r\n          Giới Thiệu\r\n        </h2>\r\n        <span class=\"text-xs sm:text-sm bg-sky-800/80 px-2 py-0.5 rounded text-sky-100 font-medium\">Phi lợi nhuận</span>\r\n      </div>\r\n      <div class=\"p-3 sm:p-4 space-y-2.5 text-xs sm:text-sm sm:text-xs text-slate-700 leading-relaxed\">\r\n        <p>\r\n          Những nội dung và tài liệu trên trang web này được tổng hợp và biên soạn từ nhiều nguồn học thuật chính thống khác nhau, phục vụ cộng đồng bạn đọc và sinh viên hoàn toàn <strong class=\"text-sky-900 font-bold\">MIỄN PHÍ</strong>, cam kết <strong class=\"text-rose-600 font-bold\">KHÔNG THU PHÍ</strong> hay đặt quảng cáo thương mại dưới bất kỳ hình thức nào.\r\n        </p>\r\n        <p>\r\n          Đây là không gian trao đổi học thuật, chia sẻ học liệu và bài tập thực hành dành cho các bộ môn chuyên ngành Quản trị - Kinh doanh (Khởi nghiệp, Marketing căn bản & dịch vụ, Kinh tế vi mô, Khởi nghiệp, Phân tích dữ liệu,...). Đồng thời, trang cung cấp các bảng tóm tắt lý thuyết trọng tâm và đề cương ôn tập giúp người học nhanh chóng nắm vững kiến thức cốt lõi.\r\n        </p>\r\n      </div>\r\n    </section>\r\n\r\n    <!-- Danh mục học liệu -->\r\n    <section class=\"space-y-2.5\">\r\n      <div class=\"bg-sky-900 text-white px-3 py-2 rounded-lg font-extrabold text-xs sm:text-sm uppercase tracking-wide flex items-center justify-between shadow-xs\">\r\n        <span class=\"flex items-center gap-1.5\">\r\n          <svg class=\"w-4 h-4 text-amber-300\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10\"/>\r\n          </svg>\r\n          Học Liệu\r\n        </span>\r\n        <span class=\"text-xs sm:text-sm font-normal text-sky-200\">10 Chuyên Mục</span>\r\n      </div>\r\n\r\n      <div class=\"grid grid-cols-1 sm:grid-cols-2 gap-2.5\">\r\n\r\n        <!-- 1. Kinh tế vi mô -->\r\n        <a href=\"/study-corner/microeconomics\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"subject-card bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between group\" title=\"Mở tài liệu: 01 Kinh Tế Vi Mô Cung cầu, hành vi người tiêu dùng & lý thuyết giá\">\r\n          <div class=\"flex items-center gap-3\">\r\n            <div class=\"w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors\">\r\n              01\r\n            </div>\r\n            <div>\r\n              <h3 class=\"text-xs font-bold text-slate-800 group-hover:text-sky-700 transition-colors\">Kinh Tế Vi Mô</h3>\r\n              <p class=\"text-xs sm:text-sm text-slate-500\">Cung cầu, hành vi người tiêu dùng & lý thuyết giá</p>\r\n            </div>\r\n          </div>\r\n          <svg class=\"w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        </a>\r\n\r\n        <!-- 2. Phân tích dữ liệu -->\r\n        <a href=\"/spss\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"subject-card bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between group\" title=\"Mở tài liệu: 02 Phân Tích Dữ Liệu Thống kê ứng dụng & hướng dẫn thực hành SPSS\">\r\n          <div class=\"flex items-center gap-3\">\r\n            <div class=\"w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors\">\r\n              02\r\n            </div>\r\n            <div>\r\n              <h3 class=\"text-xs font-bold text-slate-800 group-hover:text-sky-700 transition-colors\">Phân Tích Dữ Liệu</h3>\r\n              <p class=\"text-xs sm:text-sm text-slate-500\">Thống kê ứng dụng & hướng dẫn thực hành SPSS</p>\r\n            </div>\r\n          </div>\r\n          <svg class=\"w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        </a>\r\n\r\n        \r\n\r\n        \r\n\r\n        <!-- 6. Khởi nghiệp -->\r\n        <a href=\"/study-corner/entrepreneurship\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"subject-card bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between group\" title=\"Mở tài liệu: 06 Khởi Nghiệp Đổi Mới Sáng Tạo Xây dựng mô hình kinh doanh & kế hoạch gọi vốn\">\r\n          <div class=\"flex items-center gap-3\">\r\n            <div class=\"w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors\">\r\n              06\r\n            </div>\r\n            <div>\r\n              <h3 class=\"text-xs font-bold text-slate-800 group-hover:text-sky-700 transition-colors\">Khởi Nghiệp Đổi Mới Sáng Tạo</h3>\r\n              <p class=\"text-xs sm:text-sm text-slate-500\">Xây dựng mô hình kinh doanh & kế hoạch gọi vốn</p>\r\n            </div>\r\n          </div>\r\n          <svg class=\"w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        </a>\r\n\r\n        \r\n\r\n        \r\n\r\n        <!-- 9. Thực tập -->\r\n        <a href=\"/study-corner/internships\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"subject-card bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between group\" title=\"Mở tài liệu: 09 Thực Tập Tốt Nghiệp Hướng dẫn viết báo cáo & quy trình thực tập doanh nghiệp\">\r\n          <div class=\"flex items-center gap-3\">\r\n            <div class=\"w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors\">\r\n              09\r\n            </div>\r\n            <div>\r\n              <h3 class=\"text-xs font-bold text-slate-800 group-hover:text-sky-700 transition-colors\">Thực Tập Tốt Nghiệp</h3>\r\n              <p class=\"text-xs sm:text-sm text-slate-500\">Hướng dẫn viết báo cáo & quy trình thực tập doanh nghiệp</p>\r\n            </div>\r\n          </div>\r\n          <svg class=\"w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        </a>\r\n\r\n        <!-- 10. Truyền thông Marketing tích hợp -->\r\n        <a href=\"/study-corner/imc\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"subject-card bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between group\" title=\"Mở tài liệu: 10 Truyền Thông Marketing Tích Hợp (IMC) Chiến dịch truyền thông, quảng cáo số & PR\">\r\n          <div class=\"flex items-center gap-3\">\r\n            <div class=\"w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs group-hover:bg-sky-600 group-hover:text-white transition-colors\">\r\n              10\r\n            </div>\r\n            <div>\r\n              <h3 class=\"text-xs font-bold text-slate-800 group-hover:text-sky-700 transition-colors\">Truyền Thông Marketing Tích Hợp (IMC)</h3>\r\n              <p class=\"text-xs sm:text-sm text-slate-500\">Chiến dịch truyền thông, quảng cáo số & PR</p>\r\n            </div>\r\n          </div>\r\n          <svg class=\"w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        </a>\r\n\r\n      </div>\r\n    </section>\r\n\r\n    <!-- Khối Liên hệ & Trao đổi qua TikTok -->\r\n    <section class=\"bg-amber-50/80 rounded-xl p-3 sm:p-4 border border-amber-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left\">\r\n      <div class=\"space-y-0.5\">\r\n        <h4 class=\"text-xs sm:text-sm font-bold text-amber-950 flex items-center justify-center sm:justify-start gap-1.5\">\r\n          <svg class=\"w-4 h-4 text-amber-600\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z\" />\r\n          </svg>\r\n          Thông tin liên hệ\r\n        </h4>\r\n        <p class=\"text-xs sm:text-sm sm:text-xs sm:text-sm text-slate-600\">\r\n          Mọi thắc mắc về bài giảng, tài liệu ôn thi hoặc cần trao đổi học thuật, vui lòng kết nối qua kênh TikTok chính thức.\r\n        </p>\r\n      </div>\r\n\r\n      <a href=\"https://www.tiktok.com/@thanhks86\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"inline-flex items-center gap-2 bg-slate-900 hover:bg-black text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-xs transition-all shrink-0\" title=\"Mở tài liệu: Liên hệ TikTok\">\r\n        <!-- TikTok Icon SVG -->\r\n        <svg class=\"w-4 h-4 fill-current\" viewBox=\"0 0 24 24\">\r\n          <path d=\"M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 2.89 3.5 2.67 1.39-.1 2.6-.96 2.95-2.29.17-.67.16-1.37.16-2.06z\"/>\r\n        </svg>\r\n        <span>Liên hệ TikTok</span>\r\n      </a>\r\n    </section>\r\n\r\n    <!-- Chân trang tự động cập nhật năm -->\r\n    \r\n\r\n  </div></div>",
       "custom_css": ".tkd-page-scope, .tkd-page-scope {\r\n      height: auto !important;\r\n      min-height: 100vh;\r\n      overflow-x: hidden;\r\n      overflow-y: visible !important;\r\n      \r\n      scrollbar-width: none;\r\n      -ms-overflow-style: none;\r\n    }\n\r\n\r\n    \r\n    \r\n\r\n    .tkd-page-scope {\r\n      font-family: 'Be Vietnam Pro', 'Inter', system-ui, -apple-system, sans-serif;\r\n      -webkit-text-size-adjust: 100%;\r\n      text-size-adjust: 100%;\r\n      background-color: #f8fafc;\r\n      color: #0f172a;\r\n    }\n\r\n    \r\n    .tkd-page-scope .num-font {\r\n      font-family: 'Roboto Mono', monospace;\r\n    }\n\r\n\r\n    .tkd-page-scope .subject-card {\r\n      transition: all 0.2s ease-in-out;\r\n    }\n\r\n    .tkd-page-scope .subject-card:hover {\r\n      transform: translateY(-2px);\r\n      box-shadow: 0 4px 12px -2px rgba(14, 165, 233, 0.12), 0 2px 4px -2px rgba(0, 0, 0, 0.05);\r\n      border-color: #38bdf8;\r\n    }",
       "custom_js": "document.addEventListener(\"DOMContentLoaded\", function() {\r\n      var currentYear = new Date().getFullYear();\r\n      var footerYearSpan = document.getElementById(\"footerYear\");\r\n      if (footerYearSpan) footerYearSpan.textContent = currentYear;\r\n    });",
       "requires_gate": null,
@@ -460,7 +460,7 @@
       "title": "Giới Thiệu NGUYỄN THỊ TRÚC PHƯƠNG — Giảng Viên Khoa QTKD Trường HCE",
       "category": "General",
       "page_type": "content",
-      "html_content": "<div class=\"tkd-page-scope\">\n<!-- Header dải màu gradient chuẩn mẫu -->\r\n  <header class=\"w-full bg-gradient-to-br from-sky-800 via-sky-700 to-cyan-800 text-white pt-5 pb-5 px-3 text-center shadow-sm\">\r\n    <div class=\"max-w-5xl mx-auto space-y-1.5\">\r\n      <h1 class=\"text-sm sm:text-xl font-extrabold tracking-tight uppercase leading-snug\">\r\n        Hành Trình Chia Sẻ <span id=\"currentYear\" class=\"text-amber-300 underline decoration-amber-400 decoration-1 underline-offset-2\"></span>\r\n      </h1>\r\n      <p class=\"text-xs sm:text-sm sm:text-xs text-sky-100/90 leading-tight\">\r\n        Không gian lan tỏa nguồn học liệu, tài liệu nghiên cứu và trải nghiệm học tập hoàn toàn miễn phí\r\n      </p>\r\n    </div>\r\n  </header>\r\n\r\n  <!-- Thân trang toàn bộ chạy dài tự nhiên theo chiều dọc (max-w-5xl) -->\r\n  <div class=\"max-w-5xl mx-auto px-2 sm:px-4 py-4 space-y-4\">\r\n\r\n    <!-- Card nội dung Hành trình chia sẻ -->\r\n    <section class=\"bg-white rounded-xl shadow-xs border border-sky-200 overflow-hidden\">\r\n      <!-- Thanh tiêu đề mục màu xanh thương hiệu -->\r\n      <div class=\"bg-sky-700 px-3 py-1.5 text-white flex items-center justify-between\">\r\n        <h2 class=\"font-bold text-xs sm:text-sm sm:text-sm tracking-tight flex items-center gap-1.5\">\r\n          <svg class=\"w-3.5 h-3.5 text-sky-200\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z\" />\r\n          </svg>\r\n          SỨ MỆNH CỘNG ĐỒNG\r\n        </h2>\r\n        <span class=\"text-xs bg-sky-800/80 px-2 py-0.5 rounded text-sky-100 font-medium\">Cộng Đồng</span>\r\n      </div>\r\n\r\n      <div class=\"p-3 sm:p-4 space-y-3 text-xs sm:text-sm sm:text-xs text-slate-800 leading-relaxed\">\r\n        \r\n        <!-- Đoạn mở đầu -->\r\n        <p class=\"text-slate-700 text-justify\">\r\n          Trong công việc, <strong class=\"text-sky-900 border-b border-sky-300 pb-0.5 font-bold\">học tập và nghiên cứu</strong>, ai cũng có lúc loay hoay trước biển tài liệu đồ sộ để tìm ra thứ mình cần. Từng trải qua cảm giác bối rối đó, tôi quyết định xây dựng góc nhỏ này để chia sẻ những kiến thức tích lũy và tài liệu quý giá mình cóp nhặt được.\r\n        </p>\r\n\r\n        <!-- Trích dẫn triết lý (Quote chuẩn phông Noto Serif) -->\r\n        <div class=\"bg-gradient-to-r from-sky-800 via-sky-600 to-teal-600 p-[1.5px] rounded-xl shadow-xs my-2\">\r\n          <div class=\"bg-sky-50/60 p-3 rounded-[10px] text-center\">\r\n            <p class=\"math-font italic font-bold text-sky-950 text-xs sm:text-sm leading-snug\">\r\n              “Chúng ta không thể nhận nếu không biết cho đi. Càng cho đi nhiều, chúng ta càng nhận lại nhiều hơn.”\r\n            </p>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- Lời dẫn kết nối -->\r\n        <p class=\"text-slate-700 text-justify\">\r\n          Chính vì thế, không gian này ra đời để chúng ta cùng học hỏi, trao đổi và phát triển.\r\n        </p>\r\n\r\n        <!-- Hộp thông báo cam kết miễn phí (Khung Emerald chuẩn) -->\r\n        <div class=\"bg-emerald-50 border-l-3 border-emerald-600 p-2.5 rounded-r-lg text-emerald-950 text-xs sm:text-xs flex items-start gap-2 shadow-xs\">\r\n          <svg class=\"w-4 h-4 text-emerald-600 shrink-0 mt-0.5\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\" />\r\n          </svg>\r\n          <span class=\"leading-normal\">\r\n            Toàn bộ tài liệu tại đây được chia sẻ <strong>hoàn toàn miễn phí</strong>, không vì mục đích kinh doanh, nhằm phục vụ tốt nhất cho việc học tập và nghiên cứu của bạn.\r\n          </span>\r\n        </div>\r\n\r\n      </div>\r\n    </section>\r\n\r\n  </div>\r\n\r\n  <!-- Chân trang bản quyền -->\r\n  \r\n\r\n  <!-- Script tự động cập nhật năm hiện hành --></div>",
+      "html_content": "<div class=\"tkd-page-scope\">\n<!-- Header dải màu gradient chuẩn mẫu -->\r\n  <header class=\"w-full bg-gradient-to-br from-sky-800 via-sky-700 to-cyan-800 text-white pt-5 pb-5 px-3 text-center shadow-sm\">\r\n    <div class=\"max-w-5xl mx-auto space-y-1.5\">\r\n      <h1 class=\"text-sm sm:text-xl font-extrabold tracking-tight uppercase leading-snug\">\r\n        Hành Trình Đồng Hành <span id=\"currentYear\" class=\"text-amber-300 underline decoration-amber-400 decoration-1 underline-offset-2\"></span>\r\n      </h1>\r\n      <p class=\"text-xs sm:text-sm sm:text-xs text-sky-100/90 leading-tight\">\r\n        Không gian lan tỏa nguồn học liệu, tài liệu nghiên cứu và trải nghiệm học tập hoàn toàn miễn phí\r\n      </p>\r\n    </div>\r\n  </header>\r\n\r\n  <!-- Thân trang toàn bộ chạy dài tự nhiên theo chiều dọc (max-w-5xl) -->\r\n  <div class=\"max-w-5xl mx-auto px-2 sm:px-4 py-4 space-y-4\">\r\n\r\n    <!-- Card nội dung Hành trình chia sẻ -->\r\n    <section class=\"bg-white rounded-xl shadow-xs border border-sky-200 overflow-hidden\">\r\n      <!-- Thanh tiêu đề mục màu xanh thương hiệu -->\r\n      <div class=\"bg-sky-700 px-3 py-1.5 text-white flex items-center justify-between\">\r\n        <h2 class=\"font-bold text-xs sm:text-sm sm:text-sm tracking-tight flex items-center gap-1.5\">\r\n          <svg class=\"w-3.5 h-3.5 text-sky-200\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z\" />\r\n          </svg>\r\n          SỨ MỆNH CỘNG ĐỒNG\r\n        </h2>\r\n        <span class=\"text-xs bg-sky-800/80 px-2 py-0.5 rounded text-sky-100 font-medium\">Cộng Đồng</span>\r\n      </div>\r\n\r\n      <div class=\"p-3 sm:p-4 space-y-3 text-xs sm:text-sm sm:text-xs text-slate-800 leading-relaxed\">\r\n        \r\n        <!-- Đoạn mở đầu -->\r\n        <p class=\"text-slate-700 text-justify\">\r\n          Trên con đường <strong class=\"text-[#8B1E2D] font-bold\">định hình tư duy và phát triển sự nghiệp</strong>, kiến thức sách vở là nền tảng khởi đầu vững chắc. Gắn bó nhiều năm cùng giảng đường và các thế hệ sinh viên ngành Quản trị, tôi thấu hiểu sâu sắc những bỡ ngỡ của các bạn khi bước đầu tiếp cận với tri thức chuyên ngành. Không gian này được tạo ra như một chiếc cầu nối tâm huyết, giúp đơn giản hóa lý thuyết và lan tỏa những trải nghiệm thực tế từ doanh nghiệp.\r\n        </p>\r\n\r\n        <!-- Trích dẫn triết lý (Quote chuẩn phông Noto Serif) -->\r\n        <div class=\"bg-gradient-to-r from-sky-800 via-sky-600 to-teal-600 p-[1.5px] rounded-xl shadow-xs my-2\">\r\n          <div class=\"bg-sky-50/60 p-3 rounded-[10px] text-center\">\r\n            <p class=\"math-font italic font-bold text-sky-950 text-xs sm:text-sm leading-snug\">\r\n              “Người thầy giỏi không chỉ dạy lý thuyết, họ mở ra cánh cửa thực tế và thắp sáng niềm tin cho học trò.”\r\n            </p>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- Lời dẫn kết nối -->\r\n        <p class=\"text-slate-700 text-justify\">\r\n          Hy vọng những tài liệu và chia sẻ tại đây sẽ là bệ phóng nhỏ vững vàng, giúp các bạn tự tin hơn trên hành trình khẳng định bản thân.\r\n        </p>\r\n\r\n        <!-- Hộp thông báo cam kết miễn phí (Khung Emerald chuẩn) -->\r\n        <div class=\"bg-emerald-50 border-l-3 border-emerald-600 p-2.5 rounded-r-lg text-emerald-950 text-xs sm:text-xs flex items-start gap-2 shadow-xs\">\r\n          <svg class=\"w-4 h-4 text-emerald-600 shrink-0 mt-0.5\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\r\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\" />\r\n          </svg>\r\n          <span class=\"leading-normal\">\r\n            Toàn bộ tài liệu tại đây được chia sẻ <strong>hoàn toàn miễn phí</strong>, không vì mục đích kinh doanh, nhằm phục vụ tốt nhất cho việc học tập và nghiên cứu của bạn.\r\n          </span>\r\n        </div>\r\n\r\n      </div>\r\n    </section>\r\n\r\n  </div>\r\n\r\n  <!-- Chân trang bản quyền -->\r\n  \r\n\r\n  <!-- Script tự động cập nhật năm hiện hành --></div>",
       "custom_css": ".tkd-page-scope {\r\n      font-family: 'Be Vietnam Pro', 'Inter', system-ui, -apple-system, sans-serif;\r\n      -webkit-text-size-adjust: 100%;\r\n      text-size-adjust: 100%;\r\n      background-color: #f8fafc;\r\n      color: #0f172a;\r\n      overflow-y: visible;\r\n      height: auto;\r\n    }\n\r\n\r\n    .tkd-page-scope .math-font {\r\n      font-family: 'Noto Serif', serif;\r\n    }\n\r\n\r\n    .tkd-page-scope .num-font {\r\n      font-family: 'Roboto Mono', monospace;\r\n      font-variant-numeric: tabular-nums;\r\n    }",
       "custom_js": "document.addEventListener(\"DOMContentLoaded\", function() {\r\n      const year = new Date().getFullYear();\r\n      const currentYearEl = document.getElementById(\"currentYear\");\r\n      const footerYearEl = document.getElementById(\"footerYear\");\r\n      if (currentYearEl) currentYearEl.textContent = year;\r\n      if (footerYearEl) footerYearEl.textContent = year;\r\n      \r\n    });",
       "requires_gate": null,
@@ -6903,7 +6903,7 @@
     },
     {
       "id": 4,
-      "slug": "ung-dung-phan-mem-pom-qm-trong-bai-toan-quan-tri-san-xuat",
+      "slug": "ung-dung-phan-mem-pom-qm-trong-bai-toan-quan-tri-du-an",
       "title": "Ứng dụng phần mềm POM-QM for Windows giải nhanh bài toán Dự báo & Hoạch định sản xuất",
       "category": "Công nghệ & Phần mềm",
       "summary": "Cách nhập dữ liệu và đọc bảng kết quả dự báo nhu cầu (Moving Average, Exponential Smoothing), tính sai số MAD, MSE, MAPE trên POM-QM.",
@@ -6917,7 +6917,7 @@
     {
       "id": 75,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị rủi ro",
       "class_code": "21CQT07",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -6931,7 +6931,7 @@
     {
       "id": 74,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản Trị Sản Xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "20CQT08",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -6945,7 +6945,7 @@
     {
       "id": 73,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị rủi ro",
       "class_code": "QTSX04",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -6959,7 +6959,7 @@
     {
       "id": 72,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "010100078453",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":4,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -6973,7 +6973,7 @@
     {
       "id": 71,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị rủi ro",
       "class_code": "03",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -6987,7 +6987,7 @@
     {
       "id": 70,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị dự án",
       "class_code": "24CĐ- QTKĐ03",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":1,\"q2\":1,\"q3\":1,\"q4\":1,\"q5\":1,\"q6\":1,\"q7\":1,\"q8\":1,\"q9\":1,\"q10\":1,\"q11\":1,\"q12\":1}",
@@ -7001,7 +7001,7 @@
     {
       "id": 69,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị rủi ro",
       "class_code": "0101000784",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":4,\"q2\":4,\"q3\":3,\"q4\":4,\"q5\":3,\"q6\":2,\"q7\":4,\"q8\":3,\"q9\":2,\"q10\":3,\"q11\":3,\"q12\":3}",
@@ -7015,7 +7015,7 @@
     {
       "id": 68,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị dự án",
       "class_code": "24CD-QTK03",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7029,7 +7029,7 @@
     {
       "id": 67,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "19CD-19CQT01",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7043,7 +7043,7 @@
     {
       "id": 66,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "010100078402",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7057,7 +7057,7 @@
     {
       "id": 65,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7071,7 +7071,7 @@
     {
       "id": 64,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản Trị Sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "QTSX chiều t4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7085,7 +7085,7 @@
     {
       "id": 63,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản Trị Sản Xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "010100078402",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7099,7 +7099,7 @@
     {
       "id": 62,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "010100078402",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7113,8 +7113,8 @@
     {
       "id": 61,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
-      "class_code": "Quản trị sản xuất sáng thứ 4",
+      "course_name": "Quản trị rủi ro",
+      "class_code": "Quản trị rủi ro sáng thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
       "average_score": 5,
@@ -7127,7 +7127,7 @@
     {
       "id": 60,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Hương Mỹ Hân",
+      "course_name": "Quản trị dự án",
       "class_code": "QTSX-chiều thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7141,7 +7141,7 @@
     {
       "id": 59,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản Trị Sản Xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "CT4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":4,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7155,7 +7155,7 @@
     {
       "id": 58,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "QTSX Chiều thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7169,7 +7169,7 @@
     {
       "id": 57,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất CT4",
+      "course_name": "Quản trị rủi ro",
       "class_code": "21CQT06",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7183,7 +7183,7 @@
     {
       "id": 56,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "QTSX-CT4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7197,7 +7197,7 @@
     {
       "id": 55,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "QTSX Chiều Thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7211,7 +7211,7 @@
     {
       "id": 54,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị dự án",
       "class_code": "CT4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7225,7 +7225,7 @@
     {
       "id": 53,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị rủi ro",
       "class_code": "QTSX CHIỀU T4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7239,7 +7239,7 @@
     {
       "id": 52,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị dự án",
       "class_code": "QTSX chiều T4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7253,8 +7253,8 @@
     {
       "id": 51,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
-      "class_code": "Quản trị sản xuất chiều thứ 4",
+      "course_name": "Quản trị rủi ro",
+      "class_code": "Quản trị rủi ro chiều thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
       "average_score": 5,
@@ -7267,8 +7267,8 @@
     {
       "id": 50,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất chiều thứ 4",
-      "class_code": "Quản trị sản xuất chiều thứ 4",
+      "course_name": "Quản trị dự án",
+      "class_code": "Quản trị rủi ro chiều thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
       "average_score": 5,
@@ -7281,7 +7281,7 @@
     {
       "id": 49,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "Chiều thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":4,\"q5\":3,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":4,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7295,7 +7295,7 @@
     {
       "id": 48,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị dự án",
       "class_code": "QTSX- chiều T4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7309,7 +7309,7 @@
     {
       "id": 47,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị rủi ro",
       "class_code": "Chiều thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7323,7 +7323,7 @@
     {
       "id": 46,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị dự án",
       "class_code": "QTSX Chiều thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7337,7 +7337,7 @@
     {
       "id": 45,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị rủi ro",
       "class_code": "Chiều thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7351,7 +7351,7 @@
     {
       "id": 44,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị dự án",
       "class_code": "QTSX CT4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7365,8 +7365,8 @@
     {
       "id": 43,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản Trị Sản Xuất",
-      "class_code": "Quản Trị Sản Xuất chiều thứ 4",
+      "course_name": "Quản trị rủi ro",
+      "class_code": "Quản trị rủi ro chiều thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
       "average_score": 5,
@@ -7379,7 +7379,7 @@
     {
       "id": 42,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "QTSX04",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7393,7 +7393,7 @@
     {
       "id": 41,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "QTSX Chiều T4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7407,7 +7407,7 @@
     {
       "id": 40,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản Trị Sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7421,13 +7421,13 @@
     {
       "id": 39,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất chiều thứ 4",
+      "course_name": "Quản trị rủi ro",
       "class_code": "",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
       "average_score": 5,
       "overall_satisfaction": "Rất hài lòng",
-      "positives": "Quản trị sản xuất chiều thứ 4",
+      "positives": "Quản trị rủi ro chiều thứ 4",
       "improvements": "",
       "ip_address": "103.199.56.41",
       "submitted_at": "2026-11-04 10:04:19"
@@ -7435,8 +7435,8 @@
     {
       "id": 38,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
-      "class_code": "quản trị sản xuất chiều thứ 4",
+      "course_name": "Quản trị dự án",
+      "class_code": "Quản trị rủi ro chiều thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
       "average_score": 5,
@@ -7449,7 +7449,7 @@
     {
       "id": 37,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất - Chiều thứ 4",
+      "course_name": "Quản trị rủi ro",
       "class_code": "21CQT01",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7463,7 +7463,7 @@
     {
       "id": 36,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7477,8 +7477,8 @@
     {
       "id": 35,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
-      "class_code": "Quản trị sản xuất chiều thứ 4",
+      "course_name": "Quản trị rủi ro",
+      "class_code": "Quản trị rủi ro chiều thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
       "average_score": 5,
@@ -7491,7 +7491,7 @@
     {
       "id": 34,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "qtsx chiều thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7505,7 +7505,7 @@
     {
       "id": 33,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "quản trị sản xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "QTSX chiều t4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7519,7 +7519,7 @@
     {
       "id": 32,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QtSX",
+      "course_name": "Quản trị dự án",
       "class_code": "Chiều thứ 4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7533,7 +7533,7 @@
     {
       "id": 31,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "010100078402",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7547,7 +7547,7 @@
     {
       "id": 30,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị dự án",
       "class_code": "21CQT02",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7561,7 +7561,7 @@
     {
       "id": 29,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7575,7 +7575,7 @@
     {
       "id": 28,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "21CQT13",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7589,7 +7589,7 @@
     {
       "id": 27,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị rủi ro",
       "class_code": "",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":4,\"q2\":4,\"q3\":4,\"q4\":4,\"q5\":4,\"q6\":4,\"q7\":4,\"q8\":4,\"q9\":4,\"q10\":4,\"q11\":4,\"q12\":4}",
@@ -7603,7 +7603,7 @@
     {
       "id": 26,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị dự án",
       "class_code": "04",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7617,7 +7617,7 @@
     {
       "id": 25,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "QTSX03",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7631,7 +7631,7 @@
     {
       "id": 24,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "QTSX03",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7645,7 +7645,7 @@
     {
       "id": 23,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản Trị Sản Xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "04 ST4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7659,7 +7659,7 @@
     {
       "id": 22,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị dự án",
       "class_code": "21CQT11",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7673,7 +7673,7 @@
     {
       "id": 21,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị rủi ro",
       "class_code": "04 ST4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7687,7 +7687,7 @@
     {
       "id": 20,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7701,7 +7701,7 @@
     {
       "id": 19,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị rủi ro",
       "class_code": "",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7715,7 +7715,7 @@
     {
       "id": 18,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản Trị Sản Xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "21CQT06",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7729,7 +7729,7 @@
     {
       "id": 17,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7743,7 +7743,7 @@
     {
       "id": 16,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị dự án",
       "class_code": "010100078403",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7757,7 +7757,7 @@
     {
       "id": 15,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Qtsx",
+      "course_name": "Quản trị rủi ro",
       "class_code": "04 st4",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7771,7 +7771,7 @@
     {
       "id": 14,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "21CQT04",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7785,7 +7785,7 @@
     {
       "id": 13,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "0101000784 - 010100078403",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7799,7 +7799,7 @@
     {
       "id": 12,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị dự án",
       "class_code": "0101000784",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7813,7 +7813,7 @@
     {
       "id": 11,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7827,7 +7827,7 @@
     {
       "id": 10,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "21CQT03",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7841,7 +7841,7 @@
     {
       "id": 9,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị rủi ro",
       "class_code": "0101000784-010100078404",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7855,7 +7855,7 @@
     {
       "id": 8,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "20CQT04",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7869,7 +7869,7 @@
     {
       "id": 7,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "21CQT07",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7883,7 +7883,7 @@
     {
       "id": 6,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "21CQT01",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7897,7 +7897,7 @@
     {
       "id": 5,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản Trị Sản Xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7911,7 +7911,7 @@
     {
       "id": 4,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị dự án",
       "class_code": "",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7925,7 +7925,7 @@
     {
       "id": 3,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản trị sản xuất",
+      "course_name": "Quản trị rủi ro",
       "class_code": "",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7939,7 +7939,7 @@
     {
       "id": 2,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "Quản Trị Học",
+      "course_name": "Quản trị chiến lược",
       "class_code": "21CQT04",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",
@@ -7953,7 +7953,7 @@
     {
       "id": 1,
       "semester_year": "HK I - Năm học 2026 - 2027",
-      "course_name": "QTSX",
+      "course_name": "Quản trị rủi ro",
       "class_code": "",
       "instructor_name": "ThS. Nguyễn Thị Trúc Phương",
       "ratings_json": "{\"q1\":5,\"q2\":5,\"q3\":5,\"q4\":5,\"q5\":5,\"q6\":5,\"q7\":5,\"q8\":5,\"q9\":5,\"q10\":5,\"q11\":5,\"q12\":5}",

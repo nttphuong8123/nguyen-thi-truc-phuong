@@ -962,45 +962,10 @@ export const POST: APIRoute = async ({ request, cookies, clientAddress }) => {
     }
 
     if (action === 'save_youtube_videos') {
-      const rawList = Array.isArray(body.youtube_videos)
-        ? body.youtube_videos
-        : Array.isArray(body.videos)
-          ? body.videos
-          : [];
-      const extractYtId = (str: string): string => {
-        const s = String(str || '').trim();
-        const m = s.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([A-Za-z0-9_-]{11})/);
-        if (m) return m[1];
-        return s;
-      };
-      const cleaned: YoutubeVideoItem[] = rawList
-        .map((v: any) => {
-          const vid = extractYtId(v.videoId || v.id || '');
-          const title = String(v.title || '').trim();
-          const badge = String(v.badge || v.publishedAt || 'Chuyên đề').trim();
-          return {
-            videoId: vid,
-            title,
-            badge,
-            thumbnail: `https://i.ytimg.com/vi/${vid}/hqdefault.jpg`,
-          };
-        })
-        .filter((v: YoutubeVideoItem) => v.videoId.length > 0 && v.title.length > 0);
-
-      if (cleaned.length === 0) {
-        return new Response(
-          JSON.stringify({ ok: false, message: 'Danh sách video không hợp lệ. Vui lòng nhập ít nhất 1 video.' }),
-          { status: 400 }
-        );
-      }
-
-      saveYoutubeVideos(cleaned);
       return new Response(
         JSON.stringify({
           ok: true,
-          count: cleaned.length,
-          videos: getYoutubeVideos(),
-          message: `Đã lưu danh sách ${cleaned.length} Video Bài Giảng YouTube lên Cloudflare D1!`,
+          message: 'Chức năng Video Bài Giảng đã được tinh gọn và gỡ bỏ theo thiết kế mới.',
         }),
         { status: 200 }
       );

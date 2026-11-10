@@ -271,53 +271,7 @@ export const DEFAULT_SITE_CONTACT_CONFIG: SiteContactConfig = {
   office_hours: 'Thứ Ba & Thứ Năm: 08:30 – 11:30 | Thứ Sáu: 13:30 – 16:30 (Hẹn trước qua Email)',
 };
 
-export const DEFAULT_YOUTUBE_VIDEOS: YoutubeVideoItem[] = [
-  {
-    videoId: 'ThWjfeasS8o',
-    title: 'Bài giảng Marketing căn bản: Phân đoạn thị trường & Định vị (STP)',
-    publishedAt: 'Chuyên đề QTSX',
-  },
-  {
-    videoId: 'OUvXB4HFLgU',
-    title: 'Bài giảng Kinh tế vi mô: Lý thuyết Cung Cầu & Cân bằng thị trường',
-    publishedAt: 'Chuyên đề QTSX',
-  },
-  {
-    videoId: 'loOF48UVkrw',
-    title: 'Bài giảng Quản trị hàng tồn kho: Mô hình EOQ, POQ và Khấu trừ theo số lượng',
-    publishedAt: 'Chuyên đề Tồn kho',
-  },
-  {
-    videoId: '-QdI7-qungU',
-    title: 'Bài giảng Lập lịch trình sản xuất & Điều độ công việc trên máy (Nguyên tắc Johnson)',
-    publishedAt: 'Chuyên đề Điều độ',
-  },
-  {
-    videoId: 'q00DQpYNnGE',
-    title: 'Bài giảng Marketing căn bản: Chiến lược Marketing-Mix 4P & 7P',
-    publishedAt: 'Quản trị học',
-  },
-  {
-    videoId: 'K2v91vaKl58',
-    title: 'Bài giảng Kinh tế vi mô: Độ co giãn của cầu theo giá',
-    publishedAt: 'Quản trị học',
-  },
-  {
-    videoId: 'gdPXx_ne0oA',
-    title: 'Bài giảng Khởi nghiệp: Xây dựng mô hình kinh doanh Canvas',
-    publishedAt: 'Quản trị học',
-  },
-  {
-    videoId: 'cjsosWNpSN4',
-    title: 'Chuyên đề Khởi nghiệp: Startup là gì & Những lầm tưởng thường gặp',
-    publishedAt: 'Khởi nghiệp',
-  },
-  {
-    videoId: '6OSqgULHD6w',
-    title: 'Khởi nghiệp: Lập dự án kinh doanh thực chiến',
-    publishedAt: 'Thương hiệu',
-  },
-];
+export const DEFAULT_YOUTUBE_VIDEOS: YoutubeVideoItem[] = [];
 
 export const DEFAULT_EVALUATION_CRITERIA: EvaluationCriterion[] = [
   {
@@ -805,38 +759,11 @@ export function extractYoutubeVideoId(input: string): string {
 }
 
 export function getYoutubeVideos(): YoutubeVideoItem[] {
-  if (!store.youtube_videos_json) return DEFAULT_YOUTUBE_VIDEOS.map((v) => ({ ...v }));
-  try {
-    const parsed = JSON.parse(store.youtube_videos_json);
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed
-        .map((v: any) => ({
-          videoId: extractYoutubeVideoId(v.videoId || ''),
-          title: String(v.title || '').trim(),
-          publishedAt: String(v.publishedAt || 'Bài giảng').trim(),
-        }))
-        .filter((v) => v.videoId && v.title);
-    }
-  } catch {}
-  return DEFAULT_YOUTUBE_VIDEOS.map((v) => ({ ...v }));
+  return [];
 }
 
-export function saveYoutubeVideos(videos: YoutubeVideoItem[]): void {
-  const ts = nowIso();
-  const cleaned = (Array.isArray(videos) ? videos : [])
-    .map((v) => ({
-      videoId: extractYoutubeVideoId(v.videoId || ''),
-      title: String(v.title || '').trim(),
-      publishedAt: String(v.publishedAt || 'Bài giảng').trim(),
-    }))
-    .filter((v) => v.videoId && v.title);
-  const jsonStr = JSON.stringify(cleaned);
-  store.youtube_videos_json = jsonStr;
-  queueD1Write(
-    `INSERT OR REPLACE INTO site_pages_overrides (route_path, title, html_content, custom_css, custom_js, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?)`,
-    ['__youtube_videos__', 'Danh sách Video Bài Giảng YouTube Trang Chủ', '', '', jsonStr, ts]
-  );
+export function saveYoutubeVideos(_videos: YoutubeVideoItem[]): void {
+  // Chức năng video bài giảng đã được gỡ bỏ
 }
 
 export function getEvaluationCriteria(): EvaluationCriterion[] {

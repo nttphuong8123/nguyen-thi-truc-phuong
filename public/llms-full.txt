@@ -1,53 +1,41 @@
-# NGUYỄN THỊ TRÚC PHƯƠNG — Hệ Sinh Thái Học Liệu Số, Ôn Thi Trắc Nghiệm & Nghiên Cứu Khoa Học (nguyenthitrucphuong.pages.dev)
+# NGUYỄN THỊ TRÚC PHƯƠNG — LLM Full Documentation & Sitemap
 
-> Cổng học liệu mở, ngân hàng câu hỏi trắc nghiệm trực tuyến (50 câu / 60 phút), hướng dẫn giải bài tập định lượng, sổ tay phân tích dữ liệu SPSS và cẩm nang thực tập tốt nghiệp do ThS. NGUYỄN THỊ TRÚC PHƯƠNG (Giảng viên Khoa Quản trị - Kinh doanh, Trường Cao đẳng Kinh tế TP.HCM — HCE) biên soạn và chia sẻ miễn phí từ năm 2013.
+Chào mừng bạn đến với Cổng Học Tập & Tri Thức Số chính thức của ThS. NGUYỄN THỊ TRÚC PHƯƠNG — Giảng viên Khoa Quản trị Kinh doanh, Trường Cao đẳng Kinh tế TP. Hồ Chí Minh (HCE).
 
-## 1. Thông tin Giảng viên & Liên hệ Chính thức
-- **Giảng viên**: ThS. NGUYỄN THỊ TRÚC PHƯƠNG
-- **Đơn vị công tác**: Khoa Quản trị - Kinh doanh, Trường Cao đẳng Kinh tế TP. Hồ Chí Minh (HCE) & Giảng viên thỉnh giảng Trường Cao đẳng CTIM.
-- **Website chính thức**: https://nguyenthitrucphuong.pages.dev/
-- **Giới thiệu giảng viên**: https://nguyenthitrucphuong.pages.dev/home/introduction
-- **Liên hệ học thuật**: https://nguyenthitrucphuong.pages.dev/contact (Hotline/Zalo: 0902 928 928 — Email: dinhtran2010@gmail.com)
-- **Kênh YouTube Bài giảng**: https://www.youtube.com/@dinhtran928
-- **Kênh TikTok Chia sẻ kiến thức**: https://www.tiktok.com/@thanhks86
+## 1. Thông Tin Tổng Quan
+- Tên website: NGUYỄN THỊ TRÚC PHƯƠNG
+- Tên giảng viên: ThS. Nguyễn Thị Trúc Phương
+- Đơn vị công tác: Khoa Quản trị Kinh doanh — Trường Cao đẳng Kinh tế TP. Hồ Chí Minh (HCE)
+- Địa chỉ website: https://nguyenthitrucphuong.pages.dev
+- Email: phuongntt@kthcm.edu.vn
 
-## 2. Các Trung Tâm Học Thuật Cốt Lõi (Pillar Hubs)
-- [Góc Học Tập 11 Chuyên Đề](https://nguyenthitrucphuong.pages.dev/study-corner): Trung tâm tổng hợp toàn bộ bài giảng, bài tập, đề thi thử khối ngành Quản trị kinh doanh & Marketing.
-- [Thi Online (50 câu / 60 phút)](https://nguyenthitrucphuong.pages.dev/ngan-hang-de-thi): Hệ thống khảo thí trắc nghiệm trực tuyến 10 học phần có chấm điểm tự động, lưu bảng vàng và xuất phiếu điểm PDF/CSV.
-- [Tra Cứu Đề Cương Chi Tiết Thực Tập (/dcct)](https://nguyenthitrucphuong.pages.dev/dcct): Tra cứu nhanh đề cương chi tiết báo cáo thực tập tốt nghiệp và mẫu phiếu đánh giá theo mã số.
-- [Hướng Dẫn Xử Lý Dữ Liệu SPSS & NCKH](https://nguyenthitrucphuong.pages.dev/spss): Quy trình mã hóa thang đo Likert, thống kê mô tả, kiểm định độ tin cậy Cronbach's Alpha, phân tích nhân tố khám phá EFA, tương quan Pearson và hồi quy tuyến tính bội.
-- [Kho Phần Mềm Học Tập Chuyên Ngành](https://nguyenthitrucphuong.pages.dev/software): Tải bộ cài phần mềm IBM SPSS Statistics và phần mềm mô phỏng định lượng POM-QM for Windows.
-- [Cố Vấn Học Tập & Công Cụ Tính Điểm HCE](https://nguyenthitrucphuong.pages.dev/mentor): Quy chế đào tạo tín chỉ, công cụ tính điểm quá trình - điểm thi kết thúc học phần (40%-60%) và lập kế hoạch cải thiện GPA.
+## 2. Hệ Thống Liên Kết Chính (Main Hubs)
+- [Trang Chủ](https://nguyenthitrucphuong.pages.dev/): Tổng quan cổng học tập, thông tin giảng viên và các lối tắt nhanh.
+- [Thi Online — Ngân Hàng Đề Thi](https://nguyenthitrucphuong.pages.dev/ngan-hang-de-thi): Nền tảng thi trắc nghiệm trực tuyến tự động chấm điểm.
+- [Góc Học Tập](https://nguyenthitrucphuong.pages.dev/study-corner): Kho học liệu số chuyên ngành Kinh tế & Quản trị kinh doanh.
+- [Tra Cứu Đề Cương Chi Tiết (ĐCCT)](https://nguyenthitrucphuong.pages.dev/dcct): Hệ thống tra cứu đề cương môn học chính quy HCE.
+- [Phân Tích Dữ Liệu SPSS](https://nguyenthitrucphuong.pages.dev/spss): Hướng dẫn thực hành thống kê mô tả, Cronbach's Alpha, EFA, hồi quy.
+- [Kho Phần Mềm](https://nguyenthitrucphuong.pages.dev/software): Hướng dẫn tải và cài đặt SPSS, POM-QM.
 - [Hoạt Động Giảng Dạy](https://nguyenthitrucphuong.pages.dev/teaching): Khung giờ tiết học chuẩn, hồ sơ giảng dạy và phương pháp sư phạm.
 - [Góc Chia Sẻ & Tin Tức Học Thuật](https://nguyenthitrucphuong.pages.dev/goc-chia-se): Chuyên mục bài viết phân tích quản trị, kỹ năng học đại học và ứng dụng AI trong nghiên cứu.
 
-## 3. Chi Tiết 11 Silo Học Phần Chuyên Ngành
+## 3. Chi Tiết Các Silo Học Phần Chuyên Ngành
 
-### Silo 1: Quản Trị Sản Xuất (Production & Operations Management)
-- [Bài giảng & Đề cương Marketing căn bản](https://nguyenthitrucphuong.pages.dev/study-corner/production-management)
-- [Hướng dẫn giải bài tập Marketing căn bản](https://nguyenthitrucphuong.pages.dev/study-corner/production-management/exercise-solution-guide)
-- [Cấu trúc & Hướng dẫn giải đề thi Marketing căn bản](https://nguyenthitrucphuong.pages.dev/study-corner/production-management/dethi)
-- [Hệ thống bài tập Marketing căn bản theo chương](https://nguyenthitrucphuong.pages.dev/study-corner/production-management/bai-tap-theo-chuong)
-- [Đề thi thử Marketing căn bản có đáp án](https://nguyenthitrucphuong.pages.dev/study-corner/production-management/test)
-- [Hướng dẫn sử dụng phần mềm mô phỏng POM-QM](https://nguyenthitrucphuong.pages.dev/study-corner/production-management/poq)
+### Silo 1: Quản Trị Tài Chính (Financial Management)
+- [Giáo trình Quản trị tài chính (8 chương)](https://nguyenthitrucphuong.pages.dev/study-corner/financial-management)
+- [Đề cương & Giới thiệu học phần Quản trị tài chính](https://nguyenthitrucphuong.pages.dev/study-corner/financial-management/intro)
 
-### Silo 2: Quản Trị Sản Xuất Và Dịch Vụ (Product & Service Management)
-- [Bài giảng học phần Marketing căn bản](https://nguyenthitrucphuong.pages.dev/study-corner/product-and-service-management)
-- [Hướng dẫn giải bài tập Marketing căn bản](https://nguyenthitrucphuong.pages.dev/study-corner/product-and-service-management/hdbt)
-- [Cấu trúc đề thi & Giải đề Marketing căn bản](https://nguyenthitrucphuong.pages.dev/study-corner/product-and-service-management/dethi)
-- [Thi thử trắc nghiệm Marketing căn bản](https://nguyenthitrucphuong.pages.dev/study-corner/product-and-service-management/test)
-- [Cách bấm máy tính Casio giải bài toán dự báo nhu cầu](https://nguyenthitrucphuong.pages.dev/study-corner/product-and-service-management/casio)
-- [Thực hành phần mềm POM-QM trong QTSX & Dịch vụ](https://nguyenthitrucphuong.pages.dev/study-corner/product-and-service-management/huong-dan-su-dung-phan-mem-mo-phong-pomqm)
+### Silo 2: Quản Trị Rủi Ro (Risk Management)
+- [Giáo trình Quản trị rủi ro (5 chương)](https://nguyenthitrucphuong.pages.dev/study-corner/risk-management)
+- [Đề cương & Giới thiệu học phần Quản trị rủi ro](https://nguyenthitrucphuong.pages.dev/study-corner/risk-management/intro)
 
-### Silo 3: Quản Trị Thương Hiệu (Brand Management)
-- [Bài giảng Kinh tế vi mô: Định vị, Kiến trúc & Brand Equity](https://nguyenthitrucphuong.pages.dev/study-corner/brand-management)
-- [Bài tập thực hành & Đề thi trắc nghiệm Kinh tế vi mô](https://nguyenthitrucphuong.pages.dev/study-corner/brand-management/brand-assignment)
+### Silo 3: Quản Trị Dự Án (Project Management)
+- [Giáo trình Quản trị dự án (8 chương)](https://nguyenthitrucphuong.pages.dev/study-corner/project-management)
+- [Đề cương & Giới thiệu học phần Quản trị dự án](https://nguyenthitrucphuong.pages.dev/study-corner/project-management/intro)
 
-### Silo 4: Quản Trị Học (Principles of Management)
-- [Bài giảng Khởi nghiệp toàn tập: Hoạch định, Tổ chức, Lãnh đạo, Kiểm soát](https://nguyenthitrucphuong.pages.dev/study-corner/management)
-- [Cấu trúc đề thi & Hướng dẫn giải đề Khởi nghiệp](https://nguyenthitrucphuong.pages.dev/study-corner/management/dethi)
-- [So sánh nguyên tắc thiết lập mục tiêu SMART và CLEAR](https://nguyenthitrucphuong.pages.dev/study-corner/management/docthem)
-- [Bài tập thực hành & Đề thi thử trắc nghiệm Nguyên lý Khởi nghiệp](https://nguyenthitrucphuong.pages.dev/study-corner/management/management-exercise)
+### Silo 4: Quản Trị Chiến Lược (Strategic Management)
+- [Giáo trình Quản trị chiến lược (6 chương)](https://nguyenthitrucphuong.pages.dev/study-corner/strategic-management)
+- [Đề cương & Giới thiệu học phần Quản trị chiến lược](https://nguyenthitrucphuong.pages.dev/study-corner/strategic-management/intro)
 
 ### Silo 5: Marketing Căn Bản (Principles of Marketing)
 - [Bài giảng Marketing căn bản: Môi trường Marketing, Hành vi khách hàng, STP & 4P](https://nguyenthitrucphuong.pages.dev/study-corner/principles-of-marketing)
@@ -71,7 +59,11 @@
 - [Mô hình phân tích môi trường PEST & Đánh giá tố chất doanh nhân PEC](https://nguyenthitrucphuong.pages.dev/study-corner/entrepreneurship/pest)
 - [Phân tích các yếu tố ảnh hưởng đến hành vi người tiêu dùng](https://nguyenthitrucphuong.pages.dev/study-corner/entrepreneurship/hanh-vi-nguoi-tieu-dung)
 
-### Silo 11: Truyền Thông Marketing Tích Hợp (IMC) & Chuyển Đổi Số
+### Silo 9: Phân Tích Dữ Liệu SPSS & Kho Phần Mềm
+- [Cẩm nang xử lý dữ liệu khảo sát bằng SPSS](https://nguyenthitrucphuong.pages.dev/spss)
+- [Mẫu bảng câu hỏi khảo sát Nghiên cứu khoa học sinh viên (NCKHSV)](https://nguyenthitrucphuong.pages.dev/spss/nckhsv)
+- [Kho phần mềm học tập (SPSS, AMOS, POM-QM)](https://nguyenthitrucphuong.pages.dev/software)
+
+### Silo 10: Chuyên Đề Truyền Thông Marketing Tích Hợp (IMC)
 - [Bài giảng Truyền thông Marketing tích hợp (IMC) toàn tập](https://nguyenthitrucphuong.pages.dev/study-corner/imc)
 - [Chuyên đề Kiến thức Marketing hiện đại & Ứng dụng AI](https://nguyenthitrucphuong.pages.dev/home/marketing)
-- [Mẫu bảng câu hỏi khảo sát Nghiên cứu khoa học sinh viên (SPSS)](https://nguyenthitrucphuong.pages.dev/spss/nckhsv)

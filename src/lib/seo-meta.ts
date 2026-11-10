@@ -430,8 +430,8 @@ export const PAGE_SEO_META: Record<string, PageSeoConfig> = {
         content: 'Khi gửi email trao đổi học phần hoặc nộp bản thảo đề cương/báo cáo thực tập qua địa chỉ phuongntt@kthcm.edu.vn, sinh viên vui lòng đặt tiêu đề email rõ ràng theo cú pháp: [Lớp - Tên Học Phần/Thực Tập] - [Họ và Tên Sinh Viên] - [MSSV] - [Nội dung cần hỗ trợ]. File đính kèm cần đặt tên không dấu kèm phiên bản ngày nộp để giảng viên phản hồi nhanh nhất.'
       },
       {
-        heading: '2. Các kênh video bài giảng và hỗ trợ trực tuyến chính thức',
-        content: 'Ngoài cổng học tập trực tuyến, sinh viên có thể theo dõi danh sách phát bài giảng video chi tiết từng chương, hướng dẫn giải bài tập mẫu và giải đáp thắc mắc trực tiếp trên kênh YouTube chính thức của giảng viên hoặc liên hệ qua Zalo trong khung giờ hành chính đối với các vấn đề cấp bách về lịch thi và khóa thực tập.'
+        heading: '2. Kênh hỗ trợ học tập trực tuyến và trao đổi học thuật chính thức',
+        content: 'Ngoài cổng học tập trực tuyến, sinh viên có thể trao đổi trực tiếp với giảng viên qua email chính thức phuongntt@kthcm.edu.vn hoặc liên hệ trong khung giờ làm việc đối với các vấn đề về học phần, lịch thi và khóa thực tập tốt nghiệp.'
       }
     ]
   },

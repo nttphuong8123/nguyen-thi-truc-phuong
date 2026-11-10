@@ -42,7 +42,7 @@ export const strategicManagementInfo: SubjectInfo = {
   institution: 'Trường Cao đẳng Kinh tế Thành phố Hồ Chí Minh (HCE)',
   department: 'Khoa Quản trị Kinh doanh',
   targetAudience: 'Sinh viên Cao đẳng & Đại học ngành Quản trị kinh doanh, Marketing, Ngoại thương, Quản trị chuỗi cung ứng',
-  prerequisites: 'Quản trị học đại cương, Marketing căn bản, Quản trị tài chính, Kinh tế vi mô',
+  prerequisites: 'Quản trị kinh doanh đại cương, Marketing căn bản, Quản trị tài chính, Kinh tế vi mô',
   description: 'Giáo trình Quản trị chiến lược trang bị cho sinh viên tư duy định hướng dài hạn và khung năng lực hoạch định, thực thi, đánh giá chiến lược kinh doanh toàn diện: từ nghiên cứu môi trường vĩ mô (PESTEL) và vi mô (5 áp lực cạnh tranh Porter, chuỗi giá trị nội bộ, ma trận EFE, IFE, CPM); thiết lập sứ mạng (Mission), tầm nhìn (Vision) và mục tiêu SMART; các chiến lược cấp công ty, SBU và chức năng; công cụ ra quyết định chiến lược (SWOT, SPACE, BCG, IE, QSPM) đến thực thi chiến lược và kiểm tra đánh giá qua Thẻ điểm cân bằng (Balanced Scorecard - BSC).',
   objectives: {
     knowledge: [

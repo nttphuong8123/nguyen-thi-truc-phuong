@@ -42,7 +42,7 @@ export const riskManagementInfo: SubjectInfo = {
   institution: 'Trường Cao đẳng Kinh tế Thành phố Hồ Chí Minh (HCE)',
   department: 'Khoa Quản trị Kinh doanh',
   targetAudience: 'Sinh viên Cao đẳng & Đại học ngành Quản trị kinh doanh, Tài chính, Bảo hiểm, Ngoại thương',
-  prerequisites: 'Quản trị học đại cương, Xác suất thống kê, Kinh tế vi mô',
+  prerequisites: 'Quản trị kinh doanh đại cương, Xác suất thống kê, Kinh tế vi mô',
   description: 'Giáo trình Quản trị rủi ro trang bị cho sinh viên năng lực nhận dạng, đo lường lượng hóa và xử lý rủi ro trong hoạt động kinh doanh: từ quy trình 5 bước QTRR chuẩn mực, các công cụ nhận dạng rủi ro (lưu đồ, kiểm toán BCTC, bảng hỏi), kỹ thuật đo lường rủi ro định lượng (xác suất, kỳ vọng tổn thất, độ lệch chuẩn, ma trận rủi ro 5x5) đến các chiến lược kiểm soát rủi ro (né tránh, ngăn ngừa, giảm thiểu, chuyển giao) và kỹ thuật tài trợ rủi ro (tự bảo hiểm, quỹ dự phòng, bảo hiểm thương mại).',
   objectives: {
     knowledge: [

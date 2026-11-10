@@ -7,11 +7,7 @@ export const GET: APIRoute = async () => {
     .prepare(
       `SELECT route_path, updated_at FROM site_pages
        WHERE route_path NOT LIKE '/elearning%' 
-         AND route_path != '/data'
-         AND route_path NOT LIKE '/study-corner/production-management%'
-         AND route_path NOT LIKE '/study-corner/product-and-service-management%'
-         AND route_path NOT LIKE '/study-corner/brand-management%'
-         AND route_path NOT LIKE '/study-corner/management%'`
+         AND route_path != '/data'`
     )
     .all() as { route_path: string; updated_at: string }[];
 
