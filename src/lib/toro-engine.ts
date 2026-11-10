@@ -1507,7 +1507,7 @@ Hệ thống khảo thí trực tuyến tại **https://nguyenthitrucphuong.page
     return prefix + kbText + suffix;
   }
 
-  // Câu hỏi về lý thuyết môn học chung chung -> Điều hướng về trankimdinh.com theo đúng quy tắc PHẦN 2 Mục 3
+  // Câu hỏi về lý thuyết môn học chung chung -> Điều hướng về website Nguyễn Thị Trúc Phương theo đúng quy tắc PHẦN 2 Mục 3
   if (/(?:là gì|khái niệm|định nghĩa|phân tích mô hình|4p|stp|swot|pest|canvas|smart|clear|vi mô|vĩ mô|quản trị học|marketing|thương hiệu|khởi nghiệp)/i.test(effLower)) {
     if (isToro) {
       return prefix + `Tướng quân ơi, về phần kiến thức và giáo trình chuyên sâu của môn này, đồng đội hãy vào website **https://nguyenthitrucphuong.pages.dev/** (chuyên mục [Góc Học Tập 11 Chuyên Đề](https://nguyenthitrucphuong.pages.dev/study-corner)) để cày giáo trình chuẩn bài nhất nhé, hoặc liên hệ trực tiếp với Thầy/Cô giảng viên đứng lớp để được hướng dẫn chi tiết nha! 👦` + suffix;

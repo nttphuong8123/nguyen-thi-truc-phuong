@@ -9,7 +9,7 @@ if (!fs.existsSync(DATA_DIR)) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
 }
 
-const DB_PATH = path.join(DATA_DIR, 'trankimdinh.db');
+const DB_PATH = path.join(DATA_DIR, 'nguyenthitrucphuong.db');
 const db = new DatabaseSync(DB_PATH);
 db.exec('PRAGMA journal_mode = WAL;');
 
@@ -87,7 +87,7 @@ db.exec(`
     category TEXT DEFAULT 'Góc chia sẻ',
     summary TEXT NOT NULL,
     content_html TEXT NOT NULL,
-    author TEXT DEFAULT 'ThS. Trần Kim Đính',
+    author TEXT DEFAULT 'ThS. Nguyễn Thị Trúc Phương',
     published_at TEXT DEFAULT CURRENT_TIMESTAMP,
     views INTEGER DEFAULT 120
   );
@@ -102,9 +102,9 @@ const upsertGate = db.prepare(`
     description = excluded.description
 `);
 
-upsertGate.run('elearning', 'Cổng Thông Tin Lớp Học (/ELEARNING)', JSON.stringify(['HL753907@', 'NNYC']), 'Mã truy cập dành cho sinh viên các lớp học phần do Thầy Trần Kim Đính phụ trách');
+upsertGate.run('elearning', 'Cổng Thông Tin Lớp Học (/ELEARNING)', JSON.stringify(['HL753907@', 'NNYC']), 'Mã truy cập dành cho sinh viên các lớp học phần do Cô Nguyễn Thị Trúc Phương phụ trách');
 upsertGate.run('datacenter', 'Hệ Thống Lưu Trữ Khoa QTKD (/Data)', JSON.stringify(['Ud20101991@']), 'Mật mã truy cập kho dữ liệu hành chính và hồ sơ nội bộ Khoa QTKD');
-upsertGate.run('admin', 'Quản Trị Hệ Thống (/admin)', JSON.stringify(['Admin2026@', 'Ud20101991@']), 'Mật khẩu đăng nhập trang Admin CMS của Giảng viên Trần Kim Đính');
+upsertGate.run('admin', 'Quản Trị Hệ Thống (/admin)', JSON.stringify(['Admin2026@', 'Ud20101991@']), 'Mật khẩu đăng nhập trang Admin CMS của Giảng viên Nguyễn Thị Trúc Phương');
 
 // 2. Seed syllabus_codes from DCCT.html
 const dcctCodes = [
@@ -280,11 +280,11 @@ function scopeCssRules(cssText, routePath) {
 
 // Helper to parse each exported HTML file into clean body, styles, and scripts
 function extractHtmlParts(rawHtml, routePath, pageTitle) {
-  // Rewrite absolute https://www.trankimdinh.com/... to relative internal paths
+  // Rewrite absolute https://nguyenthitrucphuong.pages.dev/... to relative internal paths
   // Also fix known broken link /QUESTIONNAIRE/SPSS -> /SPSS
   let html = rawHtml
-    .replace(/https?:\/\/(?:www\.)?trankimdinh\.com\/QUESTIONNAIRE\/SPSS/gi, '/SPSS')
-    .replace(/https?:\/\/(?:www\.)?trankimdinh\.com(\/[^"'\s<>\\]*)/gi, '$1');
+    .replace(/https?:\/\/(?:www\.)?[a-z0-9.-]+\.(?:com|pages\.dev)\/QUESTIONNAIRE\/SPSS/gi, '/SPSS')
+    .replace(/https?:\/\/(?:www\.)?[a-z0-9.-]+\.(?:com|pages\.dev)(\/[^"'\s<>\\]*)/gi, '$1');
 
   // Extract <style> tags
   const styles = [];
@@ -453,7 +453,7 @@ let migratedCount = 0;
 
 for (const item of inventory) {
   const routePath = item.path;
-  const pageTitle = item.title || 'Trần Kim Đính';
+  const pageTitle = item.title || 'Nguyễn Thị Trúc Phương';
   let rawCombined = '';
 
   if (routePath === '/') {
@@ -709,7 +709,7 @@ const newsCount = db.prepare('SELECT COUNT(*) as c FROM news_articles').get().c;
 if (newsCount === 0) {
   const insNews = db.prepare(`
     INSERT INTO news_articles (slug, title, category, summary, content_html, author, views)
-    VALUES (?, ?, ?, ?, ?, 'ThS. Trần Kim Đính', ?)
+    VALUES (?, ?, ?, ?, ?, 'ThS. Nguyễn Thị Trúc Phương', ?)
   `);
   insNews.run(
     'bi-quyet-on-thi-va-lam-bai-trac-nghiem-dat-diem-toi-da',

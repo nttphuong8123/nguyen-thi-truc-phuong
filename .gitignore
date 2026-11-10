@@ -49,4 +49,4 @@ backups/
 CLAUDE.md
 live-seo-report.md
 du an toro/
-data/trankimdinh.db
+data/*.db

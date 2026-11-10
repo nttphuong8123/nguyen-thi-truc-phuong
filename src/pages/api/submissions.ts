@@ -110,7 +110,7 @@ export const GET: APIRoute = async ({ url, cookies }) => {
       status: 200,
       headers: {
         'Content-Type': 'text/csv; charset=utf-8',
-        'Content-Disposition': `attachment; filename="bang-diem-trankimdinh-${new Date().toISOString().slice(0, 10)}.csv"`,
+        'Content-Disposition': `attachment; filename="bang-diem-nguyenthitrucphuong-${new Date().toISOString().slice(0, 10)}.csv"`,
       },
     });
   }

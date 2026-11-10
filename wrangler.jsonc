@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "nguyenthitrucphuong",
+  "name": "nguyen-thi-truc-phuong",
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-10-23",
   "compatibility_flags": [
@@ -9,7 +9,7 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "trankimdinh-copy-db",
+      "database_name": "nguyen-thi-truc-phuong-db",
       "database_id": "180aa15d-55c9-4bbb-a86d-fc1afb0d0987"
     }
   ]
