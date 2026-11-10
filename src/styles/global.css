@@ -422,7 +422,7 @@ nav[aria-label="Điều hướng chính"],
   background-color: #ffffff !important;
 }
 
-.tkd-academic-subpage section[id^="c"] > div:first-child,
+.tkd-academic-subpage .chapter-header-banner,
 .tkd-academic-subpage .bg-sky-700 {
   background-color: #8B1E2D !important;
   color: #ffffff !important;
@@ -684,7 +684,7 @@ body,
   color: #333333 !important;
 }
 
-.tkd-academic-subpage section[id^="c"] > div:first-child {
+.tkd-academic-subpage .chapter-header-banner {
   background: linear-gradient(135deg, #8B1E2D 0%, #C62828 100%) !important;
   border-bottom: 2px solid #C62828 !important;
 }
@@ -1019,94 +1019,85 @@ footer.bg-\[\#142B49\] {
   color: var(--color-text-muted);
 }
 
-/* Leaderboard animations */
-@media (prefers-reduced-motion: reduce) {
-
 /* ==========================================================================
-   ACADEMIC PREMIUM DESIGN SYSTEM OVERRIDES (GLOBAL HARMONIZATION)
-   Navy: #142B49 | Academic Blue: #245B87 | Champagne Gold: #C5A46D
-   Soft Background: #F3F6FA | White: #FFFFFF | Main Text: #263445
+   HỆ THỐNG BẢO ĐẢM TƯƠNG PHẢN THỊ GIÁC (WCAG AAA)
+   ĐẢM BẢO 100% KHÔNG CÓ LỖI CHỮ TỐI TRÊN NỀN TỐI HOẶC CHỮ SÁNG TRÊN NỀN SÁNG
    ========================================================================== */
-}
-body,
-.bg-slate-50,
-.bg-\[\#F2F6FA\],
-.bg-\[\#F4F7FB\] {
-  background-color: #FAF8F6 !important;
-  color: #333333;
+
+/* A. THÀNH PHẦN NỀN ĐỎ/ĐỎ ĐÔ: Chữ BẮT BUỘC màu trắng hoặc đỏ nhạt sáng */
+.chapter-header-banner,
+.tkd-academic-header,
+[class*="from-[#8B1E2D]"],
+[class*="bg-[#8B1E2D]"],
+[class*="bg-[#701824]"],
+[class*="bg-[#C62828]"],
+#mainNavbar,
+nav.site-sticky-navbar,
+table thead tr,
+table thead th {
+  color: #ffffff !important;
 }
 
-.bg-\[\#123B65\] {
-  background-color: #8B1E2D !important;
+.chapter-header-banner h1, .chapter-header-banner h2, .chapter-header-banner h3, .chapter-header-banner h4,
+[class*="from-[#8B1E2D]"] h1, [class*="from-[#8B1E2D]"] h2, [class*="from-[#8B1E2D]"] h3,
+[class*="bg-[#8B1E2D]"] h1, [class*="bg-[#8B1E2D]"] h2, [class*="bg-[#8B1E2D]"] h3 {
+  color: #ffffff !important;
 }
 
-.bg-\[\#0B1E33\] {
-  background-color: #701824 !important;
+.chapter-header-banner p,
+[class*="from-[#8B1E2D]"] p,
+[class*="bg-[#8B1E2D]"] p {
+  color: #FCEEEF !important;
 }
 
-.bg-\[\#168AAD\] {
-  background-color: #C62828 !important;
+.chapter-header-banner strong,
+[class*="from-[#8B1E2D]"] strong,
+[class*="bg-[#8B1E2D]"] strong {
+  color: #ffffff !important;
 }
 
-.hover\:bg-\[\#168AAD\]:hover,
-.hover\:bg-\[\#126e8a\]:hover {
-  background-color: #8B1E2D !important;
+/* Badge/pill màu vàng trên nền đỏ: chữ đen đậm rõ nét */
+.chapter-header-banner [class*="bg-amber"],
+.chapter-header-banner [class*="bg-yellow"] {
+  color: #0F172A !important;
 }
 
-.text-\[\#123B65\] {
+/* B. KHUNG NỘI DUNG CHƯƠNG & BÀI HỌC: Luôn nền trắng sáng và chữ tối rõ nét */
+.tkd-academic-subpage section,
+.tkd-page-scope section {
+  background-color: #ffffff !important;
+  color: #333333 !important;
+}
+
+.tkd-academic-subpage section p,
+.tkd-academic-subpage section li,
+.tkd-page-scope section p,
+.tkd-page-scope section li {
+  color: #333333 !important;
+}
+
+.tkd-academic-subpage section h3,
+.tkd-academic-subpage section h4,
+.tkd-page-scope section h3,
+.tkd-page-scope section h4 {
   color: #8B1E2D !important;
 }
 
-.text-\[\#168AAD\] {
-  color: #C62828 !important;
-}
-
-.border-\[\#168AAD\]\/30,
-.border-\[\#168AAD\]\/40 {
-  border-color: rgba(198, 40, 40, 0.35) !important;
-}
-
-/* Chuẩn hóa hiển thị trang học liệu chuyên sâu: Mục lục, Công thức, Bảng biểu, Ghi chú */
-.tkd-academic-subpage {
-  color: #333333 !important;
-  font-size: 0.9375rem;
-  line-height: 1.72;
-}
-
-.tkd-academic-subpage p,
-.tkd-academic-subpage li {
-  color: #333333;
-  line-height: 1.72;
-}
-
-.tkd-academic-subpage table th {
+/* C. BẢNG BIỂU HỌC THUẬT: Header đỏ chữ trắng, Body trắng chữ đen */
+table thead tr th {
   background-color: #8B1E2D !important;
-  color: #FFFFFF !important;
-  border-color: #C62828 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
 }
 
-.tkd-academic-subpage table td {
+table tbody tr td {
   color: #333333 !important;
 }
 
-.tkd-academic-subpage section[id^="c"] > div:first-child {
-  background: linear-gradient(135deg, #8B1E2D 0%, #C62828 100%) !important;
-  border-bottom: 2px solid #C62828 !important;
+table tbody tr:nth-child(even) {
+  background-color: #FAF8F6 !important;
 }
 
-/* Điểm nhấn Champagne Gold (#C5A46D) tinh tế trên thanh điều hướng & thẻ tiêu đề */
-#mainNavbar {
-  background: rgba(139, 30, 45, 0.98) !important;
-  border-bottom: 1px solid rgba(198, 40, 40, 0.4) !important;
-  box-shadow: 0 4px 20px -2px rgba(139, 30, 45, 0.25) !important;
-}
-
-footer.bg-\[\#0B1E33\],
-footer.bg-\[\#142B49\] {
-  background: linear-gradient(180deg, #8B1E2D 0%, #5C141E 100%) !important;
-  border-top: 2px solid rgba(198, 40, 40, 0.5) !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  /* animations disabled */
+table tbody tr:nth-child(odd) {
+  background-color: #ffffff !important;
 }
