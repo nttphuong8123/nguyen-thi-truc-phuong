@@ -1,0 +1,945 @@
+---
+import '../styles/global.css';
+import { MAIN_NAVIGATION } from '../lib/navigation';
+import { SILO_GROUPS, getSeoMetaForPath, type FaqItem } from '../lib/seo-meta';
+import { getSiteContactConfig } from '../lib/db';
+import ToroChatWidget from '../components/ToroChatWidget.astro';
+
+const contactCfg = getSiteContactConfig();
+const cleanPhone = contactCfg.hotline.replace(/\s+/g, '');
+
+export interface Props {
+  title?: string;
+  description?: string;
+  currentPath?: string;
+  customCss?: string;
+  noindex?: boolean;
+  faqs?: FaqItem[];
+}
+
+const {
+  title,
+  description,
+  currentPath = '/',
+  customCss = '',
+  noindex = false,
+  faqs: propFaqs,
+} = Astro.props;
+
+const normPath = currentPath === '/' ? '/' : currentPath.toLowerCase().replace(/\/+$/, '');
+const seoMeta = getSeoMetaForPath(normPath, title);
+const finalTitle = title && !title.startsWith('NGUYỄN THỊ TRÚC PHƯƠNG -') ? title : seoMeta.title;
+const finalDescription =
+  description && !description.includes('Tài liệu học tập, bài tập thực hành và công cụ hỗ trợ sinh viên trên cổng thông tin')
+    ? description
+    : seoMeta.description;
+
+const canonicalUrl = new URL(normPath, Astro.site || 'https://nguyenthitrucphuong.pages.dev').toString();
+const currentYear = new Date().getFullYear();
+
+// Build Accurate Vietnamese BreadcrumbList JSON-LD
+const breadcrumbItems: { '@type': string; position: number; name: string; item: string }[] = [
+  {
+    '@type': 'ListItem',
+    position: 1,
+    name: 'Trang chủ',
+    item: 'https://nguyenthitrucphuong.pages.dev/',
+  },
+];
+
+if (normPath.startsWith('/study-corner') && normPath !== '/study-corner') {
+  breadcrumbItems.push({
+    '@type': 'ListItem',
+    position: breadcrumbItems.length + 1,
+    name: 'Góc học tập',
+    item: 'https://nguyenthitrucphuong.pages.dev/study-corner',
+  });
+}
+
+if (normPath.startsWith('/goc-chia-se/') && normPath !== '/goc-chia-se') {
+  breadcrumbItems.push({
+    '@type': 'ListItem',
+    position: breadcrumbItems.length + 1,
+    name: 'Góc chia sẻ',
+    item: 'https://nguyenthitrucphuong.pages.dev/goc-chia-se',
+  });
+}
+
+if (
+  seoMeta.parentPath &&
+  seoMeta.parentPath !== '/' &&
+  seoMeta.parentPath !== '/study-corner' &&
+  seoMeta.parentPath !== normPath
+) {
+  const parentMeta = getSeoMetaForPath(seoMeta.parentPath);
+  breadcrumbItems.push({
+    '@type': 'ListItem',
+    position: breadcrumbItems.length + 1,
+    name: parentMeta.breadcrumbLabel,
+    item: `https://nguyenthitrucphuong.pages.dev${seoMeta.parentPath}`,
+  });
+}
+
+if (normPath !== '/') {
+  breadcrumbItems.push({
+    '@type': 'ListItem',
+    position: breadcrumbItems.length + 1,
+    name: seoMeta.breadcrumbLabel,
+    item: canonicalUrl,
+  });
+}
+
+const silo = seoMeta.siloKey ? SILO_GROUPS[seoMeta.siloKey] : undefined;
+const activeFaqs: FaqItem[] = propFaqs || seoMeta.faqs || silo?.defaultFaqs || [];
+
+const graphNodes: Record<string, any>[] = [
+  {
+    '@type': 'WebSite',
+    '@id': 'https://nguyenthitrucphuong.pages.dev/#website',
+    url: 'https://nguyenthitrucphuong.pages.dev/',
+    name: 'NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập - Tri Thức Số',
+    description: finalDescription,
+    inLanguage: 'vi-VN',
+    publisher: { '@id': 'https://nguyenthitrucphuong.pages.dev/#person' }, image: { '@type': 'ImageObject', '@id': 'https://nguyenthitrucphuong.pages.dev/#logo', url: 'https://nguyenthitrucphuong.pages.dev/images/logo-an.svg', contentUrl: 'https://nguyenthitrucphuong.pages.dev/images/logo-an-512.webp', width: 512, height: 512, caption: 'Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập & Tri Thức Số (Tác giả thiết kế: Toro)', creator: { '@type': 'Person', name: 'Toro' } },
+  },
+  {
+    '@type': 'Person',
+    '@id': 'https://nguyenthitrucphuong.pages.dev/#person',
+    name: contactCfg.instructor_name,
+    jobTitle: 'Giảng viên Khoa Quản trị - Kinh doanh',
+    worksFor: {
+      '@type': 'CollegeOrUniversity',
+      name: 'Trường Cao đẳng Kinh tế TP. Hồ Chí Minh (HCE)',
+    },
+    url: 'https://nguyenthitrucphuong.pages.dev/home/introduction',
+    telephone: cleanPhone,
+    email: contactCfg.email,
+    address: contactCfg.address,
+    sameAs: [
+      contactCfg.youtube_url,
+      contactCfg.tiktok_url,
+    ],
+  },
+  {
+    '@type': 'BreadcrumbList',
+    '@id': `${canonicalUrl}#breadcrumb`,
+    itemListElement: breadcrumbItems,
+  },
+];
+
+if (seoMeta.schemaType === 'Course') {
+  graphNodes.push({
+    '@type': 'Course',
+    '@id': `${canonicalUrl}#course`,
+    name: finalTitle,
+    description: finalDescription,
+    url: canonicalUrl,
+    inLanguage: 'vi-VN',
+    provider: {
+      '@type': 'CollegeOrUniversity',
+      name: 'Khoa Quản trị - Kinh doanh, Trường Cao đẳng Kinh tế TP.HCM (HCE)',
+      sameAs: 'https://nguyenthitrucphuong.pages.dev/',
+    },
+    instructor: { '@id': 'https://nguyenthitrucphuong.pages.dev/#person' },
+    isAccessibleForFree: true,
+  });
+} else if (seoMeta.schemaType === 'Quiz') {
+  graphNodes.push({
+    '@type': 'Quiz',
+    '@id': `${canonicalUrl}#quiz`,
+    name: finalTitle,
+    description: finalDescription,
+    url: canonicalUrl,
+    inLanguage: 'vi-VN',
+    educationalLevel: 'Đại học / Cao đẳng',
+    author: { '@id': 'https://nguyenthitrucphuong.pages.dev/#person' },
+    isAccessibleForFree: true,
+  });
+} else if (seoMeta.schemaType === 'LearningResource') {
+  graphNodes.push({
+    '@type': 'LearningResource',
+    '@id': `${canonicalUrl}#resource`,
+    name: finalTitle,
+    description: finalDescription,
+    url: canonicalUrl,
+    inLanguage: 'vi-VN',
+    learningResourceType: 'Bài giảng, Hướng dẫn giải bài tập - Đề cương học thuật',
+    author: { '@id': 'https://nguyenthitrucphuong.pages.dev/#person' },
+    isAccessibleForFree: true,
+  });
+}
+
+if (activeFaqs.length > 0 && !noindex) {
+  graphNodes.push({
+    '@type': 'FAQPage',
+    '@id': `${canonicalUrl}#faq`,
+    mainEntity: activeFaqs.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.answer,
+      },
+    })),
+  });
+}
+
+const schemaGraph = {
+  '@context': 'https://schema.org',
+  '@graph': graphNodes,
+};
+
+// Cấu hình giao diện Mobile Drawer sinh động & hiện đại theo Design System
+const TOP_NAV_META: Record<string, { icon: string; bg: string; subtitle: string }> = {
+  'Trang chủ': { icon: '🏠', bg: 'bg-[#C62828]', subtitle: 'Thông tin Giảng viên & Hoạt động' },
+  'Góc học tập': { icon: '📚', bg: 'bg-[#8B1E2D] ring-1 ring-[#C62828]/50', subtitle: 'Bài giảng, Đề cương & Bài tập' },
+  'Thi Online': { icon: '⚡', bg: 'bg-[#C62828] text-white', subtitle: 'Ngân hàng Đề thi Trắc nghiệm Live' },
+  'SPSS - Phần mềm': { icon: '📈', bg: 'bg-[#8B1E2D]', subtitle: 'Xử lý Dữ liệu & Kho Phần mềm' },
+  
+  
+  'Liên hệ': { icon: '📬', bg: 'bg-[#C62828]', subtitle: 'Liên hệ Giảng viên & Góp ý' },
+};
+
+const SUB_NAV_ICONS: Record<string, string> = {
+  'Giới thiệu Giảng viên': '👨‍🏫',
+  'Hoạt động Giảng dạy': '📖',
+  'Cố vấn học tập (CVHT)': '🤝',
+  'Góc chia sẻ - Tin tức': '📰',
+  'Kiến thức Marketing - AI': '🤖',
+  '5. Marketing căn bản': '📣',
+  '6. Kinh tế vi mô': '📊',
+  '7. Hướng dẫn thực tập': '🎓',
+  '8. Khởi nghiệp': '🚀',
+  'Chuyên đề IMC (Truyền thông)': '📢',
+  'Hướng dẫn xử lý dữ liệu SPSS': '📊',
+  'Khảo sát NCKH Sinh viên': '📝',
+  'Kho Phần mềm (SPSS, POM-QM)': '💻',
+  'Thông tin Liên hệ - Góp ý': '📮',
+  'Phiếu Đánh giá Giảng viên': '⭐',
+  '🤖 Trợ lý AI Toro với Susi': '🤖',
+};
+
+function getLeafIcon(label: string): string {
+  const l = label.toLowerCase();
+  if (l.includes('bài giảng') || l.includes('slide') || l.includes('đề cương')) return '📖';
+  if (l.includes('đề thi') || l.includes('trắc nghiệm') || l.includes('test')) return '📝';
+  if (l.includes('bài tập') || l.includes('hướng dẫn giải') || l.includes('tự luận')) return '💡';
+  if (l.includes('phần mềm') || l.includes('pom') || l.includes('casio') || l.includes('spss')) return '💻';
+  if (l.includes('báo cáo') || l.includes('mẫu')) return '📑';
+  if (l.includes('tra cứu') || l.includes('dcct')) return '🔍';
+  if (l.includes('trích dẫn')) return '📌';
+  return '🔹';
+}
+
+---
+
+<!doctype html>
+<html lang="vi" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>{finalTitle}</title>
+    <meta name="description" content={finalDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    )}
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={finalTitle} />
+    <meta property="og:description" content={finalDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="NGUYỄN THỊ TRÚC PHƯƠNG" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:image" content="https://nguyenthitrucphuong.pages.dev/images/og-default.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={finalTitle} />
+    <meta name="twitter:description" content={finalDescription} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" /><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=3" /><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=3" />
+
+    <!-- Google Fonts: Non-blocking Preload with Display Swap (Be Vietnam Pro, Noto Serif, Roboto Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,600;0,700;1,400&family=Roboto+Mono:wght@500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,600;0,700;1,400&family=Roboto+Mono:wght@500;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,600;0,700;1,400&family=Roboto+Mono:wght@500;700&display=swap"
+      />
+    </noscript>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
+
+        <style is:inline>
+      /* Cố định tuyệt đối thanh điều hướng chính ở đỉnh màn hình, không trôi khi cuộn */
+      #mainNavbar,
+      nav[aria-label="Điều hướng chính"],
+      .site-sticky-navbar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        z-index: 100 !important;
+      }
+      body {
+        padding-top: 4rem !important; /* 64px tương ứng đúng chiều cao thanh điều hướng */
+      }
+
+      /* Khoảng đệm an toàn dưới cùng cho toàn bộ trang web chống che khuất bởi nút nổi Toro AI */
+      main, .site-main-content, #mainContent {
+        padding-bottom: 0 !important;
+      }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous" />
+    {customCss && <style is:inline set:html={customCss} />}
+  </head>
+  <body class="min-h-screen flex flex-col bg-[#FAF8F6] text-[#333333] antialiased selection:bg-[#C62828] selection:text-white pt-16">
+    <!-- Top Academic Navigation Bar (Cố định ở đỉnh màn hình, không trôi khi cuộn) -->
+    <nav id="mainNavbar" aria-label="Điều hướng chính" class="site-sticky-navbar fixed top-0 left-0 right-0 w-full z-50 bg-[#8B1E2D]/98 backdrop-blur-md text-white border-b border-[#C62828]/40 shadow-sm">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6">
+        <div class="flex items-center justify-between h-16 gap-4">
+          <!-- Brand Logo -->
+          <a
+            href="/"
+            title="Về Trang chủ Cổng Học Tập - Tri Thức Số NGUYỄN THỊ TRÚC PHƯƠNG"
+            class="group flex items-center gap-2.5 font-extrabold text-sm sm:text-base tracking-tight text-white hover:text-[#FCEEEF] transition-colors shrink-0 whitespace-nowrap"
+          >
+            <span class="w-12 h-9 sm:w-[54px] sm:h-10 bg-transparent drop-shadow-[0_2px_8px_rgba(32,197,232,0.28)] group-hover:scale-105 transition-transform duration-300 flex items-center justify-center shrink-0"><picture><source type="image/webp" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" /><img src="/images/logo-an.svg?v=3" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" width="54" height="40" alt="Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập &amp; Tri Thức Số (Tác giả thiết kế: Toro)" title="Logo AN — Thiết kế bởi Toro" fetchpriority="high" decoding="async" class="w-full h-full object-contain block" /></picture>
+
+            </span>
+            <span class="leading-tight block">
+              <span class="block text-sm sm:text-base font-extrabold tracking-wide">NGUYỄN THỊ TRÚC PHƯƠNG</span>
+              <span class="block text-[6.5px] sm:text-[7.2px] text-[#FCEEEF] font-semibold tracking-tight uppercase">Cổng Học Tập - Tri Thức Số<sup class="text-[5.5px] leading-none relative -top-[2.5px] ml-[0.5px] font-bold">®</sup></span>
+            </span>
+          </a>
+
+          <!-- Desktop Menu -->
+          <div class="hidden lg:flex items-center gap-1 xl:gap-1.5">
+            {MAIN_NAVIGATION.map((item, navIdx) => {
+              const hasActiveChild =
+                item.children?.some(
+                  (sub) =>
+                    normPath === sub.href.toLowerCase() ||
+                    normPath.startsWith(sub.href.toLowerCase() + '/')
+                ) ?? false;
+              const isActive =
+                item.href === '/'
+                  ? normPath === '/' || hasActiveChild
+                  : normPath === item.href.toLowerCase() ||
+                    normPath.startsWith(item.href.toLowerCase() + '/') ||
+                    hasActiveChild;
+              const alignRight = navIdx >= MAIN_NAVIGATION.length - 2;
+              return (
+                <div class="relative group desktop-nav-item">
+                  <div
+                    class={`rounded-lg text-[13px] font-semibold flex items-center whitespace-nowrap shrink-0 transition-all ${
+                      isActive
+                        ? 'bg-[#C62828] text-white shadow-xs ring-1 ring-[#FCEEEF]/60'
+                        : 'text-slate-100 hover:bg-[#C62828]/55 hover:text-white'
+                    }`}
+                  >
+                    <a
+                      href={item.href}
+                      title={`Truy cập chuyên mục ${item.label} trên cổng học tập`}
+                      class={`py-2 flex items-center gap-1.5 ${item.children ? 'pl-3 pr-1.5 desktop-nav-trigger' : 'px-3'}`}
+                    >
+                      <span>{item.label}</span>
+                      {item.badge === 'LOCK' && (
+                        <span aria-hidden="true" class="text-[11px] opacity-80 leading-none">
+                          🔒
+                        </span>
+                      )}
+                      {item.badge && item.badge !== 'LOCK' && (
+                        <span class="px-1.5 py-0.5 text-[10px] leading-none rounded-md bg-[#FCEEEF] text-[#8B1E2D] font-black uppercase tracking-wider whitespace-nowrap shadow-2xs">
+                          {item.badge}
+                        </span>
+                      )}
+                    </a>
+                    {item.children && (
+                      <button
+                        type="button"
+                        aria-label={`Mở danh mục con ${item.label}`}
+                        class="desktop-nav-toggle-btn pr-2.5 pl-1 py-2 flex items-center justify-center cursor-pointer focus:outline-none"
+                      >
+                        <svg aria-hidden="true" class="desktop-nav-chevron w-3.5 h-3.5 opacity-80 transition-transform duration-150 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+
+                  {item.children && (
+                    <div class={`desktop-nav-dropdown absolute ${alignRight ? 'right-0' : 'left-0'} top-full pt-1.5 w-64 z-50`}>
+                      <div class="bg-white text-slate-800 rounded-xl shadow-2xl border border-slate-200 py-1.5 ring-1 ring-black/5">
+                        {item.children.map((sub) => (
+                          <div class="relative group/sub desktop-sub-item">
+                            <a
+                              href={sub.href}
+                              title={`Mở học phần và tài liệu ${sub.label}`}
+                              class="flex items-center justify-between px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-[#FCEEEF] hover:text-[#8B1E2D] transition-colors"
+                            >
+                              <span>{sub.label}</span>
+                              {sub.children && <span aria-hidden="true" class="text-slate-400 text-[10px] ml-2">▶</span>}
+                            </a>
+                            {sub.children && (
+                              <div class={`desktop-sub-dropdown absolute ${alignRight ? 'right-full pr-1' : 'left-full pl-1'} top-0 w-64 z-50`}>
+                                <div class="bg-white rounded-xl shadow-2xl border border-slate-200 py-1.5 ring-1 ring-black/5">
+                                  {sub.children.map((leaf) => (
+                                    <a
+                                      href={leaf.href}
+                                      title={`Xem chi tiết ${leaf.label} (${sub.label})`}
+                                      class="block px-3.5 py-1.5 text-xs font-medium text-slate-700 hover:bg-[#F2F6FA] hover:text-[#123B65]"
+                                    >
+                                      {leaf.label}
+                                    </a>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          <!-- Mobile Hamburger Button -->
+          <div class="flex items-center gap-2 lg:hidden">
+            <a
+              href="/ngan-hang-de-thi"
+              title="Làm bài thi trắc nghiệm trực tuyến 50 câu trong 60 phút"
+              class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#C62828] hover:bg-[#8B1E2D] border border-[#C62828]/60 text-white font-extrabold text-xs whitespace-nowrap shadow-sm active:scale-95 transition-all"
+            >
+              <span class="w-4 h-4 rounded-full bg-[#701824] flex items-center justify-center text-[8px] text-[#FCEEEF] pl-0.5 select-none font-bold">▶</span>
+              <span>Thi Online</span>
+            </a>
+            <button
+              id="mobileMenuBtn"
+              type="button"
+              aria-label="Mở menu điều hướng"
+              class="p-2 rounded-lg text-slate-100 hover:bg-[#C62828]/50 focus:outline-none"
+            >
+              <svg aria-hidden="true" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+            <!-- Mobile Drawer Sang Trọng, Sinh Động & Hiện Đại -->
+      <div
+        id="mobileMenuDrawer"
+        class="hidden lg:hidden bg-gradient-to-b from-[#701824] via-[#8B1E2D] to-[#5C141E] border-t border-[#C62828]/40 px-3 pt-3 pb-8 max-h-[85vh] overflow-y-auto shadow-2xl backdrop-blur-xl"
+      >
+        <!-- Header Banner trong Drawer -->
+        <div class="flex items-center justify-between p-3 mb-3 rounded-2xl bg-gradient-to-r from-[#8B1E2D] via-[#C62828]/70 to-[#8B1E2D] border border-[#FCEEEF]/40 shadow-md">
+          <div class="flex items-center gap-2.5">
+            <span class="w-12 h-9 bg-transparent drop-shadow-[0_2px_8px_rgba(32,197,232,0.28)] flex items-center justify-center shrink-0"><picture><source type="image/webp" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" /><img src="/images/logo-an.svg?v=3" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" width="48" height="36" alt="Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập &amp; Tri Thức Số HCE (Tác giả thiết kế: Toro)" loading="lazy" decoding="async" class="w-full h-full object-contain block" /></picture>
+
+            </span>
+            <div>
+              <div class="text-xs sm:text-sm font-black uppercase text-white tracking-wide flex items-center gap-1.5">
+                <span>NGUYỄN THỊ TRÚC PHƯƠNG</span>
+                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <div class="text-[6.5px] sm:text-[7.2px] text-[#FCEEEF] font-semibold tracking-tight uppercase">Cổng Học Tập - Tri Thức Số<sup class="text-[5.5px] leading-none relative -top-[2.5px] ml-[0.5px] font-bold">®</sup></div>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <a
+              href="/ngan-hang-de-thi"
+              class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#C62828] hover:bg-[#701824] border border-[#FCEEEF]/50 text-white font-extrabold text-xs shadow-sm active:scale-95 transition-transform"
+            >
+              <span>⚡</span>
+              <span>Thi Online</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Danh sách Accordion Cấp 1 -->
+        <div class="space-y-2">
+          {MAIN_NAVIGATION.map((item) => {
+            const meta = TOP_NAV_META[item.label] || { icon: '📌', bg: 'from-slate-700 to-slate-800', subtitle: '' };
+            const hasChildren = item.children && item.children.length > 0;
+            const isGocHocTap = item.label === 'Góc học tập';
+
+            return (
+              <div class="rounded-2xl border border-[#C62828]/30 bg-[#8B1E2D]/80 hover:border-[#FCEEEF]/50 transition-all overflow-hidden shadow-xs">
+                {hasChildren ? (
+                  <div>
+                    <button
+                      type="button"
+                      class="mobile-accordion-btn w-full flex items-center justify-between p-3 text-left transition-colors group cursor-pointer"
+                      aria-expanded={isGocHocTap ? "true" : "false"}
+                    >
+                      <div class="flex items-center gap-3">
+                        <span class={`w-9 h-9 rounded-xl bg-gradient-to-br ${meta.bg} flex items-center justify-center text-white text-base shadow-xs shrink-0 group-hover:scale-105 transition-transform`}>
+                          {meta.icon}
+                        </span>
+                        <div>
+                          <div class="flex items-center gap-2">
+                            <span class="text-sm font-bold text-white group-hover:text-[#FCEEEF] transition-colors">
+                              {item.label}
+                            </span>
+                            {item.badge === 'LOCK' ? (
+                              <span class="px-2 py-0.2 rounded-full bg-slate-800 text-sky-300 border border-[#168AAD]/50 text-[10px] font-semibold">
+                                🔒 Nội bộ
+                              </span>
+                            ) : item.badge ? (
+                              <span class="px-2 py-0.2 rounded-full bg-[#FCEEEF] text-[#8B1E2D] text-[10px] font-extrabold shadow-2xs">
+                                {item.badge}
+                              </span>
+                            ) : null}
+                          </div>
+                          {meta.subtitle && (
+                            <p class="text-[11px] text-slate-400 leading-tight mt-0.5 line-clamp-1">
+                              {meta.subtitle}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <a
+                          href={item.href}
+                          title={`Xem toàn bộ ${item.label}`}
+                          class="p-1 rounded-lg bg-[#C62828]/60 hover:bg-[#C62828] text-slate-100 hover:text-white text-[11px] font-semibold px-2 transition-colors border border-[#C62828]"
+                          onclick="event.stopPropagation();"
+                        >
+                          Vào trang
+                        </a>
+                        <span class="mobile-chevron w-6 h-6 rounded-full bg-[#C62828]/40 flex items-center justify-center text-slate-100 text-xs transition-transform duration-200">
+                          {isGocHocTap ? '▲' : '▼'}
+                        </span>
+                      </div>
+                    </button>
+
+                    <!-- Khối nội dung con cấp 2 (Accordion Panel) -->
+                    <div class={`mobile-accordion-content ${isGocHocTap ? '' : 'hidden'} px-2.5 pb-2.5 pt-1 space-y-2 border-t border-[#C62828]/40 bg-[#5C141E]/95`}>
+                      {item.children.map((sub) => {
+                        const subIcon = SUB_NAV_ICONS[sub.label] || '📁';
+                        const hasLeaf = sub.children && sub.children.length > 0;
+
+                        return (
+                          <div class="rounded-xl border border-[#C62828]/40 bg-[#701824] p-2.5 space-y-2">
+                            <div class="flex items-center justify-between">
+                              <a
+                                href={sub.href}
+                                title={`Môn học: ${sub.label}`}
+                                class="flex items-center gap-2 group flex-1"
+                              >
+                                <span class="w-6 h-6 rounded-lg bg-[#5C141E] border border-[#C62828]/50 flex items-center justify-center text-sm shrink-0">
+                                  {subIcon}
+                                </span>
+                                <span class="text-xs sm:text-sm font-bold text-slate-100 group-hover:text-[#FCEEEF] transition-colors">
+                                  {sub.label}
+                                </span>
+                              </a>
+                              {hasLeaf && (
+                                <button
+                                  type="button"
+                                  class="mobile-sub-toggle text-xs text-slate-100 hover:text-white font-bold px-2.5 py-1 rounded-lg bg-[#C62828] hover:bg-[#8B1E2D] border border-[#FCEEEF]/40 flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer shrink-0"
+                                >
+                                  <span>Tài liệu</span>
+                                  <span class="mobile-sub-chevron text-[9px] transition-transform">▼</span>
+                                </button>
+                              )}
+                            </div>
+
+                            {hasLeaf && (
+                              <div class="mobile-sub-content hidden pt-1.5 border-t border-[#C62828]/30">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                                  {sub.children.map((leaf) => {
+                                    const leafIcon = getLeafIcon(leaf.label);
+                                    return (
+                                      <a
+                                        href={leaf.href}
+                                        title={`Tài liệu ${leaf.label}`}
+                                        class="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-[#5C141E] hover:bg-[#C62828]/40 border border-[#C62828]/30 hover:border-[#FCEEEF]/50 text-slate-100 hover:text-white text-[11px] font-medium transition-all group"
+                                      >
+                                        <span class="text-xs opacity-80 group-hover:scale-110 transition-transform">{leafIcon}</span>
+                                        <span class="truncate">{leaf.label}</span>
+                                      </a>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ) : (
+                  <a
+                    href={item.href}
+                    title={`Chuyên mục ${item.label}`}
+                    class="w-full flex items-center justify-between p-3 transition-colors group cursor-pointer"
+                  >
+                    <div class="flex items-center gap-3">
+                      <span class={`w-9 h-9 rounded-xl bg-gradient-to-br ${meta.bg} flex items-center justify-center text-white text-base shadow-xs shrink-0 group-hover:scale-105 transition-transform`}>
+                        {meta.icon}
+                      </span>
+                      <div>
+                        <div class="flex items-center gap-2">
+                          <span class="text-sm font-bold text-white group-hover:text-sky-300 transition-colors">
+                            {item.label}
+                          </span>
+                          {item.badge === 'LOCK' ? (
+                            <span class="px-2 py-0.2 rounded-full bg-slate-800 text-sky-300 border border-[#168AAD]/50 text-[10px] font-semibold">
+                              🔒 Nội bộ
+                            </span>
+                          ) : item.badge ? (
+                            <span class="px-2 py-0.2 rounded-full bg-[#72C7D5] text-[#123B65] text-[10px] font-extrabold shadow-2xs">
+                              {item.badge}
+                            </span>
+                          ) : null}
+                        </div>
+                        {meta.subtitle && (
+                          <p class="text-[11px] text-slate-400 leading-tight mt-0.5">
+                            {meta.subtitle}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    <span class="text-sky-400 text-xs font-bold group-hover:translate-x-1 transition-transform">
+                      ➔
+                    </span>
+                  </a>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <!-- Quick Action & Support Cards ở đáy Drawer -->
+        <div class="mt-4 pt-3 border-t border-[#C62828]/30 space-y-2">
+          <div class="grid grid-cols-2 gap-2">
+            <a
+              href="/tro-ly-toro"
+              class="flex items-center justify-center gap-1.5 p-2 rounded-xl bg-gradient-to-r from-[#C62828] to-[#8B1E2D] text-white font-bold text-xs shadow-md hover:brightness-110 active:scale-95 transition-all text-center"
+            >
+              <span>🤖</span>
+              <span>Trợ lý AI Toro</span>
+            </a>
+            <a
+              href="/contact"
+              class="flex items-center justify-center gap-1.5 p-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-200 font-bold text-xs shadow-xs hover:bg-slate-700 active:scale-95 transition-all text-center"
+            >
+              <span>📞</span>
+              <span>Tư Vấn & Góp Ý</span>
+            </a>
+          </div>
+
+          <div class="p-2.5 rounded-xl bg-slate-900/60 border border-[#C62828]/30/80 text-[11px] text-slate-400 text-center space-y-1">
+            <div>
+              <span class="text-slate-300 font-semibold">ThS. NGUYỄN THỊ TRÚC PHƯƠNG</span> — Khoa Quản trị - Kinh doanh (HCE)
+            </div>
+            <div class="flex items-center justify-center gap-3 text-sky-400 font-medium">
+              <span>Hotline: {contactCfg.hotline}</span>
+              <span>•</span>
+              <a href={`mailto:${contactCfg.email}`} class="hover:underline">{contactCfg.email}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Page Content -->
+    <div class="flex-1 w-full">
+      <slot />
+    </div>
+
+    <!-- Global Academic Footer -->
+    <footer class="bg-[#8B1E2D] text-slate-200 border-t border-[#C62828]/40 mt-4 sm:mt-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xs sm:text-sm">
+          <!-- Column 1: About & Châm ngôn triết lý sống -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-2 font-extrabold text-white text-base">
+              <span class="w-10 h-7.5 bg-transparent drop-shadow-[0_2px_6px_rgba(32,197,232,0.25)] flex items-center justify-center shrink-0"><picture><source type="image/webp" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" /><img src="/images/logo-an.svg?v=3" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" width="40" height="30" alt="Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG (Tác giả thiết kế: Toro)" loading="lazy" decoding="async" class="w-full h-full object-contain block" /></picture></span>
+              <span class="tracking-tight">NGUYỄN THỊ TRÚC PHƯƠNG</span>
+            </div>
+            <p class="text-slate-300 text-xs sm:text-[12.5px] leading-relaxed italic border-l-2 border-[#C62828] pl-3 py-1 my-1">
+              "Đừng vì một mùa hoa không nở mà thôi chăm sóc khu vườn. Cứ gieo hạt lành, cứ tưới mầm thiện. Bởi hoa nở là duyên của đất trời, còn giữ cho khu vườn xanh tốt là việc của chính mình."
+            </p>
+          </div>
+
+          <!-- Column 2: Liên kết nhanh (Nhất quán đề mục & danh sách ngay ngắn) -->
+          <div class="space-y-3">
+            <h2 class="font-black text-white uppercase tracking-wider text-xs m-0 flex items-center gap-2">
+              <span class="w-1.5 h-3.5 rounded-full bg-[#C62828] shrink-0"></span>
+              <span>Liên kết nhanh</span>
+            </h2>
+            <ul class="grid grid-cols-2 gap-x-2 gap-y-2 text-xs text-slate-300">
+              <li><a href="/study-corner" title="Danh mục 11 học phần trong Góc học tập" class="hover:text-[#FCEEEF] transition-colors flex items-center gap-1.5"><span class="text-sky-400 font-bold">•</span><span>Góc học tập</span></a></li>
+              <li><a href="/ngan-hang-de-thi" title="Hệ thống thi trắc nghiệm trực tuyến 50 câu" class="hover:text-[#FCEEEF] transition-colors flex items-center gap-1.5"><span class="text-sky-400 font-bold">•</span><span>Thi Online</span></a></li>
+              <li><a href="/dcct" title="Tra cứu mã đề cương chi tiết thực tập tốt nghiệp" class="hover:text-[#FCEEEF] transition-colors flex items-center gap-1.5"><span class="text-sky-400 font-bold">•</span><span>Đề cương</span></a></li>
+              
+              <li><a href="/spss" title="Hướng dẫn xử lý dữ liệu khảo sát bằng SPSS" class="hover:text-[#FCEEEF] transition-colors flex items-center gap-1.5"><span class="text-sky-400 font-bold">•</span><span>Hướng dẫn SPSS</span></a></li>
+              <li><a href="/software" title="Tải phần mềm thống kê SPSS và mô phỏng POM-QM" class="hover:text-[#FCEEEF] transition-colors flex items-center gap-1.5"><span class="text-sky-400 font-bold">•</span><span>Kho Phần mềm</span></a></li>
+              <li><a href="/mentor" title="Thông tin công tác Cố vấn học tập sinh viên" class="hover:text-[#FCEEEF] transition-colors flex items-center gap-1.5"><span class="text-sky-400 font-bold">•</span><span>Cố vấn học tập</span></a></li>
+              <li><a href="/contact" title="Thông tin liên hệ Giảng viên ThS. NGUYỄN THỊ TRÚC PHƯƠNG" class="hover:text-[#FCEEEF] transition-colors flex items-center gap-1.5"><span class="text-sky-400 font-bold">•</span><span>Liên hệ</span></a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Thông tin liên hệ (Nhất quán đề mục) -->
+          <div class="space-y-3">
+            <h2 class="font-black text-white uppercase tracking-wider text-xs m-0 flex items-center gap-2">
+              <span class="w-1.5 h-3.5 rounded-full bg-[#C62828] shrink-0"></span>
+              <span>Thông tin liên hệ</span>
+            </h2>
+            <ul class="space-y-2 text-xs text-slate-300">
+
+              <li class="flex items-center gap-2"><span class="text-sm shrink-0">📞</span><span><strong>Hotline / Zalo:</strong> <a href={`tel:${cleanPhone}`} title={`Gọi điện thoại hoặc nhắn Zalo tới số ${contactCfg.hotline}`} class="text-[#FCEEEF] font-bold hover:underline">{`${contactCfg.hotline}`}</a></span></li>
+              <li class="flex items-center gap-2"><span class="text-sm shrink-0">✉️</span><span><strong>Email:</strong> <a href={`mailto:${contactCfg.email}`} title={`Gửi thư điện tử trao đổi học thuật tới ${contactCfg.email}`} class="text-slate-200 hover:text-[#FCEEEF] font-semibold hover:underline">{`${contactCfg.email}`}</a></span></li>
+            </ul>
+            <div class="flex items-center gap-2.5 pt-1">
+              <a
+                href={contactCfg.youtube_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Xem kênh YouTube Bài Giảng của ThS. NGUYỄN THỊ TRÚC PHƯƠNG"
+                class="inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white font-bold px-3 py-1.5 rounded-xl text-xs transition-colors shadow-xs"
+              >
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+                <span>YouTube</span>
+              </a>
+              <a
+                href={contactCfg.tiktok_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Xem kênh TikTok Chia Sẻ Kiến Thức Thực Tiễn"
+                class="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold px-3 py-1.5 rounded-xl text-xs transition-colors shadow-xs"
+              >
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
+                </svg>
+                <span>TikTok</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Column 4: Thống kê lượt truy cập (Nhất quán đề mục) -->
+          <div class="space-y-3">
+            <h2 class="font-black text-white uppercase tracking-wider text-xs m-0 flex items-center gap-2">
+              <span class="w-1.5 h-3.5 rounded-full bg-emerald-500 shrink-0"></span>
+              <span>Thống kê lượt truy cập</span>
+            </h2>
+            <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-3 flex flex-col items-center justify-center min-h-[96px] shadow-inner">
+              <div id="histats_counter"></div>
+              <noscript>
+                <a href="/" target="_blank" rel="noopener noreferrer" title="Bộ đếm thống kê lượt truy cập Histats">
+                  <img src="//sstatic1.histats.com/0.gif?4586630&101" alt="Thống kê truy cập" border="0" width="1" height="1" loading="lazy" decoding="async" />
+                </a>
+              </noscript>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-[#C62828]/30 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
+          <p>Copyright © <span class="js-current-year">{currentYear}</span> NGUYỄN THỊ TRÚC PHƯƠNG - All rights reserved.</p>
+          <p class="text-[#FCEEEF] font-semibold">✨ Tài liệu được chia sẻ miễn phí</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Trợ Lý AI Toro & Susi — Chatbot Cố Vấn Học Tập HCE -->
+    <ToroChatWidget />
+
+    <script is:inline>
+      // 1. Mobile Drawer Toggle & Accordion Interaction
+      (function () {
+        const btn = document.getElementById('mobileMenuBtn');
+        const drawer = document.getElementById('mobileMenuDrawer');
+        if (btn && drawer) {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            drawer.classList.toggle('hidden');
+          });
+
+          // Tự động đóng drawer khi click ra ngoài
+          document.addEventListener('click', (e) => {
+            if (!drawer.classList.contains('hidden')) {
+              if (!drawer.contains(e.target) && !btn.contains(e.target)) {
+                drawer.classList.add('hidden');
+              }
+            }
+          });
+        }
+
+        // Mobile Accordion Cấp 1
+        document.querySelectorAll('.mobile-accordion-btn').forEach((aBtn) => {
+          aBtn.addEventListener('click', () => {
+            const card = aBtn.closest('.rounded-2xl');
+            if (!card) return;
+            const content = card.querySelector('.mobile-accordion-content');
+            const chevron = aBtn.querySelector('.mobile-chevron');
+            if (content) {
+              const isHidden = content.classList.toggle('hidden');
+              aBtn.setAttribute('aria-expanded', !isHidden);
+              if (chevron) {
+                chevron.textContent = isHidden ? '▼' : '▲';
+              }
+            }
+          });
+        });
+
+        // Mobile Sub-Accordion Cấp 2
+        document.querySelectorAll('.mobile-sub-toggle').forEach((sBtn) => {
+          sBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const subCard = sBtn.closest('.rounded-xl');
+            if (!subCard) return;
+            const subContent = subCard.querySelector('.mobile-sub-content');
+            const subChevron = sBtn.querySelector('.mobile-sub-chevron');
+            if (subContent) {
+              const isHidden = subContent.classList.toggle('hidden');
+              if (subChevron) {
+                subChevron.textContent = isHidden ? '▼' : '▲';
+              }
+            }
+          });
+        });
+      })();
+
+      // 2. Desktop dropdown menus: support both hover AND click toggle on all computers
+      (function () {
+        const navItems = document.querySelectorAll('.desktop-nav-item');
+        const subItems = document.querySelectorAll('.desktop-sub-item');
+
+        function closeAllDesktopMenus(exceptItem) {
+          navItems.forEach((item) => {
+            if (item !== exceptItem) {
+              item.classList.remove('is-open');
+              item.querySelectorAll('.desktop-sub-item.is-open').forEach((s) => s.classList.remove('is-open'));
+            }
+          });
+        }
+
+        navItems.forEach((item) => {
+          let closeTimer = null;
+          const dropdown = item.querySelector('.desktop-nav-dropdown');
+          if (!dropdown) return;
+
+          item.addEventListener('mouseenter', () => {
+            if (closeTimer) clearTimeout(closeTimer);
+            closeAllDesktopMenus(item);
+            item.classList.add('is-open');
+          });
+
+          item.addEventListener('mouseleave', () => {
+            closeTimer = setTimeout(() => {
+              item.classList.remove('is-open');
+              item.querySelectorAll('.desktop-sub-item.is-open').forEach((s) => s.classList.remove('is-open'));
+            }, 120);
+          });
+
+          const toggleBtn = item.querySelector('.desktop-nav-toggle-btn');
+          if (toggleBtn) {
+            toggleBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const willOpen = !item.classList.contains('is-open');
+              closeAllDesktopMenus(item);
+              item.classList.toggle('is-open', willOpen);
+            });
+          }
+
+          const triggerLink = item.querySelector('.desktop-nav-trigger');
+          if (triggerLink) {
+            triggerLink.addEventListener('click', (e) => {
+              const href = triggerLink.getAttribute('href') || '';
+              const normCurrent = window.location.pathname.replace(/\/+$/, '') || '/';
+              const normTarget = href.replace(/\/+$/, '') || '/';
+              if (normCurrent.toLowerCase() === normTarget.toLowerCase() || !item.classList.contains('is-open')) {
+                if (normCurrent.toLowerCase() === normTarget.toLowerCase()) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  const willOpen = !item.classList.contains('is-open');
+                  closeAllDesktopMenus(item);
+                  item.classList.toggle('is-open', willOpen);
+                }
+              }
+            });
+          }
+        });
+
+        subItems.forEach((sub) => {
+          let subTimer = null;
+          const subDropdown = sub.querySelector('.desktop-sub-dropdown');
+          if (!subDropdown) return;
+
+          sub.addEventListener('mouseenter', () => {
+            if (subTimer) clearTimeout(subTimer);
+            sub.parentElement?.querySelectorAll('.desktop-sub-item.is-open').forEach((s) => {
+              if (s !== sub) s.classList.remove('is-open');
+            });
+            sub.classList.add('is-open');
+          });
+
+          sub.addEventListener('mouseleave', () => {
+            subTimer = setTimeout(() => {
+              sub.classList.remove('is-open');
+            }, 120);
+          });
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.desktop-nav-item')) {
+            closeAllDesktopMenus(null);
+          }
+        });
+      })();
+
+      // Auto-update current year across all elements
+      (function () {
+        const y = String(new Date().getFullYear());
+        document.querySelectorAll('#currentYear, #footerYear, .js-current-year').forEach((el) => {
+          el.textContent = y;
+        });
+        const dynTitle = document.getElementById('dynamic-academic-title');
+        if (dynTitle) {
+          dynTitle.textContent = 'GÓC HỌC TẬP NĂM ' + y;
+        }
+      })();
+
+      // Histats visitor counter in global footer (deferred after page load for instant LCP)
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          window._Hasync = window._Hasync || [];
+          window._Hasync.push(['Histats.start', '1,4586630,4,408,270,55,00011111']);
+          window._Hasync.push(['Histats.fasi', '1']);
+          window._Hasync.push(['Histats.track_hits', '']);
+          var hs = document.createElement('script');
+          hs.type = 'text/javascript';
+          hs.async = true;
+          hs.src = '//s10.histats.com/js15_as.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+        }, 400);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import db, { type NewsArticle } from '../../lib/db';
+
+const { slug } = Astro.params;
+const article = db.prepare('SELECT * FROM news_articles WHERE slug = ?').get(slug || '') as NewsArticle | undefined;
+
+if (article) {
+  db.prepare('UPDATE news_articles SET views = views + 1 WHERE id = ?').run(article.id);
+} else {
+  Astro.response.status = 404;
+}
+
+const related = db
+  .prepare('SELECT slug, title, category, views FROM news_articles WHERE slug != ? ORDER BY id DESC LIMIT 4')
+  .all(slug || '') as NewsArticle[];
+---
+
+<MainLayout
+  title={article ? `${article.title} — Góc Chia Sẻ NGUYỄN THỊ TRÚC PHƯƠNG` : 'Không tìm thấy bài viết — NGUYỄN THỊ TRÚC PHƯƠNG'}
+  description={article ? article.summary : 'Bài viết không tồn tại.'}
+  currentPath={`/goc-chia-se/${slug}`}
+>
+  {
+    !article ? (
+      <main class="max-w-xl mx-auto px-4 py-16 text-center space-y-4">
+        <h1 class="text-2xl font-extrabold text-slate-900">Không tìm thấy bài viết</h1>
+        <a
+          href="/goc-chia-se"
+          title="Quay lại trang danh mục Góc chia sẻ"
+          class="inline-block bg-[#8B1E2D] hover:bg-[#C62828] text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl"
+        >
+          <span aria-hidden="true">← </span><span>Quay lại Góc Chia Sẻ</span>
+        </a>
+      </main>
+    ) : (
+      <main class="max-w-4xl mx-auto px-3 sm:px-6 py-8 space-y-6">
+        <article class="bg-white rounded-2xl shadow-xs border border-[#E8E0E1] overflow-hidden">
+          <header class="bg-gradient-to-br from-[#701824] via-[#8B1E2D] to-[#C62828] text-white p-6 sm:p-8 space-y-3">
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+              <a
+                href="/goc-chia-se"
+                title="Quay lại chuyên mục Góc chia sẻ và tin tức"
+                class="bg-white/15 hover:bg-white/25 text-sky-100 font-bold px-3 py-1 rounded-full transition-colors"
+              >
+                <span aria-hidden="true">← </span><span>Góc Chia Sẻ</span>
+              </a>
+              <span class="bg-[#72C7D5]/20 text-[#72C7D5] border border-[#72C7D5]/40 font-bold px-3 py-1 rounded-full">
+                {article.category}
+              </span>
+            </div>
+            <h1 class="text-xl sm:text-2xl font-extrabold leading-snug">{article.title}</h1>
+            <div class="flex flex-wrap items-center gap-4 text-xs text-sky-200 pt-1">
+              <span>✍️ Tác giả: <strong>{article.author}</strong></span>
+              <span>👁️ Lượt đọc: <strong class="num-font">{article.views + 1}</strong></span>
+            </div>
+          </header>
+
+          <div class="p-6 sm:p-8 space-y-4 text-sm sm:text-base text-slate-800 leading-relaxed">
+            <div class="p-4 rounded-xl bg-[#FAF8F6] border-l-4 border-[#C62828] font-semibold text-[#8B1E2D] text-xs sm:text-sm">
+              {article.summary}
+            </div>
+            <div class="space-y-3 prose prose-slate max-w-none" set:html={article.content_html} />
+          </div>
+        </article>
+
+        <section class="bg-white rounded-2xl border border-slate-200 p-5 space-y-3">
+          <h2 class="font-extrabold text-sm sm:text-base text-slate-900 uppercase">📚 Bài Viết Khác Trong Góc Chia Sẻ</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {related.map((r) => (
+              <a
+                href={`/goc-chia-se/${r.slug}`}
+                title={`Xem bài viết liên quan: ${r.title}`}
+                class="p-3 rounded-xl border border-slate-200 hover:border-sky-400 hover:bg-sky-50/50 transition-colors block"
+              >
+                <span class="text-[10px] font-bold uppercase text-sky-700 block">{r.category}</span>
+                <span class="text-xs sm:text-sm font-bold text-slate-900 mt-0.5 block">{r.title}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      </main>
+    )
+  }
+</MainLayout>

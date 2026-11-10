@@ -1,0 +1,538 @@
+---
+import { getEducationNews, EDUCATION_SOURCES } from '../lib/education-news';
+
+// Kéo dữ liệu server-side để render trước (SSR) ngay khi trang tải
+let initialData;
+try {
+  initialData = await getEducationNews(false);
+} catch {
+  initialData = {
+    ok: false,
+    total: 0,
+    updatedAt: 'Đang kết nối...',
+    sources: [],
+    items: [],
+    cached: false,
+  };
+}
+
+const initialItems = initialData.items || [];
+const initialTotal = initialItems.length;
+const initialUpdatedAt = initialData.updatedAt || 'Vừa cập nhật';
+const sources = EDUCATION_SOURCES;
+---
+
+<section
+  id="educationNewsSection"
+  class="bg-gradient-to-b from-[#0B1E33] via-[#0F243C] to-[#091526] rounded-3xl border-2 border-sky-400/40 shadow-2xl overflow-hidden text-white relative"
+>
+  <!-- Hào quang nền xanh ngọc & vàng gold -->
+  <div class="absolute -top-24 -left-24 w-80 h-80 bg-sky-500/15 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <!-- 1. HEADER CHUYÊN MỤC: TIÊU ĐỀ, MÔ TẢ & THÔNG TIN CẬP NHẬT -->
+  <div class="bg-gradient-to-r from-[#0B1E33] via-[#123B65] to-[#0E4D64] px-4 sm:px-6 py-5 border-b border-sky-400/30 relative z-10">
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div class="flex items-start sm:items-center gap-3.5">
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-amber-400 via-orange-500 to-rose-500 p-0.5 shadow-lg shrink-0">
+          <div class="w-full h-full rounded-[14px] bg-[#0B1E33] flex items-center justify-center text-2xl sm:text-3xl">
+            📰
+          </div>
+        </div>
+        <div>
+          <h2 class="text-lg sm:text-2xl md:text-3xl font-black tracking-tight uppercase text-white m-0 leading-tight">
+            TIN TỨC <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-sky-300">GIÁO DỤC</span>
+          </h2>
+          <p class="text-xs sm:text-sm font-semibold text-sky-200/90 m-0 mt-0.5">
+            Cập nhật thông tin giáo dục, đào tạo, tuyển sinh và chính sách mới nhất.
+          </p>
+        </div>
+      </div>
+
+      <!-- Thống kê & Nút làm mới dữ liệu -->
+      <div class="flex flex-wrap items-center gap-2.5">
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-xs">
+          <span class="text-slate-400">Cập nhật:</span>
+          <span id="edNewsUpdatedAtLabel" class="font-extrabold text-amber-300 num-font">{initialUpdatedAt}</span>
+        </div>
+
+        <button
+          type="button"
+          id="edNewsBtnRefresh"
+          class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-500 hover:to-teal-500 text-white font-extrabold text-xs shadow-md cursor-pointer transition-all flex items-center gap-1.5 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+          title="Làm mới tin tức từ các tòa soạn"
+        >
+          <span id="edNewsRefreshIcon" class="inline-block transition-transform duration-500">🔄</span>
+          <span id="edNewsRefreshText">Làm Mới</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-3.5 sm:p-6 space-y-5 relative z-10">
+    <!-- 2. THANH BỘ LỌC NGUỒN BÁO CHÍ (CUỘN NGANG TRÊN MOBILE) -->
+    <div class="space-y-2.5">
+      <div class="flex items-center justify-between gap-2">
+        <div class="text-xs font-black uppercase tracking-wider text-sky-300 flex items-center gap-1.5">
+          <span>🔍 CHỌN NGUỒN TIN BÁO CHÍ:</span>
+          <span id="edNewsActiveFilterName" class="text-amber-300 font-extrabold normal-case">Tất cả nguồn</span>
+        </div>
+        <div class="text-xs font-bold text-slate-400">
+          Tổng cộng: <strong id="edNewsTotalCountBadge" class="text-amber-300 font-black num-font">{initialTotal}</strong> bài viết
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 overflow-x-auto pb-1.5 pt-0.5 no-scrollbar select-none">
+        <!-- Nút Tất cả -->
+        <button
+          type="button"
+          data-source="all"
+          class="ed-source-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-black whitespace-nowrap cursor-pointer transition-all border-2 border-amber-400 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-md active:scale-95 shrink-0"
+        >
+          🌟 Tất Cả (<span class="ed-count-all">{initialTotal}</span>)
+        </button>
+
+        <!-- 6 Nút Nguồn báo chí -->
+        {sources.map((s) => (
+          <button
+            type="button"
+            data-source={s.id}
+            data-name={s.name}
+            class="ed-source-filter-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap cursor-pointer transition-all border border-slate-700 bg-slate-900/80 hover:bg-slate-800 text-slate-200 hover:text-white active:scale-95 shrink-0 flex items-center gap-1.5"
+          >
+            <span class="w-2 h-2 rounded-full shrink-0" style={`background-color: ${s.color};`}></span>
+            <span>{s.name}</span>
+          </button>
+        ))}
+      </div>
+
+      <!-- Thanh trạng thái kết nối 6 nguồn tin (Source Health Bar) -->
+      <div id="edNewsSourceHealthBar" class="flex flex-wrap items-center gap-1.5 text-[11px] text-slate-400 pt-0.5">
+        <span class="font-bold text-slate-300">Nguồn tin chính thức:</span>
+        {sources.map((s) => (
+          <a
+            href={s.homeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-900/90 hover:bg-slate-800 border border-slate-800 text-[10px] font-bold text-slate-300 hover:text-white transition-colors"
+            title={`Trang chủ ${s.name} (Chuyên mục Giáo dục)`}
+          >
+            <span class="w-1.5 h-1.5 rounded-full" style={`background-color: ${s.color};`}></span>
+            <span>{s.shortName}</span>
+            <span class="text-[9px] opacity-60">↗</span>
+          </a>
+        ))}
+        <span class="ml-auto text-[10px] text-sky-300/80 italic hidden sm:inline">
+          * Tổng hợp qua RSS công khai • Không lưu toàn văn bài báo
+        </span>
+      </div>
+    </div>
+
+    <!-- Thông báo lỗi hoặc trạng thái tạm thời -->
+    <div id="edNewsAlertBanner" class="hidden"></div>
+
+    <!-- 3. LƯỚI BÀI VIẾT (GRID 3 CỘT DESKTOP, 2 CỘT TABLET, 1 CỘT MOBILE) -->
+    <div
+      id="edNewsCardsGrid"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
+    >
+      <!-- Các thẻ bài viết sẽ được hydrate và cập nhật động qua client-side JS -->
+      {initialItems.slice(0, 9).map((item) => (
+        <article
+          class="ed-news-card group flex flex-col bg-slate-900/90 rounded-2xl border border-slate-700/80 hover:border-sky-400/60 shadow-lg hover:shadow-sky-500/10 overflow-hidden transition-all duration-300 hover:-translate-y-1"
+          data-source={item.sourceId}
+          data-id={item.id}
+        >
+          <!-- Thumbnail ảnh 16:9 -->
+          <a
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block relative aspect-video w-full overflow-hidden bg-slate-950 shrink-0"
+            title={item.title}
+          >
+            <img
+              src={item.thumbnail}
+              alt={item.title}
+              loading="lazy"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              onerror="this.onerror=null; this.src='data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 450%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%230B1E33%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 fill=%22%2393C5FD%22 font-size=%2224%22 font-weight=%22bold%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E%F0%9F%93%B0 TIN T%E1%BB%A8C GI%C3%81O D%E1%BB%A4C%3C/text%3E%3C/svg%3E';"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none"></div>
+
+            <!-- Badge Tên Báo chí ở góc ảnh -->
+            <div class="absolute top-2.5 left-2.5">
+              <span class={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg backdrop-blur-md border text-[11px] font-black uppercase shadow-md ${item.sourceBadgeBg} ${item.sourceBorderColor} ${item.sourceTextColor}`}>
+                <span class="w-1.5 h-1.5 rounded-full" style={`background-color: ${item.sourceColor};`}></span>
+                <span>{item.sourceName}</span>
+              </span>
+            </div>
+
+            <!-- Thời gian đăng góc dưới ảnh -->
+            <div class="absolute bottom-2 right-2.5">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-950/85 backdrop-blur-xs text-[10px] font-bold text-slate-300 num-font shadow-xs">
+                <span>🕒</span>
+                <span>{item.timeAgo}</span>
+              </span>
+            </div>
+          </a>
+
+          <!-- Nội dung tóm tắt -->
+          <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+            <div class="space-y-2">
+              <h3 class="text-sm sm:text-base font-extrabold text-white group-hover:text-amber-300 transition-colors line-clamp-2 leading-snug m-0">
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:underline"
+                >
+                  {item.title}
+                </a>
+              </h3>
+              <p class="text-xs text-slate-300/90 line-clamp-3 leading-relaxed m-0 font-normal">
+                {item.description}
+              </p>
+            </div>
+
+            <!-- Chân thẻ: Nút Đọc bài gốc -->
+            <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
+              <span class="text-[11px] font-semibold text-slate-400">
+                Nguồn: <strong class="text-slate-200">{item.sourceShortName}</strong>
+              </span>
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-sky-600 text-sky-200 hover:text-white font-extrabold text-xs transition-all shadow-xs group-hover:bg-sky-600 group-hover:text-white"
+              >
+                <span>ĐỌC BÀI GỐC</span>
+                <span class="text-sm leading-none">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- 4. TRẠNG THÁI KHÔNG CÓ DỮ LIỆU (EMPTY STATE) -->
+    <div
+      id="edNewsEmptyState"
+      class="hidden py-12 px-4 rounded-2xl bg-slate-950/60 border border-slate-800 text-center space-y-3"
+    >
+      <div class="text-4xl">📭</div>
+      <h3 class="text-base sm:text-lg font-bold text-white m-0">
+        Không tìm thấy bài viết nào
+      </h3>
+      <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto m-0">
+        Hiện tại chưa có tin mới từ nguồn báo chí đã chọn hoặc đường truyền RSS đang được làm mới. Vui lòng chọn "Tất cả" hoặc nhấn "Làm mới".
+      </p>
+      <button
+        type="button"
+        id="edNewsBtnResetFilter"
+        class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs cursor-pointer inline-flex items-center gap-1.5"
+      >
+        <span>🌟 Hiển thị tất cả nguồn tin</span>
+      </button>
+    </div>
+
+    <!-- 5. SKELETON LOADING (HIỂN THỊ KHI ĐANG LÀM MỚI DỮ LIỆU) -->
+    <div
+      id="edNewsLoadingSkeleton"
+      class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
+    >
+      {[1, 2, 3, 4, 5, 6].map((_) => (
+        <div class="bg-slate-900/80 rounded-2xl border border-slate-800 overflow-hidden p-4 space-y-3 animate-pulse">
+          <div class="aspect-video w-full rounded-xl bg-slate-800"></div>
+          <div class="h-4 w-3/4 rounded bg-slate-800"></div>
+          <div class="h-3 w-full rounded bg-slate-800/80"></div>
+          <div class="h-3 w-5/6 rounded bg-slate-800/80"></div>
+          <div class="pt-3 border-t border-slate-800 flex justify-between">
+            <div class="h-4 w-20 rounded bg-slate-800"></div>
+            <div class="h-6 w-24 rounded-lg bg-slate-800"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- 6. NÚT XEM THÊM (PAGINATION / LOAD MORE) -->
+    <div class="pt-2 text-center">
+      <button
+        type="button"
+        id="edNewsBtnLoadMore"
+        class="px-6 py-2.5 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 hover:from-slate-800 hover:to-slate-700 border border-sky-400/40 hover:border-sky-300 text-sky-200 hover:text-white font-extrabold text-xs sm:text-sm cursor-pointer shadow-lg transition-all active:scale-95 inline-flex items-center gap-2"
+      >
+        <span>📖 XEM THÊM BÀI VIẾT</span>
+        <span id="edNewsLoadMoreBadge" class="px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 text-[11px] font-bold num-font">
+          +6 bài
+        </span>
+      </button>
+      <div id="edNewsAllLoadedNotice" class="hidden text-xs text-slate-400 font-semibold py-2">
+        ✓ Đã hiển thị toàn bộ bài viết mới nhất từ các tòa soạn.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lưu dữ liệu ban đầu cho Client-side JavaScript -->
+<script
+  type="application/json"
+  id="edNewsInitialJson"
+  set:html={JSON.stringify(initialData)}
+></script>
+
+<script is:inline>
+  (function () {
+    const $ = (id) => document.getElementById(id);
+
+    let allItems = [];
+    let currentFilter = 'all';
+    let visibleCount = 9;
+    const PAGE_SIZE = 6;
+    let isRefreshing = false;
+
+    // Đọc dữ liệu SSR ban đầu
+    try {
+      const scriptEl = $('edNewsInitialJson');
+      if (scriptEl && scriptEl.textContent) {
+        const parsed = JSON.parse(scriptEl.textContent);
+        if (parsed && Array.isArray(parsed.items)) {
+          allItems = parsed.items;
+        }
+      }
+    } catch (e) {
+      console.warn('Lỗi đọc dữ liệu tin tức ban đầu:', e);
+    }
+
+    // Render danh sách thẻ bài viết
+    function renderNewsCards() {
+      const grid = $('edNewsCardsGrid');
+      const emptyState = $('edNewsEmptyState');
+      const btnLoadMore = $('edNewsBtnLoadMore');
+      const allLoadedNotice = $('edNewsAllLoadedNotice');
+      const totalCountBadge = $('edNewsTotalCountBadge');
+      if (!grid) return;
+
+      const filtered = currentFilter === 'all'
+        ? allItems
+        : allItems.filter((it) => it.sourceId === currentFilter);
+
+      if (totalCountBadge) {
+        totalCountBadge.textContent = filtered.length;
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        if (emptyState) emptyState.classList.remove('hidden');
+        if (btnLoadMore) btnLoadMore.classList.add('hidden');
+        if (allLoadedNotice) allLoadedNotice.classList.add('hidden');
+        return;
+      }
+
+      if (emptyState) emptyState.classList.add('hidden');
+
+      const itemsToShow = filtered.slice(0, visibleCount);
+
+      grid.innerHTML = itemsToShow
+        .map((item) => {
+          const safeTitle = (item.title || '').replace(/"/g, '&quot;');
+          const safeDesc = (item.description || '').replace(/"/g, '&quot;');
+          const fallbackSvg = `data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 450%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%230B1E33%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 fill=%22%2393C5FD%22 font-size=%2224%22 font-weight=%22bold%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E%F0%9F%93%B0 TIN T%E1%BB%A8C GI%C3%81O D%E1%BB%A4C%3C/text%3E%3C/svg%3E`;
+
+          return `
+            <article class="ed-news-card group flex flex-col bg-slate-900/90 rounded-2xl border border-slate-700/80 hover:border-sky-400/60 shadow-lg hover:shadow-sky-500/10 overflow-hidden transition-all duration-300 hover:-translate-y-1">
+              <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="block relative aspect-video w-full overflow-hidden bg-slate-950 shrink-0" title="${safeTitle}">
+                <img src="${item.thumbnail}" alt="${safeTitle}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                     onerror="this.onerror=null; this.src='${fallbackSvg}';" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none"></div>
+
+                <div class="absolute top-2.5 left-2.5">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg backdrop-blur-md border text-[11px] font-black uppercase shadow-md ${item.sourceBadgeBg} ${item.sourceBorderColor} ${item.sourceTextColor}">
+                    <span class="w-1.5 h-1.5 rounded-full" style="background-color: ${item.sourceColor};"></span>
+                    <span>${item.sourceName}</span>
+                  </span>
+                </div>
+
+                <div class="absolute bottom-2 right-2.5">
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-950/85 backdrop-blur-xs text-[10px] font-bold text-slate-300 num-font shadow-xs">
+                    <span>🕒</span>
+                    <span>${item.timeAgo}</span>
+                  </span>
+                </div>
+              </a>
+
+              <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                <div class="space-y-2">
+                  <h3 class="text-sm sm:text-base font-extrabold text-white group-hover:text-amber-300 transition-colors line-clamp-2 leading-snug m-0">
+                    <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="hover:underline">
+                      ${item.title}
+                    </a>
+                  </h3>
+                  <p class="text-xs text-slate-300/90 line-clamp-3 leading-relaxed m-0 font-normal">
+                    ${item.description}
+                  </p>
+                </div>
+
+                <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
+                  <span class="text-[11px] font-semibold text-slate-400">
+                    Nguồn: <strong class="text-slate-200">${item.sourceShortName}</strong>
+                  </span>
+                  <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-sky-600 text-sky-200 hover:text-white font-extrabold text-xs transition-all shadow-xs group-hover:bg-sky-600 group-hover:text-white">
+                    <span>ĐỌC BÀI GỐC</span>
+                    <span class="text-sm leading-none">↗</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          `;
+        })
+        .join('');
+
+      // Cập nhật nút xem thêm
+      if (filtered.length <= visibleCount) {
+        if (btnLoadMore) btnLoadMore.classList.add('hidden');
+        if (allLoadedNotice && filtered.length > 6) allLoadedNotice.classList.remove('hidden');
+        else if (allLoadedNotice) allLoadedNotice.classList.add('hidden');
+      } else {
+        if (btnLoadMore) {
+          btnLoadMore.classList.remove('hidden');
+          const remain = filtered.length - visibleCount;
+          const badge = $('edNewsLoadMoreBadge');
+          if (badge) badge.textContent = `+${Math.min(PAGE_SIZE, remain)} bài (còn ${remain})`;
+        }
+        if (allLoadedNotice) allLoadedNotice.classList.add('hidden');
+      }
+    }
+
+    // Xử lý chuyển tab bộ lọc
+    function setupFilterButtons() {
+      const buttons = document.querySelectorAll('.ed-source-filter-btn');
+      const activeLabel = $('edNewsActiveFilterName');
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const src = btn.getAttribute('data-source') || 'all';
+          currentFilter = src;
+          visibleCount = 9;
+
+          // Cập nhật giao diện active button
+          buttons.forEach((b) => {
+            const isTarget = b.getAttribute('data-source') === src;
+            if (isTarget) {
+              b.className = 'ed-source-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-black whitespace-nowrap cursor-pointer transition-all border-2 border-amber-400 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-md active:scale-95 shrink-0';
+            } else {
+              b.className = 'ed-source-filter-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap cursor-pointer transition-all border border-slate-700 bg-slate-900/80 hover:bg-slate-800 text-slate-200 hover:text-white active:scale-95 shrink-0 flex items-center gap-1.5';
+            }
+          });
+
+          if (activeLabel) {
+            activeLabel.textContent = src === 'all' ? 'Tất cả nguồn' : (btn.getAttribute('data-name') || src);
+          }
+
+          renderNewsCards();
+        });
+      });
+
+      $('edNewsBtnResetFilter')?.addEventListener('click', () => {
+        const allBtn = document.querySelector('.ed-source-filter-btn[data-source="all"]');
+        if (allBtn) allBtn.click();
+      });
+    }
+
+    // Xử lý nút Xem thêm
+    function setupLoadMore() {
+      $('edNewsBtnLoadMore')?.addEventListener('click', () => {
+        visibleCount += PAGE_SIZE;
+        renderNewsCards();
+      });
+    }
+
+    // Xử lý Làm mới dữ liệu từ server (/api/education-news?force=1)
+    async function setupRefreshButton() {
+      const btn = $('edNewsBtnRefresh');
+      const icon = $('edNewsRefreshIcon');
+      const text = $('edNewsRefreshText');
+      const updatedLbl = $('edNewsUpdatedAtLabel');
+      const skeleton = $('edNewsLoadingSkeleton');
+      const grid = $('edNewsCardsGrid');
+
+      if (!btn) return;
+
+      btn.addEventListener('click', async () => {
+        if (isRefreshing) return;
+        isRefreshing = true;
+        btn.disabled = true;
+
+        if (icon) icon.classList.add('animate-spin');
+        if (text) text.textContent = 'Đang tải...';
+        if (skeleton) skeleton.classList.remove('hidden');
+        if (grid) grid.classList.add('opacity-40');
+
+        try {
+          const res = await fetch('/api/education-news?force=1');
+          const data = await res.json();
+          if (data && data.ok && Array.isArray(data.items)) {
+            allItems = data.items;
+            if (updatedLbl && data.updatedAt) {
+              updatedLbl.textContent = data.updatedAt;
+            }
+            renderNewsCards();
+          }
+        } catch (err) {
+          console.error('Lỗi khi làm mới tin tức:', err);
+        } finally {
+          if (icon) icon.classList.remove('animate-spin');
+          if (text) text.textContent = 'Làm Mới';
+          if (skeleton) skeleton.classList.add('hidden');
+          if (grid) grid.classList.remove('opacity-40');
+
+          // Đặt cooldown 15s trước khi cho phép bấm lại
+          setTimeout(() => {
+            isRefreshing = false;
+            btn.disabled = false;
+          }, 15000);
+        }
+      });
+    }
+
+    // Khởi tạo component
+    function init() {
+      setupFilterButtons();
+      setupLoadMore();
+      setupRefreshButton();
+      // Nếu dữ liệu SSR ban đầu rỗng, tự động fetch từ API
+      if (allItems.length === 0) {
+        fetch('/api/education-news')
+          .then((r) => r.json())
+          .then((d) => {
+            if (d && d.ok && Array.isArray(d.items)) {
+              allItems = d.items;
+              const lbl = $('edNewsUpdatedAtLabel');
+              if (lbl && d.updatedAt) lbl.textContent = d.updatedAt;
+              renderNewsCards();
+            }
+          })
+          .catch((e) => console.warn('Fetch fallback news error:', e));
+      } else {
+        renderNewsCards();
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+
+<style>
+  /* Ẩn thanh cuộn ngang của bộ lọc trên mobile nhưng vẫn cho phép vuốt mượt */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>

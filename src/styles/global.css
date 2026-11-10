@@ -1,79 +1,1112 @@
 @import "tailwindcss";
+@import "./quiz-theme.css";
 
-@theme {
-  --color-brand-emerald: #176B52;
-  --color-brand-teal: #287FA0;
-  --color-brand-cream: #F7F5ED;
-  --color-brand-gold: #C6A66B;
-  --color-brand-forest: #243A32;
-  --color-brand-sage: #E8EFE9;
-
-  --color-primary: #176B52;
-  --color-secondary: #287FA0;
-  --color-accent: #C6A66B;
-  --color-surface: #F7F5ED;
-  --color-dark: #243A32;
-  --color-muted-bg: #E8EFE9;
-
-  --font-serif: 'Playfair Display', 'Noto Serif', Georgia, serif;
-  --font-sans: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
+/* ==========================================================================
+   DESIGN SYSTEM TOKENS — NGUYỄN THỊ TRÚC PHƯƠNG PORTAL (OFFICIAL RED PALETTE)
+   1. Đỏ đô chủ đạo: #8B1E2D
+   2. Đỏ nhấn: #C62828
+   3. Đỏ nhạt: #FCEEEF
+   4. Trắng: #FFFFFF
+   5. Trắng ngà: #FAF8F6
+   6. Chữ chính: #333333
+   7. Chữ phụ: #666666
+   8. Đường viền: #E8E0E1
+   9. Nền phụ: #F7F4F4
+   ========================================================================== */
 :root {
-  color-scheme: light;
+  --color-primary: #8B1E2D;          /* Đỏ đô chủ đạo */
+  --color-primary-hover: #701824;    /* Đỏ đô đậm */
+  --color-secondary: #C62828;        /* Đỏ nhấn */
+  --color-secondary-hover: #A52121;  /* Đỏ nhấn đậm */
+  --color-accent: #C62828;           /* Đỏ nhấn CTA */
+  --color-accent-hover: #8B1E2D;
+  --color-accent-light: #FCEEEF;     /* Đỏ nhạt nền phụ */
+  --color-bg-soft: #FAF8F6;          /* Trắng ngà nền tổng thể */
+  --color-bg-sub: #F7F4F4;           /* Nền phụ */
+  --color-surface: #FFFFFF;          /* Trắng tinh khiết */
+  --color-text-main: #333333;        /* Chữ chính */
+  --color-text-muted: #666666;       /* Chữ phụ */
+  --color-neutral: #888888;          /* Thành phần phụ */
+  --color-border-soft: #E8E0E1;      /* Đường viền */
+  
+  --radius-card: 16px;
+  --radius-container: 20px;
+  --radius-btn: 12px;
+  --radius-pill: 9999px;
+  
+  --shadow-card: 0 4px 20px -2px rgba(139, 30, 45, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover: 0 10px 25px -3px rgba(139, 30, 45, 0.12), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
 }
 
-html {
-  background-color: #F7F5ED;
-  color: #243A32;
-  font-family: var(--font-sans);
-  scroll-behavior: smooth;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+@layer base {
+  html,
+  body {
+    font-family: 'Be Vietnam Pro', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--color-bg-soft);
+    color: var(--color-text-main);
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
-body {
-  min-height: 100vh;
+.math-font {
+  font-family: 'Noto Serif', Georgia, serif;
+}
+
+.num-font {
+  font-family: 'Roboto Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Desktop Dropdown Menu (Unconditional Hover + Click Toggle Support) */
+.desktop-nav-item > .desktop-nav-dropdown,
+.desktop-sub-item > .desktop-sub-dropdown {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s ease;
+}
+
+.desktop-nav-item:hover > .desktop-nav-dropdown,
+.desktop-nav-item.is-open > .desktop-nav-dropdown,
+.desktop-sub-item:hover > .desktop-sub-dropdown,
+.desktop-sub-item.is-open > .desktop-sub-dropdown {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) !important;
+}
+
+.desktop-nav-item:hover .desktop-nav-chevron,
+.desktop-nav-item.is-open .desktop-nav-chevron {
+  transform: rotate(180deg);
+}
+
+/* Scoped Page Container & Mobile Responsive Safeguards */
+.tkd-page-scope {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  background-color: var(--color-bg-soft) !important;
+  font-family: 'Be Vietnam Pro', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  line-height: 1.65;
+}
+
+/* Đảm bảo hiển thị kbd và code inline đồng bộ font chữ, tinh tế và đẹp mắt */
+.tkd-page-scope kbd,
+.tkd-page-scope :not(pre) > code {
+  font-family: 'Be Vietnam Pro', 'Inter', system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  background: #FCEEEF;
+  color: var(--color-primary);
+  border: 1px solid var(--color-border-soft);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.375rem;
+  font-size: 0.875em;
+  display: inline-block;
+  line-height: 1.25;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+
+/* Sticky Header Navigation — Luôn giữ cố định trên tất cả các trang khi cuộn */
+#mainNavbar,
+nav[aria-label="Điều hướng chính"],
+.site-sticky-navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 100 !important;
+  background: var(--color-primary) !important;
+  border-bottom: 1px solid var(--color-secondary) !important;
+}
+
+/* Unified Academic Header & Card Theme for All Subpages & Quiz Pages */
+.tkd-page-scope > header,
+.tkd-page-scope > .container > .header,
+.tkd-page-scope > .wrap > header,
+.tkd-academic-header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%) !important;
+  color: #ffffff !important;
+  padding: 24px 16px !important;
+  text-align: center !important;
+  border-radius: 0 !important;
+  margin-bottom: 20px !important;
+  box-shadow: 0 4px 16px -2px rgba(139, 30, 45, 0.15) !important;
+}
+
+.tkd-page-scope > .container > .header,
+.tkd-page-scope > .wrap > header {
+  border-radius: var(--radius-card) !important;
+}
+
+.tkd-page-scope > header h1,
+.tkd-page-scope > .container > .header h1,
+.tkd-page-scope > .wrap > header h1,
+.tkd-page-scope > .wrap > header .title,
+.tkd-academic-header h1 {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: clamp(18px, 2.5vw, 24px) !important;
+  letter-spacing: -0.01em !important;
+  text-transform: uppercase !important;
+  margin: 0 auto 6px auto !important;
+}
+
+.tkd-page-scope > header p,
+.tkd-page-scope > .container > .header h2,
+.tkd-page-scope > .wrap > header p,
+.tkd-page-scope > .wrap > header .subtitle,
+.tkd-academic-header p {
+  color: #e2e8f0 !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  margin: 0 auto !important;
+  max-width: 720px !important;
+}
+
+.tkd-page-scope .card,
+.tkd-card {
+  background: var(--color-surface) !important;
+  border-radius: var(--radius-card) !important;
+  border: 1px solid var(--color-border-soft) !important;
+  box-shadow: var(--shadow-card) !important;
+  transition: all 0.2s ease !important;
+}
+
+.tkd-card-interactive:hover {
+  border-color: var(--color-secondary) !important;
+  box-shadow: var(--shadow-card-hover) !important;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   BUTTON & INTERACTION SYSTEM
+   ========================================================================== */
+.tkd-btn-primary {
+  background: var(--color-primary) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--color-primary) !important;
+  border-radius: var(--radius-btn) !important;
+  font-weight: 700 !important;
+  padding: 10px 18px !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  box-shadow: 0 2px 6px rgba(139, 30, 45, 0.15) !important;
+}
+
+.tkd-btn-primary:hover {
+  background: var(--color-secondary) !important;
+  border-color: var(--color-secondary) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 30, 45, 0.2) !important;
+}
+
+.tkd-btn-accent {
+  background: var(--color-accent) !important;
+  color: var(--color-primary) !important;
+  border: 1px solid var(--color-accent) !important;
+  border-radius: var(--radius-btn) !important;
+  font-weight: 800 !important;
+  padding: 10px 20px !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  box-shadow: 0 2px 8px rgba(198, 40, 40, 0.25) !important;
+}
+
+.tkd-btn-accent:hover {
+  background: var(--color-secondary-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(198, 40, 40, 0.35) !important;
+}
+
+.tkd-btn-secondary {
+  background: #ffffff !important;
+  color: var(--color-primary) !important;
+  border: 1.5px solid var(--color-border-soft) !important;
+  border-radius: var(--radius-btn) !important;
+  font-weight: 700 !important;
+  padding: 10px 18px !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+.tkd-btn-secondary:hover {
+  border-color: var(--color-secondary) !important;
+  color: var(--color-secondary) !important;
+  background: #f8fafc !important;
+}
+
+.tkd-badge-accent {
+  background: var(--color-accent-light) !important;
+  color: #8B1E2D !important;
+  border: 1px solid #E8E0E1 !important;
+  border-radius: var(--radius-pill) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 2px 8px !important;
+}
+
+.tkd-page-scope img,
+.tkd-page-scope video,
+.tkd-page-scope canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.tkd-page-scope iframe {
+  max-width: 100%;
+}
+
+/* Ensure tables inside migrated content never cause horizontal viewport overflow on mobile */
+@media (max-width: 640px) {
+  .tkd-page-scope table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Tables already wrapped in a scroll container keep real table layout (full width) */
+  .tkd-page-scope .table-container > table {
+    display: table;
+    width: 100%;
+  }
+
+  .tkd-page-scope .compact-table th,
+  .tkd-page-scope .compact-table td {
+    font-size: 12px !important;
+    padding: 6px 8px !important;
+    line-height: 1.45 !important;
+  }
+
+  .tkd-page-scope .controls {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .tkd-page-scope .controls .input,
+  .tkd-page-scope .controls .select,
+  .tkd-page-scope .controls .btn {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   ACADEMIC CALLOUT BOXES & STEP PROCESS (DESIGN SYSTEM STANDARDIZATION)
+   ========================================================================== */
+/* Chuẩn hóa các hộp Lưu ý, Ví dụ, Trọng tâm thi cử thanh lịch, không chói gắt */
+.tkd-page-scope .bg-rose-50,
+.tkd-page-scope .border-rose-200 {
+  background-color: #FEF2F2 !important;
+  border-color: #FECACA !important;
+  border-left-width: 4px !important;
+  border-left-color: #E11D48 !important;
+  border-radius: 0.75rem !important;
+}
+
+.tkd-page-scope .bg-blue-50,
+.tkd-page-scope .border-blue-200,
+.tkd-page-scope .bg-sky-50 {
+  background-color: #F0F6FC !important;
+  border-color: #BAE6FD !important;
+  border-left-width: 4px !important;
+  border-left-color: var(--color-primary) !important;
+  border-radius: 0.75rem !important;
+}
+
+.tkd-page-scope .bg-emerald-50,
+.tkd-page-scope .border-emerald-200 {
+  background-color: #F0FDF4 !important;
+  border-color: #BBF7D0 !important;
+  border-left-width: 4px !important;
+  border-left-color: #10B981 !important;
+  border-radius: 0.75rem !important;
+}
+
+.tkd-page-scope .bg-amber-50,
+.tkd-page-scope .border-amber-200 {
+  background-color: #FEFCE8 !important;
+  border-color: #FEF08A !important;
+  border-left-width: 4px !important;
+  border-left-color: var(--color-accent) !important;
+  border-radius: 0.75rem !important;
+}
+
+/* Sơ đồ quy trình dạng bước (Step Process / Flow Cards) */
+.tkd-step-container {
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
-  background-color: #F7F5ED;
+  gap: 12px;
+  position: relative;
+  padding-left: 12px;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #F7F5ED;
-}
-::-webkit-scrollbar-thumb {
-  background: #C6A66B;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #176B52;
+@media (min-width: 768px) {
+  .tkd-step-container.horizontal {
+    flex-direction: row;
+    align-items: stretch;
+    padding-left: 0;
+  }
 }
 
-/* Selection */
-::selection {
-  background-color: #176B52;
-  color: #F7F5ED;
+.tkd-step-card {
+  background: #ffffff;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-card);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  transition: all 0.2s ease;
 }
 
-/* Luxury accent line */
-.gold-gradient-border {
-  border-image: linear-gradient(to right, transparent, #C6A66B, transparent) 1;
+.tkd-step-card:hover {
+  border-color: var(--color-secondary);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
 }
 
-.gold-gradient-text {
-  background: linear-gradient(135deg, #176B52 0%, #287FA0 50%, #C6A66B 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.tkd-step-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--color-primary);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 11px;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  margin-bottom: 8px;
 }
 
-.glass-nav {
-  background: rgba(247, 245, 237, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+
+
+/* ==========================================================================
+   ACADEMIC SUBPAGE UNIFIED DESIGN SYSTEM (56 HỌC LIỆU TRANG CON)
+   ========================================================================== */
+.tkd-academic-subpage header,
+.tkd-academic-subpage .page-header {
+  background: linear-gradient(135deg, #8B1E2D 0%, #701824 50%, #C62828 100%) !important;
+  color: #ffffff !important;
+}
+
+.tkd-academic-subpage header h1,
+.tkd-academic-subpage .page-header h1 {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: -0.01em !important;
+}
+
+.tkd-academic-subpage section[id^="c"],
+.tkd-academic-subpage .chapter-section {
+  border-radius: 1rem !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  overflow: hidden !important;
+  margin-bottom: 1.5rem !important;
+  background-color: #ffffff !important;
+}
+
+.tkd-academic-subpage section[id^="c"] > div:first-child,
+.tkd-academic-subpage .bg-sky-700 {
+  background-color: #8B1E2D !important;
+  color: #ffffff !important;
+}
+
+.tkd-academic-subpage a[href^="#c"] {
+  background-color: #F2F6FA !important;
+  color: #8B1E2D !important;
+  border: 1px solid #CBD5E1 !important;
+  border-radius: 0.5rem !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.tkd-academic-subpage a[href^="#c"]:hover {
+  background-color: #ffffff !important;
+  border-color: #168AAD !important;
+  color: #C62828 !important;
+  transform: translateY(-1px);
+}
+
+.tkd-academic-subpage h3.text-sky-900,
+.tkd-academic-subpage h3 {
+  color: #8B1E2D !important;
+  font-weight: 700 !important;
+}
+
+.tkd-academic-subpage .border-sky-200 {
+  border-color: #DCE5ED !important;
+}
+
+.tkd-academic-subpage .text-sky-800,
+.tkd-academic-subpage .text-sky-700 {
+  color: #C62828 !important;
+}
+
+
+/* ==========================================================================
+   RESPONSIVE SAFEGUARDS & MULTI-VIEWPORT OPTIMIZATION
+   Covering: 375px, 390px (Mobile), 768px (Tablet), 1366px (Laptop), 1440px & 1920px (Desktop)
+   ========================================================================== */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+  position: relative;
+}
+
+/* 1. Ngăn chặn tràn ngang trên Mobile nhỏ (375px, 390px) */
+@media (max-width: 640px) {
+  * {
+    box-sizing: border-box !important;
+  }
+
+  /* Đảm bảo hình ảnh, canvas và iframe co giãn theo màn hình */
+  img, iframe, canvas, video {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Chống tràn cho khối code và công thức toán */
+  pre, code, .katex-display {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Bảng biểu tự động cuộn ngang mượt mà, không xô lệch bố cục */
+  table {
+    max-width: 100% !important;
+  }
+
+  .table-responsive {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Header và Tiêu đề không bị cắt chữ */
+  .tkd-academic-subpage h1 {
+    font-size: clamp(1.15rem, 5vw, 1.5rem) !important;
+    line-height: 1.35 !important;
+    word-break: break-word !important;
+  }
+
+  .tkd-academic-subpage h2 {
+    font-size: clamp(1.05rem, 4.2vw, 1.25rem) !important;
+    line-height: 1.4 !important;
+    word-break: break-word !important;
+  }
+
+  .tkd-academic-subpage h3 {
+    font-size: clamp(0.95rem, 3.8vw, 1.1rem) !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Khoảng cách padding lề an toàn 12px */
+  .max-w-5xl, .max-w-6xl, .max-w-7xl, .max-w-4xl {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  /* Nút bấm không bị chèn ép chữ */
+  .btn, a.btn, .tkd-btn {
+    min-height: 38px !important;
+  }
+}
+
+/* Marquee chạy ngang mượt mà ở cả ngoài và trong .tkd-page-scope */
+.marquee-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 16s linear infinite;
+}
+
+/* Chuẩn hóa đa kích thước màn hình: 320px, 375px, 390px, 414px, 430px, 768px, 1024px, 1366px */
+@media (max-width: 389px) {
+  .max-w-5xl, .max-w-6xl, .max-w-7xl, .max-w-4xl {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  #birthForm {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  #birthForm button[type="submit"] {
+    grid-column: span 2 / span 2 !important;
+  }
+}
+
+/* 2. Tối ưu Tablet (768px) */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .max-w-5xl, .max-w-6xl, .max-w-7xl {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  /* Bảng biểu nhiều cột trên tablet vẫn giữ thanh cuộn an toàn */
+  .table-responsive {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+}
+
+/* 3. Tối ưu Laptop (1366px), Desktop (1440px) và Màn hình lớn (1920px) */
+@media (min-width: 1024px) {
+  /* Căn giữa toàn bộ các khối nội dung lớn, chống kéo dãn quá mức */
+  .max-w-7xl {
+    max-width: 1280px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .max-w-6xl {
+    max-width: 1152px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .max-w-5xl {
+    max-width: 1024px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+
+/* ==========================================================================
+   BƯỚC 5/8 – ACCESSIBILITY, MOTION & VISUAL REFINEMENT
+   ========================================================================== */
+
+/* 1. Trạng thái Focus rõ ràng, hỗ trợ truy cập bằng bàn phím (A11y) */
+:focus-visible {
+  outline: 2px solid var(--color-secondary) !important;
+  outline-offset: 2px !important;
+}
+
+/* 2. Chống Safari iOS tự động zoom khi nhấn vào form input */
+@media (max-width: 767px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* 3. Tôn trọng thiết lập giảm chuyển động (Reduced Motion) */
+@media (prefers-reduced-motion: reduce) {
+
+/* ==========================================================================
+   ACADEMIC PREMIUM DESIGN SYSTEM OVERRIDES (GLOBAL HARMONIZATION)
+   Navy: #142B49 | Academic Blue: #245B87 | Champagne Gold: #C5A46D
+   Soft Background: #F3F6FA | White: #FFFFFF | Main Text: #263445
+   ========================================================================== */
+}
+body,
+.bg-slate-50,
+.bg-\[\#F2F6FA\],
+.bg-\[\#F4F7FB\] {
+  background-color: #FAF8F6 !important;
+  color: #333333;
+}
+
+.bg-\[\#123B65\] {
+  background-color: #8B1E2D !important;
+}
+
+.bg-\[\#0B1E33\] {
+  background-color: #701824 !important;
+}
+
+.bg-\[\#168AAD\] {
+  background-color: #C62828 !important;
+}
+
+.hover\:bg-\[\#168AAD\]:hover,
+.hover\:bg-\[\#126e8a\]:hover {
+  background-color: #8B1E2D !important;
+}
+
+.text-\[\#123B65\] {
+  color: #8B1E2D !important;
+}
+
+.text-\[\#168AAD\] {
+  color: #C62828 !important;
+}
+
+.border-\[\#168AAD\]\/30,
+.border-\[\#168AAD\]\/40 {
+  border-color: rgba(198, 40, 40, 0.35) !important;
+}
+
+/* Chuẩn hóa hiển thị trang học liệu chuyên sâu: Mục lục, Công thức, Bảng biểu, Ghi chú */
+.tkd-academic-subpage {
+  color: #333333 !important;
+  font-size: 0.9375rem;
+  line-height: 1.72;
+}
+
+.tkd-academic-subpage p,
+.tkd-academic-subpage li {
+  color: #333333;
+  line-height: 1.72;
+}
+
+.tkd-academic-subpage table th {
+  background-color: #8B1E2D !important;
+  color: #FFFFFF !important;
+  border-color: #C62828 !important;
+}
+
+.tkd-academic-subpage table td {
+  color: #333333 !important;
+}
+
+.tkd-academic-subpage section[id^="c"] > div:first-child {
+  background: linear-gradient(135deg, #8B1E2D 0%, #C62828 100%) !important;
+  border-bottom: 2px solid #C62828 !important;
+}
+
+/* Điểm nhấn Champagne Gold (#C5A46D) tinh tế trên thanh điều hướng & thẻ tiêu đề */
+#mainNavbar {
+  background: rgba(139, 30, 45, 0.98) !important;
+  border-bottom: 1px solid rgba(198, 40, 40, 0.4) !important;
+  box-shadow: 0 4px 20px -2px rgba(139, 30, 45, 0.25) !important;
+}
+
+footer.bg-\[\#0B1E33\],
+footer.bg-\[\#142B49\] {
+  background: linear-gradient(180deg, #8B1E2D 0%, #5C141E 100%) !important;
+  border-top: 2px solid rgba(198, 40, 40, 0.5) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 4. Tinh chỉnh vi chuyển động (Micro-interactions) êm ái cho thẻ & nút tương tác */
+.tkd-card-interactive,
+.interactive-card {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease !important;
+}
+
+.tkd-card-interactive:hover,
+.interactive-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(139, 30, 45, 0.1), 0 8px 10px -6px rgba(139, 30, 45, 0.06) !important;
+}
+
+
+/* ==========================================================================
+   UNIFIED DESIGN SYSTEM COMPONENT CLASSES (TKD DESIGN SYSTEM 2.0)
+   ========================================================================== */
+
+/* 1. BUTTONS */
+.tkd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-btn);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  line-height: 1.25;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+.tkd-btn:active {
+  transform: scale(0.97);
+}
+.tkd-btn-sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  border-radius: var(--radius-md, 10px);
+}
+.tkd-btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9375rem;
+  border-radius: var(--radius-btn);
+}
+
+.tkd-btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff !important;
+  border: 1px solid rgba(198, 40, 40, 0.4);
+  box-shadow: 0 2px 6px rgba(18, 59, 101, 0.15);
+}
+.tkd-btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-accent);
+  color: #ffffff !important;
+}
+
+.tkd-btn-secondary {
+  background-color: var(--color-secondary);
+  color: #ffffff !important;
+  border: 1px solid rgba(198, 40, 40, 0.5);
+  box-shadow: 0 2px 6px rgba(22, 138, 173, 0.2);
+}
+.tkd-btn-secondary:hover {
+  background-color: var(--color-secondary-hover);
+  color: #ffffff !important;
+}
+
+.tkd-btn-accent {
+  background-color: var(--color-accent);
+  color: var(--color-primary) !important;
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 2px 6px rgba(114, 199, 213, 0.25);
+}
+.tkd-btn-accent:hover {
+  filter: brightness(1.05);
+  color: var(--color-primary) !important;
+}
+
+.tkd-btn-outline {
+  background-color: #ffffff;
+  color: var(--color-primary) !important;
+  border: 1.5px solid var(--color-border-soft);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+.tkd-btn-outline:hover {
+  background-color: var(--color-bg-soft);
+  border-color: var(--color-secondary);
+  color: var(--color-secondary) !important;
+}
+
+.tkd-btn-ghost {
+  background-color: transparent;
+  color: var(--color-text-main) !important;
+  border: 1px solid transparent;
+}
+.tkd-btn-ghost:hover {
+  background-color: rgba(139, 30, 45, 0.06);
+  color: var(--color-primary) !important;
+}
+
+/* 2. FORM CONTROLS (INPUT, SELECT, TEXTAREA) */
+.tkd-input,
+.tkd-select,
+.tkd-textarea {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border: 1.5px solid var(--color-border-soft);
+  border-radius: var(--radius-btn);
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.tkd-input::placeholder,
+.tkd-textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+.tkd-input:focus,
+.tkd-select:focus,
+.tkd-textarea:focus {
+  outline: none !important;
+  border-color: var(--color-secondary) !important;
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.16) !important;
+}
+.tkd-label {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.375rem;
+}
+
+/* 3. CARDS & CONTAINERS */
+.tkd-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tkd-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(198, 40, 40, 0.35);
+}
+.tkd-card-header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  color: #ffffff;
+  padding: 0.875rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(198, 40, 40, 0.3);
+}
+.tkd-card-title {
+  font-size: 0.875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  margin: 0;
+}
+.tkd-card-subtitle {
+  font-size: 0.6875rem;
+  color: var(--color-accent);
+  margin: 0;
+}
+.tkd-card-body {
+  padding: 1rem 1.25rem;
+}
+
+/* 4. BADGES & PILLS */
+.tkd-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.625rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.tkd-badge-primary {
+  background-color: rgba(139, 30, 45, 0.08);
+  color: var(--color-primary);
+  border: 1px solid rgba(139, 30, 45, 0.2);
+}
+.tkd-badge-secondary {
+  background-color: rgba(198, 40, 40, 0.1);
+  color: var(--color-secondary);
+  border: 1px solid rgba(198, 40, 40, 0.25);
+}
+.tkd-badge-accent {
+  background-color: rgba(198, 40, 40, 0.15);
+  color: #8B1E2D;
+  border: 1px solid rgba(198, 40, 40, 0.4);
+}
+.tkd-badge-success {
+  background-color: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+}
+.tkd-badge-warning {
+  background-color: #FFFBEB;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+}
+.tkd-badge-danger {
+  background-color: #FEF2F2;
+  color: #991B1B;
+  border: 1px solid #FECACA;
+}
+
+/* 5. TABLES */
+.tkd-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-card);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+}
+.tkd-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  text-align: left;
+}
+.tkd-table th {
+  background-color: #8B1E2D;
+  color: #ffffff;
+  padding: 0.625rem 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.6875rem;
+}
+.tkd-table td {
+  padding: 0.625rem 0.875rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: var(--color-text-main);
+}
+.tkd-table tbody tr:hover {
+  background-color: var(--color-bg-soft);
+}
+.tkd-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* 6. MODALS & DIALOGS */
+.tkd-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: rgba(92, 20, 30, 0.72);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.tkd-modal-box {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1px solid var(--color-border-soft);
+  box-shadow: 0 20px 40px -10px rgba(92, 20, 30, 0.25);
+  max-width: 32rem;
+  width: 100%;
+  overflow: hidden;
+  animation: tkdFadeIn 0.2s ease-out;
+}
+@keyframes tkdFadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* 7. LOADING & EMPTY STATES */
+.tkd-spinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2.5px solid var(--color-border-soft);
+  border-top-color: var(--color-secondary);
+  border-radius: 50%;
+  animation: tkdSpin 0.75s linear infinite;
+}
+@keyframes tkdSpin {
+  to { transform: rotate(360deg); }
+}
+.tkd-empty-state {
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* Leaderboard animations */
+@media (prefers-reduced-motion: reduce) {
+
+/* ==========================================================================
+   ACADEMIC PREMIUM DESIGN SYSTEM OVERRIDES (GLOBAL HARMONIZATION)
+   Navy: #142B49 | Academic Blue: #245B87 | Champagne Gold: #C5A46D
+   Soft Background: #F3F6FA | White: #FFFFFF | Main Text: #263445
+   ========================================================================== */
+}
+body,
+.bg-slate-50,
+.bg-\[\#F2F6FA\],
+.bg-\[\#F4F7FB\] {
+  background-color: #FAF8F6 !important;
+  color: #333333;
+}
+
+.bg-\[\#123B65\] {
+  background-color: #8B1E2D !important;
+}
+
+.bg-\[\#0B1E33\] {
+  background-color: #701824 !important;
+}
+
+.bg-\[\#168AAD\] {
+  background-color: #C62828 !important;
+}
+
+.hover\:bg-\[\#168AAD\]:hover,
+.hover\:bg-\[\#126e8a\]:hover {
+  background-color: #8B1E2D !important;
+}
+
+.text-\[\#123B65\] {
+  color: #8B1E2D !important;
+}
+
+.text-\[\#168AAD\] {
+  color: #C62828 !important;
+}
+
+.border-\[\#168AAD\]\/30,
+.border-\[\#168AAD\]\/40 {
+  border-color: rgba(198, 40, 40, 0.35) !important;
+}
+
+/* Chuẩn hóa hiển thị trang học liệu chuyên sâu: Mục lục, Công thức, Bảng biểu, Ghi chú */
+.tkd-academic-subpage {
+  color: #333333 !important;
+  font-size: 0.9375rem;
+  line-height: 1.72;
+}
+
+.tkd-academic-subpage p,
+.tkd-academic-subpage li {
+  color: #333333;
+  line-height: 1.72;
+}
+
+.tkd-academic-subpage table th {
+  background-color: #8B1E2D !important;
+  color: #FFFFFF !important;
+  border-color: #C62828 !important;
+}
+
+.tkd-academic-subpage table td {
+  color: #333333 !important;
+}
+
+.tkd-academic-subpage section[id^="c"] > div:first-child {
+  background: linear-gradient(135deg, #8B1E2D 0%, #C62828 100%) !important;
+  border-bottom: 2px solid #C62828 !important;
+}
+
+/* Điểm nhấn Champagne Gold (#C5A46D) tinh tế trên thanh điều hướng & thẻ tiêu đề */
+#mainNavbar {
+  background: rgba(139, 30, 45, 0.98) !important;
+  border-bottom: 1px solid rgba(198, 40, 40, 0.4) !important;
+  box-shadow: 0 4px 20px -2px rgba(139, 30, 45, 0.25) !important;
+}
+
+footer.bg-\[\#0B1E33\],
+footer.bg-\[\#142B49\] {
+  background: linear-gradient(180deg, #8B1E2D 0%, #5C141E 100%) !important;
+  border-top: 2px solid rgba(198, 40, 40, 0.5) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* animations disabled */
 }

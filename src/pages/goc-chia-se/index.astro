@@ -1,0 +1,157 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import db, { type NewsArticle } from '../../lib/db';
+
+// Lấy bài viết chuyên đề nội bộ
+const articles = db
+  .prepare('SELECT * FROM news_articles ORDER BY id DESC')
+  .all() as NewsArticle[];
+
+const featuredArticle = articles.length > 0 ? articles[0] : null;
+const regularArticles = articles.length > 1 ? articles.slice(1) : [];
+
+const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).filter(Boolean))];
+---
+
+<MainLayout
+  title="Bản Tin Chia Sẻ & Nghiên Cứu Học Thuật — NGUYỄN THỊ TRÚC PHƯƠNG"
+  description="Bản tin chia sẻ tổng hợp bài viết chuyên sâu về phương pháp học tập, nghiên cứu khoa học SPSS, kinh nghiệm thực tập doanh nghiệp và góc nhìn kinh tế - quản trị."
+  currentPath="/goc-chia-se"
+>
+  <!-- Header Banner -->
+  <header class="w-full bg-gradient-to-br from-[#701824] via-[#8B1E2D] to-[#C62828] text-white py-8 sm:py-10 px-4 text-center shadow-sm">
+    <div class="max-w-5xl mx-auto space-y-2.5">
+      <div class="inline-flex items-center gap-1.5 bg-[#8B1E2D] border border-[#FCEEEF]/40 rounded-full px-3.5 py-1 text-xs font-semibold text-[#FCEEEF] uppercase tracking-wide">
+        <span>📰</span> Chuyên San Học Thuật &amp; Tri Thức Số
+      </div>
+      <h1 class="text-xl sm:text-3xl md:text-4xl font-extrabold tracking-tight uppercase leading-snug">
+        Góc Chia Sẻ — Bài Viết &amp; Tin Tức
+      </h1>
+      <p class="text-xs sm:text-sm text-sky-100/90 max-w-2xl mx-auto leading-relaxed">
+        Tổng hợp các bài viết chuyên sâu về phương pháp ôn thi, nghiên cứu khoa học SPSS, kinh nghiệm thực tập doanh nghiệp và góc nhìn kinh tế - quản trị.
+      </p>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-3 sm:px-6 py-6 sm:py-8 space-y-7">
+    <!-- Thanh liên kết nhanh trong Góc chia sẻ -->
+    <div class="bg-white rounded-2xl border border-[#E8E0E1] p-4 shadow-2xs flex flex-wrap items-center justify-between gap-3">
+      <span class="text-xs sm:text-sm font-extrabold text-[#8B1E2D] flex items-center gap-2">
+        <span>📌</span> Chuyên đề học thuật nổi bật:
+      </span>
+      <div class="flex flex-wrap gap-2">
+        <a
+          href="/spss"
+          title="Sổ tay hướng dẫn xử lý dữ liệu SPSS từ A đến Z"
+          class="bg-[#FAF8F6] hover:bg-[#FCEEEF] text-[#8B1E2D] border border-[#E8E0E1] hover:border-[#C62828] font-bold text-xs px-3.5 py-1.5 rounded-xl transition-all"
+        >
+          <span>📊 Sổ tay SPSS A-Z</span>
+        </a>
+        <a
+          href="/spss/nckhsv"
+          title="Mẫu bảng khảo sát nghiên cứu khoa học sinh viên"
+          class="bg-[#FAF8F6] hover:bg-[#FCEEEF] text-[#8B1E2D] border border-[#E8E0E1] hover:border-[#C62828] font-bold text-xs px-3.5 py-1.5 rounded-xl transition-all"
+        >
+          <span>📋 Mẫu Khảo Sát NCKH</span>
+        </a>
+        <a
+          href="/home/marketing"
+          title="Tổng hợp website và công cụ kiến thức Marketing"
+          class="bg-[#FAF8F6] hover:bg-[#FCEEEF] text-[#8B1E2D] border border-[#E8E0E1] hover:border-[#C62828] font-bold text-xs px-3.5 py-1.5 rounded-xl transition-all"
+        >
+          <span>💡 Kho Kiến Thức Marketing</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Bài viết Tiêu điểm (Featured Article) -->
+    {featuredArticle && (
+      <section class="bg-white rounded-2xl border-2 border-[#C62828]/40 hover:border-[#C62828] shadow-sm overflow-hidden transition-all group">
+        <div class="bg-gradient-to-r from-[#8B1E2D] to-[#C62828] px-4 py-2.5 text-white flex items-center justify-between">
+          <span class="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#72C7D5]">
+            <span>⭐</span> BÀI VIẾT TIÊU ĐIỂM
+          </span>
+          <span class="text-[11px] bg-white/20 px-2.5 py-0.5 rounded-full font-bold">
+            Mới nhất
+          </span>
+        </div>
+
+        <div class="p-5 sm:p-7 space-y-3">
+          <div class="flex flex-wrap items-center gap-2.5 text-xs">
+            <span class="px-3 py-1 rounded-full bg-[#FAF8F6] text-[#8B1E2D] font-extrabold border border-[#168AAD]/30">
+              {featuredArticle.category}
+            </span>
+            <span class="text-slate-400">•</span>
+            <span class="text-slate-500 font-semibold">✍️ {featuredArticle.author}</span>
+            <span class="text-slate-400">•</span>
+            <span class="text-slate-500 num-font">👁️ {featuredArticle.views} lượt xem</span>
+          </div>
+
+          <h2 class="text-lg sm:text-2xl font-black text-slate-900 group-hover:text-[#168AAD] transition-colors leading-snug">
+            <a href={`/goc-chia-se/${featuredArticle.slug}`} title={`Đọc bài viết: ${featuredArticle.title}`}>
+              {featuredArticle.title}
+            </a>
+          </h2>
+
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            {featuredArticle.summary}
+          </p>
+
+          <div class="pt-2 flex items-center justify-between border-t border-slate-100">
+            <a
+              href={`/goc-chia-se/${featuredArticle.slug}`}
+              title={`Đọc chi tiết: ${featuredArticle.title}`}
+              class="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#C62828] hover:bg-[#8B1E2D] text-white font-extrabold text-xs shadow-xs transition-colors"
+            >
+              <span>Đọc toàn bộ bài viết</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Bộ lọc danh mục & Danh sách bài viết -->
+    <div class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="font-extrabold text-sm sm:text-base text-slate-900 uppercase flex items-center gap-2">
+          <span>📚</span>
+          <span>Tất Cả Bài Viết ({articles.length})</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {regularArticles.map((art) => (
+          <article class="bg-white rounded-2xl border border-slate-200 hover:border-[#C62828] shadow-xs hover:shadow-md p-5 flex flex-col justify-between transition-all group">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-xs font-bold uppercase px-2.5 py-0.5 rounded-full bg-[#FAF8F6] text-[#8B1E2D] border border-[#168AAD]/30">
+                  {art.category}
+                </span>
+                <span class="text-xs text-slate-400 num-font">👁️ {art.views} lượt xem</span>
+              </div>
+              <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#168AAD] transition-colors leading-snug">
+                <a href={`/goc-chia-se/${art.slug}`} title={`Xem bài viết chuyên đề: ${art.title}`}>
+                  {art.title}
+                </a>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed">{art.summary}</p>
+            </div>
+
+            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="font-semibold text-slate-500">✍️ {art.author}</span>
+              <a
+                href={`/goc-chia-se/${art.slug}`}
+                title={`Đọc chi tiết bài viết: ${art.title}`}
+                class="inline-flex items-center gap-1 font-extrabold text-[#168AAD] group-hover:text-[#8B1E2D] transition-colors"
+              >
+                <span>Đọc bài viết</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+</MainLayout>

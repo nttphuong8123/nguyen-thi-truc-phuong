@@ -1,4 +1,23 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api/
+Allow: /elearning/msvth
+Allow: /elearning/slideqth
 
-Sitemap: https://nguyenthitrucphuong.pages.dev/sitemap-index.xml
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://nguyenthitrucphuong.pages.dev/sitemap.xml

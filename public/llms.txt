@@ -1,0 +1,12 @@
+# NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập & Chia Sẻ Tri Thức (nguyenthitrucphuong.pages.dev)
+
+> Cổng học liệu mở, ngân hàng câu hỏi trắc nghiệm trực tuyến, bài tập thực hành, hướng dẫn nghiên cứu khoa học (SPSS) và cẩm nang thực tập tốt nghiệp do Giảng viên NGUYỄN THỊ TRÚC PHƯƠNG (Khoa Quản trị Kinh doanh - Trường Cao đẳng Kinh tế TP.HCM HCE) biên soạn và chia sẻ miễn phí.
+
+## Chuyên mục trọng tâm
+- [Trang chủ](https://nguyenthitrucphuong.pages.dev/): Tổng quan học liệu mới, công cụ học thuật và kết nối tri thức.
+- [Góc Học Tập](https://nguyenthitrucphuong.pages.dev/study-corner): Học liệu và ngân hàng trắc nghiệm 10 môn chuyên ngành (Kinh tế vi mô, Khởi nghiệp, Marketing căn bản, Marketing căn bản & dịch vụ, Quản trị chiến lược, Kinh tế vi mô, Quản trị Marketing, Marketing căn bản, Khởi nghiệp, Thực tập tốt nghiệp).
+- [Thi Online](https://nguyenthitrucphuong.pages.dev/ngan-hang-de-thi): Hệ thống thi trắc nghiệm trực tuyến 60 phút / 50 câu.
+- [Tra Cứu Đề Cương Thực Tập](https://nguyenthitrucphuong.pages.dev/dcct): Hệ thống tra cứu và tải đề cương chi tiết theo mã số đề tài.
+- [Hướng Dẫn SPSS & NCKH](https://nguyenthitrucphuong.pages.dev/spss): Sổ tay thực hành xử lý dữ liệu SPSS từ A đến Z cho sinh viên.
+- [Cố Vấn Học Tập & Máy Tính Điểm](https://nguyenthitrucphuong.pages.dev/mentor): Quy chế học vụ, công cụ tính điểm thi kết thúc học phần (40%-60%) và mô phỏng GPA cải thiện.
+- [Công Tác Giảng Dạy](https://nguyenthitrucphuong.pages.dev/teaching): Khung giờ tiết học chuẩn, thành phần hồ sơ giảng dạy và biểu mẫu HCE.

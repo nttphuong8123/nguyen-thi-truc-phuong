@@ -1,0 +1,333 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import AcademicSiloWrapper from '../components/AcademicSiloWrapper.astro';
+import { getPageByPath, normalizeRoutePath } from '../lib/db';
+import { getSeoMetaForPath } from '../lib/seo-meta';
+
+const rawSlug = Astro.params.slug || '';
+const decodedPath = '/' + decodeURIComponent(rawSlug).replace(/^\/+/, '');
+const cleanPath = normalizeRoutePath(decodedPath);
+
+// Legacy 301 Redirects
+if (cleanPath === '/home') {
+  return Astro.redirect('/', 301);
+}
+if (cleanPath === '/questionnaire/spss') {
+  return Astro.redirect('/spss', 301);
+}
+if (decodedPath !== cleanPath) {
+  return Astro.redirect(cleanPath, 301);
+}
+
+const pageData = getPageByPath(cleanPath);
+
+if (!pageData) {
+  Astro.response.status = 404;
+}
+
+const seoMeta = getSeoMetaForPath(cleanPath, pageData?.title);
+---
+
+<MainLayout
+  title={pageData ? seoMeta.title : 'Không tìm thấy trang (404) — NGUYỄN THỊ TRÚC PHƯƠNG'}
+  description={
+    pageData
+      ? seoMeta.description
+      : 'Trang bạn tìm kiếm không tồn tại hoặc đã được chuyển hướng.'
+  }
+  currentPath={cleanPath}
+  customCss={pageData?.custom_css || ''}
+  noindex={!pageData}
+>
+  {
+    !pageData ? (
+      <main class="max-w-xl mx-auto px-4 py-16 text-center space-y-4">
+        <div class="text-5xl">🧭</div>
+        <h1 class="text-2xl font-extrabold text-slate-900">Không tìm thấy trang yêu cầu (404)</h1>
+        <p class="text-sm text-slate-600">
+          Đường dẫn <code class="px-2 py-0.5 bg-slate-200 rounded font-mono text-xs">{decodedPath}</code> không tồn tại hoặc đã thay đổi.
+        </p>
+        <div class="pt-2 flex items-center justify-center gap-3">
+          <a
+            href="/"
+            title="Quay về Trang chủ NGUYỄN THỊ TRÚC PHƯƠNG"
+            class="bg-sky-700 hover:bg-sky-800 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl transition-colors"
+          >
+            Về Trang Chủ
+          </a>
+          <a
+            href="/study-corner"
+            title="Khám phá Góc Học Tập các môn chuyên ngành"
+            class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl transition-colors"
+          >
+            Mở Góc Học Tập
+          </a>
+        </div>
+      </main>
+    ) : (
+      <AcademicSiloWrapper
+        currentPath={cleanPath}
+        pageTitle={pageData.title}
+      >
+        {pageData.page_type === 'quiz' && (
+          <div class="bg-gradient-to-r from-[#123B65] via-[#168AAD] to-[#123B65] text-white text-xs py-2 px-4 text-center border-b border-[#168AAD]/50">
+            <span>💡 <strong>Hệ thống Trắc nghiệm Trực tuyến:</strong> Kết quả nộp bài của bạn sẽ được chấm điểm tức thì và tự động ghi nhận vào hệ thống lớp học.</span>
+          </div>
+        )}
+        <div class="tkd-page-scope tkd-academic-subpage w-full min-h-[50vh]" set:html={pageData.html_content} />
+        {pageData.custom_js && <script is:inline set:html={pageData.custom_js} />}
+        <script is:inline>
+          (function() {
+            function formatQuizString(txt, isInlineCell = false) {
+              if (!txt || typeof txt !== 'string') return txt || '';
+              let s = txt;
+              if (!isInlineCell && s.includes('|') && (s.includes('---') || s.includes('| --- |') || s.includes('|---'))) {
+                const lines = s.split(/\r?\n/);
+                let tStart = -1, tEnd = -1;
+                for (let i = 0; i < lines.length; i++) {
+                  const l = lines[i].trim();
+                  const pipeCount = (l.match(/\|/g) || []).length;
+                  const isTableLine = l.startsWith('|') && (l.endsWith('|') || pipeCount >= 2);
+                  if (isTableLine) {
+                    if (tStart === -1) tStart = i;
+                    tEnd = i;
+                  } else if (tStart !== -1) {
+                    break;
+                  }
+                }
+                if (tStart !== -1 && tEnd > tStart) {
+                  const before = lines.slice(0, tStart).join('\n').trim();
+                  const tLines = lines.slice(tStart, tEnd + 1).map(l => l.trim()).filter(Boolean);
+                  const after = lines.slice(tEnd + 1).join('\n').trim();
+                  let headers = [];
+                  const rawRows = [];
+                  for (const rowStr of tLines) {
+                    const strippedSep = rowStr.replace(/\|/g, '').trim();
+                    if (/^[\s\-:]+$/.test(strippedSep) && strippedSep.includes('-')) continue;
+                    const cleanLine = rowStr.replace(/^\|+/, '').replace(/\|+$/, '');
+                    let cells = cleanLine.split('|').map(c => c.trim());
+                    while (cells.length > 0 && cells[cells.length - 1] === '') {
+                      cells.pop();
+                    }
+                    if (headers.length === 0) {
+                      headers = cells;
+                    } else {
+                      rawRows.push(cells);
+                    }
+                  }
+                  const colCount = Math.max(headers.length, ...rawRows.map(r => r.length));
+                  if (colCount > 0) {
+                    while (headers.length < colCount) headers.push('');
+                    const rows = rawRows.map(r => {
+                      const copy = [...r];
+                      while (copy.length < colCount) copy.push('');
+                      return copy;
+                    });
+                    const thHtml = headers.map((c, cIdx) => `<th class="${cIdx === 0 ? 'tkd-q-th-first text-left font-bold pl-3 pr-2.5' : 'tkd-q-th-num text-center font-bold px-2.5 min-w-[42px]'} py-2 text-xs sm:text-[13px] text-[#0B1E33] bg-[#EFF6FF] border border-[#CBD5E1] whitespace-nowrap">${formatQuizString(c, true)}</th>`).join('');
+                    const trHtml = rows.map((r, rIdx) => `<tr class="${rIdx % 2 === 1 ? 'bg-[#F8FAFC]' : 'bg-white'} hover:bg-sky-50/60 transition-colors">${r.map((c, cIdx) => `<td class="${cIdx === 0 ? 'tkd-q-td-first text-left font-bold text-[#0B1E33] bg-[#F8FAFC] pl-3 pr-2.5 whitespace-normal leading-snug min-w-[110px]' : 'tkd-q-td-num text-center font-semibold num-font text-[#0F172A] px-2.5 whitespace-nowrap'} py-2 text-xs sm:text-[13px] border border-[#E2E8F0]">${formatQuizString(c, true)}</td>`).join('')}</tr>`).join('');
+                    const beforeHtml = before ? `<div class="tkd-q-lead">${formatQuizString(before, true)}</div>` : '';
+                    const tableHtml = `<div class="table-responsive tkd-q-table-wrap overflow-x-auto my-3 w-full max-w-full rounded-xl border border-[#CBD5E1] bg-white shadow-2xs -webkit-overflow-scrolling-touch"><table class="tkd-q-table data-table w-full text-xs sm:text-[13px] border-collapse table-auto"><thead><tr>${thHtml}</tr></thead><tbody>${trHtml}</tbody></table></div>`;
+                    const afterHtml = after ? `<div class="tkd-q-prompt">${formatQuizString(after, false)}</div>` : '';
+                    return `<div class="tkd-q-structured">${beforeHtml}${tableHtml}${afterHtml}</div>`;
+                  }
+                }
+              }
+              s = s.replace(/<(?!\/?(?:strong|b|i|em|u|sup|sub|br|span)\b[^>]*>)/gi, '&lt;');
+              s = s.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+              s = s.replace(/\bQ2\b/g, 'Q<sup>2</sup>');
+              s = s.replace(/Q²/g, 'Q<sup>2</sup>');
+              s = s.replace(/Q³/g, 'Q<sup>3</sup>');
+              s = s.replace(/\bL1\/2\b/g, 'L<sup>1/2</sup>');
+              s = s.replace(/([A-Za-z])\^\{?([0-9\/\-\+\*]+)\}?/g, '$1<sup>$2</sup>');
+              s = s.replace(/\\Delta/g, 'Δ');
+              s = s.replace(/\\alpha/g, 'α');
+              s = s.replace(/\\beta/g, 'β');
+              s = s.replace(/\\sigma/g, 'σ');
+              s = s.replace(/\\le\b/g, '≤');
+              s = s.replace(/\\ge\b/g, '≥');
+              s = s.replace(/\\ne\b/g, '≠');
+              s = s.replace(/\\times/g, '×');
+              s = s.replace(/\\sqrt\{([^}]+)\}/g, '√($1)');
+              s = s.replace(/\n/g, '<br/>');
+              return s;
+            }
+
+            // Nâng cấp hàm renderQuestionHTML toàn cục (nếu trang có định nghĩa) để bảo toàn 100% bảng & dữ liệu
+            if (typeof window.renderQuestionHTML === 'function') {
+              window.renderQuestionHTML = function(txt) {
+                return '<div class="q-block">' + formatQuizString(txt) + '</div>';
+              };
+            }
+
+            // Bảo vệ dữ liệu câu hỏi có chứa dấu '<' đi sát chữ cái (VD: '<P < ACmin') khỏi bị trình duyệt hiểu nhầm là thẻ HTML
+            try {
+              if (typeof questionBank !== 'undefined' && Array.isArray(questionBank)) {
+                questionBank.forEach(function(item) {
+                  if (item && typeof item.question === 'string' && /<(?=[A-Za-z])/.test(item.question)) {
+                    item.question = item.question.replace(/<(?=[A-Za-z])/g, '< ');
+                  }
+                });
+              }
+            } catch (_e) {}
+
+            function scanAndEnhanceQuizContent() {
+              document.querySelectorAll('#questionContainer .question, .tkd-page-scope .question').forEach(function(qEl) {
+                if (!qEl.dataset.cardEnhanced) {
+                  qEl.dataset.cardEnhanced = 'true';
+
+                  // Trường hợp câu hỏi dạng <p>Câu 1: Nội dung...</p> (chưa tách nhãn Câu X)
+                  const firstP = qEl.querySelector(':scope > p:first-child:not(.q-title)');
+                  if (firstP) {
+                    const rawText = firstP.textContent || '';
+                    const m = rawText.match(/^\s*(Câu\s+\d+)\s*[:.]?\s*([\s\S]*)$/i);
+                    if (m) {
+                      const headerDiv = document.createElement('div');
+                      headerDiv.className = 'tkd-q-header';
+                      const badgeSpan = document.createElement('span');
+                      badgeSpan.className = 'tkd-q-badge num-font';
+                      badgeSpan.textContent = m[1];
+                      headerDiv.appendChild(badgeSpan);
+
+                      const stemDiv = document.createElement('div');
+                      stemDiv.className = 'tkd-q-stem';
+                      stemDiv.innerHTML = formatQuizString(m[2]);
+                      stemDiv.dataset.enhanced = 'true';
+
+                      qEl.insertBefore(headerDiv, firstP);
+                      qEl.insertBefore(stemDiv, firstP);
+                      firstP.remove();
+                    }
+                  }
+
+                  // Trường hợp có sẵn p.q-title
+                  const qTitle = qEl.querySelector(':scope > p.q-title');
+                  if (qTitle && !qTitle.parentElement.classList.contains('tkd-q-header')) {
+                    const headerDiv = document.createElement('div');
+                    headerDiv.className = 'tkd-q-header';
+                    qTitle.classList.add('tkd-q-badge', 'num-font');
+                    qTitle.parentNode.insertBefore(headerDiv, qTitle);
+                    headerDiv.appendChild(qTitle);
+                  }
+                }
+
+                // Định dạng nội dung câu hỏi & bảng biểu
+                qEl.querySelectorAll(':scope > div:not(.tkd-q-header), .q-text').forEach(function(el) {
+                  if (el.dataset.enhanced || el.querySelector('table') || el.closest('.table-responsive')) return;
+                  const text = el.textContent || '';
+                  if (text.includes('|') && (text.includes('---') || text.includes('| --- |'))) {
+                    el.innerHTML = formatQuizString(text);
+                    el.dataset.enhanced = 'true';
+                  } else if (/\bQ2\b|Q²|Y_t|\\Delta|\\alpha|L1\/2|\*\*/.test(el.innerHTML)) {
+                    el.innerHTML = formatQuizString(text);
+                    el.dataset.enhanced = 'true';
+                  }
+                });
+
+                // Chuẩn hóa các phương án trả lời A, B, C, D trong danh sách ul > li
+                const items = qEl.querySelectorAll('ul > li');
+                items.forEach(function(li, oIdx) {
+                  let optLabel = li.querySelector('label.opt');
+                  if (!optLabel) {
+                    const radio = li.querySelector('input[type="radio"]');
+                    if (radio) {
+                      optLabel = document.createElement('label');
+                      optLabel.className = 'opt';
+                      const textNodes = [];
+                      Array.from(li.childNodes).forEach(function(node) {
+                        if (node !== radio) textNodes.push(node.textContent || '');
+                      });
+                      const ansText = textNodes.join('').trim();
+                      li.innerHTML = '';
+                      optLabel.appendChild(radio);
+                      const span = document.createElement('span');
+                      span.className = 'tkd-opt-text';
+                      span.textContent = ansText;
+                      optLabel.appendChild(span);
+                      li.appendChild(optLabel);
+                    }
+                  }
+                  if (optLabel && !optLabel.dataset.optEnhanced) {
+                    optLabel.dataset.optEnhanced = 'true';
+                    const span = optLabel.querySelector('span');
+                    if (span) {
+                      span.classList.add('tkd-opt-text');
+                      const rawAns = (span.textContent || '').trim();
+                      const letter = String.fromCharCode(65 + oIdx);
+                      const cleanAns = rawAns.replace(/^[A-D][.:)\-]\s*/i, '');
+                      span.innerHTML = '<strong class="tkd-opt-letter">' + letter + '.</strong> ' + formatQuizString(cleanAns, true);
+                    }
+                  }
+                });
+              });
+
+              // Khởi tạo trạng thái checked cho các option radio đã chọn
+              document.querySelectorAll('.opt input[type="radio"]:checked').forEach(radio => {
+                const opt = radio.closest('.opt');
+                if (opt) opt.classList.add('selected');
+              });
+
+              // Luôn ẩn nhãn "Trang 1 trên trang 1" theo yêu cầu
+              const pInfo = document.getElementById('pageInfo');
+              if (pInfo) pInfo.style.display = 'none';
+            }
+
+            // Tự động gán hiệu ứng chọn đáp án mượt mà cho các bài trắc nghiệm
+            document.addEventListener('change', function(e) {
+              if (e.target && e.target.type === 'radio') {
+                const radio = e.target;
+                const opt = radio.closest('.opt');
+                if (opt) {
+                  const parentQ = opt.closest('.question') || opt.closest('ul') || opt.parentElement?.parentElement;
+                  if (parentQ) {
+                    parentQ.querySelectorAll('.opt').forEach(el => el.classList.remove('selected'));
+                  }
+                  opt.classList.add('selected');
+                }
+                const modeCard = radio.closest('.mode-card');
+                if (modeCard) {
+                  const modeGrid = modeCard.closest('.mode-grid') || modeCard.parentElement;
+                  if (modeGrid) {
+                    modeGrid.querySelectorAll('.mode-card').forEach(el => {
+                      el.removeAttribute('data-checked');
+                    });
+                  }
+                  modeCard.setAttribute('data-checked', 'true');
+                }
+              }
+            });
+
+            function enhanceAllTables() {
+              document.querySelectorAll('.tkd-academic-subpage table, main table').forEach(tbl => {
+                if (tbl.closest('.table-responsive') || tbl.closest('.table-container') || tbl.parentElement?.classList.contains('table-responsive') || tbl.classList.contains('no-scroll') || tbl.classList.contains('table-fixed')) return;
+                const wrapper = document.createElement('div');
+                wrapper.className = 'table-responsive my-3 max-w-full overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-2xs';
+                wrapper.style.webkitOverflowScrolling = 'touch';
+                tbl.parentNode?.insertBefore(wrapper, tbl);
+                wrapper.appendChild(tbl);
+              });
+            }
+
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', () => {
+                scanAndEnhanceQuizContent();
+                enhanceAllTables();
+              });
+            } else {
+              scanAndEnhanceQuizContent();
+              enhanceAllTables();
+            }
+
+            const observer = new MutationObserver(() => {
+              scanAndEnhanceQuizContent();
+              enhanceAllTables();
+            });
+            const target = document.getElementById('questionContainer') || document.body;
+            if (target) {
+              observer.observe(target, { childList: true, subtree: true });
+            }
+          })();
+        </script>
+      </AcademicSiloWrapper>
+    )
+  }
+</MainLayout>

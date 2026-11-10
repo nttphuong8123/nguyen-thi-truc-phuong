@@ -1,0 +1,236 @@
+---
+import { SILO_GROUPS, getSeoMetaForPath, type SiloGroup } from '../lib/seo-meta';
+
+export interface Props {
+  currentPath: string;
+  pageTitle?: string;
+  isHiddenElearning?: boolean;
+}
+
+const { currentPath, pageTitle = '' } = Astro.props;
+const normPath = currentPath === '/' ? '/' : currentPath.toLowerCase().replace(/\/+$/, '');
+const meta = getSeoMetaForPath(normPath, pageTitle);
+const silo: SiloGroup | undefined = meta.siloKey ? SILO_GROUPS[meta.siloKey] : undefined;
+
+// Build Visual Breadcrumb Trail
+interface Crumb {
+  label: string;
+  href: string;
+  titleAttr: string;
+}
+
+const crumbs: Crumb[] = [
+  { label: 'Trang chủ', href: '/', titleAttr: 'Quay về Trang chủ NGUYỄN THỊ TRÚC PHƯƠNG' },
+];
+
+if (normPath.startsWith('/study-corner') && normPath !== '/study-corner') {
+  crumbs.push({
+    label: 'Góc học tập',
+    href: '/study-corner',
+    titleAttr: 'Khám phá toàn bộ chuyên mục Góc học tập',
+  });
+}
+
+if (meta.parentPath && meta.parentPath !== '/' && meta.parentPath !== '/study-corner' && meta.parentPath !== normPath) {
+  const parentMeta = getSeoMetaForPath(meta.parentPath);
+  crumbs.push({
+    label: parentMeta.breadcrumbLabel,
+    href: meta.parentPath,
+    titleAttr: `Xem chuyên đề ${parentMeta.breadcrumbLabel}`,
+  });
+}
+
+if (normPath !== '/') {
+  crumbs.push({
+    label: meta.breadcrumbLabel,
+    href: normPath,
+    titleAttr: meta.title,
+  });
+}
+
+const faqs = meta.faqs || silo?.defaultFaqs || [];
+
+// Pick 4 Cross-Silo Related Courses (excluding current silo)
+const allSilos = Object.values(SILO_GROUPS);
+const relatedSilos = allSilos.filter((g) => g.key !== meta.siloKey).slice(0, 4);
+---
+
+<main id="main-content" class="w-full">
+  <!-- 1. Top Academic Breadcrumb & Silo Switcher Bar -->
+  <div class="bg-white border-b border-slate-200/90 shadow-2xs">
+      <div class="max-w-5xl mx-auto px-4 py-2.5 flex flex-col gap-2">
+        <!-- Breadcrumb Row -->
+        <nav aria-label="Breadcrumb" class="flex items-center flex-wrap gap-1.5 text-xs text-slate-500">
+          {crumbs.map((c, idx) => {
+            const isLast = idx === crumbs.length - 1;
+            return (
+              <div class="flex items-center gap-1.5">
+                {idx > 0 && <span aria-hidden="true" class="text-slate-300">/</span>}
+                {isLast ? (
+                  <span class="font-bold text-[#8B1E2D]" aria-current="page">{c.label}</span>
+                ) : (
+                  <a
+                    href={c.href}
+                    title={c.titleAttr}
+                    class="hover:text-[#C62828] hover:underline font-medium transition-colors"
+                  >
+                    {c.label}
+                  </a>
+                )}
+              </div>
+            );
+          })}
+        </nav>
+
+        <!-- Silo Switcher Tabs (if page belongs to a Subject Silo) -->
+        {silo && (
+          <div class="pt-1.5 border-t border-slate-100 flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 shrink-0 mr-1">
+              Chuyên đề {silo.name}:
+            </span>
+            {silo.tabs.map((tab) => {
+              const tabClean = tab.href.split('?')[0].toLowerCase().replace(/\/+$/, '');
+              const isActive = tabClean === normPath;
+              return (
+                <a
+                  href={tab.href}
+                  title={tab.titleAttr}
+                  class={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold shrink-0 transition-all ${
+                    isActive
+                      ? 'bg-[#8B1E2D] text-white shadow-xs ring-1 ring-[#C62828]/50'
+                      : 'bg-slate-100 hover:bg-[#FCEEEF] text-[#333333] hover:text-[#8B1E2D] border border-slate-200/80'
+                  }`}
+                >
+                  <span aria-hidden="true">{tab.icon}</span>
+                  <span>{tab.label}</span>
+                </a>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+
+  <!-- 2. Original Page Content Slot -->
+  <div class="w-full">
+    <slot />
+  </div>
+
+  <!-- 3. Bottom SEO & Academic Value Enrichment (Public Pages Only) -->
+  <div class="max-w-5xl mx-auto px-4 pt-4 pb-10 space-y-6">
+      <!-- 3A. SSR Study Guide & Knowledge Summary Block (for Quizzes / Hubs) -->
+      {meta.studyGuidePoints && meta.studyGuidePoints.length > 0 && (
+        <section class="bg-white rounded-2xl border border-[#E8E0E1] shadow-xs overflow-hidden">
+          <div class="bg-gradient-to-r from-[#8B1E2D] to-[#C62828] px-5 py-3.5 text-white flex items-center justify-between">
+            <h2 class="text-sm sm:text-base font-extrabold tracking-tight uppercase m-0">
+              {meta.studyGuideTitle || `Trọng Tâm Kiến Thức và Hướng Dẫn Ôn Tập ${meta.breadcrumbLabel}`}
+            </h2>
+            <span class="text-[11px] bg-white/15 px-2.5 py-0.5 rounded-full font-semibold text-sky-100 shrink-0">
+              Cẩm nang học thuật
+            </span>
+          </div>
+          <div class="p-5 sm:p-6 space-y-4">
+            {silo && (
+              <p class="text-sm text-slate-600 leading-relaxed bg-[#FAF8F6] border border-[#E8E0E1] rounded-xl p-3.5 m-0">
+                {silo.description}
+              </p>
+            )}
+            <div class="grid grid-cols-1 gap-4">
+              {meta.studyGuidePoints.map((pt) => (
+                <article class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-[#8B1E2D] m-0">{pt.heading}</h3>
+                  <p class="text-xs sm:text-sm text-slate-700 leading-relaxed m-0">{pt.content}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- 3B. Subject FAQ Accordion (Synced with FAQPage JSON-LD) -->
+      {faqs.length > 0 && (
+        <section class="bg-white rounded-2xl border border-[#E8E0E1] shadow-xs overflow-hidden">
+          <div class="bg-[#FAF8F6] border-b border-[#E8E0E1] px-5 py-3.5 flex items-center justify-between">
+            <h2 class="text-sm sm:text-base font-extrabold text-[#8B1E2D] uppercase tracking-tight m-0">
+              Câu Hỏi Thường Gặp Về {silo ? silo.name : meta.breadcrumbLabel}
+            </h2>
+            </div>
+          <div class="divide-y divide-slate-200/80 px-5 py-2">
+            {faqs.map((faq, i) => (
+              <details class="group py-3.5" open={i === 0}>
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-bold text-slate-800 hover:text-sky-800 text-xs sm:text-sm">
+                  <h3 class="font-bold text-xs sm:text-sm text-slate-800 group-hover:text-[#8B1E2D] m-0">
+                    {faq.question}
+                  </h3>
+                  <span aria-hidden="true" class="text-[#C62828] font-extrabold text-base group-open:rotate-45 transition-transform shrink-0">
+                    +
+                  </span>
+                </summary>
+                <p class="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed pl-3 border-l-2 border-[#C62828] m-0">
+                  {faq.answer}
+                </p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- 3C. Cross-Silo Internal Linking Grid (Zero Orphan Pages) -->
+      <section class="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 sm:p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div>
+            <h2 class="text-sm sm:text-base font-extrabold text-slate-900 uppercase tracking-tight m-0">
+              Công Cụ Học Tập
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5 m-0">
+              Khám phá trọn bộ bài giảng, đề cương thực tập và ngân hàng đề thi trực tuyến
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <a
+              href="/study-corner"
+              title="Xem toàn bộ 11 chuyên mục trong Góc học tập"
+              class="px-3 py-1.5 rounded-lg bg-[#FAF8F6] hover:bg-slate-200 text-[#8B1E2D] font-bold text-xs transition-colors border border-slate-200"
+            >
+              Tất cả môn học
+            </a>
+            <a
+              href="/ngan-hang-de-thi"
+              title="Làm bài thi thử trắc nghiệm trực tuyến 50 câu trong 60 phút"
+              class="px-3 py-1.5 rounded-lg bg-[#C62828] hover:bg-[#8B1E2D] text-white font-black text-xs transition-colors shadow-2xs"
+            >
+              Thi Online ngay
+            </a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {relatedSilos.map((rs) => (
+            <div class="relative group rounded-xl border border-slate-200/90 bg-slate-50/70 hover:bg-sky-50/50 hover:border-sky-300 p-3.5 transition-all flex flex-col justify-between">
+              <div>
+                <span class="inline-block text-[10px] font-bold uppercase tracking-wider text-[#8B1E2D] bg-[#FAF8F6] border border-[#E8E0E1] px-2 py-0.5 rounded mb-1.5">
+                  {rs.badge}
+                </span>
+                <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 group-hover:text-sky-800 m-0">
+                  <a
+                    href={rs.hubHref}
+                    title={`Truy cập học phần ${rs.name}: bài giảng, bài tập và đề thi thử`}
+                    class="after:absolute after:inset-0 focus:outline-none"
+                  >
+                    {rs.name}
+                  </a>
+                </h3>
+                <p class="text-[11px] text-slate-600 line-clamp-2 mt-1 m-0 leading-relaxed">
+                  {rs.description}
+                </p>
+              </div>
+              <div class="mt-2.5 pt-2 border-t border-slate-200/60 flex items-center justify-between text-[11px] font-bold text-[#C62828]">
+                <span>{rs.tabs.length} học liệu chuyên sâu</span>
+                <span aria-hidden="true">→</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+</main>

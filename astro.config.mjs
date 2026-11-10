@@ -1,13 +1,16 @@
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
+import cloudflare from '@astrojs/cloudflare';
 import tailwindcss from '@tailwindcss/vite';
 
-// https://astro.build/config
 export default defineConfig({
   site: 'https://nguyenthitrucphuong.pages.dev',
-  output: 'static',
-  integrations: [sitemap()],
+  output: 'server',
+  adapter: cloudflare(),
   vite: {
     plugins: [tailwindcss()],
+  },
+  server: {
+    port: 4321,
+    host: true,
   },
 });

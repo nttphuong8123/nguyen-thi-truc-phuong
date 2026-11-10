@@ -1,0 +1,572 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { getEvaluationCriteria, getSiteContactConfig } from '../lib/db';
+
+const contactCfg = getSiteContactConfig();
+const criteria = getEvaluationCriteria();
+
+// Group criteria by group key (I, II, III, IV...)
+interface CriteriaGroup {
+  group: string;
+  group_title: string;
+  items: { idx: number; code: string; text: string }[];
+}
+
+const groupsMap = new Map<string, CriteriaGroup>();
+criteria.forEach((c, i) => {
+  const gKey = c.group || (i < 2 ? 'I' : i < 6 ? 'II' : i < 10 ? 'III' : 'IV');
+  const gTitle =
+    c.group_title ||
+    (gKey === 'I'
+      ? 'Đề cương, mục tiêu & tài liệu học tập'
+      : gKey === 'II'
+        ? 'Nội dung & Phương pháp giảng dạy'
+        : gKey === 'III'
+          ? 'Tác phong sư phạm & Tương tác với sinh viên'
+          : 'Đánh giá & Phản hồi kết quả học tập');
+  if (!groupsMap.has(gKey)) {
+    groupsMap.set(gKey, { group: gKey, group_title: gTitle, items: [] });
+  }
+  groupsMap.get(gKey)!.items.push({
+    idx: i + 1,
+    code: c.code || `q${i + 1}`,
+    text: c.text,
+  });
+});
+
+const criteriaGroups = Array.from(groupsMap.values());
+---
+
+<MainLayout currentPath="/danh-gia-giang-vien">
+  <main class="w-full bg-[#FAF8F6] min-h-screen pb-16">
+    <!-- Header Banner -->
+    <header class="w-full bg-gradient-to-br from-[#701824] via-[#8B1E2D] to-[#C62828] text-white shadow-md">
+      <div class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 text-center sm:text-left">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-5">
+          <div>
+            <div class="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-[#8B1E2D] border border-[#FCEEEF]/40 text-[#FCEEEF] text-xs sm:text-sm font-bold tracking-wider uppercase">
+              <svg class="w-4 h-4 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
+              </svg>
+              <span>Khoa Quản Trị Kinh Doanh • HCE</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight uppercase">PHIẾU ĐÁNH GIÁ CHẤT LƯỢNG GIẢNG VIÊN</h1>
+            <p class="text-blue-100 text-sm sm:text-base mt-1">Khảo sát ý kiến sinh viên về hoạt động giảng dạy học phần (Bảo mật 100% danh tính)</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 border border-white/20 text-center sm:text-right min-w-[240px]">
+            <div class="flex items-center justify-center sm:justify-end gap-1.5 text-blue-200 text-xs font-medium mb-1">
+              <svg class="w-3.5 h-3.5 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              <span>Học kỳ / Niên khóa (Tự động)</span>
+            </div>
+            <input type="text" id="semesterYearDisplay" readonly class="w-full bg-blue-950/60 border border-blue-400/40 rounded-lg px-3 py-1.5 text-sm sm:text-base font-bold text-center sm:text-right text-amber-300 focus:outline-hidden" value="Đang xác định..." />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Nội dung Phiếu Khảo Sát -->
+    <section class="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <div class="eval-survey-card">
+        <!-- Lời ngỏ & Hướng dẫn -->
+        <div class="eval-intro-box">
+          <h2 class="text-base sm:text-lg font-extrabold text-slate-900 mb-1.5 flex items-center gap-2">
+            <span class="text-sky-600">📌</span> Mục đích &amp; Hướng dẫn đánh giá hoạt động giảng dạy
+          </h2>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            Khảo sát này nhằm thu thập ý kiến đóng góp khách quan của sinh viên để nâng cao chất lượng giảng dạy và cải tiến chương trình đào tạo. Mọi thông tin phản hồi của các bạn đều được <strong>bảo mật hoàn toàn danh tính</strong>.
+          </p>
+        </div>
+
+        <!-- Biểu mẫu Khảo Sát -->
+        <form id="surveyForm">
+          <!-- PHẦN I: Thông tin học phần -->
+          <div class="eval-section-title">PHẦN I. THÔNG TIN HỌC PHẦN VÀ GIẢNG VIÊN</div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mb-6 text-xs sm:text-sm">
+            <div>
+              <label for="courseName" class="block font-bold text-slate-800 mb-1.5">1. Tên môn học / Học phần <span class="text-rose-600">*</span></label>
+              <input type="text" id="courseName" required placeholder="VD: Marketing căn bản, Kinh tế vi mô, Khởi nghiệp..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-[#C62828] focus:ring-2 focus:ring-[#C62828]/20 outline-hidden transition-all bg-white text-slate-900" />
+            </div>
+            <div>
+              <label for="classCode" class="block font-bold text-slate-800 mb-1.5">2. Mã lớp học phần</label>
+              <input type="text" id="classCode" placeholder="VD: 24CĐ-QTKD01" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-[#C62828] focus:ring-2 focus:ring-[#C62828]/20 outline-hidden transition-all bg-white text-slate-900" />
+            </div>
+            <div>
+              <label for="instructorName" class="block font-bold text-slate-800 mb-1.5">3. Họ tên Giảng viên giảng dạy <span class="text-rose-600">*</span></label>
+              <input type="text" id="instructorName" required value={contactCfg.instructor_name} class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-[#C62828] focus:ring-2 focus:ring-[#C62828]/20 outline-hidden transition-all bg-white font-semibold text-slate-900" />
+            </div>
+          </div>
+
+          <!-- PHẦN II: Đánh giá các yếu tố -->
+          <div class="eval-section-title">PHẦN II. ĐÁNH GIÁ CÁC TIÊU CHÍ GIẢNG DẠY</div>
+          <div class="eval-note-scale">
+            <h3>Thang đo Likert 5 mức độ:</h3>
+            <p>1: Hoàn toàn không đồng ý | 2: Không đồng ý | 3: Bình thường / Tương đối | 4: Đồng ý | 5: Hoàn toàn đồng ý</p>
+          </div>
+
+          <!-- Các nhóm tiêu chí Likert động -->
+          {criteriaGroups.map((grp) => (
+            <div class="mb-5">
+              <div class="eval-section-title">{grp.group}. {grp.group_title}</div>
+              <div class="eval-survey-table">
+                <div class="eval-table-header">
+                  <div>Nội dung tiêu chí đánh giá</div>
+                  <div>1</div>
+                  <div>2</div>
+                  <div>3</div>
+                  <div>4</div>
+                  <div>5</div>
+                </div>
+                {grp.items.map((item) => (
+                  <div class="eval-item-row">
+                    <div class="eval-q-text">
+                      {item.idx}. {item.text}
+                    </div>
+                    <div class="eval-likert-grid">
+                      {[1, 2, 3, 4, 5].map((lv) => (
+                        <div class="eval-likert-cell">
+                          <label>
+                            <input type="radio" name={item.code} value={String(lv)} required={lv === 1} />
+                            <span>{lv}</span>
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <!-- PHẦN III: Đánh giá chung & Ý kiến đóng góp -->
+          <div class="eval-section-title">V. MỨC ĐỘ HÀI LÒNG CHUNG &amp; ĐÓNG GÓP Ý KIẾN</div>
+          <div class="eval-survey-table p-4 sm:p-5 space-y-5">
+            <!-- Mức độ hài lòng tổng quan -->
+            <div class="space-y-2.5">
+              <label class="block font-bold text-slate-800 text-xs sm:text-sm">
+                Đánh giá mức độ hài lòng chung của bạn về hoạt động giảng dạy của giảng viên trong môn học:
+              </label>
+              <div class="grid grid-cols-1 sm:grid-cols-5 gap-2.5 text-xs sm:text-sm">
+                {['Rất không hài lòng', 'Không hài lòng', 'Bình thường', 'Hài lòng', 'Rất hài lòng'].map((opt) => (
+                  <label class="flex items-center gap-2.5 p-3 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-sky-50 cursor-pointer transition-colors">
+                    <input type="radio" name="overall_satisfaction" value={opt} checked={opt === 'Rất hài lòng'} class="accent-sky-600 w-4 h-4" />
+                    <span class="font-semibold text-slate-700">{opt}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <!-- 2 câu hỏi mở phản hồi -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm pt-1">
+              <div>
+                <label for="positives" class="block font-bold text-slate-800 mb-1.5">
+                  Điểm bạn cảm thấy tâm đắc nhất ở giảng viên:
+                </label>
+                <textarea id="positives" rows="3" placeholder="VD: Nhiệt tình, bài giảng dễ hiểu, ví dụ thực tế phong phú..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-[#C62828] focus:ring-2 focus:ring-[#C62828]/20 outline-hidden transition-all bg-white"></textarea>
+              </div>
+              <div>
+                <label for="improvements" class="block font-bold text-slate-800 mb-1.5">
+                  Điểm giảng viên nên cải tiến để nâng cao hiệu quả giảng dạy:
+                </label>
+                <textarea id="improvements" rows="3" placeholder="VD: Giảm bớt bài tập về nhà, tăng thời lượng làm việc nhóm..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-[#C62828] focus:ring-2 focus:ring-[#C62828]/20 outline-hidden transition-all bg-white"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Thanh công cụ gửi khảo sát -->
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-5">
+            <p class="text-xs text-slate-500 italic text-center sm:text-left">
+              * Vui lòng đảm bảo đã chọn đầy đủ các tiêu chí đánh giá trước khi gửi.
+            </p>
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+              <button type="reset" class="w-1/3 sm:w-auto px-5 py-3 rounded-xl border border-slate-300 bg-white text-slate-700 font-bold hover:bg-slate-100 transition-colors text-xs sm:text-sm cursor-pointer">
+                Làm lại
+              </button>
+              <button type="submit" id="submitSurveyBtn" class="w-2/3 sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-[#8B1E2D] to-[#C62828] hover:brightness-110 border border-[#C5A46D]/40 text-white font-extrabold uppercase tracking-wide shadow-md hover:shadow-lg transition-all text-xs sm:text-sm cursor-pointer flex items-center justify-center gap-2">
+                <span>Gửi Phiếu Khảo Sát</span>
+                <span>➔</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Modal Thông Báo Gửi Thành Công & Thống Kê -->
+    <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs hidden">
+      <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-100 text-center space-y-5 animate-in fade-in zoom-in-95 duration-200">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl shadow-inner">
+          ✓
+        </div>
+        <div>
+          <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">Gửi Khảo Sát Thành Công!</h3>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Cảm ơn bạn đã dành thời gian đóng góp ý kiến quý báu cho môn học.</p>
+        </div>
+
+        <!-- Tóm tắt kết quả vừa nhập -->
+        <div class="bg-slate-50 rounded-2xl p-4 text-xs text-left space-y-2 border border-slate-200/80">
+          <div class="flex justify-between border-b border-slate-200/60 pb-1.5">
+            <span class="text-slate-500">Học kỳ:</span>
+            <span id="resSemester" class="font-bold text-slate-800"></span>
+          </div>
+          <div class="flex justify-between border-b border-slate-200/60 pb-1.5">
+            <span class="text-slate-500">Giảng viên:</span>
+            <span id="resInstructor" class="font-bold text-slate-800"></span>
+          </div>
+          <div class="flex justify-between border-b border-slate-200/60 pb-1.5">
+            <span class="text-slate-500">Môn học:</span>
+            <span id="resCourse" class="font-bold text-slate-800"></span>
+          </div>
+          <div class="flex justify-between border-b border-slate-200/60 pb-1.5">
+            <span class="text-slate-500">Điểm đánh giá trung bình:</span>
+            <span id="resScore" class="font-extrabold text-blue-700 text-sm"></span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">Mức độ hài lòng chung:</span>
+            <span id="resOverall" class="font-bold text-emerald-700"></span>
+          </div>
+        </div>
+
+        <!-- Nút điều khiển Modal -->
+        <div class="flex flex-col sm:flex-row items-center gap-2.5 pt-2">
+          <button type="button" id="downloadExcelBtn" class="w-full sm:w-1/2 py-2.5 px-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer">
+            <span>📥</span>
+            <span>Xuất Dữ Liệu (Excel)</span>
+          </button>
+          <button type="button" id="downloadJsonBtn" class="w-full sm:w-1/2 py-2.5 px-3 rounded-xl bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer">
+            <span>📦</span>
+            <span>Xuất Dữ Liệu (JSON)</span>
+          </button>
+        </div>
+
+        <button type="button" id="closeModalBtn" class="w-full py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 font-bold text-xs transition-colors cursor-pointer">
+          Đóng &amp; Hoàn tất
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    .eval-survey-card {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid #bae6fd;
+      box-shadow: 0 4px 20px #0284c70f;
+      padding: 24px 28px;
+    }
+    .eval-intro-box {
+      background: #f8fafc;
+      border-left: 4px solid #0284c7;
+      padding: 14px 18px;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 20px;
+    }
+    .eval-section-title {
+      background: linear-gradient(90deg, #142B49, #245B87);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 10px 16px;
+      border-radius: 10px;
+      margin: 22px 0 14px;
+      border-left: 4px solid #C5A46D;
+    }
+    .eval-note-scale {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: #78350f;
+    }
+    .eval-note-scale h3 {
+      margin: 0 0 3px;
+      color: #0b3d91;
+      font-size: 13.5px;
+      font-weight: 800;
+    }
+    .eval-note-scale p {
+      margin: 4px 0 0;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    .eval-survey-table {
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 18px;
+      background: #fff;
+    }
+    .eval-table-header {
+      display: grid;
+      grid-template-columns: 1fr repeat(5, 56px);
+      align-items: center;
+      background: #f1f5f9;
+      border-bottom: 1px solid #cbd5e1;
+      font-weight: 800;
+      font-size: 12.5px;
+      color: #0f172a;
+      padding: 10px 16px;
+      text-align: center;
+    }
+    .eval-table-header > div:first-child {
+      text-align: left;
+    }
+    .eval-item-row {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      transition: background 0.15s;
+    }
+    .eval-item-row:last-child {
+      border-bottom: none;
+    }
+    .eval-item-row:hover {
+      background: #f0f9ff;
+    }
+    .eval-q-text {
+      font-size: 13.5px;
+      color: #1e293b;
+      padding-right: 14px;
+      line-height: 1.5;
+    }
+    .eval-likert-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 56px);
+      align-items: center;
+    }
+    .eval-likert-cell label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 4px 0;
+    }
+    .eval-likert-cell input[type='radio'] {
+      width: 18px;
+      height: 18px;
+      accent-color: #0284c7;
+      cursor: pointer;
+    }
+    .eval-likert-cell span {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .eval-survey-card {
+        padding: 18px 14px;
+      }
+      .eval-table-header {
+        display: none !important;
+      }
+      .eval-item-row {
+        display: block;
+        padding: 12px 14px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .eval-q-text {
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #1e293b;
+        padding-right: 0;
+        margin-bottom: 10px;
+        line-height: 1.5;
+      }
+      .eval-likert-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+      }
+      .eval-likert-cell label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 8px 4px;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        background: #f8fafc;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 700;
+        color: #334155;
+      }
+      .eval-likert-cell label:has(input:checked) {
+        border-color: #0284c7;
+        background: #e0f2fe;
+        color: #0369a1;
+      }
+      .eval-likert-cell input[type='radio'] {
+        width: 16px;
+        height: 16px;
+        accent-color: #0284c7;
+      }
+      .eval-likert-cell span {
+        display: inline;
+      }
+    }
+  </style>
+
+  <script is:inline>
+    function calculateAcademicTerm() {
+      const now = new Date();
+      const month = now.getMonth() + 1;
+      const year = now.getFullYear();
+      let semester = '';
+      let academicYear = '';
+
+      if (month >= 9) {
+        semester = 'HK I';
+        academicYear = `${year} - ${year + 1}`;
+      } else if (month === 1) {
+        semester = 'HK I';
+        academicYear = `${year - 1} - ${year}`;
+      } else if (month >= 2 && month <= 6) {
+        semester = 'HK II';
+        academicYear = `${year - 1} - ${year}`;
+      } else {
+        semester = 'HK Hè';
+        academicYear = `${year - 1} - ${year}`;
+      }
+      return `${semester} - Năm học ${academicYear}`;
+    }
+
+    const semInput = document.getElementById('semesterYearDisplay');
+    if (semInput) {
+      semInput.value = calculateAcademicTerm();
+    }
+
+    let latestSubmission = null;
+    const surveyForm = document.getElementById('surveyForm');
+    const successModal = document.getElementById('successModal');
+    const submitSurveyBtn = document.getElementById('submitSurveyBtn');
+
+    if (surveyForm) {
+      surveyForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const semesterYear = document.getElementById('semesterYearDisplay').value.trim();
+        const courseName = document.getElementById('courseName').value.trim();
+        const classCode = document.getElementById('classCode').value.trim();
+        const instructorName = document.getElementById('instructorName').value.trim();
+        const positives = document.getElementById('positives').value.trim();
+        const improvements = document.getElementById('improvements').value.trim();
+
+        const overallEl = document.querySelector('input[name="overall_satisfaction"]:checked');
+        const overallSatisfaction = overallEl ? overallEl.value : 'Hài lòng';
+
+        let totalScore = 0;
+        let count = 0;
+        const ratings = {};
+
+        const radioGroups = new Set();
+        document.querySelectorAll('#surveyForm input[type="radio"]').forEach((r) => {
+          if (r.name && r.name !== 'overall_satisfaction') {
+            radioGroups.add(r.name);
+          }
+        });
+
+        for (const name of radioGroups) {
+          const checked = document.querySelector(`input[name="${name}"]:checked`);
+          if (checked) {
+            const val = parseInt(checked.value, 10);
+            ratings[name] = val;
+            totalScore += val;
+            count++;
+          }
+        }
+
+        const averageScore = count > 0 ? (totalScore / count).toFixed(2) : '5.00';
+
+        latestSubmission = {
+          semester_year: semesterYear,
+          course_name: courseName,
+          class_code: classCode,
+          instructor_name: instructorName,
+          ratings,
+          average_score: parseFloat(averageScore),
+          overall_satisfaction: overallSatisfaction,
+          positives,
+          improvements,
+          submitted_at: new Date().toISOString(),
+        };
+
+        if (submitSurveyBtn) {
+          submitSurveyBtn.disabled = true;
+          submitSurveyBtn.textContent = '⏳ Đang lưu kết quả...';
+        }
+
+        try {
+          await fetch('/api/evaluations', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(latestSubmission),
+          });
+        } catch (err) {
+          console.error('Error saving evaluation:', err);
+        } finally {
+          if (submitSurveyBtn) {
+            submitSurveyBtn.disabled = false;
+            submitSurveyBtn.innerHTML = '<span>Gửi Phiếu Khảo Sát</span><span>➔</span>';
+          }
+        }
+
+        document.getElementById('resSemester').textContent = semesterYear;
+        document.getElementById('resInstructor').textContent = instructorName;
+        document.getElementById('resCourse').textContent = courseName;
+        document.getElementById('resScore').textContent = `${averageScore} / 5.0`;
+        document.getElementById('resOverall').textContent = overallSatisfaction;
+        successModal.classList.remove('hidden');
+      });
+    }
+
+    document.getElementById('closeModalBtn')?.addEventListener('click', () => {
+      successModal.classList.add('hidden');
+      surveyForm.reset();
+      semInput.value = calculateAcademicTerm();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('downloadJsonBtn')?.addEventListener('click', () => {
+      if (!latestSubmission) return;
+      const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(latestSubmission, null, 2));
+      const a = document.createElement('a');
+      a.href = dataStr;
+      a.download = `DanhGia_${latestSubmission.instructor_name.replace(/\s+/g, '_')}_${latestSubmission.semester_year.replace(/[\s\/-]+/g, '_')}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    document.getElementById('downloadExcelBtn')?.addEventListener('click', () => {
+      if (!latestSubmission) return;
+      const keys = Object.keys(latestSubmission.ratings || {});
+      const header = 'Học kỳ,Môn học,Mã lớp,Giảng viên,Điểm TB / 5.0,Mức độ hài lòng,Điểm tâm đắc,Điểm cần cải tiến,' + keys.join(',') + '\n';
+      const esc = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+      const row = [
+        esc(latestSubmission.semester_year),
+        esc(latestSubmission.course_name),
+        esc(latestSubmission.class_code),
+        esc(latestSubmission.instructor_name),
+        latestSubmission.average_score,
+        esc(latestSubmission.overall_satisfaction),
+        esc(latestSubmission.positives),
+        esc(latestSubmission.improvements),
+        ...keys.map((k) => latestSubmission.ratings[k]),
+      ].join(',');
+      const blob = new Blob(['\uFEFF' + header + row], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `DanhGia_${latestSubmission.instructor_name.replace(/\s+/g, '_')}_${latestSubmission.semester_year.replace(/[\s\/-]+/g, '_')}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+  </script>
+</MainLayout>
