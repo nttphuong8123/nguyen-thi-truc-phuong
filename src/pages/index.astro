@@ -3,9 +3,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 import EducationNewsSection from '../components/EducationNewsSection.astro';
 import db, {
   getPageByPath,
-  distributeBirthdayWishes,
   getVietnamDate,
-  type BirthdayWish,
   type NewsArticle,
 } from '../lib/db';
 import {
@@ -43,36 +41,11 @@ if (splitIdx !== -1) {
   gocHocTapContent = homeHtmlContent;
 }
 
-const allBirthdays = db
-  .prepare('SELECT * FROM birthday_wishes WHERE is_active = 1 ORDER BY birth_month ASC, birth_day ASC')
-  .all() as BirthdayWish[];
-
 const latestNews = db
   .prepare('SELECT id, slug, title, category, summary, author, published_at, views FROM news_articles ORDER BY id DESC LIMIT 5')
   .all() as NewsArticle[];
 
-const { year: currentYear, month: currentMonth, day: currentDay } = getVietnamDate();
-distributeBirthdayWishes(currentYear, currentMonth, false);
-
-const todayBirthdays = allBirthdays.filter(
-  (b) => Number(b.birth_day) === currentDay && Number(b.birth_month) === currentMonth
-);
-
-// Tự động lọc danh sách sinh viên có ngày sinh trong tháng hiện tại (ưu tiên sinh nhật đúng hôm nay lên đầu)
-const monthBirthdays = allBirthdays
-  .filter((b) => Number(b.birth_month) === currentMonth)
-  .sort((a, b) => {
-    const aToday = Number(a.birth_day) === currentDay ? 0 : 1;
-    const bToday = Number(b.birth_day) === currentDay ? 0 : 1;
-    if (aToday !== bToday) return aToday - bToday;
-    return Number(a.birth_day) - Number(b.birth_day);
-  });
-
-const birthdays = monthBirthdays.length > 0 ? monthBirthdays : allBirthdays;
-const scrollDurationSec = Math.max(45, birthdays.length * 5.5);
-
-// Duplicate birthday list when >= 3 items for seamless infinite vertical scroll
-const scrollingBirthdays = birthdays.length >= 3 ? [...birthdays, ...birthdays] : birthdays;
+const { year: currentYear } = getVietnamDate();
 
 const initialStocks = DEFAULT_STOCKS;
 const initialStockNews = DEFAULT_STOCK_NEWS;
@@ -127,7 +100,7 @@ const initialHceCenterNews = DEFAULT_HCE_CENTER_NEWS;
         </span>
       </div>
 
-      <!-- Hành Trình Đồng Hành | Giảng Đường & Thực Tế -->
+      <!-- Hành Trình Đồng Hành -->
       <div class="bg-white rounded-2xl shadow-xs border border-[#E8E0E1] overflow-hidden">
         <div class="bg-[#8B1E2D] px-4 py-2.5 text-white flex items-center justify-between">
           <h2 class="font-bold text-xs sm:text-sm tracking-tight flex items-center gap-2 uppercase">
@@ -136,7 +109,6 @@ const initialHceCenterNews = DEFAULT_HCE_CENTER_NEWS;
             </svg>
             <span>Hành Trình Đồng Hành</span>
           </h2>
-          <span class="text-xs bg-[#C62828] px-2.5 py-0.5 rounded-full text-white font-medium">Giảng Đường &amp; Thực Tế</span>
         </div>
 
         <div class="p-4 sm:p-5 space-y-3.5 text-xs sm:text-sm text-slate-800 leading-relaxed">
@@ -144,12 +116,10 @@ const initialHceCenterNews = DEFAULT_HCE_CENTER_NEWS;
             Trên con đường <strong class="text-[#8B1E2D] font-bold">định hình tư duy và phát triển sự nghiệp</strong>, kiến thức sách vở là nền tảng khởi đầu vững chắc. Gắn bó nhiều năm cùng giảng đường và các thế hệ sinh viên ngành Quản trị, tôi thấu hiểu sâu sắc những bỡ ngỡ của các bạn khi bước đầu tiếp cận với tri thức chuyên ngành. Không gian này được tạo ra như một chiếc cầu nối tâm huyết, giúp đơn giản hóa lý thuyết và lan tỏa những trải nghiệm thực tế từ doanh nghiệp.
           </p>
 
-          <div class="bg-gradient-to-r from-[#8B1E2D] via-[#C62828] to-[#8B1E2D] p-[1.5px] rounded-xl shadow-xs my-2">
-            <div class="bg-[#FAF8F6] p-3.5 rounded-[10px] text-center">
-              <p class="math-font italic font-bold text-[#8B1E2D] text-xs sm:text-base leading-snug">
-                “Người thầy giỏi không chỉ dạy lý thuyết, họ mở ra cánh cửa thực tế và thắp sáng niềm tin cho học trò.”
-              </p>
-            </div>
+          <div class="bg-gradient-to-r from-[#FAF8F6] via-white to-[#FAF8F6] border-l-4 border-[#8B1E2D] border-y border-r border-[#E8E0E1] p-4 rounded-r-xl my-2 shadow-2xs">
+            <blockquote class="italic font-bold text-[#1E293B] text-xs sm:text-base leading-relaxed text-center">
+              “<span class="text-[#8B1E2D]">Người thầy giỏi không chỉ dạy lý thuyết</span>, họ mở ra cánh cửa thực tế và thắp sáng niềm tin cho học trò.”
+            </blockquote>
           </div>
 
           <p class="text-slate-700 text-justify">
@@ -447,86 +417,14 @@ const initialHceCenterNews = DEFAULT_HCE_CENTER_NEWS;
     <!-- KHU VỰC 7. TIỆN ÍCH VĂN HÓA & ĐỜI SỐNG                          -->
     <!-- Lời chúc sinh nhật + Lịch & Sự Kiện Hôm Nay                    -->
     <!-- ============================================================== -->
-    <section class="max-w-6xl mx-auto px-3 sm:px-6">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-        <!-- Bảng Chúc mừng Sinh nhật (5 cols) -->
-        <div class="lg:col-span-5 bg-white rounded-2xl border border-rose-200 shadow-xs overflow-hidden flex flex-col">
-          <div class="bg-gradient-to-r from-rose-600 to-pink-600 px-4 py-3 text-white flex items-center justify-between">
-            <h2 class="font-extrabold text-xs sm:text-sm uppercase tracking-wide flex items-center gap-2 m-0">
-              <span>🎂</span>
-              <span>Mừng Sinh Nhật Tháng {currentMonth}</span>
-            </h2>
-            <div class="flex items-center gap-1.5">
-              <button
-                type="button"
-                id="toggleBdayPauseBtn"
-                title="Tạm dừng / Tiếp tục cuộn"
-                class="w-6 h-6 rounded-md bg-white/20 hover:bg-white/30 text-white text-[11px] font-bold flex items-center justify-center cursor-pointer transition-colors"
-              >
-                ⏸️
-              </button>
-            </div>
-          </div>
-
-          <!-- Bộ lọc xem theo ngày / tháng -->
-          <div class="bg-rose-50/80 px-3.5 py-2 border-b border-rose-100 flex items-center justify-between gap-1.5 text-[11px]">
-            <span class="text-rose-900 font-bold">Chế độ xem:</span>
-            <div class="flex items-center gap-1.5 justify-end">
-              <button
-                type="button"
-                id="filterBdayTodayBtn"
-                class="px-2.5 py-1 rounded-lg border font-bold transition-all bg-white border-rose-200 text-rose-800 hover:bg-rose-100 cursor-pointer"
-              >
-                🎂 Hôm nay ({todayBirthdays.length})
-              </button>
-              <button
-                type="button"
-                id="filterBdayMonthBtn"
-                class="px-2.5 py-1 rounded-lg border font-bold transition-all bg-rose-600 border-rose-600 text-white shadow-2xs cursor-pointer"
-              >
-                Tháng {currentMonth} ({monthBirthdays.length})
-              </button>
-            </div>
-          </div>
-
-          <div class="p-3.5">
-            <div
-              id="bdayScrollWrapper"
-              class="relative max-h-[300px] lg:h-[310px] lg:max-h-[310px] overflow-hidden rounded-xl bg-rose-50/40 border border-rose-100 p-2.5"
-              style={`--scroll-duration: ${scrollDurationSec}s;`}
-              data-current-day={String(currentDay)}
-              data-current-month={String(currentMonth)}
-            >
-              <div id="bdayScrollTrack" class={birthdays.length >= 3 ? 'birthday-scroll-track space-y-2.5' : 'space-y-2.5'}>
-                {scrollingBirthdays.map((b) => {
-                  const isTodayBday = Number(b.birth_day) === currentDay && Number(b.birth_month) === currentMonth;
-                  return (
-                    <div class={`p-2.5 sm:p-3 rounded-xl bg-white border shadow-2xs flex items-start gap-2.5 transition-colors ${isTodayBday ? 'border-rose-400 ring-1 ring-rose-200 bg-rose-50/30' : 'border-rose-200/80 hover:border-rose-400'}`}>
-                      <span class="text-xl shrink-0 mt-0.5">{isTodayBday ? '🎉' : b.avatar_emoji || '🎂'}</span>
-                      <div class="text-xs leading-snug flex-1 min-w-0">
-                        <div class="flex items-center justify-between gap-2">
-                          <strong class="text-rose-950 font-extrabold text-xs sm:text-sm truncate">{b.full_name}</strong>
-                          <span class={`num-font text-[11px] font-bold px-2 py-0.5 rounded-md shrink-0 ${isTodayBday ? 'bg-rose-600 text-white' : 'bg-rose-100 text-rose-700'}`}>
-                            {isTodayBday ? '🎂 Hôm nay • ' : ''}{String(b.birth_day).padStart(2, '0')}/{String(b.birth_month).padStart(2, '0')}
-                          </span>
-                        </div>
-                        <p class="text-[11px] text-rose-700 font-semibold mt-0.5">{b.role_or_class}</p>
-                        <p class="text-slate-700 italic mt-1 text-xs leading-snug">“{b.wish_message}”</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Khối Tiện Ích Lịch Vạn Niên & Sự Kiện (7 cols) -->
-        <div class="lg:col-span-7 flex flex-col">
-          {utilitiesContent && <div set:html={utilitiesContent} />}
-        </div>
-      </div>
-    </section>
+    <!-- ============================================================== -->
+    <!-- KHU VỰC 7. TIỆN ÍCH LỊCH VẠN NIÊN ÂM - DƯƠNG & SỰ KIỆN          -->
+    <!-- ============================================================== -->
+    {utilitiesContent && (
+      <section class="max-w-6xl mx-auto px-3 sm:px-6">
+        <div set:html={utilitiesContent} />
+      </section>
+    )}
 
     <!-- ============================================================== -->
     <!-- KHU VỰC 8. BẢN TIN TÀI CHÍNH & THỂ THAO TRỰC TIẾP              -->
@@ -644,116 +542,7 @@ const initialHceCenterNews = DEFAULT_HCE_CENTER_NEWS;
 
   {pageData?.custom_js && <script is:inline set:html={pageData.custom_js} />}
 
-  <style>
-    .birthday-scroll-track {
-      animation: birthdayVerticalScroll var(--scroll-duration, 55s) linear infinite;
-    }
-    .birthday-scroll-track.is-paused,
-    .birthday-scroll-track:hover {
-      animation-play-state: paused !important;
-    }
-    @keyframes birthdayVerticalScroll {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-50%);
-      }
-    }
-  </style>
-
-  <script is:inline define:vars={{ rawBirthdays: monthBirthdays, currentDay, currentMonth }}>
-    const allList = Array.isArray(rawBirthdays) ? rawBirthdays : [];
-    const bdayWrapper = document.getElementById('bdayScrollWrapper');
-    const bdayTrack = document.getElementById('bdayScrollTrack');
-    const togglePauseBtn = document.getElementById('toggleBdayPauseBtn');
-
-    const btnToday = document.getElementById('filterBdayTodayBtn');
-    const btnMonth = document.getElementById('filterBdayMonthBtn');
-
-    let currentFilter = 'month';
-    let isPaused = false;
-
-    function renderBdayList(filter) {
-      currentFilter = filter;
-      let filtered = [];
-
-      if (filter === 'today') {
-        filtered = allList.filter((b) => Number(b.birth_day) === currentDay && Number(b.birth_month) === currentMonth);
-        if (btnToday) btnToday.className = 'px-2.5 py-1 rounded-lg border font-bold transition-all bg-rose-600 border-rose-600 text-white shadow-2xs cursor-pointer';
-        if (btnMonth) btnMonth.className = 'px-2.5 py-1 rounded-lg border font-bold transition-all bg-white border-rose-200 text-slate-700 hover:bg-rose-100 cursor-pointer';
-      } else {
-        filtered = allList
-          .filter((b) => Number(b.birth_month) === currentMonth)
-          .sort((a, b) => {
-            const aToday = Number(a.birth_day) === currentDay ? 0 : 1;
-            const bToday = Number(b.birth_day) === currentDay ? 0 : 1;
-            if (aToday !== bToday) return aToday - bToday;
-            return Number(a.birth_day) - Number(b.birth_day);
-          });
-        if (btnToday) btnToday.className = 'px-2.5 py-1 rounded-lg border font-bold transition-all bg-white border-rose-200 text-slate-700 hover:bg-rose-100 cursor-pointer';
-        if (btnMonth) btnMonth.className = 'px-2.5 py-1 rounded-lg border font-bold transition-all bg-rose-600 border-rose-600 text-white shadow-2xs cursor-pointer';
-      }
-
-      if (!bdayTrack) return;
-
-      if (filtered.length === 0) {
-        bdayTrack.className = 'space-y-2.5 p-4 text-center text-xs text-rose-800';
-        bdayTrack.innerHTML = '<div class="p-6 bg-white rounded-xl border border-rose-200 text-rose-700 font-medium">🌸 Chưa có sinh nhật nào trong mục này.</div>';
-        return;
-      }
-
-      const durationSec = Math.max(45, filtered.length * 5.5);
-      if (bdayWrapper) {
-        bdayWrapper.style.setProperty('--scroll-duration', `${durationSec}s`);
-      }
-
-      const renderList = filtered.length >= 3 ? [...filtered, ...filtered] : filtered;
-      bdayTrack.className = filtered.length >= 3 ? 'birthday-scroll-track space-y-2.5' : 'space-y-2.5';
-      if (isPaused) bdayTrack.classList.add('is-paused');
-
-      bdayTrack.innerHTML = renderList
-        .map((b) => {
-          const isTodayBday = Number(b.birth_day) === currentDay && Number(b.birth_month) === currentMonth;
-          return `
-            <div class="p-2.5 sm:p-3 rounded-xl bg-white border shadow-2xs flex items-start gap-2.5 transition-colors ${
-              isTodayBday
-                ? 'border-rose-400 ring-1 ring-rose-200 bg-rose-50/30'
-                : 'border-rose-200/80 hover:border-rose-400'
-            }">
-              <span class="text-xl shrink-0 mt-0.5">${isTodayBday ? '🎉' : b.avatar_emoji || '🎂'}</span>
-              <div class="text-xs leading-snug flex-1 min-w-0">
-                <div class="flex items-center justify-between gap-2">
-                  <strong class="text-rose-950 font-extrabold text-xs sm:text-sm truncate">${b.full_name}</strong>
-                  <span class="num-font text-[11px] font-bold px-2 py-0.5 rounded-md shrink-0 ${
-                    isTodayBday ? 'bg-rose-600 text-white' : 'bg-rose-100 text-rose-700'
-                  }">
-                    ${isTodayBday ? '🎂 Hôm nay • ' : ''}${String(b.birth_day).padStart(2, '0')}/${String(b.birth_month).padStart(2, '0')}
-                  </span>
-                </div>
-                <p class="text-[11px] text-rose-700 font-semibold mt-0.5">${b.role_or_class || 'Sinh viên'}</p>
-                <p class="text-slate-700 italic mt-1 text-xs leading-snug">“${b.wish_message}”</p>
-              </div>
-            </div>
-          `;
-        })
-        .join('');
-    }
-
-    if (btnToday) btnToday.addEventListener('click', () => renderBdayList('today'));
-    if (btnMonth) btnMonth.addEventListener('click', () => renderBdayList('month'));
-
-    if (togglePauseBtn) {
-      togglePauseBtn.addEventListener('click', () => {
-        isPaused = !isPaused;
-        togglePauseBtn.textContent = isPaused ? '▶️' : '⏸️';
-        if (bdayTrack) {
-          if (isPaused) bdayTrack.classList.add('is-paused');
-          else bdayTrack.classList.remove('is-paused');
-        }
-      });
-    }
-
+  <script is:inline>
     // Đồng bộ nền Tin Chứng Khoán - Tin Thể Thao sau khi trang đã tải xong
     async function refreshMarketAndSportsFeeds() {
       try {
