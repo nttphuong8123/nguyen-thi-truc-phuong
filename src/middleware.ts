@@ -47,8 +47,8 @@ export const onRequest = defineMiddleware(async (context, next) => {
       pathname.startsWith('/elearning') ||
       pathname.startsWith('/ngan-hang-de-thi') ||
       pathname.startsWith('/api/admin') ||
-      pathname.startsWith('/api/submissions') ||
-          await syncFromD1(d1, isAdminRoute);
+      pathname.startsWith('/api/submissions');
+    await syncFromD1(d1, isAdminRoute);
   }
 
   const response = await next();
