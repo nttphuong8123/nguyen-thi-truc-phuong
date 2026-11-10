@@ -11,11 +11,7 @@ import db, {
   resetEvaluationCriteria,
   deleteEvaluation,
   clearAllEvaluations,
-  deleteSurvey,
-  deleteToroChatLog,
-  clearAllToroChatLogs,
-  purgeOldChatLogs,
-  getTeachingSchedule,
+  deleteSurvey,  getTeachingSchedule,
   saveTeachingSchedule,
   resetTeachingSchedule,
   type TeachingScheduleItem,
@@ -1137,42 +1133,6 @@ export const POST: APIRoute = async ({ request, cookies, clientAddress }) => {
         }),
         { status: 200 }
       );
-    }
-
-    if (action === 'delete_chat_log') {
-      const authErr = requireRole(['super_admin', 'editor']);
-      if (authErr) return authErr;
-      const id = Number(body.id || 0);
-      deleteToroChatLog(id);
-      addAdminAuditLog({
-        actor_username: currentActor,
-        actor_role: currentRole,
-        action_type: 'DELETE',
-        target_module: 'TORO_AI',
-        details: `Đã xóa bản ghi câu hỏi AI #${id}`,
-        ip_address: clientAddress || '',
-      });
-      return new Response(JSON.stringify({ ok: true, message: `Đã xóa câu hỏi #${id}!` }), { status: 200 });
-    }
-
-    if (action === 'clear_all_chat_logs') {
-      const authErr = requireRole(['super_admin']);
-      if (authErr) return authErr;
-      clearAllToroChatLogs();
-      addAdminAuditLog({
-        actor_username: currentActor,
-        actor_role: currentRole,
-        action_type: 'CLEAR_ALL',
-        target_module: 'TORO_AI',
-        details: 'Đã xóa toàn bộ lịch sử câu hỏi AI trong 30 ngày',
-        ip_address: clientAddress || '',
-      });
-      return new Response(JSON.stringify({ ok: true, message: 'Đã xóa toàn bộ lịch sử câu hỏi và câu trả lời!' }), { status: 200 });
-    }
-
-    if (action === 'purge_expired_chat_logs') {
-      const removed = purgeOldChatLogs(30, true);
-      return new Response(JSON.stringify({ ok: true, removed, message: `Đã dọn dẹp các câu hỏi quá hạn 30 ngày!` }), { status: 200 });
     }
 
     // =========================================================================

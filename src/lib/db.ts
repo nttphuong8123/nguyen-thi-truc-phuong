@@ -135,15 +135,6 @@ export interface StudentSurvey {
   submitted_at: string;
 }
 
-export interface ToroChatLog {
-  id: number;
-  character_name: string;
-  question: string;
-  answer: string;
-  source_page: string;
-  ip_address: string;
-  created_at: string;
-}
 
 export interface LuckyRaceHistoryWinner {
   rank: number;
@@ -424,7 +415,6 @@ interface StoreState {
   news_articles: NewsArticle[];
   lecturer_evaluations: LecturerEvaluation[];
   student_surveys: StudentSurvey[];
-  toro_chat_logs: ToroChatLog[];
   admin_accounts: AdminAccount[];
   admin_audit_logs: AdminAuditLog[];
   birthday_templates: BirthdayTemplate[];
@@ -448,7 +438,6 @@ const store: StoreState = {
   news_articles: Array.isArray(raw.news_articles) ? [...raw.news_articles] : [],
   lecturer_evaluations: Array.isArray(raw.lecturer_evaluations) ? [...raw.lecturer_evaluations] : [],
   student_surveys: Array.isArray(raw.student_surveys) ? [...raw.student_surveys] : [],
-  toro_chat_logs: [],
   admin_accounts: [
     {
       id: 1,
@@ -470,7 +459,7 @@ const store: StoreState = {
       email: 'editor@nguyenthitrucphuong.pages.dev',
       password_hash: 'sha256$tkd-copy-salt-02$ee6b595b128527a20c35f29dca418ca10bc06e5bb593740263884399b50b5ddf',
       role: 'editor',
-      permissions_json: '["dashboard","articles","categories","documents","quiz","students","submissions","leaderboard","toro","banners","library","settings"]',
+      permissions_json: '["dashboard","articles","categories","documents","quiz","students","submissions","leaderboard","banners","library","settings"]',
       is_active: 1,
       last_login_at: '',
       created_at: '2026-11-09 18:00:00',
@@ -483,7 +472,7 @@ const store: StoreState = {
       email: 'viewer@nguyenthitrucphuong.pages.dev',
       password_hash: 'sha256$tkd-copy-salt-03$6d5db9e64e52e46c768997a6e709087d3a04a55ce8c807b539cf24f5a34e5657',
       role: 'viewer',
-      permissions_json: '["dashboard","submissions","leaderboard","toro","audit_logs"]',
+      permissions_json: '["dashboard","submissions","leaderboard","audit_logs"]',
       is_active: 1,
       last_login_at: '',
       created_at: '2026-11-09 18:00:00',
@@ -590,12 +579,6 @@ export async function syncFromD1(d1: any, includeAdminData = false): Promise<voi
       ),
       d1.prepare('SELECT * FROM lecturer_evaluations ORDER BY id DESC LIMIT 1000'),
       d1.prepare('SELECT * FROM student_surveys ORDER BY id DESC LIMIT 1000'),
-      d1.prepare("DELETE FROM toro_chat_logs WHERE created_at < datetime('now', '-30 days')"),
-      d1.prepare(
-        includeAdminData
-          ? 'SELECT * FROM toro_chat_logs ORDER BY id DESC LIMIT 2000'
-          : 'SELECT * FROM toro_chat_logs ORDER BY id DESC LIMIT 20'
-      ),
       d1.prepare('SELECT * FROM admin_accounts ORDER BY id ASC'),
       d1.prepare('SELECT * FROM admin_audit_logs ORDER BY id DESC LIMIT 500'),
       d1.prepare('SELECT * FROM birthday_templates ORDER BY id ASC'),
@@ -603,7 +586,7 @@ export async function syncFromD1(d1: any, includeAdminData = false): Promise<voi
     ];
 
     const results = (await Promise.allSettled(queries.map((q) => q.all()))).map((s) => (s.status === 'fulfilled' ? s.value : { results: [] }));
-    const [gatesRes, codesRes, bdaysRes, newsRes, overridesRes, subsRes, evalsRes, surveysRes, _purgeRes, chatLogsRes, accountsRes, logsRes, bdayTemplatesRes, bdayAssignmentsRes] = results;
+    const [gatesRes, codesRes, bdaysRes, newsRes, overridesRes, subsRes, evalsRes, surveysRes, accountsRes, logsRes, bdayTemplatesRes, bdayAssignmentsRes] = results;
 
     if (Array.isArray(gatesRes?.results) && gatesRes.results.length > 0) {
       store.access_gates = gatesRes.results as AccessGate[];
@@ -625,10 +608,6 @@ export async function syncFromD1(d1: any, includeAdminData = false): Promise<voi
     }
     if (Array.isArray(surveysRes?.results)) {
       store.student_surveys = surveysRes.results as StudentSurvey[];
-    }
-    if (Array.isArray(chatLogsRes?.results)) {
-      store.toro_chat_logs = chatLogsRes.results as ToroChatLog[];
-      purgeOldChatLogs(30, false);
     }
     if (Array.isArray(accountsRes?.results) && accountsRes.results.length > 0) {
       store.admin_accounts = accountsRes.results as AdminAccount[];
@@ -1083,68 +1062,7 @@ export function clearAllSurveys(surveyType?: string): void {
   }
 }
 
-export function purgeOldChatLogs(days = 30, shouldQueueD1 = true): number {
-  const cutoffMs = Date.now() - days * 86400 * 1000;
-  const cutoffIso = new Date(cutoffMs).toISOString().replace('T', ' ').slice(0, 19);
-  let removed = 0;
-  for (let i = store.toro_chat_logs.length - 1; i >= 0; i--) {
-    const created = String(store.toro_chat_logs[i].created_at || '');
-    if (created && created < cutoffIso) {
-      store.toro_chat_logs.splice(i, 1);
-      removed++;
-    }
-  }
-  if (shouldQueueD1) {
-    queueD1Write(`DELETE FROM toro_chat_logs WHERE created_at < ?`, [cutoffIso]);
-  }
-  return removed;
-}
 
-export function getToroChatLogs(limit = 2000): ToroChatLog[] {
-  purgeOldChatLogs(30, false);
-  return [...store.toro_chat_logs]
-    .sort((a, b) => Number(b.id) - Number(a.id))
-    .slice(0, limit);
-}
-
-export function addToroChatLog(input: {
-  character_name?: string;
-  question: string;
-  answer: string;
-  source_page?: string;
-  ip_address?: string;
-}): ToroChatLog {
-  purgeOldChatLogs(30, true);
-  const ts = nowIso();
-  const nextId = store.toro_chat_logs.reduce((max, r) => Math.max(max, Number(r.id) || 0), 0) + 1;
-  const row: ToroChatLog = {
-    id: nextId,
-    character_name: String(input.character_name || 'TORO').toUpperCase(),
-    question: String(input.question || '').trim(),
-    answer: String(input.answer || '').trim(),
-    source_page: String(input.source_page || '/tro-ly-toro').trim(),
-    ip_address: String(input.ip_address || '').trim(),
-    created_at: ts,
-  };
-  store.toro_chat_logs.unshift(row);
-  queueD1Write(
-    `INSERT INTO toro_chat_logs (character_name, question, answer, source_page, ip_address, created_at)
-     VALUES (?, ?, ?, ?, ?, ?)`,
-    [row.character_name, row.question, row.answer, row.source_page, row.ip_address, row.created_at]
-  );
-  return row;
-}
-
-export function deleteToroChatLog(id: number): void {
-  const idx = store.toro_chat_logs.findIndex((c) => Number(c.id) === Number(id));
-  if (idx !== -1) store.toro_chat_logs.splice(idx, 1);
-  queueD1Write(`DELETE FROM toro_chat_logs WHERE id = ?`, [Number(id)]);
-}
-
-export function clearAllToroChatLogs(): void {
-  store.toro_chat_logs.length = 0;
-  queueD1Write(`DELETE FROM toro_chat_logs`, []);
-}
 
 export function getAdminAccounts(): AdminAccount[] {
   return [...store.admin_accounts].sort((a, b) => a.id - b.id);

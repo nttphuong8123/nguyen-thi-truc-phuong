@@ -122,7 +122,6 @@ export const MAIN_NAVIGATION: NavItem[] = [
     children: [
       { label: 'Thông tin Liên hệ - Góp ý', href: '/contact' },
       { label: 'Phiếu Đánh giá Giảng viên', href: '/danh-gia-giang-vien' },
-      { label: '🤖 Trợ lý AI Toro với Susi', href: '/tro-ly-toro' },
     ],
   },
 ];

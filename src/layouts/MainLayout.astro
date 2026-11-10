@@ -3,7 +3,6 @@ import '../styles/global.css';
 import { MAIN_NAVIGATION } from '../lib/navigation';
 import { SILO_GROUPS, getSeoMetaForPath, type FaqItem } from '../lib/seo-meta';
 import { getSiteContactConfig } from '../lib/db';
-import ToroChatWidget from '../components/ToroChatWidget.astro';
 
 const contactCfg = getSiteContactConfig();
 const cleanPhone = contactCfg.hotline.replace(/\s+/g, '');
@@ -100,7 +99,7 @@ const graphNodes: Record<string, any>[] = [
     name: 'NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập - Tri Thức Số',
     description: finalDescription,
     inLanguage: 'vi-VN',
-    publisher: { '@id': 'https://nguyenthitrucphuong.pages.dev/#person' }, image: { '@type': 'ImageObject', '@id': 'https://nguyenthitrucphuong.pages.dev/#logo', url: 'https://nguyenthitrucphuong.pages.dev/images/logo-an.svg', contentUrl: 'https://nguyenthitrucphuong.pages.dev/images/logo-an-512.webp', width: 512, height: 512, caption: 'Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập & Tri Thức Số (Tác giả thiết kế: Toro)', creator: { '@type': 'Person', name: 'Toro' } },
+    publisher: { '@id': 'https://nguyenthitrucphuong.pages.dev/#person' }, image: { '@type': 'ImageObject', '@id': 'https://nguyenthitrucphuong.pages.dev/#logo', url: 'https://nguyenthitrucphuong.pages.dev/images/logo-an.svg', contentUrl: 'https://nguyenthitrucphuong.pages.dev/images/logo-an-512.webp', width: 512, height: 512, caption: 'Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập & Tri Thức Số' },
   },
   {
     '@type': 'Person',
@@ -216,8 +215,7 @@ const SUB_NAV_ICONS: Record<string, string> = {
   'Kho Phần mềm (SPSS, POM-QM)': '💻',
   'Thông tin Liên hệ - Góp ý': '📮',
   'Phiếu Đánh giá Giảng viên': '⭐',
-  '🤖 Trợ lý AI Toro với Susi': '🤖',
-};
+  };
 
 function getLeafIcon(label: string): string {
   const l = label.toLowerCase();
@@ -302,7 +300,7 @@ function getLeafIcon(label: string): string {
         padding-top: 4rem !important; /* 64px tương ứng đúng chiều cao thanh điều hướng */
       }
 
-      /* Khoảng đệm an toàn dưới cùng cho toàn bộ trang web chống che khuất bởi nút nổi Toro AI */
+      /* Khoảng đệm an toàn dưới cùng cho trang web */
       main, .site-main-content, #mainContent {
         padding-bottom: 0 !important;
       }
@@ -321,7 +319,7 @@ function getLeafIcon(label: string): string {
             title="Về Trang chủ Cổng Học Tập - Tri Thức Số NGUYỄN THỊ TRÚC PHƯƠNG"
             class="group flex items-center gap-2.5 font-extrabold text-sm sm:text-base tracking-tight text-white hover:text-[#FCEEEF] transition-colors shrink-0 whitespace-nowrap"
           >
-            <span class="w-12 h-9 sm:w-[54px] sm:h-10 bg-transparent drop-shadow-[0_2px_8px_rgba(32,197,232,0.28)] group-hover:scale-105 transition-transform duration-300 flex items-center justify-center shrink-0"><picture><source type="image/webp" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" /><img src="/images/logo-an.svg?v=3" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" width="54" height="40" alt="Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập &amp; Tri Thức Số (Tác giả thiết kế: Toro)" title="Logo AN — Thiết kế bởi Toro" fetchpriority="high" decoding="async" class="w-full h-full object-contain block" /></picture>
+            <span class="w-12 h-9 sm:w-[54px] sm:h-10 bg-transparent drop-shadow-[0_2px_8px_rgba(32,197,232,0.28)] group-hover:scale-105 transition-transform duration-300 flex items-center justify-center shrink-0"><picture><source type="image/webp" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" /><img src="/images/logo-an.svg?v=3" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" width="54" height="40" alt="Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập &amp; Tri Thức Số " title="Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG" fetchpriority="high" decoding="async" class="w-full h-full object-contain block" /></picture>
 
             </span>
             <span class="leading-tight block">
@@ -455,7 +453,7 @@ function getLeafIcon(label: string): string {
         <!-- Header Banner trong Drawer -->
         <div class="flex items-center justify-between p-3 mb-3 rounded-2xl bg-gradient-to-r from-[#8B1E2D] via-[#C62828]/70 to-[#8B1E2D] border border-[#FCEEEF]/40 shadow-md">
           <div class="flex items-center gap-2.5">
-            <span class="w-12 h-9 bg-transparent drop-shadow-[0_2px_8px_rgba(32,197,232,0.28)] flex items-center justify-center shrink-0"><picture><source type="image/webp" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" /><img src="/images/logo-an.svg?v=3" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" width="48" height="36" alt="Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập &amp; Tri Thức Số HCE (Tác giả thiết kế: Toro)" loading="lazy" decoding="async" class="w-full h-full object-contain block" /></picture>
+            <span class="w-12 h-9 bg-transparent drop-shadow-[0_2px_8px_rgba(32,197,232,0.28)] flex items-center justify-center shrink-0"><picture><source type="image/webp" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" /><img src="/images/logo-an.svg?v=3" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" width="48" height="36" alt="Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập &amp; Tri Thức Số HCE " loading="lazy" decoding="async" class="w-full h-full object-contain block" /></picture>
 
             </span>
             <div>
@@ -634,20 +632,13 @@ function getLeafIcon(label: string): string {
 
         <!-- Quick Action & Support Cards ở đáy Drawer -->
         <div class="mt-4 pt-3 border-t border-[#C62828]/30 space-y-2">
-          <div class="grid grid-cols-2 gap-2">
-            <a
-              href="/tro-ly-toro"
-              class="flex items-center justify-center gap-1.5 p-2 rounded-xl bg-gradient-to-r from-[#C62828] to-[#8B1E2D] text-white font-bold text-xs shadow-md hover:brightness-110 active:scale-95 transition-all text-center"
-            >
-              <span>🤖</span>
-              <span>Trợ lý AI Toro</span>
-            </a>
+          <div class="w-full">
             <a
               href="/contact"
-              class="flex items-center justify-center gap-1.5 p-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-200 font-bold text-xs shadow-xs hover:bg-slate-700 active:scale-95 transition-all text-center"
+              class="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-gradient-to-r from-[#8B1E2D] to-[#C62828] text-white font-bold text-xs shadow-md hover:brightness-110 active:scale-95 transition-all text-center w-full"
             >
               <span>📞</span>
-              <span>Tư Vấn & Góp Ý</span>
+              <span>Tư Vấn Học Tập & Góp Ý</span>
             </a>
           </div>
 
@@ -677,7 +668,7 @@ function getLeafIcon(label: string): string {
           <!-- Column 1: About & Châm ngôn triết lý sống -->
           <div class="space-y-3">
             <div class="flex items-center gap-2 font-extrabold text-white text-base">
-              <span class="w-10 h-7.5 bg-transparent drop-shadow-[0_2px_6px_rgba(32,197,232,0.25)] flex items-center justify-center shrink-0"><picture><source type="image/webp" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" /><img src="/images/logo-an.svg?v=3" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" width="40" height="30" alt="Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG (Tác giả thiết kế: Toro)" loading="lazy" decoding="async" class="w-full h-full object-contain block" /></picture></span>
+              <span class="w-10 h-7.5 bg-transparent drop-shadow-[0_2px_6px_rgba(32,197,232,0.25)] flex items-center justify-center shrink-0"><picture><source type="image/webp" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" /><img src="/images/logo-an.svg?v=3" srcset="/images/logo-an.webp?v=3 1x, /images/logo-an@2x.webp?v=3 2x, /images/logo-an@3x.webp?v=3 3x" width="40" height="30" alt="Logo AN — NGUYỄN THỊ TRÚC PHƯƠNG " loading="lazy" decoding="async" class="w-full h-full object-contain block" /></picture></span>
               <span class="tracking-tight">NGUYỄN THỊ TRÚC PHƯƠNG</span>
             </div>
             <p class="text-slate-300 text-xs sm:text-[12.5px] leading-relaxed italic border-l-2 border-[#C62828] pl-3 py-1 my-1">
@@ -766,9 +757,7 @@ function getLeafIcon(label: string): string {
       </div>
     </footer>
 
-    <!-- Trợ Lý AI Toro & Susi — Chatbot Cố Vấn Học Tập HCE -->
-    <ToroChatWidget />
-
+    
     <script is:inline>
       // 1. Mobile Drawer Toggle & Accordion Interaction
       (function () {
