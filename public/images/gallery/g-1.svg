@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#176B52"/>
+      <stop offset="100%" stop-color="#243A32"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#bg)"/>
+  <rect x="30" y="30" width="540" height="390" rx="12" fill="none" stroke="#C6A66B" stroke-width="1.5" opacity="0.6"/>
+  <g transform="translate(300, 200)">
+    <circle cx="0" cy="0" r="50" fill="#287FA0" opacity="0.4"/>
+    <polygon points="-15,-20 20,0 -15,20" fill="#F7F5ED"/>
+  </g>
+  <text x="300" y="320" font-family="'Playfair Display', serif" font-size="20" font-weight="700" fill="#F7F5ED" text-anchor="middle">Hội Thảo Lãnh Đạo Nữ 2026</text>
+  <text x="300" y="348" font-family="'Be Vietnam Pro', sans-serif" font-size="12" fill="#C6A66B" text-anchor="middle" letter-spacing="1.5">SỰ KIỆN & TỌA ĐÀM</text>
+</svg>

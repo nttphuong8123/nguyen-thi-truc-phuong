@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import GalleryModal from '../components/GalleryModal.astro';
+import { siteConfig } from '../data/siteData';
+---
+
+<Layout
+  title={`Thư Viện Hình Ảnh — ${siteConfig.name}`}
+  description={`Bộ sưu tập hình ảnh hoạt động, sự kiện, khoảnh khắc đời thường và những dấu ấn đáng nhớ của ${siteConfig.name}.`}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumb items={[{ title: 'Thư viện hình ảnh' }]} />
+
+    <!-- Page Header -->
+    <div class="mt-6 mb-12 text-center max-w-3xl mx-auto space-y-4">
+      <span class="inline-block px-4 py-1.5 rounded-full bg-[#E8EFE9] border border-[#C6A66B]/50 text-xs font-semibold text-[#176B52] uppercase tracking-widest">
+        Tư Liệu & Khoảnh Khắc
+      </span>
+      <h1 class="font-serif font-extrabold text-4xl sm:text-5xl text-[#176B52] leading-tight">
+        Thư Viện Hình Ảnh
+      </h1>
+      <p class="text-base sm:text-lg text-[#243A32]/80 leading-relaxed">
+        Lưu giữ những khoảnh khắc ý nghĩa trên hành trình phụng sự cộng đồng, giao lưu kết nối và trải nghiệm cuộc sống.
+      </p>
+    </div>
+
+    <!-- Gallery Component with Filters & Lightbox -->
+    <div class="mb-20">
+      <GalleryModal />
+    </div>
+
+  </div>
+</Layout>

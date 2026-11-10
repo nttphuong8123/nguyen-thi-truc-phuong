@@ -1,0 +1,73 @@
+---
+import type { Article } from '../data/articles';
+
+export interface Props {
+  article: Article;
+  featured?: boolean;
+}
+
+const { article, featured = false } = Astro.props;
+---
+
+<article class={`group bg-white/70 hover:bg-white rounded-2xl border border-[#C6A66B]/25 hover:border-[#176B52] shadow-sm hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden ${
+  featured ? 'md:col-span-2 md:grid md:grid-cols-2 md:items-center' : ''
+}`}>
+  <!-- Cover Image -->
+  <div class="relative overflow-hidden aspect-[16/10] bg-[#E8EFE9]">
+    <img
+      src={article.coverImage}
+      alt={article.title}
+      loading="lazy"
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+    />
+    <div class="absolute top-3 left-3">
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-[#176B52]/90 text-[#F7F5ED] backdrop-blur-sm shadow-sm">
+        {article.category}
+      </span>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="p-6 flex flex-col flex-1">
+    <div class="flex items-center gap-3 text-xs text-[#243A32]/60 mb-3">
+      <span class="flex items-center gap-1">
+        <svg class="w-3.5 h-3.5 text-[#C6A66B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        <time datetime={article.publishedAt}>
+          {new Date(article.publishedAt).toLocaleDateString('vi-VN', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+      </span>
+      <span>•</span>
+      <span class="flex items-center gap-1">
+        <svg class="w-3.5 h-3.5 text-[#287FA0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        {article.readTime}
+      </span>
+    </div>
+
+    <h3 class="font-serif font-bold text-xl text-[#243A32] group-hover:text-[#176B52] transition-colors leading-snug mb-3">
+      <a href={`/tin-tuc/${article.slug}`} class="focus:outline-none">
+        {article.title}
+      </a>
+    </h3>
+
+    <p class="text-sm text-[#243A32]/80 leading-relaxed mb-4 line-clamp-3 flex-1">
+      {article.excerpt}
+    </p>
+
+    <div class="flex items-center justify-between pt-4 border-t border-[#E8EFE9] text-xs">
+      <span class="text-[#C6A66B] font-semibold">{article.author}</span>
+      <a
+        href={`/tin-tuc/${article.slug}`}
+        class="inline-flex items-center gap-1 font-semibold text-[#176B52] hover:text-[#287FA0] transition-colors"
+      >
+        <span>Đọc tiếp</span>
+        <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</article>

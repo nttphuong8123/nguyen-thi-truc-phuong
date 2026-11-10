@@ -1,0 +1,23 @@
+# Build output
+dist/
+.astro/
+
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables & secrets
+.env
+.env.production
+.env.local
+.env.*.local
+*.pem
+*.key
+.wrangler/
+
+# System / OS
+.DS_Store
+Thumbs.db

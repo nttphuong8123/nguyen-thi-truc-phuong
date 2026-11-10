@@ -1,0 +1,202 @@
+---
+import { galleryItems } from '../data/gallery';
+
+const categories = [
+  { id: 'all', label: 'Tất Cả' },
+  { id: 'event', label: 'Sự Kiện & Tọa Đàm' },
+  { id: 'social', label: 'Hoạt Động Xã Hội' },
+  { id: 'lifestyle', label: 'Khoảnh Khắc Đời Thường' },
+  { id: 'education', label: 'Kết Nối Tri Thức' },
+];
+---
+
+<div class="space-y-8">
+  <!-- Filter Pills -->
+  <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3" id="gallery-filters">
+    {categories.map((cat, i) => (
+      <button
+        type="button"
+        data-filter={cat.id}
+        class={`filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 border ${
+          i === 0
+            ? 'active bg-[#176B52] text-[#F7F5ED] border-[#176B52] shadow-sm'
+            : 'bg-white/80 text-[#243A32] border-[#C6A66B]/30 hover:border-[#176B52] hover:bg-[#E8EFE9]'
+        }`}
+      >
+        {cat.label}
+      </button>
+    ))}
+  </div>
+
+  <!-- Gallery Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+    {galleryItems.map((item) => (
+      <div
+        data-category={item.category}
+        class="gallery-card group relative bg-white rounded-2xl overflow-hidden border border-[#C6A66B]/20 hover:border-[#176B52] shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer"
+        data-title={item.title}
+        data-desc={item.description}
+        data-img={item.image}
+        data-date={item.date}
+        data-catlabel={item.categoryLabel}
+      >
+        <div class="aspect-[4/3] overflow-hidden bg-[#E8EFE9]">
+          <img
+            src={item.image}
+            alt={item.title}
+            loading="lazy"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+
+        <!-- Overlay Tag -->
+        <div class="p-5">
+          <div class="flex items-center justify-between text-xs text-[#243A32]/60 mb-2">
+            <span class="font-semibold text-[#176B52]">{item.categoryLabel}</span>
+            <span>{item.date}</span>
+          </div>
+          <h3 class="font-serif font-bold text-base text-[#243A32] group-hover:text-[#176B52] transition-colors leading-snug line-clamp-2">
+            {item.title}
+          </h3>
+          <p class="mt-2 text-xs text-[#243A32]/75 line-clamp-2">
+            {item.description}
+          </p>
+        </div>
+
+        <!-- Hover Icon -->
+        <div class="absolute inset-0 bg-[#176B52]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <span class="px-4 py-2 rounded-full bg-[#F7F5ED] text-[#176B52] font-semibold text-xs shadow flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-[#C6A66B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+            </svg>
+            <span>Xem chi tiết</span>
+          </span>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div
+    id="gallery-modal"
+    class="fixed inset-0 z-50 bg-[#243A32]/85 backdrop-blur-md hidden items-center justify-center p-4"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div class="relative max-w-4xl w-full bg-[#F7F5ED] rounded-3xl overflow-hidden shadow-2xl border border-[#C6A66B]/50 animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Close Button -->
+      <button
+        type="button"
+        id="modal-close"
+        class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 text-[#243A32] hover:bg-[#176B52] hover:text-white transition-colors flex items-center justify-center shadow"
+        aria-label="Đóng xem ảnh"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-2">
+        <div class="bg-[#E8EFE9] flex items-center justify-center aspect-[4/3] md:aspect-auto">
+          <img id="modal-img" src="" alt="" class="w-full h-full object-cover max-h-[480px]"/>
+        </div>
+        
+        <div class="p-6 md:p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 mb-3">
+              <span id="modal-cat" class="px-3 py-1 rounded-full text-xs font-semibold bg-[#176B52] text-[#F7F5ED]"></span>
+              <span id="modal-date" class="text-xs text-[#243A32]/60"></span>
+            </div>
+            
+            <h3 id="modal-title" class="font-serif font-bold text-2xl text-[#243A32] leading-snug mb-4"></h3>
+            
+            <p id="modal-desc" class="text-sm text-[#243A32]/85 leading-relaxed mb-6"></p>
+          </div>
+
+          <div class="pt-4 border-t border-[#C6A66B]/20 flex items-center justify-between text-xs text-[#243A32]/60">
+            <span>Nguyễn Thị Trúc Phương • Tư liệu & Hình ảnh</span>
+            <span class="text-[#C6A66B] font-semibold">Tân Dậu 1981</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Filter logic
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.gallery-card');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach((b) => {
+        b.classList.remove('active', 'bg-[#176B52]', 'text-[#F7F5ED]', 'border-[#176B52]', 'shadow-sm');
+        b.classList.add('bg-white/80', 'text-[#243A32]', 'border-[#C6A66B]/30');
+      });
+      btn.classList.add('active', 'bg-[#176B52]', 'text-[#F7F5ED]', 'border-[#176B52]', 'shadow-sm');
+      btn.classList.remove('bg-white/80', 'text-[#243A32]', 'border-[#C6A66B]/30');
+
+      const filter = btn.getAttribute('data-filter');
+      cards.forEach((card) => {
+        const cat = card.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          (card as HTMLElement).style.display = 'block';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Modal logic
+  const modal = document.getElementById('gallery-modal');
+  const modalImg = document.getElementById('modal-img') as HTMLImageElement;
+  const modalTitle = document.getElementById('modal-title');
+  const modalDesc = document.getElementById('modal-desc');
+  const modalCat = document.getElementById('modal-cat');
+  const modalDate = document.getElementById('modal-date');
+  const closeBtn = document.getElementById('modal-close');
+
+  cards.forEach((card) => {
+    card.addEventListener('click', () => {
+      const img = card.getAttribute('data-img') || '';
+      const title = card.getAttribute('data-title') || '';
+      const desc = card.getAttribute('data-desc') || '';
+      const cat = card.getAttribute('data-catlabel') || '';
+      const date = card.getAttribute('data-date') || '';
+
+      if (modalImg) modalImg.src = img;
+      if (modalTitle) modalTitle.textContent = title;
+      if (modalDesc) modalDesc.textContent = desc;
+      if (modalCat) modalCat.textContent = cat;
+      if (modalDate) modalDate.textContent = date;
+
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  function closeModal() {
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b4d3e"/>
+      <stop offset="100%" stop-color="#12352a"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#bg)"/>
+  <rect x="30" y="30" width="540" height="390" rx="12" fill="none" stroke="#C6A66B" stroke-width="1.5" opacity="0.6"/>
+  <!-- Leaf sprout -->
+  <path d="M300 240 V160 C320 160 340 180 340 200 C340 220 320 240 300 240 Z" fill="#48B088"/>
+  <path d="M300 240 V180 C280 180 260 200 260 220 C260 230 280 240 300 240 Z" fill="#C6A66B"/>
+  <text x="300" y="320" font-family="'Playfair Display', serif" font-size="20" font-weight="700" fill="#F7F5ED" text-anchor="middle">Hành Trình Vì Môi Trường Xanh</text>
+  <text x="300" y="348" font-family="'Be Vietnam Pro', sans-serif" font-size="12" fill="#C6A66B" text-anchor="middle" letter-spacing="1.5">HOẠT ĐỘNG XÃ HỘI</text>
+</svg>

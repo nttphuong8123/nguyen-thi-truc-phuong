@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { siteConfig } from '../data/siteData';
+
+const faqs = [
+  {
+    q: 'Làm thế nào để hẹn gặp hoặc mời cô Trúc Phương tham gia tọa đàm?',
+    a: 'Bạn vui lòng điền thông tin vào biểu mẫu liên hệ bên dưới hoặc gửi email trực tiếp đến địa chỉ contact@nguyenthitrucphuong.pages.dev với nội dung chủ đề và thời gian dự kiến. Trúc Phương sẽ phản hồi trong vòng 24-48 giờ làm việc.',
+  },
+  {
+    q: 'Trúc Phương có tham gia tư vấn cho các dự án khởi nghiệp không?',
+    a: 'Có. Trúc Phương luôn dành thời gian ưu tiên cho các chương trình hỗ trợ phụ nữ khởi sự kinh doanh và các dự án hướng tới sự phát triển cộng đồng bền vững.',
+  },
+  {
+    q: 'Tôi có thể đóng góp hoặc đồng hành cùng các hoạt động thiện nguyện như thế nào?',
+    a: 'Mọi hoạt động thiện nguyện đều được tổ chức minh bạch và hướng đến giá trị thiết thực. Bạn có thể gửi thông tin kết nối để cùng tham gia các chuyến đi thực tế hoặc trao học bổng cho các em nhỏ vùng khó khăn.',
+  },
+];
+---
+
+<Layout
+  title={`Liên Hệ & Kết Nối — ${siteConfig.name}`}
+  description={`Thông tin liên hệ, gửi thông điệp và kết nối trực tiếp cùng ${siteConfig.name}.`}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumb items={[{ title: 'Liên hệ' }]} />
+
+    <!-- Page Header -->
+    <div class="mt-6 mb-16 text-center max-w-3xl mx-auto space-y-4">
+      <span class="inline-block px-4 py-1.5 rounded-full bg-[#E8EFE9] border border-[#C6A66B]/50 text-xs font-semibold text-[#176B52] uppercase tracking-widest">
+        Giao Lưu & Hợp Tác
+      </span>
+      <h1 class="font-serif font-extrabold text-4xl sm:text-5xl text-[#176B52] leading-tight">
+        Kết Nối Cùng Trúc Phương
+      </h1>
+      <p class="text-base sm:text-lg text-[#243A32]/80 leading-relaxed">
+        Trân trọng từng cuộc gặp gỡ, chân thành trong từng mối lương duyên. Hãy để lại lời nhắn để chúng ta cùng sẻ chia những giá trị tốt đẹp.
+      </p>
+    </div>
+
+    <!-- Contact Form Section -->
+    <div class="mb-20">
+      <ContactForm />
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mb-20 max-w-4xl mx-auto">
+      <div class="text-center mb-10">
+        <span class="text-xs font-bold text-[#C6A66B] uppercase tracking-widest block mb-2">Giải Đáp</span>
+        <h2 class="font-serif font-bold text-2xl sm:text-3xl text-[#176B52]">
+          Câu Hỏi Thường Gặp
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <div class="bg-white p-6 rounded-2xl border border-[#C6A66B]/25 shadow-xs">
+            <h3 class="font-serif font-bold text-base sm:text-lg text-[#243A32] mb-2 flex items-center gap-2">
+              <span class="text-[#C6A66B] font-serif">Q.</span>
+              <span>{faq.q}</span>
+            </h3>
+            <p class="text-xs sm:text-sm text-[#243A32]/80 leading-relaxed pl-6">
+              {faq.a}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</Layout>

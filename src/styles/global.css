@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-emerald: #176B52;
+  --color-brand-teal: #287FA0;
+  --color-brand-cream: #F7F5ED;
+  --color-brand-gold: #C6A66B;
+  --color-brand-forest: #243A32;
+  --color-brand-sage: #E8EFE9;
+
+  --color-primary: #176B52;
+  --color-secondary: #287FA0;
+  --color-accent: #C6A66B;
+  --color-surface: #F7F5ED;
+  --color-dark: #243A32;
+  --color-muted-bg: #E8EFE9;
+
+  --font-serif: 'Playfair Display', 'Noto Serif', Georgia, serif;
+  --font-sans: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  background-color: #F7F5ED;
+  color: #243A32;
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  background-color: #F7F5ED;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F5ED;
+}
+::-webkit-scrollbar-thumb {
+  background: #C6A66B;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #176B52;
+}
+
+/* Selection */
+::selection {
+  background-color: #176B52;
+  color: #F7F5ED;
+}
+
+/* Luxury accent line */
+.gold-gradient-border {
+  border-image: linear-gradient(to right, transparent, #C6A66B, transparent) 1;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #176B52 0%, #287FA0 50%, #C6A66B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glass-nav {
+  background: rgba(247, 245, 237, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}

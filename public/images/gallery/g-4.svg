@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#176B52"/>
+      <stop offset="100%" stop-color="#287FA0"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#bg)"/>
+  <rect x="30" y="30" width="540" height="390" rx="12" fill="none" stroke="#FFE094" stroke-width="1.5" opacity="0.6"/>
+  <!-- Open Book / Wisdom -->
+  <path d="M260 210 Q300 190 300 230 Q300 190 340 210 L340 180 Q300 160 300 200 Q300 160 260 180 Z" fill="#F7F5ED"/>
+  <text x="300" y="320" font-family="'Playfair Display', serif" font-size="20" font-weight="700" fill="#F7F5ED" text-anchor="middle">Định Vị Giá Trị Phụ Nữ Hiện Đại</text>
+  <text x="300" y="348" font-family="'Be Vietnam Pro', sans-serif" font-size="12" fill="#FFE094" text-anchor="middle" letter-spacing="1.5">KẾT NỐI TRI THỨC</text>
+</svg>

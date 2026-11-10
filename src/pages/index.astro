@@ -1,0 +1,368 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../data/siteData';
+import { articles } from '../data/articles';
+import { galleryItems } from '../data/gallery';
+import ArticleCard from '../components/ArticleCard.astro';
+
+const latestArticles = articles.slice(0, 3);
+const featuredGallery = galleryItems.slice(0, 3);
+---
+
+<Layout
+  title={`${siteConfig.name} — Website Chính Thức • Thạch Lựu Mộc 1981`}
+  description={siteConfig.description}
+>
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-20 lg:pt-20 lg:pb-32 overflow-hidden">
+    <!-- Ambient Background Accents -->
+    <div class="absolute top-0 right-0 -z-10 w-96 h-96 rounded-full bg-[#176B52]/10 blur-3xl"></div>
+    <div class="absolute bottom-10 left-10 -z-10 w-80 h-80 rounded-full bg-[#287FA0]/10 blur-3xl"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Left Content -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          
+          <!-- Destiny & Date of Birth Badge -->
+          <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#E8EFE9] border border-[#C6A66B]/50 shadow-xs">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#176B52]"></span>
+            <span class="text-xs sm:text-sm font-semibold text-[#176B52] tracking-wider uppercase">
+              Tân Dậu 1981 • Nạp Âm Thạch Lựu Mộc
+            </span>
+          </div>
+
+          <!-- Main Title -->
+          <h1 class="font-serif font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#176B52] tracking-tight leading-[1.15]">
+            NGUYỄN THỊ <br class="hidden sm:inline" />
+            <span class="text-[#243A32]">TRÚC PHƯƠNG</span>
+          </h1>
+
+          <!-- Role & Subtitle -->
+          <p class="font-serif italic text-xl sm:text-2xl text-[#C6A66B] font-medium leading-relaxed">
+            "{siteConfig.tagline}"
+          </p>
+
+          <!-- Biography summary -->
+          <p class="text-base sm:text-lg text-[#243A32]/85 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            Chào mừng bạn đến với không gian cá nhân của Trúc Phương — nơi hội tụ của sự kiên định, lòng nhân ái và những giá trị bền vững được chắt lọc qua hơn bốn thập kỷ trải nghiệm và cống hiến.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+            <a
+              href="/gioi-thieu"
+              class="px-8 py-3.5 rounded-full font-semibold text-sm text-[#F7F5ED] bg-gradient-to-r from-[#176B52] to-[#287FA0] hover:from-[#135742] hover:to-[#1e6680] shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+            >
+              Hành Trình & Cuộc Đời
+            </a>
+            <a
+              href="/lien-he"
+              class="px-8 py-3.5 rounded-full font-semibold text-sm text-[#176B52] bg-white border border-[#C6A66B] hover:bg-[#E8EFE9] shadow-xs transition-all duration-300"
+            >
+              Giao Lưu & Kết Nối
+            </a>
+          </div>
+
+          <!-- Quick Highlights -->
+          <div class="pt-8 grid grid-cols-3 gap-4 border-t border-[#C6A66B]/25 max-w-lg mx-auto lg:mx-0">
+            <div>
+              <div class="font-serif font-bold text-2xl sm:text-3xl text-[#176B52]">45+</div>
+              <div class="text-xs text-[#243A32]/70 font-medium mt-1">Năm tôi luyện</div>
+            </div>
+            <div>
+              <div class="font-serif font-bold text-2xl sm:text-3xl text-[#287FA0]">1981</div>
+              <div class="text-xs text-[#243A32]/70 font-medium mt-1">Năm sinh Tân Dậu</div>
+            </div>
+            <div>
+              <div class="font-serif font-bold text-2xl sm:text-3xl text-[#C6A66B]">Mộc</div>
+              <div class="text-xs text-[#243A32]/70 font-medium mt-1">Thạch Lựu Kiên Cường</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Side: Portrait Artwork -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-md">
+            <!-- Decorative Back Border Frame -->
+            <div class="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#176B52]/20 via-[#C6A66B]/25 to-[#287FA0]/20 blur-lg"></div>
+            
+            <div class="relative rounded-3xl overflow-hidden border-2 border-[#C6A66B]/60 shadow-2xl bg-white">
+              <img
+                src="/images/avatar-trucphuong.svg"
+                alt="Chân dung Nguyễn Thị Trúc Phương"
+                class="w-full h-auto object-cover"
+                loading="eager"
+              />
+
+              <!-- Floating Luxury Card -->
+              <div class="absolute bottom-4 left-4 right-4 bg-[#F7F5ED]/95 backdrop-blur-md p-4 rounded-2xl border border-[#C6A66B]/40 shadow-lg">
+                <div class="flex items-center justify-between text-xs">
+                  <div>
+                    <div class="font-serif font-bold text-[#176B52] text-sm">Nguyễn Thị Trúc Phương</div>
+                    <div class="text-[#243A32]/70">Sinh ngày 23/02/1981</div>
+                  </div>
+                  <div class="text-right">
+                    <span class="inline-block px-2.5 py-1 rounded-full bg-[#176B52] text-[#FFE094] font-semibold text-[11px]">
+                      Thạch Lựu Mộc
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Four Pillars Section: Mộc - Thủy - Thổ - Kim -->
+  <section class="py-16 bg-[#E8EFE9]/60 border-y border-[#C6A66B]/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-bold text-[#C6A66B] uppercase tracking-[0.25em] block mb-2">
+          Triết Lý Ngũ Hành Hài Hòa
+        </span>
+        <h2 class="font-serif font-bold text-3xl sm:text-4xl text-[#176B52]">
+          Bốn Trụ Cột Tâm Huyết Của Trúc Phương
+        </h2>
+        <p class="mt-3 text-sm sm:text-base text-[#243A32]/80">
+          Chắt lọc từ bản tính kiên cường của Thạch Lựu Mộc và sự mềm mại, uyển chuyển của dòng Thủy tương sinh.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Card 1 -->
+        <div class="bg-white p-7 rounded-2xl border border-[#C6A66B]/25 hover:border-[#176B52] shadow-xs hover:shadow-md transition-all duration-300">
+          <div class="w-12 h-12 rounded-xl bg-[#176B52]/15 text-[#176B52] flex items-center justify-center mb-5 font-serif font-bold text-xl">
+            M
+          </div>
+          <h3 class="font-serif font-bold text-lg text-[#243A32] mb-2">Bền Bỉ Kiên Cường</h3>
+          <p class="text-xs sm:text-sm text-[#243A32]/75 leading-relaxed">
+            Như rễ cây bám đá, luôn giữ vững tâm định và sự nhẫn nại trước mọi biến động và nghịch cảnh cuộc sống.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white p-7 rounded-2xl border border-[#C6A66B]/25 hover:border-[#287FA0] shadow-xs hover:shadow-md transition-all duration-300">
+          <div class="w-12 h-12 rounded-xl bg-[#287FA0]/15 text-[#287FA0] flex items-center justify-center mb-5 font-serif font-bold text-xl">
+            T
+          </div>
+          <h3 class="font-serif font-bold text-lg text-[#243A32] mb-2">Thích Ứng Mềm Mại</h3>
+          <p class="text-xs sm:text-sm text-[#243A32]/75 leading-relaxed">
+            Thủy dưỡng Mộc — dòng chảy tri thức và sự thấu cảm giúp kết nối con người, kiến tạo môi trường hòa hợp.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white p-7 rounded-2xl border border-[#C6A66B]/25 hover:border-[#C6A66B] shadow-xs hover:shadow-md transition-all duration-300">
+          <div class="w-12 h-12 rounded-xl bg-[#C6A66B]/20 text-[#8F7038] flex items-center justify-center mb-5 font-serif font-bold text-xl">
+            K
+          </div>
+          <h3 class="font-serif font-bold text-lg text-[#243A32] mb-2">Thanh Cao & Trọng Tín</h3>
+          <p class="text-xs sm:text-sm text-[#243A32]/75 leading-relaxed">
+            Ánh kim quý và cốt cách thanh tao. Giữ trọn lời hứa, làm việc trung thực và đặt chữ Tín lên hàng đầu.
+          </p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-white p-7 rounded-2xl border border-[#C6A66B]/25 hover:border-[#243A32] shadow-xs hover:shadow-md transition-all duration-300">
+          <div class="w-12 h-12 rounded-xl bg-[#243A32]/10 text-[#243A32] flex items-center justify-center mb-5 font-serif font-bold text-xl">
+            Đ
+          </div>
+          <h3 class="font-serif font-bold text-lg text-[#243A32] mb-2">Vững Vàng Nền Tảng</h3>
+          <p class="text-xs sm:text-sm text-[#243A32]/75 leading-relaxed">
+            Đất lành sinh vạn vật. Tập trung vào những giá trị thật, nuôi dưỡng gia đình và vun đắp cho thế hệ tương lai.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Deep Dive: Triết Lý Thạch Lựu Mộc -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-6 space-y-6">
+          <span class="text-xs font-bold text-[#C6A66B] uppercase tracking-[0.25em]">
+            Bản Thể & Năng Lượng
+          </span>
+          <h2 class="font-serif font-bold text-3xl sm:text-4xl text-[#176B52] leading-snug">
+            Cây Lựu Trên Ghềnh Đá — Nội Lực Của Người Phụ Nữ Tân Dậu 1981
+          </h2>
+          <p class="text-[#243A32]/85 text-base sm:text-lg leading-relaxed">
+            Sinh ngày 23 tháng 2 năm 1981, Trúc Phương thuộc nạp âm Thạch Lựu Mộc. Đây là mệnh Mộc đặc biệt nhất trong lục Mộc: không mong manh như liễu rủ, không xum xuê như rừng rậm, mà là loài cây bén rễ trong đá núi cằn khô.
+          </p>
+          <p class="text-[#243A32]/80 text-sm sm:text-base leading-relaxed">
+            Càng trải qua mưa nguồn gió biển, cành lá càng thêm dẻo dai, hoa nở càng thắm đỏ và trái cho hạt ngọt lành. Đó cũng chính là con đường tôi đã đi qua: biến thử thách thành chất dinh dưỡng, lấy tình yêu thương và sự bền bỉ làm kim chỉ nam.
+          </p>
+
+          <div class="pt-4">
+            <a
+              href="/gioi-thieu"
+              class="inline-flex items-center gap-2 text-sm font-semibold text-[#176B52] hover:text-[#287FA0] transition-colors"
+            >
+              <span>Tìm hiểu thêm về câu chuyện cuộc đời Trúc Phương</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 bg-[#F7F5ED] p-8 sm:p-10 rounded-3xl border border-[#C6A66B]/30 shadow-md relative overflow-hidden">
+          <div class="space-y-6">
+            <div class="flex items-center justify-between pb-4 border-b border-[#C6A66B]/30">
+              <span class="font-serif font-bold text-xl text-[#176B52]">Bảng Năng Lượng Phong Thủy</span>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full bg-[#176B52] text-[#F7F5ED]">Nữ Mệnh</span>
+            </div>
+
+            <div class="space-y-4 text-sm">
+              <div class="flex justify-between items-center py-2 border-b border-[#C6A66B]/15">
+                <span class="text-[#243A32]/70">Họ và tên:</span>
+                <span class="font-bold text-[#176B52]">NGUYỄN THỊ TRÚC PHƯƠNG</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-[#C6A66B]/15">
+                <span class="text-[#243A32]/70">Ngày sinh:</span>
+                <span class="font-bold text-[#243A32]">23 / 02 / 1981</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-[#C6A66B]/15">
+                <span class="text-[#243A32]/70">Năm can chi:</span>
+                <span class="font-bold text-[#243A32]">Tân Dậu (Năm con Gà)</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-[#C6A66B]/15">
+                <span class="text-[#243A32]/70">Nạp âm bản mệnh:</span>
+                <span class="font-bold text-[#C6A66B]">Thạch Lựu Mộc (Gỗ cây lựu đá)</span>
+              </div>
+              <div class="flex justify-between items-center py-2">
+                <span class="text-[#243A32]/70">Màu sắc tương hợp:</span>
+                <span class="font-semibold text-xs text-[#176B52]">Xanh Ngọc, Xanh Biển, Trắng Ngà & Ánh Kim</span>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white border border-[#C6A66B]/20 italic text-xs sm:text-sm text-[#243A32]/85 font-serif leading-relaxed">
+              "Tâm bình thế giới bình. Sức mạnh lớn nhất của con người là khả năng mỉm cười đón nhận sóng gió và lặng lẽ biến sỏi đá thành hoa thơm."
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Gallery Preview -->
+  <section class="py-20 bg-[#F7F5ED]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12">
+        <div>
+          <span class="text-xs font-bold text-[#C6A66B] uppercase tracking-[0.25em] block mb-2">
+            Tư Liệu & Khoảnh Khắc
+          </span>
+          <h2 class="font-serif font-bold text-3xl sm:text-4xl text-[#176B52]">
+            Thư Viện Hình Ảnh Tiêu Biểu
+          </h2>
+        </div>
+        <a
+          href="/thu-vien"
+          class="mt-4 sm:mt-0 inline-flex items-center gap-1.5 font-semibold text-sm text-[#176B52] hover:text-[#287FA0] transition-colors"
+        >
+          <span>Xem tất cả album</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {featuredGallery.map((item) => (
+          <a
+            href="/thu-vien"
+            class="group bg-white rounded-2xl overflow-hidden border border-[#C6A66B]/25 hover:border-[#176B52] shadow-xs hover:shadow-md transition-all duration-300 flex flex-col"
+          >
+            <div class="aspect-[4/3] overflow-hidden bg-[#E8EFE9]">
+              <img
+                src={item.image}
+                alt={item.title}
+                loading="lazy"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div class="p-5">
+              <span class="text-xs font-semibold text-[#176B52] block mb-1">{item.categoryLabel}</span>
+              <h3 class="font-serif font-bold text-base text-[#243A32] group-hover:text-[#176B52] transition-colors line-clamp-1">
+                {item.title}
+              </h3>
+              <p class="mt-1 text-xs text-[#243A32]/70 line-clamp-2">
+                {item.description}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Articles Section -->
+  <section class="py-20 bg-white border-t border-[#C6A66B]/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12">
+        <div>
+          <span class="text-xs font-bold text-[#C6A66B] uppercase tracking-[0.25em] block mb-2">
+            Tri Thức & Trải Nghiệm
+          </span>
+          <h2 class="font-serif font-bold text-3xl sm:text-4xl text-[#176B52]">
+            Góc Chia Sẻ & Bài Viết Mới
+          </h2>
+        </div>
+        <a
+          href="/tin-tuc"
+          class="mt-4 sm:mt-0 inline-flex items-center gap-1.5 font-semibold text-sm text-[#176B52] hover:text-[#287FA0] transition-colors"
+        >
+          <span>Xem tất cả bài viết</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {latestArticles.map((art) => (
+          <ArticleCard article={art} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Call to Action -->
+  <section class="py-20 bg-gradient-to-br from-[#176B52] to-[#243A32] text-[#F7F5ED] relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
+      <span class="inline-block px-4 py-1.5 rounded-full bg-[#FFE094]/15 border border-[#C6A66B]/40 text-xs font-semibold text-[#FFE094] tracking-widest uppercase">
+        Đồng Hành & Lan Tỏa
+      </span>
+      <h2 class="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl leading-tight">
+        Bạn Có Mong Muốn Kết Nối Hoặc Trao Đổi Cùng Trúc Phương?
+      </h2>
+      <p class="text-base sm:text-lg text-[#E8EFE9]/85 max-w-2xl mx-auto leading-relaxed">
+        Dù là câu chuyện về quản trị, chia sẻ triết lý sống hay những dự án thiện nguyện vì cộng đồng, tôi luôn sẵn sàng lắng nghe và kết nối.
+      </p>
+      <div class="pt-4">
+        <a
+          href="/lien-he"
+          class="inline-flex items-center gap-2 px-9 py-4 rounded-full font-semibold text-sm text-[#243A32] bg-[#FFE094] hover:bg-[#ebd085] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
+        >
+          <span>Gửi Lời Nhắn Đến Trúc Phương</span>
+          <svg class="w-4 h-4 text-[#243A32]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
