@@ -1067,85 +1067,154 @@ footer.bg-\[\#142B49\] {
 .chapter-header-banner,
 .tkd-academic-header,
 [class*="from-[#A83245]"],
+/* ==========================================================================
+   HIGH CONTRAST & WCAG AAA ENFORCEMENT FOR BRAND COLORS & DARK CONTAINERS
+   ========================================================================== */
+
+/* 1. Explicit Light Text Utilities — MUST ALWAYS REMAIN LIGHT & CRISP */
+.text-white,
+[class*="text-white"],
+.text-slate-50,
+.text-slate-100,
+.text-slate-200,
+.text-\[\#F8EDEF\],
+.text-\[\#f8edef\],
+.text-rose-50,
+.text-rose-100 {
+  color: #ffffff !important;
+}
+
+.text-white\/90, [class*="text-white/90"] {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+.text-white\/80, [class*="text-white/80"] {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+.text-white\/70, [class*="text-white/70"] {
+  color: rgba(255, 255, 255, 0.80) !important;
+}
+.text-\[\#F8EDEF\]\/90 {
+  color: rgba(248, 237, 239, 0.95) !important;
+}
+.text-\[\#F8EDEF\]\/80 {
+  color: rgba(248, 237, 239, 0.88) !important;
+}
+
+/* 2. All Dark Containers: Headers, Banners, Burgundy Boxes, Footers, Navbars */
 [class*="bg-[#A83245]"],
 [class*="bg-[#742D3A]"],
 [class*="bg-[#C65B69]"],
+[class*="from-[#A83245]"],
+[class*="from-[#742D3A]"],
+[class*="from-[#C65B69]"],
+[class*="bg-[#111827]"],
+[class*="bg-[#0B1E33]"],
+[class*="bg-[#142B49]"],
+[class*="bg-slate-900"],
+[class*="bg-slate-800"],
+[class*="bg-gray-900"],
+.chapter-header-banner,
 #mainNavbar,
 nav.site-sticky-navbar,
+header.no-print,
+footer,
 table thead tr,
 table thead th {
-  color: #ffffff !important;
+  color: #ffffff;
 }
 
+/* Headings inside all dark containers MUST BE crisp white */
+[class*="bg-[#A83245]"] h1, [class*="bg-[#A83245]"] h2, [class*="bg-[#A83245]"] h3, [class*="bg-[#A83245]"] h4, [class*="bg-[#A83245]"] h5, [class*="bg-[#A83245]"] h6,
+[class*="bg-[#742D3A]"] h1, [class*="bg-[#742D3A]"] h2, [class*="bg-[#742D3A]"] h3, [class*="bg-[#742D3A]"] h4, [class*="bg-[#742D3A]"] h5, [class*="bg-[#742D3A]"] h6,
+[class*="bg-[#C65B69]"] h1, [class*="bg-[#C65B69]"] h2, [class*="bg-[#C65B69]"] h3, [class*="bg-[#C65B69]"] h4, [class*="bg-[#C65B69]"] h5, [class*="bg-[#C65B69]"] h6,
+[class*="from-[#A83245]"] h1, [class*="from-[#A83245]"] h2, [class*="from-[#A83245]"] h3, [class*="from-[#A83245]"] h4, [class*="from-[#A83245]"] h5, [class*="from-[#A83245]"] h6,
+[class*="from-[#742D3A]"] h1, [class*="from-[#742D3A]"] h2, [class*="from-[#742D3A]"] h3, [class*="from-[#742D3A]"] h4, [class*="from-[#742D3A]"] h5, [class*="from-[#742D3A]"] h6,
+[class*="from-[#C65B69]"] h1, [class*="from-[#C65B69]"] h2, [class*="from-[#C65B69]"] h3, [class*="from-[#C65B69]"] h4, [class*="from-[#C65B69]"] h5, [class*="from-[#C65B69]"] h6,
 .chapter-header-banner h1, .chapter-header-banner h2, .chapter-header-banner h3, .chapter-header-banner h4,
-[class*="from-[#A83245]"] h1, [class*="from-[#A83245]"] h2, [class*="from-[#A83245]"] h3,
-[class*="bg-[#A83245]"] h1, [class*="bg-[#A83245]"] h2, [class*="bg-[#A83245]"] h3 {
+footer h1, footer h2, footer h3, footer h4 {
   color: #ffffff !important;
 }
 
+/* Paragraphs directly in dark containers: light blush #F8EDEF for soft readability */
+[class*="bg-[#A83245]"] > p,
+[class*="bg-[#742D3A]"] > p,
+[class*="bg-[#C65B69]"] > p,
+[class*="from-[#A83245]"] > p,
+[class*="from-[#742D3A]"] > p,
+[class*="from-[#C65B69]"] > p,
+[class*="from-[#742D3A]"] p:not([class*="text-slate-"]):not([class*="text-amber-"]):not([class*="text-emerald-"]),
+[class*="from-[#A83245]"] p:not([class*="text-slate-"]):not([class*="text-amber-"]):not([class*="text-emerald-"]),
+[class*="bg-[#742D3A]"] p:not([class*="text-slate-"]):not([class*="text-amber-"]):not([class*="text-emerald-"]),
+[class*="bg-[#A83245]"] p:not([class*="text-slate-"]):not([class*="text-amber-"]):not([class*="text-emerald-"]),
 .chapter-header-banner p,
-[class*="from-[#A83245]"] p,
-[class*="bg-[#A83245]"] p {
+footer p {
   color: #F8EDEF !important;
 }
 
 .chapter-header-banner strong,
 [class*="from-[#A83245]"] strong,
-[class*="bg-[#A83245]"] strong {
+[class*="from-[#742D3A]"] strong,
+[class*="bg-[#A83245]"] strong,
+[class*="bg-[#742D3A]"] strong {
   color: #ffffff !important;
 }
 
-/* Badge/pill màu vàng trên nền đỏ: chữ đen đậm rõ nét */
+/* Badges / pills on dark backgrounds */
 .chapter-header-banner [class*="bg-amber"],
-.chapter-header-banner [class*="bg-yellow"] {
+.chapter-header-banner [class*="bg-yellow"],
+[class*="from-[#742D3A]"] [class*="bg-amber"],
+[class*="from-[#A83245]"] [class*="bg-amber"] {
   color: #0F172A !important;
 }
+[class*="from-[#742D3A]"] [class*="bg-emerald"],
+[class*="from-[#A83245]"] [class*="bg-emerald"] {
+  color: #ffffff !important;
+}
 
-/* B. KHUNG NỘI DUNG CHƯƠNG & BÀI HỌC: Luôn nền trắng sáng và chữ tối rõ nét */
+/* 3. LIGHT CONTRAST INSIDE DARK CONTAINERS (Buttons, White Cards, Inputs) */
+[class*="from-[#742D3A]"] a.bg-white,
+[class*="from-[#A83245]"] a.bg-white,
+[class*="bg-[#742D3A]"] a.bg-white,
+[class*="bg-[#A83245]"] a.bg-white,
+[class*="from-[#742D3A]"] button.bg-white,
+[class*="from-[#A83245]"] button.bg-white,
+[class*="bg-[#742D3A]"] button.bg-white,
+[class*="bg-[#A83245]"] button.bg-white {
+  color: #742D3A !important;
+  font-weight: 700 !important;
+}
+
+/* 4. ACADEMIC TEXTBOOK & SECTION SCOPED STYLES: Chỉ áp dụng màu tối cho vùng nền sáng */
 .tkd-academic-subpage section,
 .tkd-page-scope section {
-  background-color: #ffffff !important;
-  color: #303039 !important;
+  background-color: #ffffff;
+  color: #303039;
 }
 
-.tkd-academic-subpage section h1,
-.tkd-academic-subpage section h2,
-.tkd-page-scope section h1,
-.tkd-page-scope section h2 {
-  color: #111827 !important;
+/* CHỈ áp dụng màu chữ tối cho các tiêu đề và đoạn văn nằm trực tiếp trên nền sáng (không nằm trong khối gradient/dark) */
+.tkd-academic-subpage section:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]) > h1,
+.tkd-academic-subpage section:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]) > h2,
+.tkd-page-scope section:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]) > h1,
+.tkd-page-scope section:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]) > h2,
+.tkd-academic-subpage div:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]):not([class*="text-white"]) > h1:not([class*="text-white"]):not([class*="text-slate-50"]):not([class*="text-slate-100"]),
+.tkd-academic-subpage div:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]):not([class*="text-white"]) > h2:not([class*="text-white"]):not([class*="text-slate-50"]):not([class*="text-slate-100"]),
+.tkd-page-scope div:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]):not([class*="text-white"]) > h1:not([class*="text-white"]):not([class*="text-slate-50"]):not([class*="text-slate-100"]),
+.tkd-page-scope div:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]):not([class*="text-white"]) > h2:not([class*="text-white"]):not([class*="text-slate-50"]):not([class*="text-slate-100"]) {
+  color: #111827;
 }
 
-.tkd-academic-subpage section h3,
-.tkd-academic-subpage section h4,
-.tkd-page-scope section h3,
-.tkd-page-scope section h4 {
-  color: #A83245 !important;
+.tkd-academic-subpage div:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]):not([class*="text-white"]) > h3:not([class*="text-white"]):not([class*="text-slate-50"]):not([class*="text-slate-100"]),
+.tkd-academic-subpage div:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]):not([class*="text-white"]) > h4:not([class*="text-white"]):not([class*="text-slate-50"]):not([class*="text-slate-100"]),
+.tkd-page-scope div:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]):not([class*="text-white"]) > h3:not([class*="text-white"]):not([class*="text-slate-50"]):not([class*="text-slate-100"]),
+.tkd-page-scope div:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]):not([class*="text-white"]) > h4:not([class*="text-white"]):not([class*="text-slate-50"]):not([class*="text-slate-100"]) {
+  color: #A83245;
 }
 
-.tkd-academic-subpage section p,
-.tkd-academic-subpage section li,
-.tkd-page-scope section p,
-.tkd-page-scope section li {
-  color: #303039 !important;
-}
-
-/* Bảo đảm mọi footer hoặc khối nền sẫm màu luôn có chữ sáng rõ nét, không bao giờ bị chữ tối trên nền tối */
-footer,
-footer p,
-footer span:not([class*="text-"]),
-[class*="bg-[#111827]"],
-[class*="bg-[#142B49]"],
-[class*="bg-[#0B1E33]"],
-[class*="bg-[#742D3A]"],
-[class*="bg-[#A83245]"] {
-  color: #ffffff;
-}
-
-[class*="bg-[#111827]"] p,
-[class*="bg-[#142B49]"] p,
-[class*="bg-[#0B1E33]"] p,
-[class*="bg-[#742D3A]"] p {
-  color: #F8EDEF !important;
+.tkd-academic-subpage section p:not([class*="text-white"]):not([class*="text-[#"]):not([class*="text-slate-100"]):not([class*="text-slate-50"]),
+.tkd-academic-subpage section li:not([class*="text-white"]):not([class*="text-[#"]):not([class*="text-slate-100"]):not([class*="text-slate-50"]),
+.tkd-page-scope section p:not([class*="text-white"]):not([class*="text-[#"]):not([class*="text-slate-100"]):not([class*="text-slate-50"]),
+.tkd-page-scope section li:not([class*="text-white"]):not([class*="text-[#"]):not([class*="text-slate-100"]):not([class*="text-slate-50"]) {
+  color: #303039;
 }
 
 /* C. BẢNG BIỂU HỌC THUẬT: Header đỏ chữ trắng, Body trắng chữ đen */

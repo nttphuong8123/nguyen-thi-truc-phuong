@@ -81,13 +81,13 @@ const officeHourLines = contactCfg.office_hours
         <div class="p-6 rounded-2xl bg-gradient-to-br from-[#742D3A] to-[#742D3A] border border-[#E8DDE0]/80 shadow-xs flex flex-col justify-between space-y-4">
           <div class="space-y-2">
             <span class="inline-block px-2.5 py-1 rounded-full bg-[#C65B69] text-white text-[11px] font-extrabold uppercase tracking-wider">Lịch tiếp sinh viên</span>
-            <h3 class="text-base font-extrabold text-slate-900">Hỗ Trợ Cố Vấn Học Tập &amp; Giải Đáp Thực Tập</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
+            <h3 class="text-base font-extrabold text-white">Hỗ Trợ Cố Vấn Học Tập &amp; Giải Đáp Thực Tập</h3>
+            <p class="text-xs text-[#F8EDEF] leading-relaxed">
               Giảng viên hỗ trợ giải đáp trực tiếp tại văn phòng Khoa ({contactCfg.address}) hoặc trực tuyến qua Zalo / Google Meet:
             </p>
-            <div class="space-y-1.5 pt-1 text-xs text-slate-700">
+            <div class="space-y-1.5 pt-1 text-xs text-[#F8EDEF]">
               {officeHourLines.map((line) => (
-                <p>• <strong>{line}</strong></p>
+                <p>• <strong class="text-white">{line}</strong></p>
               ))}
             </div>
           </div>
@@ -97,8 +97,8 @@ const officeHourLines = contactCfg.office_hours
       <!-- Banner mời đánh giá giảng viên -->
       <div class="p-5 rounded-2xl bg-gradient-to-r from-[#A83245] to-[#C65B69] text-white shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="space-y-1 text-center sm:text-left">
-          <h3 class="text-base sm:text-lg font-extrabold">⭐ Khảo sát đánh giá chất lượng giảng dạy học kỳ</h3>
-          <p class="text-xs sm:text-sm text-white">Ý kiến chân thành của sinh viên giúp cô hoàn thiện phương pháp giảng dạy và nâng cao chất lượng bài giảng.</p>
+          <h3 class="text-base sm:text-lg font-extrabold text-white">⭐ Khảo sát đánh giá chất lượng giảng dạy học kỳ</h3>
+          <p class="text-xs sm:text-sm text-[#F8EDEF]">Ý kiến chân thành của sinh viên giúp cô hoàn thiện phương pháp giảng dạy và nâng cao chất lượng bài giảng.</p>
         </div>
         <a href="/danh-gia-giang-vien" class="px-5 py-2.5 rounded-xl bg-[#C65B69] hover:bg-[#A83245] text-white font-extrabold text-xs sm:text-sm transition-all shrink-0 shadow-xs">
           Mở Trang Đánh Giá Giảng Viên ➔
