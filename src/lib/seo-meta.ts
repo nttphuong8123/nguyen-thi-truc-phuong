@@ -179,7 +179,6 @@ export const SILO_GROUPS: Record<string, SiloGroup> = {
       { label: 'Quy trình chung', href: '/study-corner/internships', icon: '🧭', titleAttr: 'Quy trình và hướng dẫn chung thực tập tốt nghiệp' },
       { label: 'Đề cương & Biểu mẫu HCE', href: '/study-corner/internships/hcehdtt', icon: '📋', titleAttr: 'Đề cương chi tiết và biểu mẫu báo cáo thực tập trường HCE' },
       { label: 'Hướng dẫn báo cáo HCE', href: '/study-corner/internships/huong-dan-bao-cao-hce', icon: '🏛️', titleAttr: 'Hướng dẫn trình bày báo cáo thực tập tốt nghiệp chuẩn HCE' },
-      { label: 'Hướng dẫn báo cáo CTIM', href: '/study-corner/internships/huong-dan-bao-cao-ctim', icon: '🎓', titleAttr: 'Hướng dẫn trình bày báo cáo thực tập tốt nghiệp chuẩn CTIM' },
       { label: '19 Mẫu báo cáo thực tập', href: '/study-corner/internships/sample', icon: '📂', titleAttr: 'Kho 19 mẫu báo cáo thực tập tốt nghiệp ngành Quản trị kinh doanh & Marketing' },
       { label: 'Cách trích dẫn tài liệu', href: '/study-corner/internships/tailieuthamkhao', icon: '📚', titleAttr: 'Hướng dẫn cách viết và trích dẫn tài liệu tham khảo chuẩn học thuật' },
       { label: 'Tra cứu Mã đề cương (/dcct)', href: '/dcct', icon: '🔍', titleAttr: 'Cổng tra cứu nhanh đề cương chi tiết theo mã số' },
@@ -574,14 +573,6 @@ export const PAGE_SEO_META: Record<string, PageSeoConfig> = {
     title: 'Hướng Dẫn Trình Bày Báo Cáo Thực Tập Tốt Nghiệp Chuẩn Trường HCE',
     description: 'Quy định chi tiết về hình thức định dạng trang in, font chữ, đánh số bảng biểu, sơ đồ, mục lục tự động và thang điểm chấm báo cáo thực tập tốt nghiệp tại HCE.',
     breadcrumbLabel: 'Chuẩn trình bày HCE',
-    parentPath: '/study-corner/internships',
-    siloKey: 'internships',
-    schemaType: 'LearningResource'
-  },
-  '/study-corner/internships/huong-dan-bao-cao-ctim': {
-    title: 'Hướng Dẫn Viết Báo Cáo Thực Tập Tốt Nghiệp Chuẩn Trường Cao Đẳng CTIM',
-    description: 'Tài liệu hướng dẫn quy cách trình bày báo cáo thực tập tốt nghiệp, nhật ký thực tập, nhận xét của đơn vị thực tập và cấu trúc 3 chương chuẩn trường CTIM.',
-    breadcrumbLabel: 'Chuẩn trình bày CTIM',
     parentPath: '/study-corner/internships',
     siloKey: 'internships',
     schemaType: 'LearningResource'

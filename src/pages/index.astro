@@ -442,15 +442,15 @@ const initialHceCenterNews = DEFAULT_HCE_CENTER_NEWS;
         </div>
 
         <div class="p-4 sm:p-5 space-y-4">
-          <!-- 3 Chỉ số VN-INDEX, VN30, HNX -->
-          <div id="liveStocksGrid" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <!-- 3 Chỉ số VN-INDEX, VN30, HNX (Hiển thị cùng 1 dòng trên cả mobile & desktop) -->
+          <div id="liveStocksGrid" class="grid grid-cols-3 gap-1.5 sm:gap-3">
             {initialStocks.map((st) => (
-              <div class={`p-3 rounded-xl border text-center ${st.isUp ? 'bg-emerald-50/70 border-emerald-200' : 'bg-rose-50/70 border-rose-200'}`}>
-                <span class="block text-[11px] font-extrabold text-slate-700 uppercase">{st.label}</span>
-                <span class={`block text-base sm:text-lg font-extrabold num-font mt-0.5 ${st.isUp ? 'text-emerald-700' : 'text-rose-700'}`}>
+              <div class={`p-2 sm:p-3 rounded-xl border text-center ${st.isUp ? 'bg-emerald-50/70 border-emerald-200' : 'bg-rose-50/70 border-rose-200'}`}>
+                <span class="block text-[10px] sm:text-[11px] font-extrabold text-slate-700 uppercase truncate">{st.label}</span>
+                <span class={`block text-xs sm:text-lg font-extrabold num-font mt-0.5 whitespace-nowrap ${st.isUp ? 'text-emerald-700' : 'text-rose-700'}`}>
                   {st.price}
                 </span>
-                <span class={`block text-xs font-bold num-font ${st.isUp ? 'text-emerald-600' : 'text-rose-600'}`}>
+                <span class={`block text-[10px] sm:text-xs font-bold num-font whitespace-nowrap ${st.isUp ? 'text-emerald-600' : 'text-rose-600'}`}>
                   {st.changePercent}
                 </span>
               </div>
@@ -497,18 +497,18 @@ const initialHceCenterNews = DEFAULT_HCE_CENTER_NEWS;
           stocksGrid.innerHTML = data.stocks
             .map(
               (st) =>
-                '<div class="p-2.5 rounded-xl border text-center ' +
+                '<div class="p-2 sm:p-2.5 rounded-xl border text-center ' +
                 (st.isUp ? 'bg-emerald-50/70 border-emerald-200' : 'bg-rose-50/70 border-rose-200') +
                 '">' +
-                '<span class="block text-[11px] font-extrabold text-slate-700 uppercase">' +
+                '<span class="block text-[10px] sm:text-[11px] font-extrabold text-slate-700 uppercase truncate">' +
                 st.label +
                 '</span>' +
-                '<span class="block text-sm sm:text-base font-extrabold num-font mt-0.5 ' +
+                '<span class="block text-xs sm:text-base font-extrabold num-font mt-0.5 whitespace-nowrap ' +
                 (st.isUp ? 'text-emerald-700' : 'text-rose-700') +
                 '">' +
                 st.price +
                 '</span>' +
-                '<span class="block text-[10px] font-bold num-font ' +
+                '<span class="block text-[10px] sm:text-xs font-bold num-font whitespace-nowrap ' +
                 (st.isUp ? 'text-emerald-600' : 'text-rose-600') +
                 '">' +
                 st.changePercent +

@@ -78,13 +78,13 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
             <span class="px-3 py-1 rounded-full bg-[#F7F5F2] text-[#A83245] font-extrabold border border-[#C65B69]/30">
               {featuredArticle.category}
             </span>
-            <span class="text-slate-400">•</span>
-            <span class="text-slate-500 font-semibold">✍️ {featuredArticle.author}</span>
-            <span class="text-slate-400">•</span>
-            <span class="text-slate-500 num-font">👁️ {featuredArticle.views} lượt xem</span>
+            <span class="text-slate-500">•</span>
+            <span class="text-slate-700 font-semibold">✍️ {featuredArticle.author}</span>
+            <span class="text-slate-500">•</span>
+            <span class="text-slate-700 num-font">👁️ {featuredArticle.views} lượt xem</span>
           </div>
 
-          <h2 class="text-lg sm:text-2xl font-black text-slate-900 group-hover:text-[#C65B69] transition-colors leading-snug">
+          <h2 class="text-lg sm:text-2xl font-black text-slate-900 group-hover:text-[#A83245] transition-colors leading-snug">
             <a href={`/goc-chia-se/${featuredArticle.slug}`} title={`Đọc bài viết: ${featuredArticle.title}`}>
               {featuredArticle.title}
             </a>
@@ -127,7 +127,7 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
                 </span>
                 <span class="text-xs text-slate-600 font-medium num-font">👁️ {art.views} lượt xem</span>
               </div>
-              <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#C65B69] transition-colors leading-snug">
+              <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#A83245] transition-colors leading-snug">
                 <a href={`/goc-chia-se/${art.slug}`} title={`Xem bài viết chuyên đề: ${art.title}`}>
                   {art.title}
                 </a>
@@ -136,11 +136,11 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
             </div>
 
             <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-              <span class="font-semibold text-slate-500">✍️ {art.author}</span>
+              <span class="font-semibold text-slate-700">✍️ {art.author}</span>
               <a
                 href={`/goc-chia-se/${art.slug}`}
                 title={`Đọc chi tiết bài viết: ${art.title}`}
-                class="inline-flex items-center gap-1 font-extrabold text-[#C65B69] group-hover:text-[#A83245] transition-colors"
+                class="inline-flex items-center gap-1 font-extrabold text-[#A83245] group-hover:text-[#742D3A] transition-colors"
               >
                 <span>Đọc bài viết</span>
                 <span aria-hidden="true">→</span>

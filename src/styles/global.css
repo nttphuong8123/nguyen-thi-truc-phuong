@@ -2,33 +2,33 @@
 @import "./quiz-theme.css";
 
 /* ==========================================================================
-   DESIGN SYSTEM TOKENS — NGUYỄN THỊ TRÚC PHƯƠNG (OFFICIAL ROSE-WINE RED PALETTE)
-   - Đỏ chủ đạo:    #A83245
-   - Đỏ phụ:        #C65B69
-   - Đỏ đậm:        #742D3A
-   - Hồng nền nhạt: #F8EDEF
-   - Nền tổng thể:  #F7F5F2
-   - Nền thẻ:       #FFFFFF
-   - Chữ chính:     #303039
-   - Chữ phụ:       #62616A
-   - Đường viền:    #E8DDE0
+   DESIGN SYSTEM TOKENS â€” NGUYá»„N THá»Š TRÃšC PHÆ¯Æ NG (OFFICIAL ROSE-WINE RED PALETTE)
+   - Äá» chá»§ Ä‘áº¡o:    #A83245
+   - Äá» phá»¥:        #C65B69
+   - Äá» Ä‘áº­m:        #742D3A
+   - Há»“ng ná»n nháº¡t: #F8EDEF
+   - Ná»n tá»•ng thá»ƒ:  #F7F5F2
+   - Ná»n tháº»:       #FFFFFF
+   - Chá»¯ chÃ­nh:     #303039
+   - Chá»¯ phá»¥:       #62616A
+   - ÄÆ°á»ng viá»n:    #E8DDE0
    ========================================================================== */
 :root {
-  --color-primary: #A83245;          /* Đỏ chủ đạo */
-  --color-primary-hover: #742D3A;    /* Đỏ đậm */
-  --color-secondary: #C65B69;        /* Đỏ phụ */
-  --color-secondary-hover: #A83245;  /* Đỏ chủ đạo */
-  --color-accent: #C65B69;           /* Đỏ phụ nhấn */
-  --color-accent-hover: #742D3A;     /* Đỏ đậm hover */
-  --color-accent-light: #F8EDEF;     /* Hồng nền nhạt */
-  --color-bg-soft: #F7F5F2;          /* Nền tổng thể */
-  --color-bg-sub: #F8EDEF;           /* Hồng nền phụ */
-  --color-surface: #FFFFFF;          /* Nền thẻ */
-  --color-text-main: #303039;        /* Chữ chính */
-  --color-text-muted: #62616A;       /* Chữ phụ */
-  --color-text-desc: #62616A;        /* Chữ mô tả */
-  --color-neutral: #8A8992;          /* Thành phần trung tính */
-  --color-border-soft: #E8DDE0;      /* Đường viền */
+  --color-primary: #A83245;          /* Äá» chá»§ Ä‘áº¡o */
+  --color-primary-hover: #742D3A;    /* Äá» Ä‘áº­m */
+  --color-secondary: #C65B69;        /* Äá» phá»¥ */
+  --color-secondary-hover: #A83245;  /* Äá» chá»§ Ä‘áº¡o */
+  --color-accent: #C65B69;           /* Äá» phá»¥ nháº¥n */
+  --color-accent-hover: #742D3A;     /* Äá» Ä‘áº­m hover */
+  --color-accent-light: #F8EDEF;     /* Há»“ng ná»n nháº¡t */
+  --color-bg-soft: #F7F5F2;          /* Ná»n tá»•ng thá»ƒ */
+  --color-bg-sub: #F8EDEF;           /* Há»“ng ná»n phá»¥ */
+  --color-surface: #FFFFFF;          /* Ná»n tháº» */
+  --color-text-main: #303039;        /* Chá»¯ chÃ­nh */
+  --color-text-muted: #62616A;       /* Chá»¯ phá»¥ */
+  --color-text-desc: #62616A;        /* Chá»¯ mÃ´ táº£ */
+  --color-neutral: #8A8992;          /* ThÃ nh pháº§n trung tÃ­nh */
+  --color-border-soft: #E8DDE0;      /* ÄÆ°á»ng viá»n */
   
   --radius-card: 16px;
   --radius-container: 20px;
@@ -95,7 +95,7 @@
   line-height: 1.65;
 }
 
-/* Đảm bảo hiển thị kbd và code inline đồng bộ font chữ, tinh tế và đẹp mắt */
+/* Äáº£m báº£o hiá»ƒn thá»‹ kbd vÃ  code inline Ä‘á»“ng bá»™ font chá»¯, tinh táº¿ vÃ  Ä‘áº¹p máº¯t */
 .tkd-page-scope kbd,
 .tkd-page-scope :not(pre) > code {
   font-family: 'Be Vietnam Pro', 'Inter', system-ui, sans-serif !important;
@@ -111,9 +111,9 @@
   box-shadow: 0 1px 1px rgba(0,0,0,0.05);
 }
 
-/* Sticky Header Navigation — Luôn giữ cố định trên tất cả các trang khi cuộn */
+/* Sticky Header Navigation â€” LuÃ´n giá»¯ cá»‘ Ä‘á»‹nh trÃªn táº¥t cáº£ cÃ¡c trang khi cuá»™n */
 #mainNavbar,
-nav[aria-label="Điều hướng chính"],
+nav[aria-label="Äiá»u hÆ°á»›ng chÃ­nh"],
 .site-sticky-navbar {
   position: fixed !important;
   top: 0 !important;
@@ -126,7 +126,7 @@ nav[aria-label="Điều hướng chính"],
   box-sizing: border-box !important;
 }
 
-/* Bảo đảm nút 3 gạch (Mobile Menu) luôn hiển thị trọn vẹn 100%, không bao giờ bị cắt/tràn lề trên điện thoại */
+/* Báº£o Ä‘áº£m nÃºt 3 gáº¡ch (Mobile Menu) luÃ´n hiá»ƒn thá»‹ trá»n váº¹n 100%, khÃ´ng bao giá» bá»‹ cáº¯t/trÃ n lá» trÃªn Ä‘iá»‡n thoáº¡i */
 #mobileMenuBtn {
   flex-shrink: 0 !important;
   display: flex !important;
@@ -328,7 +328,7 @@ nav[aria-label="Điều hướng chính"],
 /* ==========================================================================
    ACADEMIC CALLOUT BOXES & STEP PROCESS (DESIGN SYSTEM STANDARDIZATION)
    ========================================================================== */
-/* Chuẩn hóa các hộp Lưu ý, Ví dụ, Trọng tâm thi cử thanh lịch, không chói gắt */
+/* Chuáº©n hÃ³a cÃ¡c há»™p LÆ°u Ã½, VÃ­ dá»¥, Trá»ng tÃ¢m thi cá»­ thanh lá»‹ch, khÃ´ng chÃ³i gáº¯t */
 .tkd-page-scope .bg-rose-50,
 .tkd-page-scope .border-rose-200 {
   background-color: #FEF2F2 !important;
@@ -366,7 +366,7 @@ nav[aria-label="Điều hướng chính"],
   border-radius: 0.75rem !important;
 }
 
-/* Sơ đồ quy trình dạng bước (Step Process / Flow Cards) */
+/* SÆ¡ Ä‘á»“ quy trÃ¬nh dáº¡ng bÆ°á»›c (Step Process / Flow Cards) */
 .tkd-step-container {
   display: flex;
   flex-direction: column;
@@ -416,7 +416,7 @@ nav[aria-label="Điều hướng chính"],
 
 
 /* ==========================================================================
-   ACADEMIC SUBPAGE UNIFIED DESIGN SYSTEM (56 HỌC LIỆU TRANG CON)
+   ACADEMIC SUBPAGE UNIFIED DESIGN SYSTEM (56 Há»ŒC LIá»†U TRANG CON)
    ========================================================================== */
 .tkd-academic-subpage header,
 .tkd-academic-subpage .page-header {
@@ -491,26 +491,26 @@ html, body {
   position: relative;
 }
 
-/* 1. Ngăn chặn tràn ngang trên Mobile nhỏ (375px, 390px) */
+/* 1. NgÄƒn cháº·n trÃ n ngang trÃªn Mobile nhá» (375px, 390px) */
 @media (max-width: 640px) {
   * {
     box-sizing: border-box !important;
   }
 
-  /* Đảm bảo hình ảnh, canvas và iframe co giãn theo màn hình */
+  /* Äáº£m báº£o hÃ¬nh áº£nh, canvas vÃ  iframe co giÃ£n theo mÃ n hÃ¬nh */
   img, iframe, canvas, video {
     max-width: 100% !important;
     height: auto !important;
   }
 
-  /* Chống tràn cho khối code và công thức toán */
+  /* Chá»‘ng trÃ n cho khá»‘i code vÃ  cÃ´ng thá»©c toÃ¡n */
   pre, code, .katex-display {
     max-width: 100% !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
   }
 
-  /* Bảng biểu tự động cuộn ngang mượt mà, không xô lệch bố cục */
+  /* Báº£ng biá»ƒu tá»± Ä‘á»™ng cuá»™n ngang mÆ°á»£t mÃ , khÃ´ng xÃ´ lá»‡ch bá»‘ cá»¥c */
   table {
     max-width: 100% !important;
   }
@@ -522,7 +522,7 @@ html, body {
     -webkit-overflow-scrolling: touch !important;
   }
 
-  /* Header và Tiêu đề không bị cắt chữ */
+  /* Header vÃ  TiÃªu Ä‘á» khÃ´ng bá»‹ cáº¯t chá»¯ */
   .tkd-academic-subpage h1 {
     font-size: clamp(1.15rem, 5vw, 1.5rem) !important;
     line-height: 1.35 !important;
@@ -540,26 +540,26 @@ html, body {
     line-height: 1.4 !important;
   }
 
-  /* Khoảng cách padding lề an toàn 12px */
+  /* Khoáº£ng cÃ¡ch padding lá» an toÃ n 12px */
   .max-w-5xl, .max-w-6xl, .max-w-7xl, .max-w-4xl {
     padding-left: 12px !important;
     padding-right: 12px !important;
   }
 
-  /* Nút bấm không bị chèn ép chữ */
+  /* NÃºt báº¥m khÃ´ng bá»‹ chÃ¨n Ã©p chá»¯ */
   .btn, a.btn, .tkd-btn {
     min-height: 38px !important;
   }
 }
 
-/* Marquee chạy ngang mượt mà ở cả ngoài và trong .tkd-page-scope */
+/* Marquee cháº¡y ngang mÆ°á»£t mÃ  á»Ÿ cáº£ ngoÃ i vÃ  trong .tkd-page-scope */
 .marquee-track {
   display: inline-block;
   white-space: nowrap;
   animation: marquee 16s linear infinite;
 }
 
-/* Chuẩn hóa đa kích thước màn hình: 320px, 375px, 390px, 414px, 430px, 768px, 1024px, 1366px */
+/* Chuáº©n hÃ³a Ä‘a kÃ­ch thÆ°á»›c mÃ n hÃ¬nh: 320px, 375px, 390px, 414px, 430px, 768px, 1024px, 1366px */
 @media (max-width: 389px) {
   .max-w-5xl, .max-w-6xl, .max-w-7xl, .max-w-4xl {
     padding-left: 10px !important;
@@ -573,23 +573,23 @@ html, body {
   }
 }
 
-/* 2. Tối ưu Tablet (768px) */
+/* 2. Tá»‘i Æ°u Tablet (768px) */
 @media (min-width: 641px) and (max-width: 1023px) {
   .max-w-5xl, .max-w-6xl, .max-w-7xl {
     padding-left: 20px !important;
     padding-right: 20px !important;
   }
 
-  /* Bảng biểu nhiều cột trên tablet vẫn giữ thanh cuộn an toàn */
+  /* Báº£ng biá»ƒu nhiá»u cá»™t trÃªn tablet váº«n giá»¯ thanh cuá»™n an toÃ n */
   .table-responsive {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
   }
 }
 
-/* 3. Tối ưu Laptop (1366px), Desktop (1440px) và Màn hình lớn (1920px) */
+/* 3. Tá»‘i Æ°u Laptop (1366px), Desktop (1440px) vÃ  MÃ n hÃ¬nh lá»›n (1920px) */
 @media (min-width: 1024px) {
-  /* Căn giữa toàn bộ các khối nội dung lớn, chống kéo dãn quá mức */
+  /* CÄƒn giá»¯a toÃ n bá»™ cÃ¡c khá»‘i ná»™i dung lá»›n, chá»‘ng kÃ©o dÃ£n quÃ¡ má»©c */
   .max-w-7xl {
     max-width: 1280px !important;
     margin-left: auto !important;
@@ -611,10 +611,10 @@ html, body {
 
 
 /* ==========================================================================
-   BƯỚC 5/8 – ACCESSIBILITY, MOTION & VISUAL REFINEMENT
+   BÆ¯á»šC 5/8 â€“ ACCESSIBILITY, MOTION & VISUAL REFINEMENT
    ========================================================================== */
 
-/* 1. Trạng thái Focus rõ ràng, hỗ trợ truy cập bằng bàn phím (A11y) */
+/* 1. Tráº¡ng thÃ¡i Focus rÃµ rÃ ng, há»— trá»£ truy cáº­p báº±ng bÃ n phÃ­m (A11y) */
 :focus-visible {
   outline: 2px solid var(--color-secondary) !important;
   outline-offset: 2px !important;
@@ -631,7 +631,7 @@ textarea:disabled,
   filter: grayscale(0.5);
 }
 
-/* 2. Chống Safari iOS tự động zoom khi nhấn vào form input */
+/* 2. Chá»‘ng Safari iOS tá»± Ä‘á»™ng zoom khi nháº¥n vÃ o form input */
 @media (max-width: 767px) {
   input[type="text"],
   input[type="email"],
@@ -645,7 +645,7 @@ textarea:disabled,
   }
 }
 
-/* 3. Tôn trọng thiết lập giảm chuyển động (Reduced Motion) */
+/* 3. TÃ´n trá»ng thiáº¿t láº­p giáº£m chuyá»ƒn Ä‘á»™ng (Reduced Motion) */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -700,7 +700,7 @@ body,
   border-color: rgba(198, 91, 105, 0.35) !important;
 }
 
-/* Chuẩn hóa hiển thị trang học liệu chuyên sâu: Mục lục, Công thức, Bảng biểu, Ghi chú */
+/* Chuáº©n hÃ³a hiá»ƒn thá»‹ trang há»c liá»‡u chuyÃªn sÃ¢u: Má»¥c lá»¥c, CÃ´ng thá»©c, Báº£ng biá»ƒu, Ghi chÃº */
 .tkd-academic-subpage {
   color: #303039 !important;
   font-size: 0.9375rem;
@@ -728,7 +728,7 @@ body,
   border-bottom: 2px solid #C65B69 !important;
 }
 
-/* Điểm nhấn Champagne Gold (#C5A46D) tinh tế trên thanh điều hướng & thẻ tiêu đề */
+/* Äiá»ƒm nháº¥n Champagne Gold (#C5A46D) tinh táº¿ trÃªn thanh Ä‘iá»u hÆ°á»›ng & tháº» tiÃªu Ä‘á» */
 #mainNavbar {
   background: rgba(168, 50, 69, 0.98) !important;
   border-bottom: 1px solid rgba(198, 91, 105, 0.4) !important;
@@ -752,7 +752,7 @@ footer.bg-\[\#142B49\] {
   }
 }
 
-/* 4. Tinh chỉnh vi chuyển động (Micro-interactions) êm ái cho thẻ & nút tương tác */
+/* 4. Tinh chá»‰nh vi chuyá»ƒn Ä‘á»™ng (Micro-interactions) Ãªm Ã¡i cho tháº» & nÃºt tÆ°Æ¡ng tÃ¡c */
 .tkd-card-interactive,
 .interactive-card {
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease !important;
@@ -1060,11 +1060,11 @@ footer.bg-\[\#142B49\] {
 }
 
 /* ==========================================================================
-   HỆ THỐNG BẢO ĐẢM TƯƠNG PHẢN THỊ GIÁC (WCAG AAA)
-   ĐẢM BẢO 100% KHÔNG CÓ LỖI CHỮ TỐI TRÊN NỀN TỐI HOẶC CHỮ SÁNG TRÊN NỀN SÁNG
+   Há»† THá»NG Báº¢O Äáº¢M TÆ¯Æ NG PHáº¢N THá»Š GIÃC (WCAG AAA)
+   Äáº¢M Báº¢O 100% KHÃ”NG CÃ“ Lá»–I CHá»® Tá»I TRÃŠN Ná»€N Tá»I HOáº¶C CHá»® SÃNG TRÃŠN Ná»€N SÃNG
    ========================================================================== */
 
-/* A. THÀNH PHẦN NỀN ĐỎ/ĐỎ ĐÔ: Chữ BẮT BUỘC màu trắng hoặc đỏ nhạt sáng */
+/* A. THÃ€NH PHáº¦N Ná»€N Äá»Ž/Äá»Ž ÄÃ”: Chá»¯ Báº®T BUá»˜C mÃ u tráº¯ng hoáº·c Ä‘á» nháº¡t sÃ¡ng */
 .chapter-header-banner,
 .tkd-academic-header,
 [class*="from-[#A83245]"],
@@ -1072,31 +1072,9 @@ footer.bg-\[\#142B49\] {
    HIGH CONTRAST & WCAG AAA ENFORCEMENT FOR BRAND COLORS & DARK CONTAINERS
    ========================================================================== */
 
-/* Explicit Brand Text Utilities — Guaranteed Color Enforcement */
-.text-\[\#742D3A\],
-.text-\[\#742d3a\],
-[class*="text-[#742D3A]"],
-[class*="text-[#742d3a]"] {
-  color: #742D3A !important;
-}
-
-.text-\[\#A83245\],
-.text-\[\#a83245\],
-[class*="text-[#A83245]"],
-[class*="text-[#a83245]"] {
-  color: #A83245 !important;
-}
-
-.text-\[\#C65B69\],
-.text-\[\#c65b69\],
-[class*="text-[#C65B69]"],
-[class*="text-[#c65b69]"] {
-  color: #C65B69 !important;
-}
-
-/* 1. Explicit Light Text Utilities — MUST ALWAYS REMAIN LIGHT & CRISP */
+/* 1. Explicit Light Text Utilities â€” MUST ALWAYS REMAIN LIGHT & CRISP */
 .text-white,
-[class*="text-white"],
+[class~="text-white"],
 .text-slate-50,
 .text-slate-100,
 .text-slate-200,
@@ -1107,13 +1085,13 @@ footer.bg-\[\#142B49\] {
   color: #ffffff !important;
 }
 
-.text-white\/90, [class*="text-white/90"] {
+.text-white\/90, [class~="text-white/90"] {
   color: rgba(255, 255, 255, 0.95) !important;
 }
-.text-white\/80, [class*="text-white/80"] {
+.text-white\/80, [class~="text-white/80"] {
   color: rgba(255, 255, 255, 0.88) !important;
 }
-.text-white\/70, [class*="text-white/70"] {
+.text-white\/70, [class~="text-white/70"] {
   color: rgba(255, 255, 255, 0.80) !important;
 }
 .text-\[\#F8EDEF\]\/90 {
@@ -1124,18 +1102,18 @@ footer.bg-\[\#142B49\] {
 }
 
 /* 2. All Dark Containers: Headers, Banners, Burgundy Boxes, Footers, Navbars */
-div[class*="bg-[#A83245]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class*="bg-[#F7F5F2]"]),
-div[class*="bg-[#742D3A]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class*="bg-[#F7F5F2]"]),
-div[class*="bg-[#C65B69]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class*="bg-[#F7F5F2]"]),
-div[class*="from-[#A83245]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class*="bg-[#F7F5F2]"]),
-div[class*="from-[#742D3A]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class*="bg-[#F7F5F2]"]),
-div[class*="from-[#C65B69]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class*="bg-[#F7F5F2]"]),
+div[class~="bg-[#A83245]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class~="bg-[#F7F5F2]"]),
+div[class~="bg-[#742D3A]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class~="bg-[#F7F5F2]"]),
+div[class~="bg-[#C65B69]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class~="bg-[#F7F5F2]"]),
+div[class~="from-[#A83245]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class~="bg-[#F7F5F2]"]),
+div[class~="from-[#742D3A]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class~="bg-[#F7F5F2]"]),
+div[class~="from-[#C65B69]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class~="bg-[#F7F5F2]"]),
 header[class*="from-[#"],
 header[class*="bg-[#"],
 section[class*="from-[#"],
-[class*="bg-[#111827]"],
-[class*="bg-[#0B1E33]"],
-[class*="bg-[#142B49]"],
+[class~="bg-[#111827]"],
+[class~="bg-[#0B1E33]"],
+[class~="bg-[#142B49]"],
 [class*="bg-slate-900"],
 [class*="bg-slate-800"],
 [class*="bg-gray-900"],
@@ -1149,7 +1127,7 @@ table thead th {
   color: #ffffff;
 }
 
-/* 2B. CÁC NÚT TABS & BỘ LỌC DANH MỤC: Nền trắng chữ đen/chàm đậm tuyệt đối rõ nét, đang chọn nền đỏ chữ trắng */
+/* 2B. CÃC NÃšT TABS & Bá»˜ Lá»ŒC DANH Má»¤C: Ná»n tráº¯ng chá»¯ Ä‘en/chÃ m Ä‘áº­m tuyá»‡t Ä‘á»‘i rÃµ nÃ©t, Ä‘ang chá»n ná»n Ä‘á» chá»¯ tráº¯ng */
 .news-filter-btn,
 button.news-filter-btn,
 .ed-source-filter-btn {
@@ -1157,123 +1135,123 @@ button.news-filter-btn,
 }
 
 .news-filter-btn.bg-white,
-.news-filter-btn:not([class*="text-white"]):not([class*="bg-[#A83245]"]),
-button.news-filter-btn:not([class*="text-white"]):not([class*="bg-[#A83245]"]),
+.news-filter-btn:not([class~="text-white"]):not([class~="bg-[#A83245]"]),
+button.news-filter-btn:not([class~="text-white"]):not([class~="bg-[#A83245]"]),
 .news-filter-btn[class*="bg-white"],
 button.news-filter-btn[class*="bg-white"] {
   background-color: #ffffff !important;
-  color: #0f172a !important; /* text-slate-900 tuyệt đối rõ nét */
+  color: #0f172a !important; /* text-slate-900 tuyá»‡t Ä‘á»‘i rÃµ nÃ©t */
   border: 1px solid #94a3b8 !important;
 }
 
 .news-filter-btn.bg-white:hover,
-.news-filter-btn:not([class*="text-white"]):not([class*="bg-[#A83245]"]):hover,
-button.news-filter-btn:not([class*="text-white"]):not([class*="bg-[#A83245]"]):hover {
+.news-filter-btn:not([class~="text-white"]):not([class~="bg-[#A83245]"]):hover,
+button.news-filter-btn:not([class~="text-white"]):not([class~="bg-[#A83245]"]):hover {
   background-color: #F8EDEF !important;
   color: #A83245 !important;
   border-color: #C65B69 !important;
 }
 
 .news-filter-btn.bg-\[\#A83245\],
-.news-filter-btn[class*="bg-[#A83245]"][class*="text-white"],
-button.news-filter-btn[class*="bg-[#A83245]"][class*="text-white"] {
+.news-filter-btn[class~="bg-[#A83245]"][class~="text-white"],
+button.news-filter-btn[class~="bg-[#A83245]"][class~="text-white"] {
   background-color: #A83245 !important;
   color: #ffffff !important;
   border-color: #A83245 !important;
 }
 
-/* 2C. CHÚ THÍCH PHỤ VÀ DẪN NGUỒN TRÊN NỀN SÁNG: Đảm bảo độ đậm rõ nét tối thiểu WCAG AA/AAA */
-.tkd-page-scope .text-slate-500:not([class*="from-"]):not([class*="bg-[#"]):not([class*="text-white"]):not([class*="text-[#F8EDEF]"]),
-.tkd-page-scope .text-slate-400:not([class*="from-"]):not([class*="bg-[#"]):not([class*="text-white"]):not([class*="text-[#F8EDEF]"]),
-.tkd-page-scope .text-gray-500:not([class*="from-"]):not([class*="bg-[#"]):not([class*="text-white"]):not([class*="text-[#F8EDEF]"]),
-.tkd-page-scope .text-gray-400:not([class*="from-"]):not([class*="bg-[#"]):not([class*="text-white"]):not([class*="text-[#F8EDEF]"]) {
-  color: #334155 !important; /* text-slate-700 chuẩn tương phản cao trên nền trắng/kem */
+/* 2C. CHÃš THÃCH PHá»¤ VÃ€ DáºªN NGUá»’N TRÃŠN Ná»€N SÃNG: Äáº£m báº£o Ä‘á»™ Ä‘áº­m rÃµ nÃ©t tá»‘i thiá»ƒu WCAG AA/AAA */
+.tkd-page-scope .text-slate-500:not([class*="from-"]):not([class*="bg-[#"]):not([class~="text-white"]):not([class*="text-[#F8EDEF]"]),
+.tkd-page-scope .text-slate-400:not([class*="from-"]):not([class*="bg-[#"]):not([class~="text-white"]):not([class*="text-[#F8EDEF]"]),
+.tkd-page-scope .text-gray-500:not([class*="from-"]):not([class*="bg-[#"]):not([class~="text-white"]):not([class*="text-[#F8EDEF]"]),
+.tkd-page-scope .text-gray-400:not([class*="from-"]):not([class*="bg-[#"]):not([class~="text-white"]):not([class*="text-[#F8EDEF]"]) {
+  color: #334155 !important; /* text-slate-700 chuáº©n tÆ°Æ¡ng pháº£n cao trÃªn ná»n tráº¯ng/kem */
   font-weight: 500;
 }
 
-/* 2D. NHÃN PHỤ, NGÀY THÁNG, THÔNG TIN CẬP NHẬT TRÊN NỀN TỐI */
-[class*="from-[#742D3A]"] [class*="text-slate-400"],
-[class*="from-[#742D3A]"] [class*="text-slate-500"],
-[class*="from-[#742D3A]"] [class*="text-gray-400"],
-[class*="from-[#742D3A]"] [class*="text-gray-500"],
-[class*="bg-[#742D3A]"] [class*="text-slate-400"],
-[class*="bg-[#742D3A]"] [class*="text-slate-500"],
-[class*="bg-[#A83245]"] [class*="text-slate-400"],
-[class*="bg-[#A83245]"] [class*="text-slate-500"],
+/* 2D. NHÃƒN PHá»¤, NGÃ€Y THÃNG, THÃ”NG TIN Cáº¬P NHáº¬T TRÃŠN Ná»€N Tá»I */
+[class~="from-[#742D3A]"] [class*="text-slate-400"],
+[class~="from-[#742D3A]"] [class*="text-slate-500"],
+[class~="from-[#742D3A]"] [class*="text-gray-400"],
+[class~="from-[#742D3A]"] [class*="text-gray-500"],
+[class~="bg-[#742D3A]"] [class*="text-slate-400"],
+[class~="bg-[#742D3A]"] [class*="text-slate-500"],
+[class~="bg-[#A83245]"] [class*="text-slate-400"],
+[class~="bg-[#A83245]"] [class*="text-slate-500"],
 header.bg-gradient-to-br [class*="text-slate-400"],
 header.bg-gradient-to-br [class*="text-slate-500"] {
   color: #e2e8f0 !important;
 }
 
 /* Headings inside all dark containers MUST BE crisp white */
-[class*="bg-[#A83245]"] h1, [class*="bg-[#A83245]"] h2, [class*="bg-[#A83245]"] h3, [class*="bg-[#A83245]"] h4, [class*="bg-[#A83245]"] h5, [class*="bg-[#A83245]"] h6,
-[class*="bg-[#742D3A]"] h1, [class*="bg-[#742D3A]"] h2, [class*="bg-[#742D3A]"] h3, [class*="bg-[#742D3A]"] h4, [class*="bg-[#742D3A]"] h5, [class*="bg-[#742D3A]"] h6,
-[class*="bg-[#C65B69]"] h1, [class*="bg-[#C65B69]"] h2, [class*="bg-[#C65B69]"] h3, [class*="bg-[#C65B69]"] h4, [class*="bg-[#C65B69]"] h5, [class*="bg-[#C65B69]"] h6,
-[class*="from-[#A83245]"] h1, [class*="from-[#A83245]"] h2, [class*="from-[#A83245]"] h3, [class*="from-[#A83245]"] h4, [class*="from-[#A83245]"] h5, [class*="from-[#A83245]"] h6,
-[class*="from-[#742D3A]"] h1, [class*="from-[#742D3A]"] h2, [class*="from-[#742D3A]"] h3, [class*="from-[#742D3A]"] h4, [class*="from-[#742D3A]"] h5, [class*="from-[#742D3A]"] h6,
-[class*="from-[#C65B69]"] h1, [class*="from-[#C65B69]"] h2, [class*="from-[#C65B69]"] h3, [class*="from-[#C65B69]"] h4, [class*="from-[#C65B69]"] h5, [class*="from-[#C65B69]"] h6,
+[class~="bg-[#A83245]"] h1, [class~="bg-[#A83245]"] h2, [class~="bg-[#A83245]"] h3, [class~="bg-[#A83245]"] h4, [class~="bg-[#A83245]"] h5, [class~="bg-[#A83245]"] h6,
+[class~="bg-[#742D3A]"] h1, [class~="bg-[#742D3A]"] h2, [class~="bg-[#742D3A]"] h3, [class~="bg-[#742D3A]"] h4, [class~="bg-[#742D3A]"] h5, [class~="bg-[#742D3A]"] h6,
+[class~="bg-[#C65B69]"] h1, [class~="bg-[#C65B69]"] h2, [class~="bg-[#C65B69]"] h3, [class~="bg-[#C65B69]"] h4, [class~="bg-[#C65B69]"] h5, [class~="bg-[#C65B69]"] h6,
+[class~="from-[#A83245]"] h1, [class~="from-[#A83245]"] h2, [class~="from-[#A83245]"] h3, [class~="from-[#A83245]"] h4, [class~="from-[#A83245]"] h5, [class~="from-[#A83245]"] h6,
+[class~="from-[#742D3A]"] h1, [class~="from-[#742D3A]"] h2, [class~="from-[#742D3A]"] h3, [class~="from-[#742D3A]"] h4, [class~="from-[#742D3A]"] h5, [class~="from-[#742D3A]"] h6,
+[class~="from-[#C65B69]"] h1, [class~="from-[#C65B69]"] h2, [class~="from-[#C65B69]"] h3, [class~="from-[#C65B69]"] h4, [class~="from-[#C65B69]"] h5, [class~="from-[#C65B69]"] h6,
 .chapter-header-banner h1, .chapter-header-banner h2, .chapter-header-banner h3, .chapter-header-banner h4,
 footer h1, footer h2, footer h3, footer h4 {
   color: #ffffff !important;
 }
 
 /* Paragraphs directly in dark containers: light blush #F8EDEF for soft readability */
-[class*="bg-[#A83245]"] > p,
-[class*="bg-[#742D3A]"] > p,
-[class*="bg-[#C65B69]"] > p,
-[class*="from-[#A83245]"] > p,
-[class*="from-[#742D3A]"] > p,
-[class*="from-[#C65B69]"] > p,
-[class*="from-[#742D3A]"] p:not([class*="text-slate-"]):not([class*="text-amber-"]):not([class*="text-emerald-"]),
-[class*="from-[#A83245]"] p:not([class*="text-slate-"]):not([class*="text-amber-"]):not([class*="text-emerald-"]),
-[class*="bg-[#742D3A]"] p:not([class*="text-slate-"]):not([class*="text-amber-"]):not([class*="text-emerald-"]),
-[class*="bg-[#A83245]"] p:not([class*="text-slate-"]):not([class*="text-amber-"]):not([class*="text-emerald-"]),
+[class~="bg-[#A83245]"] > p,
+[class~="bg-[#742D3A]"] > p,
+[class~="bg-[#C65B69]"] > p,
+[class~="from-[#A83245]"] > p,
+[class~="from-[#742D3A]"] > p,
+[class~="from-[#C65B69]"] > p,
+[class~="from-[#742D3A]"] p:not([class*="text-slate-"]):not([class*="text-amber-"]):not([class*="text-emerald-"]),
+[class~="from-[#A83245]"] p:not([class*="text-slate-"]):not([class*="text-amber-"]):not([class*="text-emerald-"]),
+[class~="bg-[#742D3A]"] p:not([class*="text-slate-"]):not([class*="text-amber-"]):not([class*="text-emerald-"]),
+[class~="bg-[#A83245]"] p:not([class*="text-slate-"]):not([class*="text-amber-"]):not([class*="text-emerald-"]),
 .chapter-header-banner p,
 footer p {
   color: #F8EDEF !important;
 }
 
 .chapter-header-banner strong,
-[class*="from-[#A83245]"] strong,
-[class*="from-[#742D3A]"] strong,
-[class*="bg-[#A83245]"] strong,
-[class*="bg-[#742D3A]"] strong {
+[class~="from-[#A83245]"] strong,
+[class~="from-[#742D3A]"] strong,
+[class~="bg-[#A83245]"] strong,
+[class~="bg-[#742D3A]"] strong {
   color: #ffffff !important;
 }
 
 /* Badges / pills on dark backgrounds */
 .chapter-header-banner [class*="bg-amber"],
 .chapter-header-banner [class*="bg-yellow"],
-[class*="from-[#742D3A]"] [class*="bg-amber"],
-[class*="from-[#A83245]"] [class*="bg-amber"] {
+[class~="from-[#742D3A]"] [class*="bg-amber"],
+[class~="from-[#A83245]"] [class*="bg-amber"] {
   color: #0F172A !important;
 }
-[class*="from-[#742D3A]"] [class*="bg-emerald"],
-[class*="from-[#A83245]"] [class*="bg-emerald"] {
+[class~="from-[#742D3A]"] [class*="bg-emerald"],
+[class~="from-[#A83245]"] [class*="bg-emerald"] {
   color: #ffffff !important;
 }
 
 /* 3. LIGHT CONTRAST INSIDE DARK CONTAINERS (Buttons, White Cards, Inputs) */
-[class*="from-[#742D3A]"] a.bg-white,
-[class*="from-[#A83245]"] a.bg-white,
-[class*="bg-[#742D3A]"] a.bg-white,
-[class*="bg-[#A83245]"] a.bg-white,
-[class*="from-[#742D3A]"] button.bg-white,
-[class*="from-[#A83245]"] button.bg-white,
-[class*="bg-[#742D3A]"] button.bg-white,
-[class*="bg-[#A83245]"] button.bg-white {
+[class~="from-[#742D3A]"] a.bg-white,
+[class~="from-[#A83245]"] a.bg-white,
+[class~="bg-[#742D3A]"] a.bg-white,
+[class~="bg-[#A83245]"] a.bg-white,
+[class~="from-[#742D3A]"] button.bg-white,
+[class~="from-[#A83245]"] button.bg-white,
+[class~="bg-[#742D3A]"] button.bg-white,
+[class~="bg-[#A83245]"] button.bg-white {
   color: #742D3A !important;
   font-weight: 700 !important;
 }
 
-/* 4. ACADEMIC TEXTBOOK & SECTION SCOPED STYLES: Chỉ áp dụng màu tối cho vùng nền sáng */
+/* 4. ACADEMIC TEXTBOOK & SECTION SCOPED STYLES: Chá»‰ Ã¡p dá»¥ng mÃ u tá»‘i cho vÃ¹ng ná»n sÃ¡ng */
 .tkd-academic-subpage section,
 .tkd-page-scope section {
   background-color: #ffffff;
   color: #303039;
 }
 
-/* CHỈ áp dụng màu chữ tối cho các tiêu đề và đoạn văn nằm trực tiếp trên nền sáng (không nằm trong khối gradient/dark) */
+/* CHá»ˆ Ã¡p dá»¥ng mÃ u chá»¯ tá»‘i cho cÃ¡c tiÃªu Ä‘á» vÃ  Ä‘oáº¡n vÄƒn náº±m trá»±c tiáº¿p trÃªn ná»n sÃ¡ng (khÃ´ng náº±m trong khá»‘i gradient/dark) */
 .tkd-academic-subpage section:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]) > h1,
 .tkd-academic-subpage section:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]) > h2,
 .tkd-page-scope section:not([class*="from-"]):not([class*="bg-[#742D3A]"]):not([class*="bg-[#A83245]"]) > h1,
@@ -1299,7 +1277,7 @@ footer p {
   color: #303039;
 }
 
-/* C. BẢNG BIỂU HỌC THUẬT: Header đỏ chữ trắng, Body trắng chữ đen */
+/* C. Báº¢NG BIá»‚U Há»ŒC THUáº¬T: Header Ä‘á» chá»¯ tráº¯ng, Body tráº¯ng chá»¯ Ä‘en */
 table thead tr th {
   background-color: #A83245 !important;
   color: #ffffff !important;
@@ -1320,11 +1298,11 @@ table tbody tr:nth-child(odd) {
 
 
 /* ==========================================================================
-   TỰ CO GIÃN TỰ ĐỘNG THEO KÍCH CỠ MÀN HÌNH (NO SCROLLBAR, FLUID FIT)
-   ÁP DỤNG ĐỒNG BỘ TOÀN BỘ WEBSITE CHO MỌI THIẾT BỊ
+   Tá»° CO GIÃƒN Tá»° Äá»˜NG THEO KÃCH Cá»  MÃ€N HÃŒNH (NO SCROLLBAR, FLUID FIT)
+   ÃP Dá»¤NG Äá»’NG Bá»˜ TOÃ€N Bá»˜ WEBSITE CHO Má»ŒI THIáº¾T Bá»Š
    ========================================================================== */
 
-/* 1. Bảng biểu tự co giãn theo kích thước màn hình, loại bỏ hoàn toàn thanh trượt ngang */
+/* 1. Báº£ng biá»ƒu tá»± co giÃ£n theo kÃ­ch thÆ°á»›c mÃ n hÃ¬nh, loáº¡i bá» hoÃ n toÃ n thanh trÆ°á»£t ngang */
 table,
 .table-responsive table,
 .table-container table,
@@ -1358,7 +1336,7 @@ table td,
   hyphens: auto !important;
 }
 
-/* 2. Quy trình & sơ đồ các bước tự co giãn linh hoạt */
+/* 2. Quy trÃ¬nh & sÆ¡ Ä‘á»“ cÃ¡c bÆ°á»›c tá»± co giÃ£n linh hoáº¡t */
 .tkd-step-container,
 .process-flow,
 .step-grid {
@@ -1377,4 +1355,60 @@ table td,
   padding: clamp(8px, 1vw, 14px) !important;
   font-size: clamp(11px, 1.1vw, 13px) !important;
   box-sizing: border-box !important;
+}
+
+
+/* ==========================================================================
+   HOTFIX: SELECTOR CHÃNH XÃC (class~=) â€” khÃ´ng Ä‘á»ƒ hover:/group-hover:/selection:
+   lÃ m Ä‘á»•i mÃ u chá»¯ toÃ n khá»‘i. Tháº» tin tá»©c, nÃºt, báº£ng luÃ´n Ä‘á»§ tÆ°Æ¡ng pháº£n.
+   ========================================================================== */
+::selection { background: #C65B69; color: #ffffff; }
+
+/* Tháº» tin tá»©c / bÃ i viáº¿t trÃªn ná»n tráº¯ng: tiÃªu Ä‘á» tá»‘i, nhÃ£n há»“ng nháº¡t chá»¯ Ä‘á» Ä‘áº­m */
+.hce-news-card h3,
+.hce-news-card h3 a,
+article.group h3,
+article.group h3 a {
+  color: #1e293b !important;
+}
+.hce-news-card h3 a:hover,
+article.group:hover h3 a {
+  color: #A83245 !important;
+}
+.hce-news-card > div:first-child > div:first-child > span:first-child {
+  background-color: #F8EDEF !important;
+  color: #742D3A !important;
+  border: 1px solid #E8DDE0 !important;
+}
+.hce-news-card .text-slate-500,
+.hce-news-card .text-slate-400 {
+  color: #475569 !important;
+}
+article.group a.font-extrabold {
+  color: #A83245 !important;
+}
+
+/* Báº£ng giÃ¡o trÃ¬nh: tiÃªu Ä‘á» Ä‘á» chá»¯ tráº¯ng, thÃ¢n tráº¯ng chá»¯ Ä‘áº­m */
+.tkd-page-scope table thead th,
+.tkd-academic-subpage table thead th {
+  background-color: #742D3A !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+.tkd-page-scope table td,
+.tkd-academic-subpage table td {
+  color: #303039 !important;
+}
+.tkd-page-scope table td.text-\[\#742D3A\],
+.tkd-page-scope table td[class~="text-[#742D3A]"] {
+  color: #742D3A !important;
+}
+.tkd-fit-wrap {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  position: relative;
+}
+.tkd-fit-wrap > * {
+  transform-origin: top left;
 }
