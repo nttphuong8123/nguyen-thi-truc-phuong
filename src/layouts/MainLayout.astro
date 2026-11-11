@@ -930,97 +930,50 @@ function getLeafIcon(label: string): string {
           }
         }
 
-        // --- 2. THU NHỎ BẢNG BIỂU / SƠ ĐỒ VỪA VẶN MÀN HÌNH ---
-        function autoScaleAcademicMedia() {
-          var isMobile = window.innerWidth <= 768;
-
-          // Xử lý tất cả các bảng trong trang học thuật
+        // --- 2. TỰ ĐỘNG BẢO ĐẢM BẢNG BIỂU & MEDIA VỪA VẶN MÀN HÌNH (RESPONSIVE) ---
+        function ensureResponsiveAcademicMedia() {
+          // Xử lý tất cả các bảng trong trang: bọc wrapper cuộn ngang mượt mà trên mobile, không bao giờ bị cắt xén
           document.querySelectorAll('.tkd-page-scope table, .tkd-academic-subpage table, main table, article table').forEach(function(tbl) {
-            // Loại bỏ bọc lồng nhau nếu có overflow-x-auto bao quanh
-            var parent = tbl.parentElement;
-            if (parent && (parent.classList.contains('overflow-x-auto') || parent.classList.contains('table-responsive') || parent.classList.contains('table-container'))) {
-              parent.style.setProperty('overflow-x', 'hidden', 'important');
-              parent.style.setProperty('max-width', '100%', 'important');
-            }
-
-            var wrapper = tbl.parentElement;
-            if (!wrapper || !wrapper.classList.contains('tkd-auto-scale-wrapper')) {
+            var existingWrapper = tbl.closest('.overflow-x-auto, .table-responsive, .table-container, .table-responsive-wrapper');
+            if (!existingWrapper) {
               var wrap = document.createElement('div');
-              wrap.className = 'tkd-auto-scale-wrapper';
-              wrap.style.width = '100%';
-              wrap.style.overflow = 'hidden';
-              wrap.style.position = 'relative';
-              wrap.style.margin = '0.5rem 0';
+              wrap.className = 'overflow-x-auto my-3 w-full rounded-xl border border-slate-200 bg-white shadow-2xs';
+              wrap.style.webkitOverflowScrolling = 'touch';
               tbl.parentNode.insertBefore(wrap, tbl);
               wrap.appendChild(tbl);
-              wrapper = wrap;
-            }
-
-            if (!isMobile) {
-              tbl.style.transform = '';
-              tbl.style.transformOrigin = '';
-              tbl.style.width = '100%';
-              tbl.style.maxWidth = '100%';
-              wrapper.style.height = '';
-              wrapper.style.overflow = '';
-              return;
-            }
-
-            // Trên mobile: Đặt chiều rộng tự nhiên để đo chính xác
-            tbl.querySelectorAll('th, td').forEach(function(c) {
-              c.style.setProperty('white-space', 'nowrap', 'important');
-              c.style.setProperty('word-break', 'normal', 'important');
-            });
-            tbl.style.setProperty('width', 'max-content', 'important');
-            tbl.style.setProperty('max-width', 'none', 'important');
-            tbl.style.transform = 'none';
-
-            var containerWidth = wrapper.getBoundingClientRect().width || wrapper.clientWidth || (window.innerWidth - 32);
-            var tableWidth = tbl.scrollWidth || tbl.offsetWidth || tbl.getBoundingClientRect().width;
-
-            if (tableWidth > containerWidth && containerWidth > 0) {
-              var scale = containerWidth / tableWidth;
-              tbl.style.transform = 'scale(' + scale + ')';
-              tbl.style.transformOrigin = 'top left';
-              var scaledHeight = Math.ceil((tbl.offsetHeight || tbl.getBoundingClientRect().height) * scale);
-              wrapper.style.height = scaledHeight + 'px';
-              wrapper.style.overflow = 'hidden';
             } else {
-              tbl.style.transform = '';
-              wrapper.style.height = '';
-              wrapper.style.overflow = 'hidden';
+              existingWrapper.style.overflowX = 'auto';
+              existingWrapper.style.webkitOverflowScrolling = 'touch';
+              existingWrapper.style.maxWidth = '100%';
             }
+
+            // Đảm bảo chữ trong ô tự xuống dòng hợp lý, không ép dồn hàng và không bị tràn
+            tbl.querySelectorAll('th, td').forEach(function(c) {
+              c.style.whiteSpace = 'normal';
+              c.style.wordBreak = 'break-word';
+              c.style.overflowWrap = 'break-word';
+            });
           });
 
-          // Biểu đồ, sơ đồ, SVG, hình ảnh
+          // Biểu đồ, sơ đồ, SVG, hình ảnh: co giãn 100% theo chiều ngang thiết bị
           document.querySelectorAll('.tkd-page-scope svg, .tkd-academic-subpage svg, .diagram, .flowchart, .tkd-page-scope img, .tkd-academic-subpage img').forEach(function(el) {
             el.style.maxWidth = '100%';
             el.style.height = 'auto';
-            if (el.parentElement) {
-              el.parentElement.style.overflowX = 'hidden';
-              el.parentElement.style.maxWidth = '100%';
-            }
-          });
-
-          document.querySelectorAll('.table-responsive, .table-container, .overflow-x-auto').forEach(function(c) {
-            c.style.setProperty('overflow-x', 'hidden', 'important');
-            c.style.setProperty('max-width', '100%', 'important');
           });
         }
 
         var resizeTimer;
         window.addEventListener('resize', function () {
           clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(autoScaleAcademicMedia, 150);
+          resizeTimer = setTimeout(ensureResponsiveAcademicMedia, 150);
         });
 
-        // Kích hoạt render công thức và scale bảng
+        // Kích hoạt render công thức và chuẩn hóa bảng biểu
         function initAcademicEnhancements() {
           renderMathFormulas();
-          autoScaleAcademicMedia();
-          // Chạy thêm 1 lần sau khi KaTeX render xong cấu trúc DOM
-          setTimeout(autoScaleAcademicMedia, 300);
-          setTimeout(autoScaleAcademicMedia, 800);
+          ensureResponsiveAcademicMedia();
+          setTimeout(renderMathFormulas, 300);
+          setTimeout(ensureResponsiveAcademicMedia, 500);
         }
 
         if (document.readyState === 'loading') {

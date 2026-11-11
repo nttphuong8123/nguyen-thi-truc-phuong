@@ -1469,37 +1469,59 @@ a:hover span[class*="rounded-lg"][class*="text-[#A83245]"],
   }
 }
 
-/* 5. Auto-Scale Academic Tables & Diagrams on Mobile (No Horizontal Scroll, No Forced Line-Wrapping, Proportional Shrink-Fit) */
+/* 5. Responsive Academic Tables & Media (Full width, smooth touch scroll on mobile, no cut-off) */
+.table-responsive,
+.table-container,
+.table-responsive-wrapper,
+.overflow-x-auto,
 .tkd-auto-scale-wrapper {
   width: 100% !important;
   max-width: 100% !important;
-  overflow: hidden !important;
-  position: relative;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
   display: block;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.table-responsive table,
+.table-container table,
+.table-responsive-wrapper table,
+.overflow-x-auto table,
+.tkd-auto-scale-wrapper table {
+  width: 100% !important;
+  min-width: 560px;
+  border-collapse: collapse;
+}
+
+.table-responsive table th,
+.table-responsive table td,
+.table-container table th,
+.table-container table td,
+.overflow-x-auto table th,
+.overflow-x-auto table td,
+.tkd-auto-scale-wrapper table th,
+.tkd-auto-scale-wrapper table td {
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  line-height: 1.45;
 }
 
 @media (max-width: 768px) {
-  .tkd-auto-scale-wrapper table {
-    white-space: nowrap !important;
-    width: max-content !important;
-    max-width: none !important;
-  }
+  .table-responsive table th,
+  .table-responsive table td,
+  .overflow-x-auto table th,
+  .overflow-x-auto table td,
   .tkd-auto-scale-wrapper table th,
   .tkd-auto-scale-wrapper table td {
-    white-space: nowrap !important;
-    word-break: normal !important;
-    overflow-wrap: normal !important;
-    padding: 6px 8px !important;
-    font-size: 11px !important;
+    padding: 8px 10px !important;
+    font-size: 12px !important;
   }
-  .table-responsive,
-  .table-container,
-  .table-responsive-wrapper,
-  .overflow-x-auto {
-    overflow-x: hidden !important;
-    max-width: 100% !important;
-  }
-  /* Biểu đồ, sơ đồ, hình vẽ tự thu nhỏ vừa khít chiều ngang màn hình điện thoại */
+  
+  /* Biểu đồ, sơ đồ, hình vẽ tự co giãn vừa khít chiều ngang màn hình */
   .tkd-page-scope svg,
   .tkd-academic-subpage svg,
   .diagram,
