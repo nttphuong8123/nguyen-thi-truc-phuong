@@ -1101,12 +1101,15 @@ footer.bg-\[\#142B49\] {
 }
 
 /* 2. All Dark Containers: Headers, Banners, Burgundy Boxes, Footers, Navbars */
-[class*="bg-[#A83245]"],
-[class*="bg-[#742D3A]"],
-[class*="bg-[#C65B69]"],
-[class*="from-[#A83245]"],
-[class*="from-[#742D3A]"],
-[class*="from-[#C65B69]"],
+div[class*="bg-[#A83245]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class*="bg-[#F7F5F2]"]),
+div[class*="bg-[#742D3A]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class*="bg-[#F7F5F2]"]),
+div[class*="bg-[#C65B69]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class*="bg-[#F7F5F2]"]),
+div[class*="from-[#A83245]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class*="bg-[#F7F5F2]"]),
+div[class*="from-[#742D3A]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class*="bg-[#F7F5F2]"]),
+div[class*="from-[#C65B69]"]:not([class*="bg-white"]):not([class*="bg-slate-"]):not([class*="bg-amber-"]):not([class*="bg-[#F7F5F2]"]),
+header[class*="from-[#"],
+header[class*="bg-[#"],
+section[class*="from-[#"],
 [class*="bg-[#111827]"],
 [class*="bg-[#0B1E33]"],
 [class*="bg-[#142B49]"],
@@ -1121,6 +1124,37 @@ footer,
 table thead tr,
 table thead th {
   color: #ffffff;
+}
+
+/* 2B. CÁC NÚT TABS & BỘ LỌC DANH MỤC: Nền trắng chữ đen/chàm đậm tuyệt đối rõ nét, đang chọn nền đỏ chữ trắng */
+.news-filter-btn,
+button.news-filter-btn {
+  font-weight: 700 !important;
+}
+
+.news-filter-btn.bg-white,
+.news-filter-btn:not([class*="text-white"]):not([class*="bg-[#A83245]"]),
+button.news-filter-btn:not([class*="text-white"]):not([class*="bg-[#A83245]"]),
+.news-filter-btn[class*="bg-white"] {
+  background-color: #ffffff !important;
+  color: #1e293b !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+.news-filter-btn.bg-white:hover,
+.news-filter-btn:not([class*="text-white"]):not([class*="bg-[#A83245]"]):hover,
+button.news-filter-btn:not([class*="text-white"]):not([class*="bg-[#A83245]"]):hover {
+  background-color: #F8EDEF !important;
+  color: #A83245 !important;
+  border-color: #C65B69 !important;
+}
+
+.news-filter-btn.bg-\[\#A83245\],
+.news-filter-btn[class*="bg-[#A83245]"][class*="text-white"],
+button.news-filter-btn[class*="bg-[#A83245]"][class*="text-white"] {
+  background-color: #A83245 !important;
+  color: #ffffff !important;
+  border-color: #A83245 !important;
 }
 
 /* Headings inside all dark containers MUST BE crisp white */
