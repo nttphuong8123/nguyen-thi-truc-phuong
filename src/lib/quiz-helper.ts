@@ -1,4 +1,28 @@
 import db, { getOnlineExamConfigRaw, saveOnlineExamConfigRaw, getPageByPath } from './db';
+import riskManagementQuestionsRaw from '../data/subjects/quiz_bank_risk_management_300.json';
+
+// Transform raw quiz bank (quiz_bank_risk_management_300.json) → QuizQuestionItem[]
+interface RawRiskQuestion {
+  id: string;
+  chapter: number;
+  topic: string;
+  bloomLevel: string;
+  difficulty: string;
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+  sourceReference: string;
+  correctLetter: string;
+}
+const RISK_MANAGEMENT_QUESTIONS: QuizQuestionItem[] = (riskManagementQuestionsRaw as RawRiskQuestion[]).map((q) => ({
+  question: q.question,
+  answers: q.options,
+  correct: q.correctAnswer,
+  chapter: q.chapter,
+  difficulty: q.difficulty,
+  explanation: q.explanation,
+}));
 
 export interface QuizQuestionItem {
   question: string;
@@ -730,7 +754,17 @@ const DEFAULT_ONLINE_SUBJECTS: OnlineExamSubjectConfig[] = [
       {"question":"Đối với một số ngành, trong một số thời điểm hay giai đoạn trong năm doanh số bán hàng lớn hơn mức bình thường, hiện tượng này được gọi là","answers":["Tính chu kỳ","Tính nhạy cảm","Tính bất ổn","Tính mùa vụ"],"correct":3,"chapter":3,"difficulty":"Trung bình"},
       {"question":"là quá trình phân chia thị trường tổng thể thành các bộ phận nhỏ và một bộ phận bao gồm những khách hàng có hành vi cũng như nhu cầu tương đồng","answers":["(*) Thị trường mục tiêu","(**) Phân tích thị trường","(***) Phân khúc thị trường","Câu (*), (**) và (***) đều sai"],"correct":2,"chapter":3,"difficulty":"Trung bình"}
     ]
-  }
+  },
+  // =========================================================
+  // 4. Quản trị rủi ro — 300 câu, 5 chương, chuẩn Bloom
+  // =========================================================
+  {
+    key: 'risk-management',
+    label: '4. Quản trị rủi ro',
+    linked_route: '/study-corner/risk-management',
+    enabled: true,
+    questions: RISK_MANAGEMENT_QUESTIONS,
+  },
 ];
 
 export function getDefaultOnlineExamConfig(): OnlineExamConfig {

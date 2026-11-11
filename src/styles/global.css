@@ -1065,9 +1065,11 @@ footer.bg-\[\#142B49\] {
    ========================================================================== */
 
 /* A. THÃ€NH PHáº¦N Ná»€N Äá»Ž/Äá»Ž ÄÃ”: Chá»¯ Báº®T BUá»˜C mÃ u tráº¯ng hoáº·c Ä‘á» nháº¡t sÃ¡ng */
+/* Academic & banner explicit styles */
 .chapter-header-banner,
-.tkd-academic-header,
-[class*="from-[#A83245]"],
+.tkd-academic-header {
+  color: #ffffff;
+}
 /* ==========================================================================
    HIGH CONTRAST & WCAG AAA ENFORCEMENT FOR BRAND COLORS & DARK CONTAINERS
    ========================================================================== */
@@ -1411,4 +1413,102 @@ article.group a.font-extrabold {
 }
 .tkd-fit-wrap > * {
   transform-origin: top left;
+}
+
+
+/* ==========================================================================
+   TARGETED WCAG AAA CONTRAST ENFORCEMENT & MOBILE RESPONSIVE FIXES
+   ========================================================================== */
+
+/* 1. News Cards / Mentor / DCCT Category Badges: High Contrast */
+.hce-news-card span.uppercase,
+.hce-news-card [data-category],
+.hce-news-card span.bg-\[\#F8EDEF\],
+.hce-news-card span[class*="bg-[#F8EDEF]"],
+span[class*="rounded-md"][class*="uppercase"] {
+  background-color: #F8EDEF !important;
+  color: #742D3A !important;
+  border: 1px solid #E8DDE0 !important;
+  font-weight: 800 !important;
+}
+
+/* 2. Digital Resource / Teaching Page Buttons ("Mở Drive", "Mở Slide", "Tải văn bản") */
+a span[class*="rounded-lg"][class*="text-[#A83245]"],
+a span[class*="rounded-lg"][class*="bg-[#F7F5F2]"],
+a span[class*="text-[#A83245]"].font-bold,
+.group span[class*="bg-[#F7F5F2]"],
+span:has(> svg) + span[class*="text-[#A83245]"] {
+  background-color: #F8EDEF !important;
+  color: #742D3A !important;
+  border: 1px solid #E8DDE0 !important;
+  font-weight: 700 !important;
+}
+a:hover span[class*="rounded-lg"][class*="text-[#A83245]"],
+.group:hover span[class*="bg-[#F7F5F2]"] {
+  background-color: #742D3A !important;
+  color: #ffffff !important;
+}
+
+/* 3. Section Objectives / Chapter Headings ("Mục Tiêu Trọng Tâm") */
+.tkd-page-scope h3:not(header *):not(.chapter-header-banner *),
+.tkd-page-scope h4:not(header *):not(.chapter-header-banner *),
+.tkd-academic-subpage h3:not(header *):not(.chapter-header-banner *),
+.tkd-academic-subpage h4:not(header *):not(.chapter-header-banner *) {
+  color: #742D3A !important;
+}
+
+/* 4. Financial Market Index Bar (VN-INDEX, VN30, HNX) Mobile: Always 1 row */
+#liveStocksGrid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0.375rem !important;
+}
+@media (min-width: 640px) {
+  #liveStocksGrid {
+    gap: 0.75rem !important;
+  }
+}
+
+/* 5. Auto-Scale Academic Tables & Diagrams on Mobile (No Horizontal Scroll, No Forced Line-Wrapping, Proportional Shrink-Fit) */
+.tkd-auto-scale-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  position: relative;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .tkd-auto-scale-wrapper table {
+    white-space: nowrap !important;
+    width: max-content !important;
+    max-width: none !important;
+  }
+  .tkd-auto-scale-wrapper table th,
+  .tkd-auto-scale-wrapper table td {
+    white-space: nowrap !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    padding: 6px 8px !important;
+    font-size: 11px !important;
+  }
+  .table-responsive,
+  .table-container,
+  .table-responsive-wrapper,
+  .overflow-x-auto {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+  }
+  /* Biểu đồ, sơ đồ, hình vẽ tự thu nhỏ vừa khít chiều ngang màn hình điện thoại */
+  .tkd-page-scope svg,
+  .tkd-academic-subpage svg,
+  .diagram,
+  .flowchart,
+  .svg-container svg,
+  .tkd-page-scope img,
+  .tkd-academic-subpage img {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
 }

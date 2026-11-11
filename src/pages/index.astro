@@ -443,7 +443,7 @@ const initialHceCenterNews = DEFAULT_HCE_CENTER_NEWS;
 
         <div class="p-4 sm:p-5 space-y-4">
           <!-- 3 Chỉ số VN-INDEX, VN30, HNX (Hiển thị cùng 1 dòng trên cả mobile & desktop) -->
-          <div id="liveStocksGrid" class="grid grid-cols-3 gap-1.5 sm:gap-3">
+          <div id="liveStocksGrid" class="grid grid-cols-3 gap-1.5 sm:gap-3" style="display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important;">
             {initialStocks.map((st) => (
               <div class={`p-2 sm:p-3 rounded-xl border text-center ${st.isUp ? 'bg-emerald-50/70 border-emerald-200' : 'bg-rose-50/70 border-rose-200'}`}>
                 <span class="block text-[10px] sm:text-[11px] font-extrabold text-slate-700 uppercase truncate">{st.label}</span>
