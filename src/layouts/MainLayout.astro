@@ -306,6 +306,8 @@ function getLeafIcon(label: string): string {
       }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
     {customCss && <style is:inline set:html={customCss} />}
   </head>
   <body class="min-h-screen flex flex-col bg-[#F7F5F2] text-[#303039] antialiased selection:bg-[#C65B69] selection:text-white pt-14 sm:pt-16">
@@ -908,15 +910,39 @@ function getLeafIcon(label: string): string {
     </script>
 
         <script is:inline>
-      /* Tu dong thu nho bang bieu, so do, hinh ve vua khit man hinh dien thoai:
-         - Khong xuong dong trong o bang (white-space: nowrap)
-         - Khong su dung thanh truot ngang (overflow: hidden)
-         - Tu dong co gian theo ty le (transform: scale) */
+      /* Tự động render KaTeX cho toàn bộ công thức toán học và thu nhỏ bảng biểu vừa vặn màn hình */
       (function () {
+        // --- 1. RENDER KATEX TỰ ĐỘNG ---
+        function renderMathFormulas() {
+          if (window.renderMathInElement) {
+            window.renderMathInElement(document.body, {
+              delimiters: [
+                { left: '$$', right: '$$', display: true },
+                { left: '$', right: '$', display: false },
+                { left: '\\[', right: '\\]', display: true },
+                { left: '\\(', right: '\\)', display: false }
+              ],
+              throwOnError: false,
+              ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option']
+            });
+          } else {
+            setTimeout(renderMathFormulas, 100);
+          }
+        }
+
+        // --- 2. THU NHỎ BẢNG BIỂU / SƠ ĐỒ VỪA VẶN MÀN HÌNH ---
         function autoScaleAcademicMedia() {
           var isMobile = window.innerWidth <= 768;
 
-          document.querySelectorAll('.tkd-page-scope table, .tkd-academic-subpage table, main table').forEach(function(tbl) {
+          // Xử lý tất cả các bảng trong trang học thuật
+          document.querySelectorAll('.tkd-page-scope table, .tkd-academic-subpage table, main table, article table').forEach(function(tbl) {
+            // Loại bỏ bọc lồng nhau nếu có overflow-x-auto bao quanh
+            var parent = tbl.parentElement;
+            if (parent && (parent.classList.contains('overflow-x-auto') || parent.classList.contains('table-responsive') || parent.classList.contains('table-container'))) {
+              parent.style.setProperty('overflow-x', 'hidden', 'important');
+              parent.style.setProperty('max-width', '100%', 'important');
+            }
+
             var wrapper = tbl.parentElement;
             if (!wrapper || !wrapper.classList.contains('tkd-auto-scale-wrapper')) {
               var wrap = document.createElement('div');
@@ -929,25 +955,35 @@ function getLeafIcon(label: string): string {
               wrap.appendChild(tbl);
               wrapper = wrap;
             }
+
             if (!isMobile) {
               tbl.style.transform = '';
+              tbl.style.transformOrigin = '';
               tbl.style.width = '100%';
+              tbl.style.maxWidth = '100%';
               wrapper.style.height = '';
+              wrapper.style.overflow = '';
               return;
             }
+
+            // Trên mobile: Đặt chiều rộng tự nhiên để đo chính xác
             tbl.querySelectorAll('th, td').forEach(function(c) {
               c.style.setProperty('white-space', 'nowrap', 'important');
               c.style.setProperty('word-break', 'normal', 'important');
             });
-            tbl.style.width = 'max-content';
-            tbl.style.maxWidth = 'none';
-            var containerWidth = wrapper.clientWidth || (window.innerWidth - 32);
-            var tableWidth = tbl.scrollWidth || tbl.offsetWidth;
+            tbl.style.setProperty('width', 'max-content', 'important');
+            tbl.style.setProperty('max-width', 'none', 'important');
+            tbl.style.transform = 'none';
+
+            var containerWidth = wrapper.getBoundingClientRect().width || wrapper.clientWidth || (window.innerWidth - 32);
+            var tableWidth = tbl.scrollWidth || tbl.offsetWidth || tbl.getBoundingClientRect().width;
+
             if (tableWidth > containerWidth && containerWidth > 0) {
               var scale = containerWidth / tableWidth;
               tbl.style.transform = 'scale(' + scale + ')';
               tbl.style.transformOrigin = 'top left';
-              wrapper.style.height = Math.ceil(tbl.offsetHeight * scale) + 'px';
+              var scaledHeight = Math.ceil((tbl.offsetHeight || tbl.getBoundingClientRect().height) * scale);
+              wrapper.style.height = scaledHeight + 'px';
               wrapper.style.overflow = 'hidden';
             } else {
               tbl.style.transform = '';
@@ -956,7 +992,8 @@ function getLeafIcon(label: string): string {
             }
           });
 
-          document.querySelectorAll('.tkd-page-scope svg, .tkd-academic-subpage svg, .tkd-page-scope img, .tkd-academic-subpage img').forEach(function(el) {
+          // Biểu đồ, sơ đồ, SVG, hình ảnh
+          document.querySelectorAll('.tkd-page-scope svg, .tkd-academic-subpage svg, .diagram, .flowchart, .tkd-page-scope img, .tkd-academic-subpage img').forEach(function(el) {
             el.style.maxWidth = '100%';
             el.style.height = 'auto';
             if (el.parentElement) {
@@ -966,18 +1003,32 @@ function getLeafIcon(label: string): string {
           });
 
           document.querySelectorAll('.table-responsive, .table-container, .overflow-x-auto').forEach(function(c) {
-            c.style.overflowX = 'hidden';
-            c.style.maxWidth = '100%';
+            c.style.setProperty('overflow-x', 'hidden', 'important');
+            c.style.setProperty('max-width', '100%', 'important');
           });
         }
 
         var resizeTimer;
-        window.addEventListener('resize', function () { clearTimeout(resizeTimer); resizeTimer = setTimeout(autoScaleAcademicMedia, 150); });
-        window.addEventListener('load', autoScaleAcademicMedia);
-        document.addEventListener('DOMContentLoaded', autoScaleAcademicMedia);
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-          setTimeout(autoScaleAcademicMedia, 50);
+        window.addEventListener('resize', function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(autoScaleAcademicMedia, 150);
+        });
+
+        // Kích hoạt render công thức và scale bảng
+        function initAcademicEnhancements() {
+          renderMathFormulas();
+          autoScaleAcademicMedia();
+          // Chạy thêm 1 lần sau khi KaTeX render xong cấu trúc DOM
+          setTimeout(autoScaleAcademicMedia, 300);
+          setTimeout(autoScaleAcademicMedia, 800);
         }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initAcademicEnhancements);
+        } else {
+          initAcademicEnhancements();
+        }
+        window.addEventListener('load', initAcademicEnhancements);
       })();
     </script>
   </body>
