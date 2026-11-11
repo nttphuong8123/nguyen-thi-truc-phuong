@@ -125,7 +125,7 @@ const relatedSilos = allSilos.filter((g) => g.key !== meta.siloKey).slice(0, 4);
             <h2 class="text-sm sm:text-base font-extrabold tracking-tight uppercase m-0">
               {meta.studyGuideTitle || `Trọng Tâm Kiến Thức và Hướng Dẫn Ôn Tập ${meta.breadcrumbLabel}`}
             </h2>
-            <span class="text-[11px] bg-white/15 px-2.5 py-0.5 rounded-full font-semibold text-sky-100 shrink-0">
+            <span class="text-[11px] bg-white/15 px-2.5 py-0.5 rounded-full font-semibold text-white shrink-0">
               Cẩm nang học thuật
             </span>
           </div>
@@ -158,7 +158,7 @@ const relatedSilos = allSilos.filter((g) => g.key !== meta.siloKey).slice(0, 4);
           <div class="divide-y divide-slate-200/80 px-5 py-2">
             {faqs.map((faq, i) => (
               <details class="group py-3.5" open={i === 0}>
-                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-bold text-slate-800 hover:text-sky-800 text-xs sm:text-sm">
+                <summary class="flex items-center justify-between gap-3 cursor-pointer list-none font-bold text-slate-800 hover:text-[#A83245] text-xs sm:text-sm">
                   <h3 class="font-bold text-xs sm:text-sm text-slate-800 group-hover:text-[#A83245] m-0">
                     {faq.question}
                   </h3>
@@ -206,12 +206,12 @@ const relatedSilos = allSilos.filter((g) => g.key !== meta.siloKey).slice(0, 4);
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {relatedSilos.map((rs) => (
-            <div class="relative group rounded-xl border border-slate-200/90 bg-slate-50/70 hover:bg-sky-50/50 hover:border-sky-300 p-3.5 transition-all flex flex-col justify-between">
+            <div class="relative group rounded-xl border border-slate-200/90 bg-slate-50/70 hover:bg-[#F7F5F2]/50 hover:border-[#E8DDE0] p-3.5 transition-all flex flex-col justify-between">
               <div>
                 <span class="inline-block text-[10px] font-bold uppercase tracking-wider text-[#A83245] bg-[#F7F5F2] border border-[#E8DDE0] px-2 py-0.5 rounded mb-1.5">
                   {rs.badge}
                 </span>
-                <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 group-hover:text-sky-800 m-0">
+                <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 group-hover:text-[#A83245] m-0">
                   <a
                     href={rs.hubHref}
                     title={`Truy cập học phần ${rs.name}: bài giảng, bài tập và đề thi thử`}

@@ -18,13 +18,13 @@ const officeHourLines = contactCfg.office_hours
         <div class="flex flex-col sm:flex-row items-center justify-between gap-5">
           <div>
             <div class="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-[#A83245] border border-[#F8EDEF]/40 text-[#F8EDEF] text-xs sm:text-sm font-bold tracking-wider uppercase">
-              <svg class="w-4 h-4 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 text-[#F8EDEF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
               </svg>
               <span>{contactCfg.department}</span>
             </div>
             <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight uppercase">THÔNG TIN LIÊN HỆ &amp; GIẢI ĐÁP HỌC VỤ</h1>
-            <p class="text-blue-100 text-sm sm:text-base mt-1">Kênh kết nối chính thức, lịch tiếp sinh viên và gửi câu hỏi trực tiếp đến {contactCfg.instructor_name}</p>
+            <p class="text-white text-sm sm:text-base mt-1">Kênh kết nối chính thức, lịch tiếp sinh viên và gửi câu hỏi trực tiếp đến {contactCfg.instructor_name}</p>
           </div>
           <a href="/danh-gia-giang-vien" class="px-5 py-3 rounded-2xl bg-[#C65B69] hover:bg-[#A83245] border border-[#C65B69]/40 text-white font-extrabold text-xs sm:text-sm transition-all shrink-0 shadow-sm flex items-center gap-2">
             <span>⭐</span>
@@ -58,7 +58,7 @@ const officeHourLines = contactCfg.office_hours
               <div class="text-slate-400 font-bold uppercase text-[11px] mb-1">📞 Zalo / Hotline</div>
               <div class="flex items-center gap-2">
                 <a href={`tel:${cleanPhone}`} class="font-bold text-slate-800 hover:text-[#C65B69]">{contactCfg.hotline}</a>
-                <a href={contactCfg.zalo_url} target="_blank" rel="noopener" class="px-2 py-0.5 rounded-md bg-[#F8EDEF] text-[#A83245] text-[11px] font-bold hover:bg-blue-200">
+                <a href={contactCfg.zalo_url} target="_blank" rel="noopener" class="px-2 py-0.5 rounded-md bg-[#F8EDEF] text-[#A83245] text-[11px] font-bold hover:bg-[#F8EDEF]">
                   Nhắn Zalo ↗
                 </a>
               </div>
@@ -78,9 +78,9 @@ const officeHourLines = contactCfg.office_hours
           </div>
         </div>
 
-        <div class="p-6 rounded-2xl bg-gradient-to-br from-sky-50 to-indigo-50 border border-sky-200/80 shadow-xs flex flex-col justify-between space-y-4">
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-[#742D3A] to-[#742D3A] border border-[#E8DDE0]/80 shadow-xs flex flex-col justify-between space-y-4">
           <div class="space-y-2">
-            <span class="inline-block px-2.5 py-1 rounded-full bg-[#168AAD] text-white text-[11px] font-extrabold uppercase tracking-wider">Lịch tiếp sinh viên</span>
+            <span class="inline-block px-2.5 py-1 rounded-full bg-[#C65B69] text-white text-[11px] font-extrabold uppercase tracking-wider">Lịch tiếp sinh viên</span>
             <h3 class="text-base font-extrabold text-slate-900">Hỗ Trợ Cố Vấn Học Tập &amp; Giải Đáp Thực Tập</h3>
             <p class="text-xs text-slate-600 leading-relaxed">
               Giảng viên hỗ trợ giải đáp trực tiếp tại văn phòng Khoa ({contactCfg.address}) hoặc trực tuyến qua Zalo / Google Meet:
@@ -98,7 +98,7 @@ const officeHourLines = contactCfg.office_hours
       <div class="p-5 rounded-2xl bg-gradient-to-r from-[#A83245] to-[#C65B69] text-white shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="space-y-1 text-center sm:text-left">
           <h3 class="text-base sm:text-lg font-extrabold">⭐ Khảo sát đánh giá chất lượng giảng dạy học kỳ</h3>
-          <p class="text-xs sm:text-sm text-blue-100">Ý kiến chân thành của sinh viên giúp cô hoàn thiện phương pháp giảng dạy và nâng cao chất lượng bài giảng.</p>
+          <p class="text-xs sm:text-sm text-white">Ý kiến chân thành của sinh viên giúp cô hoàn thiện phương pháp giảng dạy và nâng cao chất lượng bài giảng.</p>
         </div>
         <a href="/danh-gia-giang-vien" class="px-5 py-2.5 rounded-xl bg-[#C65B69] hover:bg-[#A83245] text-white font-extrabold text-xs sm:text-sm transition-all shrink-0 shadow-xs">
           Mở Trang Đánh Giá Giảng Viên ➔

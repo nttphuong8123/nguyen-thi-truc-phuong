@@ -27,7 +27,7 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
       <h1 class="text-xl sm:text-3xl md:text-4xl font-extrabold tracking-tight uppercase leading-snug">
         Góc Chia Sẻ — Bài Viết &amp; Tin Tức
       </h1>
-      <p class="text-xs sm:text-sm text-sky-100/90 max-w-2xl mx-auto leading-relaxed">
+      <p class="text-xs sm:text-sm text-white/90 max-w-2xl mx-auto leading-relaxed">
         Tổng hợp các bài viết chuyên sâu về phương pháp ôn thi, nghiên cứu khoa học SPSS, kinh nghiệm thực tập doanh nghiệp và góc nhìn kinh tế - quản trị.
       </p>
     </div>
@@ -68,7 +68,7 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
     {featuredArticle && (
       <section class="bg-white rounded-2xl border-2 border-[#C65B69]/40 hover:border-[#C65B69] shadow-sm overflow-hidden transition-all group">
         <div class="bg-gradient-to-r from-[#A83245] to-[#C65B69] px-4 py-2.5 text-white flex items-center justify-between">
-          <span class="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#72C7D5]">
+          <span class="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#F8EDEF]">
             <span>⭐</span> BÀI VIẾT TIÊU ĐIỂM
           </span>
           <span class="text-[11px] bg-white/20 px-2.5 py-0.5 rounded-full font-bold">
@@ -78,7 +78,7 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
 
         <div class="p-5 sm:p-7 space-y-3">
           <div class="flex flex-wrap items-center gap-2.5 text-xs">
-            <span class="px-3 py-1 rounded-full bg-[#F7F5F2] text-[#A83245] font-extrabold border border-[#168AAD]/30">
+            <span class="px-3 py-1 rounded-full bg-[#F7F5F2] text-[#A83245] font-extrabold border border-[#C65B69]/30">
               {featuredArticle.category}
             </span>
             <span class="text-slate-400">•</span>
@@ -87,7 +87,7 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
             <span class="text-slate-500 num-font">👁️ {featuredArticle.views} lượt xem</span>
           </div>
 
-          <h2 class="text-lg sm:text-2xl font-black text-slate-900 group-hover:text-[#168AAD] transition-colors leading-snug">
+          <h2 class="text-lg sm:text-2xl font-black text-slate-900 group-hover:text-[#C65B69] transition-colors leading-snug">
             <a href={`/goc-chia-se/${featuredArticle.slug}`} title={`Đọc bài viết: ${featuredArticle.title}`}>
               {featuredArticle.title}
             </a>
@@ -125,12 +125,12 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
           <article class="bg-white rounded-2xl border border-slate-200 hover:border-[#C65B69] shadow-xs hover:shadow-md p-5 flex flex-col justify-between transition-all group">
             <div class="space-y-2.5">
               <div class="flex items-center justify-between gap-2">
-                <span class="text-xs font-bold uppercase px-2.5 py-0.5 rounded-full bg-[#F7F5F2] text-[#A83245] border border-[#168AAD]/30">
+                <span class="text-xs font-bold uppercase px-2.5 py-0.5 rounded-full bg-[#F7F5F2] text-[#A83245] border border-[#C65B69]/30">
                   {art.category}
                 </span>
                 <span class="text-xs text-slate-400 num-font">👁️ {art.views} lượt xem</span>
               </div>
-              <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#168AAD] transition-colors leading-snug">
+              <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#C65B69] transition-colors leading-snug">
                 <a href={`/goc-chia-se/${art.slug}`} title={`Xem bài viết chuyên đề: ${art.title}`}>
                   {art.title}
                 </a>
@@ -143,7 +143,7 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
               <a
                 href={`/goc-chia-se/${art.slug}`}
                 title={`Đọc chi tiết bài viết: ${art.title}`}
-                class="inline-flex items-center gap-1 font-extrabold text-[#168AAD] group-hover:text-[#A83245] transition-colors"
+                class="inline-flex items-center gap-1 font-extrabold text-[#C65B69] group-hover:text-[#A83245] transition-colors"
               >
                 <span>Đọc bài viết</span>
                 <span aria-hidden="true">→</span>

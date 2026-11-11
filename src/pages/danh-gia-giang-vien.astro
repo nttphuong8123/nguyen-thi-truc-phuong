@@ -45,22 +45,22 @@ const criteriaGroups = Array.from(groupsMap.values());
         <div class="flex flex-col sm:flex-row items-center justify-between gap-5">
           <div>
             <div class="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-[#A83245] border border-[#F8EDEF]/40 text-[#F8EDEF] text-xs sm:text-sm font-bold tracking-wider uppercase">
-              <svg class="w-4 h-4 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 text-[#F8EDEF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
               </svg>
               <span>Khoa Quản Trị Kinh Doanh • HCE</span>
             </div>
             <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight uppercase">PHIẾU ĐÁNH GIÁ CHẤT LƯỢNG GIẢNG VIÊN</h1>
-            <p class="text-blue-100 text-sm sm:text-base mt-1">Khảo sát ý kiến sinh viên về hoạt động giảng dạy học phần (Bảo mật 100% danh tính)</p>
+            <p class="text-white text-sm sm:text-base mt-1">Khảo sát ý kiến sinh viên về hoạt động giảng dạy học phần (Bảo mật 100% danh tính)</p>
           </div>
           <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 border border-white/20 text-center sm:text-right min-w-[240px]">
-            <div class="flex items-center justify-center sm:justify-end gap-1.5 text-blue-200 text-xs font-medium mb-1">
-              <svg class="w-3.5 h-3.5 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex items-center justify-center sm:justify-end gap-1.5 text-[#F8EDEF] text-xs font-medium mb-1">
+              <svg class="w-3.5 h-3.5 text-[#F8EDEF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
               <span>Học kỳ / Niên khóa (Tự động)</span>
             </div>
-            <input type="text" id="semesterYearDisplay" readonly class="w-full bg-blue-950/60 border border-blue-400/40 rounded-lg px-3 py-1.5 text-sm sm:text-base font-bold text-center sm:text-right text-amber-300 focus:outline-hidden" value="Đang xác định..." />
+            <input type="text" id="semesterYearDisplay" readonly class="w-full bg-[#742D3A]/60 border border-[#C65B69]/40 rounded-lg px-3 py-1.5 text-sm sm:text-base font-bold text-center sm:text-right text-amber-300 focus:outline-hidden" value="Đang xác định..." />
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@ const criteriaGroups = Array.from(groupsMap.values());
         <!-- Lời ngỏ & Hướng dẫn -->
         <div class="eval-intro-box">
           <h2 class="text-base sm:text-lg font-extrabold text-slate-900 mb-1.5 flex items-center gap-2">
-            <span class="text-sky-600">📌</span> Mục đích &amp; Hướng dẫn đánh giá hoạt động giảng dạy
+            <span class="text-[#C65B69]">📌</span> Mục đích &amp; Hướng dẫn đánh giá hoạt động giảng dạy
           </h2>
           <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
             Khảo sát này nhằm thu thập ý kiến đóng góp khách quan của sinh viên để nâng cao chất lượng giảng dạy và cải tiến chương trình đào tạo. Mọi thông tin phản hồi của các bạn đều được <strong>bảo mật hoàn toàn danh tính</strong>.
@@ -149,7 +149,7 @@ const criteriaGroups = Array.from(groupsMap.values());
               </label>
               <div class="grid grid-cols-1 sm:grid-cols-5 gap-2.5 text-xs sm:text-sm">
                 {['Rất không hài lòng', 'Không hài lòng', 'Bình thường', 'Hài lòng', 'Rất hài lòng'].map((opt) => (
-                  <label class="flex items-center gap-2.5 p-3 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-sky-50 cursor-pointer transition-colors">
+                  <label class="flex items-center gap-2.5 p-3 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-[#F7F5F2] cursor-pointer transition-colors">
                     <input type="radio" name="overall_satisfaction" value={opt} checked={opt === 'Rất hài lòng'} class="accent-sky-600 w-4 h-4" />
                     <span class="font-semibold text-slate-700">{opt}</span>
                   </label>
@@ -220,7 +220,7 @@ const criteriaGroups = Array.from(groupsMap.values());
           </div>
           <div class="flex justify-between border-b border-slate-200/60 pb-1.5">
             <span class="text-slate-500">Điểm đánh giá trung bình:</span>
-            <span id="resScore" class="font-extrabold text-blue-700 text-sm"></span>
+            <span id="resScore" class="font-extrabold text-[#A83245] text-sm"></span>
           </div>
           <div class="flex justify-between">
             <span class="text-slate-500">Mức độ hài lòng chung:</span>
@@ -234,7 +234,7 @@ const criteriaGroups = Array.from(groupsMap.values());
             <span>📥</span>
             <span>Xuất Dữ Liệu (Excel)</span>
           </button>
-          <button type="button" id="downloadJsonBtn" class="w-full sm:w-1/2 py-2.5 px-3 rounded-xl bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer">
+          <button type="button" id="downloadJsonBtn" class="w-full sm:w-1/2 py-2.5 px-3 rounded-xl bg-[#A83245] hover:bg-[#A83245] text-white font-extrabold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer">
             <span>📦</span>
             <span>Xuất Dữ Liệu (JSON)</span>
           </button>
@@ -251,13 +251,13 @@ const criteriaGroups = Array.from(groupsMap.values());
     .eval-survey-card {
       background: #fff;
       border-radius: 16px;
-      border: 1px solid #bae6fd;
-      box-shadow: 0 4px 20px #0284c70f;
+      border: 1px solid #E8DDE0;
+      box-shadow: 0 4px 20px #C65B690f;
       padding: 24px 28px;
     }
     .eval-intro-box {
       background: #f8fafc;
-      border-left: 4px solid #0284c7;
+      border-left: 4px solid #C65B69;
       padding: 14px 18px;
       border-radius: 0 12px 12px 0;
       margin-bottom: 20px;
@@ -328,7 +328,7 @@ const criteriaGroups = Array.from(groupsMap.values());
       border-bottom: none;
     }
     .eval-item-row:hover {
-      background: #f0f9ff;
+      background: #F8EDEF;
     }
     .eval-q-text {
       font-size: 13.5px;
@@ -351,7 +351,7 @@ const criteriaGroups = Array.from(groupsMap.values());
     .eval-likert-cell input[type='radio'] {
       width: 18px;
       height: 18px;
-      accent-color: #0284c7;
+      accent-color: #C65B69;
       cursor: pointer;
     }
     .eval-likert-cell span {
@@ -398,14 +398,14 @@ const criteriaGroups = Array.from(groupsMap.values());
         color: #334155;
       }
       .eval-likert-cell label:has(input:checked) {
-        border-color: #0284c7;
-        background: #e0f2fe;
-        color: #0369a1;
+        border-color: #C65B69;
+        background: #F8EDEF;
+        color: #A83245;
       }
       .eval-likert-cell input[type='radio'] {
         width: 16px;
         height: 16px;
-        accent-color: #0284c7;
+        accent-color: #C65B69;
       }
       .eval-likert-cell span {
         display: inline;

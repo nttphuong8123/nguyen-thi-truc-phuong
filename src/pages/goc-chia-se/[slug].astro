@@ -41,16 +41,16 @@ const related = db
               <a
                 href="/goc-chia-se"
                 title="Quay lại chuyên mục Góc chia sẻ và tin tức"
-                class="bg-white/15 hover:bg-white/25 text-sky-100 font-bold px-3 py-1 rounded-full transition-colors"
+                class="bg-white/15 hover:bg-white/25 text-white font-bold px-3 py-1 rounded-full transition-colors"
               >
                 <span aria-hidden="true">← </span><span>Góc Chia Sẻ</span>
               </a>
-              <span class="bg-[#72C7D5]/20 text-[#72C7D5] border border-[#72C7D5]/40 font-bold px-3 py-1 rounded-full">
+              <span class="bg-[#F8EDEF]/20 text-[#F8EDEF] border border-[#F8EDEF]/40 font-bold px-3 py-1 rounded-full">
                 {article.category}
               </span>
             </div>
             <h1 class="text-xl sm:text-2xl font-extrabold leading-snug">{article.title}</h1>
-            <div class="flex flex-wrap items-center gap-4 text-xs text-sky-200 pt-1">
+            <div class="flex flex-wrap items-center gap-4 text-xs text-[#F8EDEF] pt-1">
               <span>✍️ Tác giả: <strong>{article.author}</strong></span>
               <span>👁️ Lượt đọc: <strong class="num-font">{article.views + 1}</strong></span>
             </div>
@@ -71,9 +71,9 @@ const related = db
               <a
                 href={`/goc-chia-se/${r.slug}`}
                 title={`Xem bài viết liên quan: ${r.title}`}
-                class="p-3 rounded-xl border border-slate-200 hover:border-sky-400 hover:bg-sky-50/50 transition-colors block"
+                class="p-3 rounded-xl border border-slate-200 hover:border-[#C65B69] hover:bg-[#F7F5F2]/50 transition-colors block"
               >
-                <span class="text-[10px] font-bold uppercase text-sky-700 block">{r.category}</span>
+                <span class="text-[10px] font-bold uppercase text-[#A83245] block">{r.category}</span>
                 <span class="text-xs sm:text-sm font-bold text-slate-900 mt-0.5 block">{r.title}</span>
               </a>
             ))}

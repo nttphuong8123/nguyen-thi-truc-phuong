@@ -48,8 +48,8 @@ for (const sub of enabledSubjects) {
 >
   <!-- HEADER BANNER -->
   <header class="relative w-full bg-gradient-to-br from-[#742D3A] via-[#A83245] to-[#C65B69] text-white py-8 sm:py-10 px-4 text-center shadow-sm overflow-hidden print:hidden">
-    <div class="pointer-events-none absolute -top-20 -left-20 w-64 h-64 rounded-full bg-sky-300/10 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-24 -right-20 w-72 h-72 rounded-full bg-cyan-300/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -top-20 -left-20 w-64 h-64 rounded-full bg-[#F8EDEF]/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-24 -right-20 w-72 h-72 rounded-full bg-[#F8EDEF]/10 blur-3xl"></div>
     <div class="relative max-w-4xl mx-auto space-y-2.5">
       <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight uppercase text-white drop-shadow-2xs">
         {onlineConfig.header_title || 'THI ONLINE'}
@@ -82,7 +82,7 @@ for (const sub of enabledSubjects) {
             </p>
           </div>
         </div>
-        <span class="inline-flex items-center gap-1.5 text-[11px] bg-white/15 border border-white/20 px-3 py-1 rounded-full text-sky-50 font-semibold">
+        <span class="inline-flex items-center gap-1.5 text-[11px] bg-white/15 border border-white/20 px-3 py-1 rounded-full text-white font-semibold">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
           Lưu kết quả tự động
         </span>
@@ -143,15 +143,15 @@ for (const sub of enabledSubjects) {
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-          <div class="p-3.5 rounded-xl bg-sky-50/60 border border-sky-200/80 space-y-1.5">
-            <label for="regSubjectSelect" class="flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider text-sky-900">
+          <div class="p-3.5 rounded-xl bg-[#F7F5F2]/60 border border-[#E8DDE0]/80 space-y-1.5">
+            <label for="regSubjectSelect" class="flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider text-[#742D3A]">
               <span>📚</span>
               <span>Chọn Môn Học Dự Thi <span class="text-rose-500">*</span></span>
             </label>
             <select
               id="regSubjectSelect"
               data-initial={preselectedSubject}
-              class="w-full px-3.5 py-2.5 rounded-xl border border-sky-300 bg-white text-xs sm:text-sm font-extrabold text-sky-950 focus:outline-none focus:border-[#C65B69] focus:ring-3 focus:ring-[#C65B69]/20 transition-all cursor-pointer"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-[#E8DDE0] bg-white text-xs sm:text-sm font-extrabold text-[#303039] focus:outline-none focus:border-[#C65B69] focus:ring-3 focus:ring-[#C65B69]/20 transition-all cursor-pointer"
             >
               {
                 enabledSubjects.map((sub) => (
@@ -183,7 +183,7 @@ for (const sub of enabledSubjects) {
 
         <div class="pt-3 flex flex-col sm:flex-row items-center justify-between gap-3.5 border-t border-slate-200/80">
           <p class="text-xs text-slate-500 flex items-center gap-1.5">
-            <span class="text-sky-600">💡</span>
+            <span class="text-[#C65B69]">💡</span>
             <span>Sau khi nộp bài, điểm số được cập nhật tự động và hỗ trợ <strong>Xuất Phiếu Kết Quả PDF / CSV</strong> ngay lập tức.</span>
           </p>
           <button
@@ -207,7 +207,7 @@ for (const sub of enabledSubjects) {
         <div class="flex items-center gap-2.5 sm:gap-3">
           <div class="bg-slate-800/90 border border-slate-700 px-3 py-1.5 rounded-xl text-center">
             <span class="text-[10px] text-slate-300 uppercase block">Mã đề</span>
-            <span id="activeTestCode" class="num-font font-extrabold text-xs sm:text-sm text-sky-300">TKD-01</span>
+            <span id="activeTestCode" class="num-font font-extrabold text-xs sm:text-sm text-[#F8EDEF]">TKD-01</span>
           </div>
           <div class="bg-rose-950/90 border border-rose-500/40 px-3.5 py-1.5 rounded-xl text-center">
             <span class="text-[10px] text-rose-200 uppercase block">Thời gian còn lại</span>
@@ -258,7 +258,7 @@ for (const sub of enabledSubjects) {
           <button
             type="button"
             id="cancelExamBtn"
-            class="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#123B65] bg-white hover:bg-slate-100 py-2 px-5 rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all cursor-pointer"
+            class="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#742D3A] bg-white hover:bg-slate-100 py-2 px-5 rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all cursor-pointer"
           >
             <span>↺</span>
             <span>Quay lại Đăng nhập</span>
@@ -270,20 +270,20 @@ for (const sub of enabledSubjects) {
     <!-- BƯỚC 3: PHIẾU KẾT QUẢ BÀI THI & XUẤT KẾT QUẢ (HIỂN THỊ SAU KHI NỘP BÀI & KHI IN PDF) -->
     <section id="examResultCertificate" class="hidden bg-white rounded-2xl shadow-lg border-2 border-[#A83245] overflow-hidden">
       <div class="bg-gradient-to-r from-[#742D3A] via-[#A83245] to-[#C65B69] p-5 text-white text-center space-y-1">
-        <p class="text-xs font-bold uppercase tracking-widest text-sky-200">CỔNG HỌC TẬP SỐ — NGUYỄN THỊ TRÚC PHƯƠNG</p>
+        <p class="text-xs font-bold uppercase tracking-widest text-[#F8EDEF]">CỔNG HỌC TẬP SỐ — NGUYỄN THỊ TRÚC PHƯƠNG</p>
         <h2 class="text-lg sm:text-2xl font-extrabold uppercase tracking-tight">PHIẾU KẾT QUẢ BÀI THI TRỰC TUYẾN</h2>
-        <p id="certTimestamp" class="text-xs text-sky-100 num-font"></p>
+        <p id="certTimestamp" class="text-xs text-white num-font"></p>
       </div>
 
       <div class="p-5 sm:p-8 space-y-6">
         <!-- Bảng thông tin thí sinh & Điểm số -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-sky-50/70 border border-sky-200 rounded-2xl p-4 sm:p-5">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-[#F7F5F2]/70 border border-[#E8DDE0] rounded-2xl p-4 sm:p-5">
           <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm">
             <div><span class="text-slate-500">Họ và tên thí sinh:</span> <strong id="certName" class="text-slate-900 font-extrabold block sm:inline"></strong></div>
-            <div><span class="text-slate-500">Mã số SV (MSSV):</span> <strong id="certId" class="num-font text-sky-900 font-bold block sm:inline"></strong></div>
+            <div><span class="text-slate-500">Mã số SV (MSSV):</span> <strong id="certId" class="num-font text-[#742D3A] font-bold block sm:inline"></strong></div>
             <div><span class="text-slate-500">Lớp học phần:</span> <strong id="certClass" class="text-slate-900 font-bold block sm:inline"></strong></div>
-            <div><span class="text-slate-500">Mã đề thi:</span> <strong id="certCode" class="num-font text-indigo-700 font-bold block sm:inline"></strong></div>
-            <div class="sm:col-span-2"><span class="text-slate-500">Môn học dự thi:</span> <strong id="certSubject" class="text-sky-900 font-extrabold"></strong></div>
+            <div><span class="text-slate-500">Mã đề thi:</span> <strong id="certCode" class="num-font text-[#A83245] font-bold block sm:inline"></strong></div>
+            <div class="sm:col-span-2"><span class="text-slate-500">Môn học dự thi:</span> <strong id="certSubject" class="text-[#742D3A] font-extrabold"></strong></div>
             <div><span class="text-slate-500">Số câu trả lời đúng:</span> <strong id="certCorrect" class="num-font text-emerald-700 font-bold"></strong></div>
             <div><span class="text-slate-500">Thời gian hoàn thành:</span> <strong id="certDuration" class="num-font text-slate-800 font-bold"></strong></div>
           </div>
@@ -347,13 +347,13 @@ for (const sub of enabledSubjects) {
             <h2 class="font-extrabold text-sm sm:text-base uppercase tracking-wide text-white leading-tight">
               Bảng Cập Nhật Lực Chiến
             </h2>
-            <p class="text-[11px] text-sky-100/85 font-medium">
+            <p class="text-[11px] text-white/85 font-medium">
               Tự động cập nhật 100 bạn thi gần nhất trên hệ thống
             </p>
           </div>
         </div>
         <div class="flex items-center gap-2">
-          <span id="liveCountBadge" class="text-[11px] font-bold bg-white/15 border border-white/20 px-2.5 py-1 rounded-full text-sky-100 num-font">
+          <span id="liveCountBadge" class="text-[11px] font-bold bg-white/15 border border-white/20 px-2.5 py-1 rounded-full text-white num-font">
             {recentSubmissions.length}/100 lượt gần nhất
           </span>
           <span class="hidden">
@@ -379,7 +379,7 @@ for (const sub of enabledSubjects) {
               const isHigh = scoreNum >= 85;
               const isGood = scoreNum >= 70 && scoreNum < 85;
               return (
-                <div class="flex items-center justify-between gap-2.5 sm:gap-4 p-2.5 sm:px-3.5 sm:py-2.5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-sky-50/50 hover:border-sky-200 transition-all">
+                <div class="flex items-center justify-between gap-2.5 sm:gap-4 p-2.5 sm:px-3.5 sm:py-2.5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-[#F7F5F2]/50 hover:border-[#E8DDE0] transition-all">
                   <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-1">
                     <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl shrink-0 flex flex-col items-center justify-center bg-white text-slate-700 border border-slate-200/90 shadow-2xs">
                       <span class="text-[8px] font-bold uppercase text-slate-400 leading-none">Lượt</span>
@@ -398,7 +398,7 @@ for (const sub of enabledSubjects) {
                         )}
                       </div>
                       <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5 text-[11px] text-slate-500">
-                        <span class="font-semibold text-sky-700 truncate max-w-full">📘 {r.subject_title}</span>
+                        <span class="font-semibold text-[#A83245] truncate max-w-full">📘 {r.subject_title}</span>
                         {r.duration_text && (
                           <>
                             <span class="text-slate-300">•</span>
@@ -420,7 +420,7 @@ for (const sub of enabledSubjects) {
                       isHigh
                         ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
                         : isGood
-                        ? 'bg-sky-50 border-sky-200 text-sky-800'
+                        ? 'bg-[#F7F5F2] border-[#E8DDE0] text-[#A83245]'
                         : 'bg-white border-slate-200 text-slate-700'
                     }`}
                   >
@@ -489,11 +489,11 @@ for (const sub of enabledSubjects) {
           const badgeClass = isHigh
             ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
             : isGood
-            ? 'bg-sky-50 border-sky-200 text-sky-800'
+            ? 'bg-[#F7F5F2] border-[#E8DDE0] text-[#A83245]'
             : 'bg-white border-slate-200 text-slate-700';
 
           return `
-            <div class="flex items-center justify-between gap-2.5 sm:gap-4 p-2.5 sm:px-3.5 sm:py-2.5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-sky-50/50 hover:border-sky-200 transition-all">
+            <div class="flex items-center justify-between gap-2.5 sm:gap-4 p-2.5 sm:px-3.5 sm:py-2.5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-[#F7F5F2]/50 hover:border-[#E8DDE0] transition-all">
               <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-1">
                 <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl shrink-0 flex flex-col items-center justify-center bg-white text-slate-700 border border-slate-200/90 shadow-2xs">
                   <span class="text-[8px] font-bold uppercase text-slate-400 leading-none">Lượt</span>
@@ -511,7 +511,7 @@ for (const sub of enabledSubjects) {
                     }
                   </div>
                   <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5 text-[11px] text-slate-500">
-                    <span class="font-semibold text-sky-700 truncate max-w-full">📘 ${escapeHtml(r.subject_title)}</span>
+                    <span class="font-semibold text-[#A83245] truncate max-w-full">📘 ${escapeHtml(r.subject_title)}</span>
                     ${
                       r.duration_text
                         ? `<span class="text-slate-300">•</span><span class="num-font whitespace-nowrap">⏱️ ${escapeHtml(r.duration_text)}</span>`
@@ -609,8 +609,8 @@ for (const sub of enabledSubjects) {
               while (copy.length < colCount) copy.push('');
               return copy;
             });
-            const thHtml = headers.map((c, cIdx) => `<th class="${cIdx === 0 ? 'tkd-q-th-first text-left font-bold pl-3 pr-2.5' : 'tkd-q-th-num text-center font-bold px-2.5 min-w-[42px]'} py-2 text-xs sm:text-[13px] text-[#0B1E33] bg-[#EFF6FF] border border-[#CBD5E1] whitespace-nowrap">${formatQuizString(c, true)}</th>`).join('');
-            const trHtml = rows.map((r, rIdx) => `<tr class="${rIdx % 2 === 1 ? 'bg-[#F8FAFC]' : 'bg-white'} hover:bg-sky-50/60 transition-colors">${r.map((c, cIdx) => `<td class="${cIdx === 0 ? 'tkd-q-td-first text-left font-bold text-[#0B1E33] bg-[#F8FAFC] pl-3 pr-2.5 whitespace-normal leading-snug min-w-[110px]' : 'tkd-q-td-num text-center font-semibold num-font text-[#0F172A] px-2.5 whitespace-nowrap'} py-2 text-xs sm:text-[13px] border border-[#E2E8F0]">${formatQuizString(c, true)}</td>`).join('')}</tr>`).join('');
+            const thHtml = headers.map((c, cIdx) => `<th class="${cIdx === 0 ? 'tkd-q-th-first text-left font-bold pl-3 pr-2.5' : 'tkd-q-th-num text-center font-bold px-2.5 min-w-[42px]'} py-2 text-xs sm:text-[13px] text-[#742D3A] bg-[#F7F5F2] border border-[#CBD5E1] whitespace-nowrap">${formatQuizString(c, true)}</th>`).join('');
+            const trHtml = rows.map((r, rIdx) => `<tr class="${rIdx % 2 === 1 ? 'bg-[#F8FAFC]' : 'bg-white'} hover:bg-[#F7F5F2]/60 transition-colors">${r.map((c, cIdx) => `<td class="${cIdx === 0 ? 'tkd-q-td-first text-left font-bold text-[#742D3A] bg-[#F8FAFC] pl-3 pr-2.5 whitespace-normal leading-snug min-w-[110px]' : 'tkd-q-td-num text-center font-semibold num-font text-[#0F172A] px-2.5 whitespace-nowrap'} py-2 text-xs sm:text-[13px] border border-[#E2E8F0]">${formatQuizString(c, true)}</td>`).join('')}</tr>`).join('');
             const beforeHtml = before ? `<div class="tkd-q-lead">${formatQuizString(before, true)}</div>` : '';
             const tableHtml = `<div class="table-responsive tkd-q-table-wrap overflow-x-auto my-3 w-full max-w-full rounded-xl border border-[#CBD5E1] bg-white shadow-2xs -webkit-overflow-scrolling-touch"><table class="tkd-q-table data-table w-full text-xs sm:text-[13px] border-collapse table-auto"><thead><tr>${thHtml}</tr></thead><tbody>${trHtml}</tbody></table></div>`;
             const afterHtml = after ? `<div class="tkd-q-prompt">${formatQuizString(after, false)}</div>` : '';
@@ -650,7 +650,7 @@ for (const sub of enabledSubjects) {
         if (isChecked) {
           answeredCount++;
           if (matrixBtn) {
-            matrixBtn.className = 'w-8 h-8 rounded-lg text-xs font-black bg-sky-600 text-white shadow-xs flex items-center justify-center transition-all cursor-pointer ring-1 ring-sky-300';
+            matrixBtn.className = 'w-8 h-8 rounded-lg text-xs font-black bg-[#C65B69] text-white shadow-xs flex items-center justify-center transition-all cursor-pointer ring-1 ring-[#C65B69]';
           }
         } else {
           if (matrixBtn) {
@@ -693,10 +693,10 @@ for (const sub of enabledSubjects) {
             const card = label.closest('.question-card');
             if (card) {
               card.querySelectorAll('.choice-label').forEach(function(el) {
-                el.classList.remove('border-sky-600', 'bg-sky-50', 'text-sky-950', 'font-semibold', 'shadow-2xs');
+                el.classList.remove('border-[#A83245]', 'bg-[#F7F5F2]', 'text-[#303039]', 'font-semibold', 'shadow-2xs');
               });
             }
-            label.classList.add('border-sky-600', 'bg-sky-50', 'text-sky-950', 'font-semibold', 'shadow-2xs');
+            label.classList.add('border-[#A83245]', 'bg-[#F7F5F2]', 'text-[#303039]', 'font-semibold', 'shadow-2xs');
           }
           updateProgressAndMatrix();
         }

@@ -16,13 +16,13 @@ const currentYear = new Date().getFullYear();
 >
   <header class="w-full bg-gradient-to-br from-[#742D3A] via-[#A83245] to-[#C65B69] text-white py-7 px-4 text-center shadow-sm">
     <div class="max-w-3xl mx-auto space-y-2">
-      <div class="inline-flex items-center gap-1.5 bg-sky-900/60 border border-sky-300/30 rounded-full px-3 py-1 text-xs font-semibold text-sky-200 uppercase tracking-wide">
+      <div class="inline-flex items-center gap-1.5 bg-[#742D3A]/60 border border-[#E8DDE0]/30 rounded-full px-3 py-1 text-xs font-semibold text-[#F8EDEF] uppercase tracking-wide">
         <span>📘</span> Thực tập tốt nghiệp
       </div>
       <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight uppercase">
-        Tra Cứu Đề Cương Chi Tiết Năm <span class="js-current-year text-[#F8EDEF] underline decoration-[#72C7D5]/60 underline-offset-4">{currentYear}</span>
+        Tra Cứu Đề Cương Chi Tiết Năm <span class="js-current-year text-[#F8EDEF] underline decoration-[#F8EDEF]/60 underline-offset-4">{currentYear}</span>
       </h1>
-      <p class="text-xs sm:text-sm text-sky-100/90">
+      <p class="text-xs sm:text-sm text-white/90">
         Nhập mã đề tài do Giảng viên hướng dẫn cung cấp hoặc chọn mã tài liệu mặc định bên dưới
       </p>
     </div>
@@ -42,8 +42,8 @@ const currentYear = new Date().getFullYear();
         <div class="bg-amber-50/90 p-3.5 rounded-xl border border-amber-200 text-xs sm:text-sm text-slate-800 space-y-1">
           <span class="font-bold text-amber-900 block">💡 Mã số tra cứu thông dụng:</span>
           <p>• Nhập mã <strong class="num-font text-[#A83245] font-bold">00</strong>: Tải về <em>Đề cương chi tiết học phần thực tập tốt nghiệp</em>.</p>
-          <p>• Nhập mã <strong class="num-font text-sky-800 font-bold">01</strong>: Tải về <em>Mẫu bảng điểm & Phiếu chấm điểm thực tập của đơn vị</em>.</p>
-          <p>• Nhập mã đề tài riêng (VD: <strong class="num-font text-sky-800">A040201</strong>): Nhận đề cương chi tiết cho từng đề tài cụ thể.</p>
+          <p>• Nhập mã <strong class="num-font text-[#A83245] font-bold">01</strong>: Tải về <em>Mẫu bảng điểm & Phiếu chấm điểm thực tập của đơn vị</em>.</p>
+          <p>• Nhập mã đề tài riêng (VD: <strong class="num-font text-[#A83245]">A040201</strong>): Nhận đề cương chi tiết cho từng đề tài cụ thể.</p>
         </div>
 
         <form id="dcctLookupForm" toolname="lookup-syllabus-code" tooldescription="Look up and download internship syllabus document by code" class="space-y-2">
@@ -90,21 +90,21 @@ const currentYear = new Date().getFullYear();
           <table class="w-full min-w-[340px] text-xs sm:text-sm text-left bg-white border-collapse">
             <thead class="bg-gradient-to-r from-[#A83245] to-[#C65B69] text-white font-bold text-[11px] sm:text-xs uppercase tracking-wide">
               <tr>
-                <th class="py-2.5 sm:py-3 px-1.5 sm:px-3 text-center w-11 sm:w-16 border-r border-sky-500/50 whitespace-nowrap">STT</th>
-                <th class="py-2.5 sm:py-3 px-1.5 sm:px-3 text-center w-16 sm:w-24 border-r border-sky-500/50 whitespace-nowrap">Mã Số</th>
-                <th class="py-2.5 sm:py-3 px-2.5 sm:px-4 border-r border-sky-500/50">Phân Loại Tài Liệu</th>
+                <th class="py-2.5 sm:py-3 px-1.5 sm:px-3 text-center w-11 sm:w-16 border-r border-[#C65B69]/50 whitespace-nowrap">STT</th>
+                <th class="py-2.5 sm:py-3 px-1.5 sm:px-3 text-center w-16 sm:w-24 border-r border-[#C65B69]/50 whitespace-nowrap">Mã Số</th>
+                <th class="py-2.5 sm:py-3 px-2.5 sm:px-4 border-r border-[#C65B69]/50">Phân Loại Tài Liệu</th>
                 <th class="py-2.5 sm:py-3 px-2 sm:px-3 text-center w-22 sm:w-28 whitespace-nowrap">Thao Tác</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-200/80 text-slate-800">
               {
                 publicCodes.map((item, idx) => (
-                  <tr class="even:bg-slate-50/50 hover:bg-sky-50/70 transition-colors">
+                  <tr class="even:bg-slate-50/50 hover:bg-[#F7F5F2]/70 transition-colors">
                     <td class="py-3 sm:py-3.5 px-1.5 sm:px-3 text-center font-semibold text-slate-500 num-font border-r border-slate-200/80 align-middle">
                       {String(idx + 1).padStart(2, '0')}
                     </td>
                     <td class="py-3 sm:py-3.5 px-1.5 sm:px-3 text-center border-r border-slate-200/80 align-middle">
-                      <span class="inline-flex items-center justify-center px-2 sm:px-2.5 py-0.5 rounded-md bg-sky-50 text-sky-800 border border-[#E8DDE0] num-font font-extrabold text-xs sm:text-sm shadow-2xs">
+                      <span class="inline-flex items-center justify-center px-2 sm:px-2.5 py-0.5 rounded-md bg-[#F7F5F2] text-[#A83245] border border-[#E8DDE0] num-font font-extrabold text-xs sm:text-sm shadow-2xs">
                         {item.code}
                       </span>
                     </td>
@@ -115,7 +115,7 @@ const currentYear = new Date().getFullYear();
                       <button
                         type="button"
                         data-fill-code={item.code}
-                        class="quick-fill-btn inline-flex items-center justify-center bg-sky-50 hover:bg-sky-600 text-sky-700 hover:text-white border border-[#E8DDE0] hover:border-sky-600 font-bold text-[11px] sm:text-xs px-2.5 sm:px-3 py-1.5 rounded-lg transition-all shadow-2xs cursor-pointer whitespace-nowrap active:scale-95"
+                        class="quick-fill-btn inline-flex items-center justify-center bg-[#F7F5F2] hover:bg-[#C65B69] text-[#A83245] hover:text-white border border-[#E8DDE0] hover:border-[#A83245] font-bold text-[11px] sm:text-xs px-2.5 sm:px-3 py-1.5 rounded-lg transition-all shadow-2xs cursor-pointer whitespace-nowrap active:scale-95"
                       >
                         Chọn mã
                       </button>
@@ -141,7 +141,7 @@ const currentYear = new Date().getFullYear();
         <a
           href="tel:"
           title="Gọi trực tiếp tới số điện thoại  của Giảng viên NGUYỄN THỊ TRÚC PHƯƠNG"
-          class="inline-flex items-center gap-2 bg-sky-50 hover:bg-sky-100 border border-sky-300 px-5 py-2 rounded-full shadow-xs num-font font-extrabold text-base text-sky-800 transition-colors"
+          class="inline-flex items-center gap-2 bg-[#F7F5F2] hover:bg-[#F8EDEF] border border-[#E8DDE0] px-5 py-2 rounded-full shadow-xs num-font font-extrabold text-base text-[#A83245] transition-colors"
         >
           <span aria-hidden="true">📞</span>
           <span></span>
@@ -151,33 +151,33 @@ const currentYear = new Date().getFullYear();
 
     <!-- MỤC 4: CẨM NANG XÂY DỰNG ĐỀ CƯƠNG & BÁO CÁO THỰC TẬP TỐT NGHIỆP CHUẨN HCE/CTIM (SSR SEO BLOCK) -->
     <section class="bg-white rounded-2xl shadow-sm border border-[#E8DDE0] overflow-hidden">
-      <div class="bg-gradient-to-r from-sky-800 to-cyan-800 px-5 py-3.5 text-white flex items-center justify-between">
+      <div class="bg-gradient-to-r from-[#742D3A] to-[#742D3A] px-5 py-3.5 text-white flex items-center justify-between">
         <h2 class="font-bold text-sm sm:text-base uppercase m-0">
           Hướng Dẫn Quy Trình Lập Đề Cương &amp; Viết Báo Cáo Thực Tập Tốt Nghiệp Đạt Điểm Giỏi
         </h2>
-        <span class="text-xs bg-white/15 px-2.5 py-0.5 rounded-full text-sky-100 font-medium shrink-0">Cẩm nang HCE &amp; CTIM</span>
+        <span class="text-xs bg-white/15 px-2.5 py-0.5 rounded-full text-white font-medium shrink-0">Cẩm nang HCE &amp; CTIM</span>
       </div>
       <div class="p-5 space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
         <article class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1.5">
-          <h3 class="font-bold text-sky-900 text-sm m-0">1. Cấu trúc 3 chương chuẩn của Đề cương chi tiết Báo cáo thực tập</h3>
+          <h3 class="font-bold text-[#742D3A] text-sm m-0">1. Cấu trúc 3 chương chuẩn của Đề cương chi tiết Báo cáo thực tập</h3>
           <p class="m-0">
             Một bản đề cương chi tiết báo cáo thực tập tốt nghiệp ngành Quản trị kinh doanh, Marketing và Kinh doanh quốc tế được cấu trúc chặt chẽ gồm 3 chương: <strong>Chương 1 — Giới thiệu khái quát về đơn vị thực tập</strong> (quá trình hình thành phát triển, chức năng nhiệm vụ, sơ đồ cơ cấu tổ chức quản lý và phân tích kết quả hoạt động kinh doanh trong 3 năm gần nhất); <strong>Chương 2 — Phân tích thực trạng hoạt động nghiệp vụ tại doanh nghiệp</strong> (mô tả quy trình thực tế, phân tích bảng biểu số liệu minh chứng, đánh giá ưu điểm và nguyên nhân hạn chế); <strong>Chương 3 — Định hướng và giải pháp hoàn thiện</strong> gắn liền với những tồn tại đã chỉ ra ở Chương 2.
           </p>
         </article>
         <article class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1.5">
-          <h3 class="font-bold text-sky-900 text-sm m-0">2. Lưu ý khi xin số liệu và hoàn thiện Phiếu đánh giá thực tập tại doanh nghiệp</h3>
+          <h3 class="font-bold text-[#742D3A] text-sm m-0">2. Lưu ý khi xin số liệu và hoàn thiện Phiếu đánh giá thực tập tại doanh nghiệp</h3>
           <p class="m-0">
             Khi sử dụng mã tra cứu đề cương trên hệ thống, sinh viên cần đối chiếu ngay các bảng số liệu yêu cầu ở Chương 1 và Chương 2 để chủ động xin phòng Kế toán, phòng Nhân sự hoặc phòng Kinh doanh của đơn vị thực tập (số liệu cần đồng nhất đơn vị tính và có nguồn trích dẫn rõ ràng). Trước khi kết thúc đợt thực tập, sinh viên tải <strong>Mã 01 (Bảng điểm &amp; Phiếu đánh giá thực tập)</strong> để cán bộ hướng dẫn tại doanh nghiệp nhận xét, ký tên và đóng dấu tròn xác nhận theo đúng quy chế đào tạo.
           </p>
         </article>
         <div class="pt-1 flex flex-wrap gap-2">
-          <a href="/study-corner/internships" title="Xem quy trình hướng dẫn thực tập tốt nghiệp toàn diện" class="px-3.5 py-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-800 border border-[#E8DDE0] font-bold text-xs transition-colors">
+          <a href="/study-corner/internships" title="Xem quy trình hướng dẫn thực tập tốt nghiệp toàn diện" class="px-3.5 py-2 rounded-xl bg-[#F7F5F2] hover:bg-[#F8EDEF] text-[#A83245] border border-[#E8DDE0] font-bold text-xs transition-colors">
             <span>🧭 Quy trình thực tập chung</span>
           </a>
-          <a href="/study-corner/internships/huong-dan-bao-cao-hce" title="Xem quy định trình bày báo cáo thực tập chuẩn trường HCE" class="px-3.5 py-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-800 border border-[#E8DDE0] font-bold text-xs transition-colors">
+          <a href="/study-corner/internships/huong-dan-bao-cao-hce" title="Xem quy định trình bày báo cáo thực tập chuẩn trường HCE" class="px-3.5 py-2 rounded-xl bg-[#F7F5F2] hover:bg-[#F8EDEF] text-[#A83245] border border-[#E8DDE0] font-bold text-xs transition-colors">
             <span>🏛️ Chuẩn trình bày HCE</span>
           </a>
-          <a href="/study-corner/internships/huong-dan-bao-cao-ctim" title="Xem quy định trình bày báo cáo thực tập chuẩn trường CTIM" class="px-3.5 py-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-800 border border-[#E8DDE0] font-bold text-xs transition-colors">
+          <a href="/study-corner/internships/huong-dan-bao-cao-ctim" title="Xem quy định trình bày báo cáo thực tập chuẩn trường CTIM" class="px-3.5 py-2 rounded-xl bg-[#F7F5F2] hover:bg-[#F8EDEF] text-[#A83245] border border-[#E8DDE0] font-bold text-xs transition-colors">
             <span>🎓 Chuẩn trình bày CTIM</span>
           </a>
           <a href="/study-corner/internships/sample" title="Tải 19 mẫu báo cáo thực tập tốt nghiệp hoàn chỉnh" class="px-3.5 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-bold text-xs transition-colors">
@@ -223,7 +223,7 @@ const currentYear = new Date().getFullYear();
             '<h4 class="font-bold uppercase text-emerald-900">' +
             data.title +
             '</h4>' +
-            '<p class="text-emerald-800 font-medium mt-0.5">Mã tra cứu hợp lệ: <span class="num-font font-extrabold text-sky-900">' +
+            '<p class="text-emerald-800 font-medium mt-0.5">Mã tra cứu hợp lệ: <span class="num-font font-extrabold text-[#742D3A]">' +
             data.code +
             '</span></p>' +
             '</div>' +
