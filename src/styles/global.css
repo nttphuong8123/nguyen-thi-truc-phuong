@@ -2,42 +2,41 @@
 @import "./quiz-theme.css";
 
 /* ==========================================================================
-   DESIGN SYSTEM TOKENS — NGUYỄN THỊ TRÚC PHƯƠNG PORTAL (OFFICIAL RED PALETTE)
-   1. Đỏ đô chủ đạo: #8B1E2D
-   2. Đỏ nhấn: #C62828
-   3. Đỏ nhạt: #FCEEEF
-   4. Trắng: #FFFFFF
-   5. Trắng ngà: #FAF8F6
-   6. Chữ chính: #292929
-   7. Chữ phụ: #555555
-   8. Chữ mô tả: #666666
-   9. Đường viền: #E8E0E1
-   10. Nền phụ: #F7F4F4
+   DESIGN SYSTEM TOKENS — NGUYỄN THỊ TRÚC PHƯƠNG (OFFICIAL ROSE-WINE RED PALETTE)
+   - Đỏ chủ đạo:    #A83245
+   - Đỏ phụ:        #C65B69
+   - Đỏ đậm:        #742D3A
+   - Hồng nền nhạt: #F8EDEF
+   - Nền tổng thể:  #F7F5F2
+   - Nền thẻ:       #FFFFFF
+   - Chữ chính:     #303039
+   - Chữ phụ:       #62616A
+   - Đường viền:    #E8DDE0
    ========================================================================== */
 :root {
-  --color-primary: #8B1E2D;          /* Đỏ đô chủ đạo */
-  --color-primary-hover: #701824;    /* Đỏ đô đậm */
-  --color-secondary: #C62828;        /* Đỏ nhấn */
-  --color-secondary-hover: #A52121;  /* Đỏ nhấn đậm */
-  --color-accent: #C62828;           /* Đỏ nhấn CTA */
-  --color-accent-hover: #8B1E2D;
-  --color-accent-light: #FCEEEF;     /* Đỏ nhạt nền phụ */
-  --color-bg-soft: #FAF8F6;          /* Trắng ngà nền tổng thể */
-  --color-bg-sub: #F7F4F4;           /* Nền phụ */
-  --color-surface: #FFFFFF;          /* Trắng tinh khiết */
-  --color-text-main: #292929;        /* Chữ chính */
-  --color-text-muted: #555555;       /* Chữ phụ */
-  --color-text-desc: #666666;        /* Chữ mô tả */
-  --color-neutral: #888888;          /* Thành phần phụ */
-  --color-border-soft: #E8E0E1;      /* Đường viền */
+  --color-primary: #A83245;          /* Đỏ chủ đạo */
+  --color-primary-hover: #742D3A;    /* Đỏ đậm */
+  --color-secondary: #C65B69;        /* Đỏ phụ */
+  --color-secondary-hover: #A83245;  /* Đỏ chủ đạo */
+  --color-accent: #C65B69;           /* Đỏ phụ nhấn */
+  --color-accent-hover: #742D3A;     /* Đỏ đậm hover */
+  --color-accent-light: #F8EDEF;     /* Hồng nền nhạt */
+  --color-bg-soft: #F7F5F2;          /* Nền tổng thể */
+  --color-bg-sub: #F8EDEF;           /* Hồng nền phụ */
+  --color-surface: #FFFFFF;          /* Nền thẻ */
+  --color-text-main: #303039;        /* Chữ chính */
+  --color-text-muted: #62616A;       /* Chữ phụ */
+  --color-text-desc: #62616A;        /* Chữ mô tả */
+  --color-neutral: #8A8992;          /* Thành phần trung tính */
+  --color-border-soft: #E8DDE0;      /* Đường viền */
   
   --radius-card: 16px;
   --radius-container: 20px;
   --radius-btn: 12px;
   --radius-pill: 9999px;
   
-  --shadow-card: 0 4px 20px -2px rgba(139, 30, 45, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
-  --shadow-card-hover: 0 10px 25px -3px rgba(139, 30, 45, 0.12), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 4px 20px -2px rgba(168, 50, 69, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover: 0 10px 25px -3px rgba(168, 50, 69, 0.12), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
 }
 
 @layer base {
@@ -101,7 +100,7 @@
 .tkd-page-scope :not(pre) > code {
   font-family: 'Be Vietnam Pro', 'Inter', system-ui, sans-serif !important;
   font-weight: 700 !important;
-  background: #FCEEEF;
+  background: #F8EDEF;
   color: var(--color-primary);
   border: 1px solid var(--color-border-soft);
   padding: 0.1rem 0.35rem;
@@ -124,6 +123,24 @@ nav[aria-label="Điều hướng chính"],
   z-index: 100 !important;
   background: var(--color-primary) !important;
   border-bottom: 1px solid var(--color-secondary) !important;
+  box-sizing: border-box !important;
+}
+
+/* Bảo đảm nút 3 gạch (Mobile Menu) luôn hiển thị trọn vẹn 100%, không bao giờ bị cắt/tràn lề trên điện thoại */
+#mobileMenuBtn {
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+}
+
+@media (max-width: 640px) {
+  #mainNavbar .max-w-7xl {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
 }
 
 /* Unified Academic Header & Card Theme for All Subpages & Quiz Pages */
@@ -137,7 +154,7 @@ nav[aria-label="Điều hướng chính"],
   text-align: center !important;
   border-radius: 0 !important;
   margin-bottom: 20px !important;
-  box-shadow: 0 4px 16px -2px rgba(139, 30, 45, 0.15) !important;
+  box-shadow: 0 4px 16px -2px rgba(168, 50, 69, 0.15) !important;
 }
 
 .tkd-page-scope > .container > .header,
@@ -200,14 +217,14 @@ nav[aria-label="Điều hướng chính"],
   align-items: center !important;
   justify-content: center !important;
   gap: 8px !important;
-  box-shadow: 0 2px 6px rgba(139, 30, 45, 0.15) !important;
+  box-shadow: 0 2px 6px rgba(168, 50, 69, 0.15) !important;
 }
 
 .tkd-btn-primary:hover {
   background: var(--color-secondary) !important;
   border-color: var(--color-secondary) !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(139, 30, 45, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(168, 50, 69, 0.2) !important;
 }
 
 .tkd-btn-accent {
@@ -222,14 +239,14 @@ nav[aria-label="Điều hướng chính"],
   align-items: center !important;
   justify-content: center !important;
   gap: 8px !important;
-  box-shadow: 0 2px 8px rgba(198, 40, 40, 0.25) !important;
+  box-shadow: 0 2px 8px rgba(198, 91, 105, 0.25) !important;
 }
 
 .tkd-btn-accent:hover {
   background: var(--color-primary) !important;
   color: #ffffff !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(198, 40, 40, 0.35) !important;
+  box-shadow: 0 4px 14px rgba(198, 91, 105, 0.35) !important;
 }
 
 .tkd-btn-secondary {
@@ -249,13 +266,13 @@ nav[aria-label="Điều hướng chính"],
 .tkd-btn-secondary:hover {
   border-color: var(--color-secondary) !important;
   color: var(--color-secondary) !important;
-  background: #FCEEEF !important;
+  background: #F8EDEF !important;
 }
 
 .tkd-badge-accent {
   background: var(--color-accent-light) !important;
-  color: #8B1E2D !important;
-  border: 1px solid #E8E0E1 !important;
+  color: #A83245 !important;
+  border: 1px solid #E8DDE0 !important;
   border-radius: var(--radius-pill) !important;
   font-size: 11px !important;
   font-weight: 700 !important;
@@ -403,7 +420,7 @@ nav[aria-label="Điều hướng chính"],
    ========================================================================== */
 .tkd-academic-subpage header,
 .tkd-academic-subpage .page-header {
-  background: linear-gradient(135deg, #8B1E2D 0%, #701824 50%, #C62828 100%) !important;
+  background: linear-gradient(135deg, #A83245 0%, #742D3A 50%, #C65B69 100%) !important;
   color: #ffffff !important;
 }
 
@@ -427,13 +444,13 @@ nav[aria-label="Điều hướng chính"],
 
 .tkd-academic-subpage .chapter-header-banner,
 .tkd-academic-subpage .bg-sky-700 {
-  background-color: #8B1E2D !important;
+  background-color: #A83245 !important;
   color: #ffffff !important;
 }
 
 .tkd-academic-subpage a[href^="#c"] {
   background-color: #F2F6FA !important;
-  color: #8B1E2D !important;
+  color: #A83245 !important;
   border: 1px solid #CBD5E1 !important;
   border-radius: 0.5rem !important;
   font-weight: 600 !important;
@@ -443,13 +460,13 @@ nav[aria-label="Điều hướng chính"],
 .tkd-academic-subpage a[href^="#c"]:hover {
   background-color: #ffffff !important;
   border-color: #168AAD !important;
-  color: #C62828 !important;
+  color: #C65B69 !important;
   transform: translateY(-1px);
 }
 
 .tkd-academic-subpage h3.text-sky-900,
 .tkd-academic-subpage h3 {
-  color: #8B1E2D !important;
+  color: #A83245 !important;
   font-weight: 700 !important;
 }
 
@@ -459,7 +476,7 @@ nav[aria-label="Điều hướng chính"],
 
 .tkd-academic-subpage .text-sky-800,
 .tkd-academic-subpage .text-sky-700 {
-  color: #C62828 !important;
+  color: #C65B69 !important;
 }
 
 
@@ -642,86 +659,86 @@ textarea:disabled,
 
 /* ==========================================================================
    ACADEMIC PREMIUM DESIGN SYSTEM OVERRIDES (GLOBAL HARMONIZATION)
-   Primary: #8B1E2D | Accent: #C62828 | Light Accent: #FCEEEF
-   Soft Background: #FAF8F6 | White: #FFFFFF | Main Text: #292929
+   Primary: #A83245 | Accent: #C65B69 | Light Accent: #F8EDEF
+   Soft Background: #F7F5F2 | White: #FFFFFF | Main Text: #303039
    ========================================================================== */
 body,
 .bg-slate-50,
 .bg-\[\#F2F6FA\],
 .bg-\[\#F4F7FB\] {
-  background-color: #FAF8F6 !important;
-  color: #292929;
+  background-color: #F7F5F2 !important;
+  color: #303039;
 }
 
 .bg-\[\#123B65\] {
-  background-color: #8B1E2D !important;
+  background-color: #A83245 !important;
 }
 
 .bg-\[\#0B1E33\] {
-  background-color: #701824 !important;
+  background-color: #742D3A !important;
 }
 
 .bg-\[\#168AAD\] {
-  background-color: #C62828 !important;
+  background-color: #C65B69 !important;
 }
 
 .hover\:bg-\[\#168AAD\]:hover,
 .hover\:bg-\[\#126e8a\]:hover {
-  background-color: #8B1E2D !important;
+  background-color: #A83245 !important;
 }
 
 .text-\[\#123B65\] {
-  color: #8B1E2D !important;
+  color: #A83245 !important;
 }
 
 .text-\[\#168AAD\] {
-  color: #C62828 !important;
+  color: #C65B69 !important;
 }
 
 .border-\[\#168AAD\]\/30,
 .border-\[\#168AAD\]\/40 {
-  border-color: rgba(198, 40, 40, 0.35) !important;
+  border-color: rgba(198, 91, 105, 0.35) !important;
 }
 
 /* Chuẩn hóa hiển thị trang học liệu chuyên sâu: Mục lục, Công thức, Bảng biểu, Ghi chú */
 .tkd-academic-subpage {
-  color: #292929 !important;
+  color: #303039 !important;
   font-size: 0.9375rem;
   line-height: 1.72;
 }
 
 .tkd-academic-subpage p,
 .tkd-academic-subpage li {
-  color: #292929;
+  color: #303039;
   line-height: 1.72;
 }
 
 .tkd-academic-subpage table th {
-  background-color: #8B1E2D !important;
+  background-color: #A83245 !important;
   color: #FFFFFF !important;
-  border-color: #C62828 !important;
+  border-color: #C65B69 !important;
 }
 
 .tkd-academic-subpage table td {
-  color: #333333 !important;
+  color: #303039 !important;
 }
 
 .tkd-academic-subpage .chapter-header-banner {
-  background: linear-gradient(135deg, #8B1E2D 0%, #C62828 100%) !important;
-  border-bottom: 2px solid #C62828 !important;
+  background: linear-gradient(135deg, #A83245 0%, #C65B69 100%) !important;
+  border-bottom: 2px solid #C65B69 !important;
 }
 
 /* Điểm nhấn Champagne Gold (#C5A46D) tinh tế trên thanh điều hướng & thẻ tiêu đề */
 #mainNavbar {
-  background: rgba(139, 30, 45, 0.98) !important;
-  border-bottom: 1px solid rgba(198, 40, 40, 0.4) !important;
-  box-shadow: 0 4px 20px -2px rgba(139, 30, 45, 0.25) !important;
+  background: rgba(168, 50, 69, 0.98) !important;
+  border-bottom: 1px solid rgba(198, 91, 105, 0.4) !important;
+  box-shadow: 0 4px 20px -2px rgba(168, 50, 69, 0.25) !important;
 }
 
 footer.bg-\[\#0B1E33\],
 footer.bg-\[\#142B49\] {
-  background: linear-gradient(180deg, #8B1E2D 0%, #5C141E 100%) !important;
-  border-top: 2px solid rgba(198, 40, 40, 0.5) !important;
+  background: linear-gradient(180deg, #A83245 0%, #742D3A 100%) !important;
+  border-top: 2px solid rgba(198, 91, 105, 0.5) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -744,7 +761,7 @@ footer.bg-\[\#142B49\] {
 .tkd-card-interactive:hover,
 .interactive-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(139, 30, 45, 0.1), 0 8px 10px -6px rgba(139, 30, 45, 0.06) !important;
+  box-shadow: 0 10px 25px -5px rgba(168, 50, 69, 0.1), 0 8px 10px -6px rgba(168, 50, 69, 0.06) !important;
 }
 
 
@@ -786,7 +803,7 @@ footer.bg-\[\#142B49\] {
 .tkd-btn-primary {
   background-color: var(--color-primary);
   color: #ffffff !important;
-  border: 1px solid rgba(198, 40, 40, 0.4);
+  border: 1px solid rgba(198, 91, 105, 0.4);
   box-shadow: 0 2px 6px rgba(18, 59, 101, 0.15);
 }
 .tkd-btn-primary:hover {
@@ -798,7 +815,7 @@ footer.bg-\[\#142B49\] {
 .tkd-btn-secondary {
   background-color: var(--color-secondary);
   color: #ffffff !important;
-  border: 1px solid rgba(198, 40, 40, 0.5);
+  border: 1px solid rgba(198, 91, 105, 0.5);
   box-shadow: 0 2px 6px rgba(22, 138, 173, 0.2);
 }
 .tkd-btn-secondary:hover {
@@ -835,7 +852,7 @@ footer.bg-\[\#142B49\] {
   border: 1px solid transparent;
 }
 .tkd-btn-ghost:hover {
-  background-color: rgba(139, 30, 45, 0.06);
+  background-color: rgba(168, 50, 69, 0.06);
   color: var(--color-primary) !important;
 }
 
@@ -863,7 +880,7 @@ footer.bg-\[\#142B49\] {
 .tkd-textarea:focus {
   outline: none !important;
   border-color: var(--color-secondary) !important;
-  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.16) !important;
+  box-shadow: 0 0 0 3px rgba(198, 91, 105, 0.16) !important;
 }
 .tkd-label {
   display: block;
@@ -886,7 +903,7 @@ footer.bg-\[\#142B49\] {
 }
 .tkd-card:hover {
   box-shadow: var(--shadow-card-hover);
-  border-color: rgba(198, 40, 40, 0.35);
+  border-color: rgba(198, 91, 105, 0.35);
 }
 .tkd-card-header {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
@@ -895,7 +912,7 @@ footer.bg-\[\#142B49\] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(198, 40, 40, 0.3);
+  border-bottom: 1px solid rgba(198, 91, 105, 0.3);
 }
 .tkd-card-title {
   font-size: 0.875rem;
@@ -927,19 +944,19 @@ footer.bg-\[\#142B49\] {
   white-space: nowrap;
 }
 .tkd-badge-primary {
-  background-color: rgba(139, 30, 45, 0.08);
+  background-color: rgba(168, 50, 69, 0.08);
   color: var(--color-primary);
-  border: 1px solid rgba(139, 30, 45, 0.2);
+  border: 1px solid rgba(168, 50, 69, 0.2);
 }
 .tkd-badge-secondary {
-  background-color: rgba(198, 40, 40, 0.1);
+  background-color: rgba(198, 91, 105, 0.1);
   color: var(--color-secondary);
-  border: 1px solid rgba(198, 40, 40, 0.25);
+  border: 1px solid rgba(198, 91, 105, 0.25);
 }
 .tkd-badge-accent {
-  background-color: rgba(198, 40, 40, 0.15);
-  color: #8B1E2D;
-  border: 1px solid rgba(198, 40, 40, 0.4);
+  background-color: rgba(198, 91, 105, 0.15);
+  color: #A83245;
+  border: 1px solid rgba(198, 91, 105, 0.4);
 }
 .tkd-badge-success {
   background-color: #ECFDF5;
@@ -971,7 +988,7 @@ footer.bg-\[\#142B49\] {
   text-align: left;
 }
 .tkd-table th {
-  background-color: #8B1E2D;
+  background-color: #A83245;
   color: #ffffff;
   padding: 0.625rem 0.875rem;
   font-weight: 700;
@@ -1049,10 +1066,10 @@ footer.bg-\[\#142B49\] {
 /* A. THÀNH PHẦN NỀN ĐỎ/ĐỎ ĐÔ: Chữ BẮT BUỘC màu trắng hoặc đỏ nhạt sáng */
 .chapter-header-banner,
 .tkd-academic-header,
-[class*="from-[#8B1E2D]"],
-[class*="bg-[#8B1E2D]"],
-[class*="bg-[#701824]"],
-[class*="bg-[#C62828]"],
+[class*="from-[#A83245]"],
+[class*="bg-[#A83245]"],
+[class*="bg-[#742D3A]"],
+[class*="bg-[#C65B69]"],
 #mainNavbar,
 nav.site-sticky-navbar,
 table thead tr,
@@ -1061,20 +1078,20 @@ table thead th {
 }
 
 .chapter-header-banner h1, .chapter-header-banner h2, .chapter-header-banner h3, .chapter-header-banner h4,
-[class*="from-[#8B1E2D]"] h1, [class*="from-[#8B1E2D]"] h2, [class*="from-[#8B1E2D]"] h3,
-[class*="bg-[#8B1E2D]"] h1, [class*="bg-[#8B1E2D]"] h2, [class*="bg-[#8B1E2D]"] h3 {
+[class*="from-[#A83245]"] h1, [class*="from-[#A83245]"] h2, [class*="from-[#A83245]"] h3,
+[class*="bg-[#A83245]"] h1, [class*="bg-[#A83245]"] h2, [class*="bg-[#A83245]"] h3 {
   color: #ffffff !important;
 }
 
 .chapter-header-banner p,
-[class*="from-[#8B1E2D]"] p,
-[class*="bg-[#8B1E2D]"] p {
-  color: #FCEEEF !important;
+[class*="from-[#A83245]"] p,
+[class*="bg-[#A83245]"] p {
+  color: #F8EDEF !important;
 }
 
 .chapter-header-banner strong,
-[class*="from-[#8B1E2D]"] strong,
-[class*="bg-[#8B1E2D]"] strong {
+[class*="from-[#A83245]"] strong,
+[class*="bg-[#A83245]"] strong {
   color: #ffffff !important;
 }
 
@@ -1088,36 +1105,62 @@ table thead th {
 .tkd-academic-subpage section,
 .tkd-page-scope section {
   background-color: #ffffff !important;
-  color: #333333 !important;
+  color: #303039 !important;
 }
 
-.tkd-academic-subpage section p,
-.tkd-academic-subpage section li,
-.tkd-page-scope section p,
-.tkd-page-scope section li {
-  color: #333333 !important;
+.tkd-academic-subpage section h1,
+.tkd-academic-subpage section h2,
+.tkd-page-scope section h1,
+.tkd-page-scope section h2 {
+  color: #111827 !important;
 }
 
 .tkd-academic-subpage section h3,
 .tkd-academic-subpage section h4,
 .tkd-page-scope section h3,
 .tkd-page-scope section h4 {
-  color: #8B1E2D !important;
+  color: #A83245 !important;
+}
+
+.tkd-academic-subpage section p,
+.tkd-academic-subpage section li,
+.tkd-page-scope section p,
+.tkd-page-scope section li {
+  color: #303039 !important;
+}
+
+/* Bảo đảm mọi footer hoặc khối nền sẫm màu luôn có chữ sáng rõ nét, không bao giờ bị chữ tối trên nền tối */
+footer,
+footer p,
+footer span:not([class*="text-"]),
+[class*="bg-[#111827]"],
+[class*="bg-[#142B49]"],
+[class*="bg-[#0B1E33]"],
+[class*="bg-[#742D3A]"],
+[class*="bg-[#A83245]"] {
+  color: #ffffff;
+}
+
+[class*="bg-[#111827]"] p,
+[class*="bg-[#142B49]"] p,
+[class*="bg-[#0B1E33]"] p,
+[class*="bg-[#742D3A]"] p {
+  color: #F8EDEF !important;
 }
 
 /* C. BẢNG BIỂU HỌC THUẬT: Header đỏ chữ trắng, Body trắng chữ đen */
 table thead tr th {
-  background-color: #8B1E2D !important;
+  background-color: #A83245 !important;
   color: #ffffff !important;
   font-weight: 700 !important;
 }
 
 table tbody tr td {
-  color: #333333 !important;
+  color: #303039 !important;
 }
 
 table tbody tr:nth-child(even) {
-  background-color: #FAF8F6 !important;
+  background-color: #F7F5F2 !important;
 }
 
 table tbody tr:nth-child(odd) {

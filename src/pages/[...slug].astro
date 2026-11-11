@@ -70,7 +70,7 @@ const seoMeta = getSeoMetaForPath(cleanPath, pageData?.title);
         pageTitle={pageData.title}
       >
         {pageData.page_type === 'quiz' && (
-          <div class="bg-gradient-to-r from-[#123B65] via-[#168AAD] to-[#123B65] text-white text-xs py-2 px-4 text-center border-b border-[#168AAD]/50">
+          <div class="bg-gradient-to-r from-[#742D3A] via-[#A83245] to-[#742D3A] text-white text-xs py-2 px-4 text-center border-b border-[#C65B69]/40">
             <span>💡 <strong>Hệ thống Trắc nghiệm Trực tuyến:</strong> Kết quả nộp bài của bạn sẽ được chấm điểm tức thì và tự động ghi nhận vào hệ thống lớp học.</span>
           </div>
         )}
@@ -123,10 +123,10 @@ const seoMeta = getSeoMetaForPath(cleanPath, pageData?.title);
                       while (copy.length < colCount) copy.push('');
                       return copy;
                     });
-                    const thHtml = headers.map((c, cIdx) => `<th class="${cIdx === 0 ? 'tkd-q-th-first text-left font-bold pl-3 pr-2.5' : 'tkd-q-th-num text-center font-bold px-2.5 min-w-[42px]'} py-2 text-xs sm:text-[13px] text-[#0B1E33] bg-[#EFF6FF] border border-[#CBD5E1] whitespace-nowrap">${formatQuizString(c, true)}</th>`).join('');
-                    const trHtml = rows.map((r, rIdx) => `<tr class="${rIdx % 2 === 1 ? 'bg-[#F8FAFC]' : 'bg-white'} hover:bg-sky-50/60 transition-colors">${r.map((c, cIdx) => `<td class="${cIdx === 0 ? 'tkd-q-td-first text-left font-bold text-[#0B1E33] bg-[#F8FAFC] pl-3 pr-2.5 whitespace-normal leading-snug min-w-[110px]' : 'tkd-q-td-num text-center font-semibold num-font text-[#0F172A] px-2.5 whitespace-nowrap'} py-2 text-xs sm:text-[13px] border border-[#E2E8F0]">${formatQuizString(c, true)}</td>`).join('')}</tr>`).join('');
+                    const thHtml = headers.map((c, cIdx) => `<th class="${cIdx === 0 ? 'tkd-q-th-first text-left font-bold pl-3 pr-2.5' : 'tkd-q-th-num text-center font-bold px-2.5 min-w-[42px]'} py-2 text-xs sm:text-[13px] text-white bg-[#A83245] border border-[#E8DDE0] whitespace-nowrap">${formatQuizString(c, true)}</th>`).join('');
+                    const trHtml = rows.map((r, rIdx) => `<tr class="${rIdx % 2 === 1 ? 'bg-[#F7F5F2]' : 'bg-white'} hover:bg-[#F8EDEF]/50 transition-colors">${r.map((c, cIdx) => `<td class="${cIdx === 0 ? 'tkd-q-td-first text-left font-bold text-[#303039] bg-[#F7F5F2] pl-3 pr-2.5 whitespace-normal leading-snug min-w-[110px]' : 'tkd-q-td-num text-center font-semibold num-font text-[#303039] px-2.5 whitespace-nowrap'} py-2 text-xs sm:text-[13px] border border-[#E8DDE0]">${formatQuizString(c, true)}</td>`).join('')}</tr>`).join('');
                     const beforeHtml = before ? `<div class="tkd-q-lead">${formatQuizString(before, true)}</div>` : '';
-                    const tableHtml = `<div class="table-responsive tkd-q-table-wrap overflow-x-auto my-3 w-full max-w-full rounded-xl border border-[#CBD5E1] bg-white shadow-2xs -webkit-overflow-scrolling-touch"><table class="tkd-q-table data-table w-full text-xs sm:text-[13px] border-collapse table-auto"><thead><tr>${thHtml}</tr></thead><tbody>${trHtml}</tbody></table></div>`;
+                    const tableHtml = `<div class="table-responsive tkd-q-table-wrap overflow-x-auto my-3 w-full max-w-full rounded-xl border border-[#E8DDE0] bg-white shadow-2xs -webkit-overflow-scrolling-touch"><table class="tkd-q-table data-table w-full text-xs sm:text-[13px] border-collapse table-auto"><thead><tr>${thHtml}</tr></thead><tbody>${trHtml}</tbody></table></div>`;
                     const afterHtml = after ? `<div class="tkd-q-prompt">${formatQuizString(after, false)}</div>` : '';
                     return `<div class="tkd-q-structured">${beforeHtml}${tableHtml}${afterHtml}</div>`;
                   }

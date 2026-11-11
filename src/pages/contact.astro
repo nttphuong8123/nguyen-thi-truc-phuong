@@ -11,13 +11,13 @@ const officeHourLines = contactCfg.office_hours
 ---
 
 <MainLayout currentPath="/contact">
-  <main class="w-full bg-[#FAF8F6] min-h-screen pb-16">
+  <main class="w-full bg-[#F7F5F2] min-h-screen pb-16">
     <!-- Header Banner -->
-    <header class="w-full bg-gradient-to-br from-[#701824] via-[#8B1E2D] to-[#C62828] text-white shadow-md">
+    <header class="w-full bg-gradient-to-br from-[#742D3A] via-[#A83245] to-[#C65B69] text-white shadow-md">
       <div class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 text-center sm:text-left">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-5">
           <div>
-            <div class="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-[#8B1E2D] border border-[#FCEEEF]/40 text-[#FCEEEF] text-xs sm:text-sm font-bold tracking-wider uppercase">
+            <div class="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-[#A83245] border border-[#F8EDEF]/40 text-[#F8EDEF] text-xs sm:text-sm font-bold tracking-wider uppercase">
               <svg class="w-4 h-4 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
               </svg>
@@ -26,7 +26,7 @@ const officeHourLines = contactCfg.office_hours
             <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight uppercase">THÔNG TIN LIÊN HỆ &amp; GIẢI ĐÁP HỌC VỤ</h1>
             <p class="text-blue-100 text-sm sm:text-base mt-1">Kênh kết nối chính thức, lịch tiếp sinh viên và gửi câu hỏi trực tiếp đến {contactCfg.instructor_name}</p>
           </div>
-          <a href="/danh-gia-giang-vien" class="px-5 py-3 rounded-2xl bg-[#C62828] hover:bg-[#8B1E2D] border border-[#C62828]/40 text-white font-extrabold text-xs sm:text-sm transition-all shrink-0 shadow-sm flex items-center gap-2">
+          <a href="/danh-gia-giang-vien" class="px-5 py-3 rounded-2xl bg-[#C65B69] hover:bg-[#A83245] border border-[#C65B69]/40 text-white font-extrabold text-xs sm:text-sm transition-all shrink-0 shadow-sm flex items-center gap-2">
             <span>⭐</span>
             <span>Phiếu Đánh Giá Giảng Viên</span>
             <span>➔</span>
@@ -40,7 +40,7 @@ const officeHourLines = contactCfg.office_hours
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
         <div class="md:col-span-2 p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-[#FCEEEF] text-[#8B1E2D] flex items-center justify-center text-2xl font-extrabold">
+            <div class="w-12 h-12 rounded-2xl bg-[#F8EDEF] text-[#A83245] flex items-center justify-center text-2xl font-extrabold">
               👩‍🏫
             </div>
             <div>
@@ -52,13 +52,13 @@ const officeHourLines = contactCfg.office_hours
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs sm:text-sm">
             <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
               <div class="text-slate-400 font-bold uppercase text-[11px] mb-1">📧 Email Học Vụ</div>
-              <a href={`mailto:${contactCfg.email}`} class="font-bold text-[#C62828] hover:underline break-all">{contactCfg.email}</a>
+              <a href={`mailto:${contactCfg.email}`} class="font-bold text-[#C65B69] hover:underline break-all">{contactCfg.email}</a>
             </div>
             <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
               <div class="text-slate-400 font-bold uppercase text-[11px] mb-1">📞 Zalo / Hotline</div>
               <div class="flex items-center gap-2">
-                <a href={`tel:${cleanPhone}`} class="font-bold text-slate-800 hover:text-[#C62828]">{contactCfg.hotline}</a>
-                <a href={contactCfg.zalo_url} target="_blank" rel="noopener" class="px-2 py-0.5 rounded-md bg-[#FCEEEF] text-[#8B1E2D] text-[11px] font-bold hover:bg-blue-200">
+                <a href={`tel:${cleanPhone}`} class="font-bold text-slate-800 hover:text-[#C65B69]">{contactCfg.hotline}</a>
+                <a href={contactCfg.zalo_url} target="_blank" rel="noopener" class="px-2 py-0.5 rounded-md bg-[#F8EDEF] text-[#A83245] text-[11px] font-bold hover:bg-blue-200">
                   Nhắn Zalo ↗
                 </a>
               </div>
@@ -95,12 +95,12 @@ const officeHourLines = contactCfg.office_hours
       </div>
 
       <!-- Banner mời đánh giá giảng viên -->
-      <div class="p-5 rounded-2xl bg-gradient-to-r from-[#8B1E2D] to-[#C62828] text-white shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="p-5 rounded-2xl bg-gradient-to-r from-[#A83245] to-[#C65B69] text-white shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="space-y-1 text-center sm:text-left">
           <h3 class="text-base sm:text-lg font-extrabold">⭐ Khảo sát đánh giá chất lượng giảng dạy học kỳ</h3>
           <p class="text-xs sm:text-sm text-blue-100">Ý kiến chân thành của sinh viên giúp cô hoàn thiện phương pháp giảng dạy và nâng cao chất lượng bài giảng.</p>
         </div>
-        <a href="/danh-gia-giang-vien" class="px-5 py-2.5 rounded-xl bg-[#C62828] hover:bg-[#8B1E2D] text-white font-extrabold text-xs sm:text-sm transition-all shrink-0 shadow-xs">
+        <a href="/danh-gia-giang-vien" class="px-5 py-2.5 rounded-xl bg-[#C65B69] hover:bg-[#A83245] text-white font-extrabold text-xs sm:text-sm transition-all shrink-0 shadow-xs">
           Mở Trang Đánh Giá Giảng Viên ➔
         </a>
       </div>
@@ -132,7 +132,7 @@ const officeHourLines = contactCfg.office_hours
           </div>
           <div class="flex items-center justify-between">
             <span id="contactFormStatus" class="text-xs text-slate-500"></span>
-            <button type="submit" class="px-5 py-2.5 rounded-xl bg-[#8B1E2D] hover:bg-[#C62828] text-white font-extrabold cursor-pointer">
+            <button type="submit" class="px-5 py-2.5 rounded-xl bg-[#A83245] hover:bg-[#C65B69] text-white font-extrabold cursor-pointer">
               Gửi Tin Nhắn
             </button>
           </div>

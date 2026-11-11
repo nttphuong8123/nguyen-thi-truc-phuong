@@ -13,15 +13,15 @@ const categories = ['Marketing', 'Kinh tế & Khởi nghiệp', 'Quản trị'];
   description="Cổng Góc học tập học phần chuyên ngành: Quản trị dự án, Quản trị tài chính, Quản trị rủi ro, Quản trị chiến lược, Marketing căn bản, Kinh tế vi mô, Hướng dẫn thực tập và Khởi nghiệp của ThS. NGUYỄN THỊ TRÚC PHƯƠNG."
   currentPath="/study-corner"
 >
-  <header class="w-full bg-gradient-to-br from-[#8B1E2D] via-[#A32234] to-[#691420] text-white py-8 sm:py-10 px-4 text-center shadow-sm">
+  <header class="w-full bg-gradient-to-br from-[#A83245] via-[#A32234] to-[#691420] text-white py-8 sm:py-10 px-4 text-center shadow-sm">
     <div class="max-w-6xl mx-auto space-y-2.5">
-      <div class="inline-flex items-center gap-2 bg-white/15 border border-[#FCEEEF]/30 rounded-full px-4 py-1 text-xs font-semibold text-[#FCEEEF] uppercase tracking-wide">
+      <div class="inline-flex items-center gap-2 bg-white/15 border border-[#F8EDEF]/30 rounded-full px-4 py-1 text-xs font-semibold text-[#F8EDEF] uppercase tracking-wide">
         <span>📚</span> Hệ Thống Học Liệu Mở &amp; Thực Hành Số
       </div>
       <h1 class="text-xl sm:text-3xl md:text-4xl font-extrabold tracking-tight uppercase">
         Góc Học Tập — Các Học Phần Trọng Tâm
       </h1>
-      <p class="text-xs sm:text-sm text-[#FCEEEF]/90 max-w-3xl mx-auto font-medium leading-relaxed">
+      <p class="text-xs sm:text-sm text-[#F8EDEF]/90 max-w-3xl mx-auto font-medium leading-relaxed">
         Trang bị đầy đủ Giáo trình toàn tập chuẩn hóa, Đề cương chi tiết, Hướng dẫn giải bài tập, Đề thi có đáp án, Biểu mẫu và Phần mềm mô phỏng ({totalResources}+ tài nguyên mở).
       </p>
     </div>
@@ -29,32 +29,32 @@ const categories = ['Marketing', 'Kinh tế & Khởi nghiệp', 'Quản trị'];
 
   <main class="max-w-6xl mx-auto px-3 sm:px-6 py-6 sm:py-8 space-y-6">
     <!-- Banner điều hướng nhanh sang Thi Online -->
-    <div class="bg-gradient-to-r from-[#8B1E2D] via-[#C62828] to-[#8B1E2D] border border-[#C62828]/40 rounded-2xl p-4 sm:p-5 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+    <div class="bg-gradient-to-r from-[#A83245] via-[#C65B69] to-[#A83245] border border-[#C65B69]/40 rounded-2xl p-4 sm:p-5 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
       <div class="space-y-1 text-center sm:text-left">
         <h2 class="font-extrabold text-sm sm:text-base uppercase flex items-center justify-center sm:justify-start gap-2">
           <span>✍️</span>
           <span>Trung Tâm Thi Online (Thi Trắc Nghiệm Trực Tuyến — 60 Phút / 50 Câu)</span>
         </h2>
-        <p class="text-xs text-[#FCEEEF] leading-relaxed">
+        <p class="text-xs text-[#F8EDEF] leading-relaxed">
           Đăng ký thông tin thí sinh, chọn môn học, làm bài thi trực tuyến, chấm điểm tự động và xuất phiếu kết quả PDF/CSV.
         </p>
       </div>
       <a
         href="/ngan-hang-de-thi"
         title="Truy cập Trung tâm Thi Online 50 câu trong 60 phút"
-        class="bg-[#C62828] hover:bg-[#8B1E2D] border border-[#C62828] text-white font-extrabold text-xs sm:text-sm px-6 py-2.5 rounded-xl shadow-xs transition-colors shrink-0 active:scale-95"
+        class="bg-[#C65B69] hover:bg-[#A83245] border border-[#C65B69] text-white font-extrabold text-xs sm:text-sm px-6 py-2.5 rounded-xl shadow-xs transition-colors shrink-0 active:scale-95"
       >
         <span>Vào Thi Online</span> <span aria-hidden="true">→</span>
       </a>
     </div>
 
     <!-- Thanh Lọc Chuyên Mục & Tìm Kiếm Học Phần Nhanh -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3 rounded-2xl border border-[#E8E0E1] shadow-2xs">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3 rounded-2xl border border-[#E8DDE0] shadow-2xs">
       <div class="flex flex-wrap items-center gap-1.5" id="subjectFilterButtons">
         <button
           type="button"
           data-category="all"
-          class="subject-filter-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-[#8B1E2D] text-white shadow-2xs cursor-pointer"
+          class="subject-filter-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-[#A83245] text-white shadow-2xs cursor-pointer"
         >
           Tất cả ({studySubjects.length})
         </button>
@@ -78,7 +78,7 @@ const categories = ['Marketing', 'Kinh tế & Khởi nghiệp', 'Quản trị'];
           type="text"
           id="subjectSearchInput"
           placeholder="Tìm kiếm môn học, tài liệu..."
-          class="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#C62828] focus:ring-1 focus:ring-[#C62828]"
+          class="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#C65B69] focus:ring-1 focus:ring-[#C65B69]"
         />
         <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs">🔍</span>
       </div>
@@ -92,19 +92,19 @@ const categories = ['Marketing', 'Kinh tế & Khởi nghiệp', 'Quản trị'];
             data-subject-card
             data-category={sub.category}
             data-title={sub.title.toLowerCase()}
-            class="bg-white rounded-2xl border border-slate-200 shadow-xs hover:border-[#C62828]/60 hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group"
+            class="bg-white rounded-2xl border border-slate-200 shadow-xs hover:border-[#C65B69]/60 hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group"
           >
             <!-- Card Header -->
             <div class="p-5 border-b border-slate-100 bg-gradient-to-r from-slate-50/70 to-white">
               <div class="flex items-start justify-between gap-3 mb-2">
-                <span class="text-3xl shrink-0 p-2.5 bg-[#FCEEEF] rounded-2xl border border-[#E8E0E1] group-hover:scale-105 transition-transform">
+                <span class="text-3xl shrink-0 p-2.5 bg-[#F8EDEF] rounded-2xl border border-[#E8DDE0] group-hover:scale-105 transition-transform">
                   {sub.icon}
                 </span>
                 <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 uppercase tracking-wider">
                   {sub.category}
                 </span>
               </div>
-              <h2 class="font-extrabold text-base sm:text-lg text-[#333333] group-hover:text-[#8B1E2D] transition-colors leading-snug">
+              <h2 class="font-extrabold text-base sm:text-lg text-[#333333] group-hover:text-[#A83245] transition-colors leading-snug">
                 <a href={sub.mainHref}>{sub.title}</a>
               </h2>
               <p class="text-xs text-slate-500 font-semibold mt-0.5">{sub.subtitle}</p>
@@ -121,8 +121,8 @@ const categories = ['Marketing', 'Kinh tế & Khởi nghiệp', 'Quản trị'];
                   <li class="flex items-center justify-between gap-2 p-1.5 rounded-lg hover:bg-white border border-transparent hover:border-slate-200 transition-colors">
                     <a
                       href={link.href}
-                      class={`flex-1 hover:text-[#C62828] font-medium truncate ${
-                        link.highlight ? 'text-[#8B1E2D] font-bold' : 'text-slate-700'
+                      class={`flex-1 hover:text-[#C65B69] font-medium truncate ${
+                        link.highlight ? 'text-[#A83245] font-bold' : 'text-slate-700'
                       }`}
                     >
                       • {link.label}
@@ -130,7 +130,7 @@ const categories = ['Marketing', 'Kinh tế & Khởi nghiệp', 'Quản trị'];
                     <span
                       class={`text-[10px] px-2 py-0.5 rounded font-bold shrink-0 ${
                         link.highlight
-                          ? 'bg-[#FCEEEF] text-[#8B1E2D] border border-[#E8E0E1]'
+                          ? 'bg-[#F8EDEF] text-[#A83245] border border-[#E8DDE0]'
                           : 'bg-slate-200/60 text-slate-600'
                       }`}
                     >
@@ -143,7 +143,7 @@ const categories = ['Marketing', 'Kinh tế & Khởi nghiệp', 'Quản trị'];
               <div class="pt-3 border-t border-slate-200/60 flex items-center justify-between gap-2">
                 <a
                   href={sub.mainHref}
-                  class="bg-[#8B1E2D] hover:bg-[#C62828] text-white text-xs font-bold px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 shadow-2xs hover:shadow-xs active:scale-95"
+                  class="bg-[#A83245] hover:bg-[#C65B69] text-white text-xs font-bold px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 shadow-2xs hover:shadow-xs active:scale-95"
                 >
                   <span>📖</span>
                   <span>Xem giáo trình</span>
@@ -151,7 +151,7 @@ const categories = ['Marketing', 'Kinh tế & Khởi nghiệp', 'Quản trị'];
                 </a>
                 <a
                   href={sub.mainHref}
-                  class="text-xs font-bold text-slate-500 hover:text-[#8B1E2D] hover:underline flex items-center gap-1"
+                  class="text-xs font-bold text-slate-500 hover:text-[#A83245] hover:underline flex items-center gap-1"
                 >
                   <span>Chi tiết</span>
                 </a>
@@ -193,10 +193,10 @@ const categories = ['Marketing', 'Kinh tế & Khởi nghiệp', 'Quản trị'];
     filterBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
         filterBtns.forEach((b) => {
-          b.classList.remove('active', 'bg-[#8B1E2D]', 'text-white', 'shadow-2xs');
+          b.classList.remove('active', 'bg-[#A83245]', 'text-white', 'shadow-2xs');
           b.classList.add('bg-slate-100', 'text-slate-700');
         });
-        btn.classList.add('active', 'bg-[#8B1E2D]', 'text-white', 'shadow-2xs');
+        btn.classList.add('active', 'bg-[#A83245]', 'text-white', 'shadow-2xs');
         btn.classList.remove('bg-slate-100', 'text-slate-700');
 
         activeCat = btn.getAttribute('data-category') || 'all';

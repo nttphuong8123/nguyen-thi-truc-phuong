@@ -2,26 +2,26 @@
    HỆ THỐNG GIAO DIỆN ÔN TẬP TRẮC NGHIỆM & THI ONLINE ĐỒNG NHẤT (TKD QUIZ THEME)
    Chuẩn hóa theo Unified Design System — NGUYỄN THỊ TRÚC PHƯƠNG (nguyenthitrucphuong.pages.dev):
    - Bảng màu chủ đạo: Xanh Navy (#0B1E33 / #123B65), Xanh Dương Sáng (#0284C7 / #0369A1), Xanh Teal (#168AAD / #72C7D5)
-   - Nền sáng dịu mắt (#FAF8F6 / #FFFFFF), viền mảnh sắc nét (#E8E0E1 / #E8E0E1)
+   - Nền sáng dịu mắt (#F7F5F2 / #FFFFFF), viền mảnh sắc nét (#E8DDE0 / #E8DDE0)
    - Bảo toàn 100% nội dung câu hỏi, bảng số liệu, công thức, ký hiệu và đáp án A, B, C, D
    - Tuyệt đối không dùng overflow:hidden, line-clamp hay cắt chữ trên câu hỏi và đáp án
    ========================================================================== */
 
 .tkd-page-scope {
-  --quiz-primary: #8B1E2D;          /* Đỏ đô chủ đạo */
-  --quiz-primary-dark: #701824;     /* Đỏ đô đậm */
-  --quiz-secondary: #C62828;        /* Đỏ nhấn */
-  --quiz-bright-blue: #C62828;      /* Đỏ nhấn */
-  --quiz-accent: #C62828;           /* Đỏ nhấn */
+  --quiz-primary: #A83245;          /* Đỏ đô chủ đạo */
+  --quiz-primary-dark: #742D3A;     /* Đỏ đô đậm */
+  --quiz-secondary: #C65B69;        /* Đỏ nhấn */
+  --quiz-bright-blue: #C65B69;      /* Đỏ nhấn */
+  --quiz-accent: #C65B69;           /* Đỏ nhấn */
   --quiz-rose: #EF4444;             /* Cảnh báo UX */
-  --quiz-bg-soft: #FAF8F6;          /* Trắng ngà */
+  --quiz-bg-soft: #F7F5F2;          /* Trắng ngà */
   --quiz-card-radius: 18px;
 }
 
 /* Nền và Khung bao quanh */
 body:has(.tkd-page-scope),
 .tkd-page-scope {
-  background-color: #FAF8F6 !important;
+  background-color: #F7F5F2 !important;
 }
 
 .tkd-page-scope .container,
@@ -54,7 +54,7 @@ body:has(.tkd-page-scope),
 #activeExamSection,
 #examResultCertificate {
   background: #ffffff !important;
-  border: 1.5px solid #E8E0E1 !important;
+  border: 1.5px solid #E8DDE0 !important;
   border-radius: 20px !important;
   box-shadow: 0 6px 24px -4px rgba(11, 30, 51, 0.06), 0 2px 8px rgba(15, 23, 42, 0.03) !important;
   overflow: visible !important;
@@ -66,7 +66,7 @@ body:has(.tkd-page-scope),
 #examRegistrationSection input,
 #examRegistrationSection select {
   padding: 11px 16px !important;
-  border: 1.5px solid #E8E0E1 !important;
+  border: 1.5px solid #E8DDE0 !important;
   border-radius: 12px !important;
   background: #ffffff !important;
   font-size: 14px !important;
@@ -80,9 +80,9 @@ body:has(.tkd-page-scope),
 #examRegistrationSection input:focus,
 #examRegistrationSection select:focus {
   outline: none !important;
-  border-color: #C62828 !important;
+  border-color: #C65B69 !important;
   background: #ffffff !important;
-  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.15) !important;
+  box-shadow: 0 0 0 3px rgba(198, 91, 105, 0.15) !important;
 }
 
 /* Grid & Thẻ chọn chế độ ôn tập (Mode Selection Cards) */
@@ -99,23 +99,23 @@ body:has(.tkd-page-scope),
   padding: 15px 18px !important;
   border-radius: 16px !important;
   background: #ffffff !important;
-  border: 1.5px solid #E8E0E1 !important;
+  border: 1.5px solid #E8DDE0 !important;
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.03) !important;
   cursor: pointer !important;
   position: relative !important;
   transition: all 0.2s ease !important;
 }
 .tkd-page-scope .mode-card:hover {
-  background: #FAF8F6 !important;
-  border-color: #C62828 !important;
+  background: #F7F5F2 !important;
+  border-color: #C65B69 !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 6px 16px -4px rgba(18, 59, 101, 0.1) !important;
 }
 .tkd-page-scope .mode-card[data-checked="true"],
 .tkd-page-scope .mode-card:has(input:checked) {
-  background: #FCEEEF !important;
-  border-color: #C62828 !important;
-  box-shadow: 0 0 0 1.5px rgba(198, 40, 40, 0.25) !important;
+  background: #F8EDEF !important;
+  border-color: #C65B69 !important;
+  box-shadow: 0 0 0 1.5px rgba(198, 91, 105, 0.25) !important;
 }
 .tkd-page-scope .mode-title {
   margin: 0 0 4px !important;
@@ -134,13 +134,13 @@ body:has(.tkd-page-scope),
   align-items: center !important;
   gap: 4px !important;
   margin-top: 6px !important;
-  background: #FCEEEF !important;
-  color: #8B1E2D !important;
+  background: #F8EDEF !important;
+  color: #A83245 !important;
   font-weight: 700 !important;
   border-radius: 999px !important;
   padding: 3px 10px !important;
   font-size: 11px !important;
-  border: 1px solid #E8E0E1 !important;
+  border: 1px solid #E8DDE0 !important;
 }
 
 /* ==========================================================================
@@ -150,7 +150,7 @@ body:has(.tkd-page-scope),
 .tkd-page-scope .question-card,
 .question-card {
   background: #ffffff !important;
-  border: 1.5px solid #E8E0E1 !important;
+  border: 1.5px solid #E8DDE0 !important;
   border-radius: 18px !important;
   padding: 18px 16px !important;
   margin-bottom: 16px !important;
@@ -174,7 +174,7 @@ body:has(.tkd-page-scope),
 .tkd-page-scope .question:hover,
 .tkd-page-scope .question-card:hover,
 .question-card:hover {
-  border-color: #E8E0E1 !important;
+  border-color: #E8DDE0 !important;
   box-shadow: 0 4px 16px rgba(11, 30, 51, 0.06) !important;
 }
 
@@ -198,7 +198,7 @@ body:has(.tkd-page-scope),
   gap: 8px !important;
   margin-bottom: 10px !important;
   padding-bottom: 8px !important;
-  border-bottom: 1px solid #FCEEEF !important;
+  border-bottom: 1px solid #F8EDEF !important;
 }
 
 .tkd-q-badge,
@@ -209,9 +209,9 @@ body:has(.tkd-page-scope),
   display: inline-flex !important;
   align-items: center !important;
   gap: 6px !important;
-  background: #FCEEEF !important;
-  color: #8B1E2D !important;
-  border: 1px solid #E8E0E1 !important;
+  background: #F8EDEF !important;
+  color: #A83245 !important;
+  border: 1px solid #E8DDE0 !important;
   font-size: 12.5px !important;
   font-weight: 800 !important;
   line-height: 1.25 !important;
@@ -234,7 +234,7 @@ body:has(.tkd-page-scope),
   width: 6px !important;
   height: 6px !important;
   border-radius: 50% !important;
-  background-color: #C62828 !important;
+  background-color: #C65B69 !important;
   flex-shrink: 0 !important;
 }
 
@@ -297,8 +297,8 @@ body:has(.tkd-page-scope),
   margin-top: 12px !important;
   margin-bottom: 4px !important;
   padding: 10px 14px !important;
-  background-color: #FAF8F6 !important;
-  border-left: 3.5px solid #C62828 !important;
+  background-color: #F7F5F2 !important;
+  border-left: 3.5px solid #C65B69 !important;
   border-radius: 0 10px 10px 0 !important;
   font-size: 15px !important;
   font-weight: 600 !important;
@@ -328,7 +328,7 @@ body:has(.tkd-page-scope),
   -webkit-overflow-scrolling: touch !important;
   margin: 10px 0 !important;
   border-radius: 12px !important;
-  border: 1px solid #E8E0E1 !important;
+  border: 1px solid #E8DDE0 !important;
   background: #ffffff !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03) !important;
 }
@@ -362,7 +362,7 @@ body:has(.tkd-page-scope),
   text-align: center !important;
   font-size: 12.5px !important;
   line-height: 1.45 !important;
-  border: 1px solid #E8E0E1 !important;
+  border: 1px solid #E8DDE0 !important;
   min-width: 42px !important;
   box-sizing: border-box !important;
   vertical-align: middle !important;
@@ -403,7 +403,7 @@ body:has(.tkd-page-scope),
   overflow-wrap: break-word !important;
   min-width: 110px !important;
   max-width: none !important;
-  background-color: #FAF8F6 !important;
+  background-color: #F7F5F2 !important;
   color: #333333 !important;
 }
 
@@ -437,10 +437,10 @@ body:has(.tkd-page-scope),
 .tkd-page-scope #questionContainer table th,
 .tkd-page-scope .table-responsive table th,
 .tkd-page-scope .data-table th {
-  background: #FCEEEF !important;
+  background: #F8EDEF !important;
   color: #333333 !important;
   font-weight: 800 !important;
-  border-bottom: 1.5px solid #E8E0E1 !important;
+  border-bottom: 1.5px solid #E8DDE0 !important;
 }
 
 /* ==========================================================================
@@ -472,7 +472,7 @@ body:has(.tkd-page-scope),
   gap: 12px !important;
   padding: 12px 15px !important;
   background: #ffffff !important;
-  border: 1.5px solid #E8E0E1 !important;
+  border: 1.5px solid #E8DDE0 !important;
   border-radius: 14px !important;
   cursor: pointer !important;
   transition: background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease !important;
@@ -502,8 +502,8 @@ body:has(.tkd-page-scope),
 .choice-label:hover,
 .tkd-page-scope .opt:hover,
 .tkd-page-scope .choice-label:hover {
-  background: #FAF8F6 !important;
-  border-color: #C62828 !important;
+  background: #F7F5F2 !important;
+  border-color: #C65B69 !important;
   color: #0F172A !important;
   box-shadow: 0 2px 8px rgba(18, 59, 101, 0.06) !important;
 }
@@ -512,7 +512,7 @@ body:has(.tkd-page-scope),
 .choice-label:focus-within,
 .tkd-page-scope .opt:focus-within,
 .tkd-page-scope .choice-label:focus-within {
-  outline: 2px solid rgba(198, 40, 40, 0.35) !important;
+  outline: 2px solid rgba(198, 91, 105, 0.35) !important;
   outline-offset: 1px !important;
 }
 
@@ -522,11 +522,11 @@ body:has(.tkd-page-scope),
 .tkd-page-scope .opt:has(input:checked),
 .tkd-page-scope .opt.selected,
 .tkd-page-scope .choice-label:has(input:checked) {
-  background: #FCEEEF !important;
-  border-color: #C62828 !important;
+  background: #F8EDEF !important;
+  border-color: #C65B69 !important;
   color: #333333 !important;
   font-weight: 600 !important;
-  box-shadow: 0 0 0 1px #C62828, 0 3px 10px -2px rgba(198, 40, 40, 0.15) !important;
+  box-shadow: 0 0 0 1px #C65B69, 0 3px 10px -2px rgba(198, 91, 105, 0.15) !important;
 }
 
 /* Radio button tròn viền Xanh Navy / Teal chuẩn nhận diện */
@@ -551,13 +551,13 @@ body:has(.tkd-page-scope),
 .choice-label:hover input[type="radio"],
 .tkd-page-scope .opt:hover input[type="radio"],
 .tkd-page-scope .choice-label:hover input[type="radio"] {
-  border-color: #C62828 !important;
+  border-color: #C65B69 !important;
 }
 
 .choice-label input[type="radio"]:checked,
 .tkd-page-scope .opt input[type="radio"]:checked,
 .tkd-page-scope .choice-label input[type="radio"]:checked {
-  border-color: #C62828 !important;
+  border-color: #C65B69 !important;
   background: #ffffff !important;
 }
 
@@ -570,7 +570,7 @@ body:has(.tkd-page-scope),
   border-radius: 50% !important;
   transform: scale(0) !important;
   transition: 120ms transform ease-in-out !important;
-  background: #C62828 !important;
+  background: #C65B69 !important;
 }
 
 .choice-label input[type="radio"]:checked::before,
@@ -582,13 +582,13 @@ body:has(.tkd-page-scope),
 /* Chữ cái A, B, C, D được nhấn mạnh vừa đủ */
 .tkd-opt-letter {
   font-weight: 800 !important;
-  color: #8B1E2D !important;
+  color: #A83245 !important;
   margin-right: 4px !important;
 }
 
 .choice-label:has(input:checked) .tkd-opt-letter,
 .tkd-page-scope .opt:has(input:checked) .tkd-opt-letter {
-  color: #8B1E2D !important;
+  color: #A83245 !important;
 }
 
 .tkd-opt-text,
@@ -632,8 +632,8 @@ body:has(.tkd-page-scope),
   min-width: 0 !important;
   flex: none !important;
   background: #ffffff !important;
-  border: 1.5px solid #E8E0E1 !important;
-  color: #8B1E2D !important;
+  border: 1.5px solid #E8DDE0 !important;
+  color: #A83245 !important;
   border-radius: 14px !important;
   padding: 12px 14px !important;
   font-size: 13.5px !important;
@@ -650,9 +650,9 @@ body:has(.tkd-page-scope),
 .tkd-page-scope #prevButton:hover,
 .tkd-page-scope #nextButton:hover,
 .tkd-page-scope .navButton:hover {
-  background: #FAF8F6 !important;
-  border-color: #C62828 !important;
-  color: #C62828 !important;
+  background: #F7F5F2 !important;
+  border-color: #C65B69 !important;
+  color: #C65B69 !important;
   transform: translateY(-1px) !important;
 }
 
@@ -668,9 +668,9 @@ body:has(.tkd-page-scope),
 .tkd-page-scope .btn-danger,
 .tkd-page-scope #submitButton,
 .tkd-page-scope button[id*="submit"] {
-  background: linear-gradient(135deg, #8B1E2D 0%, #C62828 100%) !important;
+  background: linear-gradient(135deg, #A83245 0%, #C65B69 100%) !important;
   color: #ffffff !important;
-  border: 1.5px solid #C62828 !important;
+  border: 1.5px solid #C65B69 !important;
   border-radius: 14px !important;
   padding: 13px 22px !important;
   font-size: 14px !important;
@@ -679,7 +679,7 @@ body:has(.tkd-page-scope),
   align-items: center !important;
   justify-content: center !important;
   gap: 8px !important;
-  box-shadow: 0 4px 14px rgba(139, 30, 45, 0.25) !important;
+  box-shadow: 0 4px 14px rgba(168, 50, 69, 0.25) !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
   width: 100% !important;
@@ -688,15 +688,15 @@ body:has(.tkd-page-scope),
 .tkd-page-scope .btn-danger:hover,
 .tkd-page-scope #submitButton:hover,
 .tkd-page-scope button[id*="submit"]:hover {
-  background: linear-gradient(135deg, #701824 0%, #8B1E2D 100%) !important;
+  background: linear-gradient(135deg, #742D3A 0%, #A83245 100%) !important;
   transform: translateY(-1px) !important;
 }
 
 .tkd-page-scope .btn-gray,
 .tkd-page-scope #backButton {
   background: #ffffff !important;
-  border: 1.5px solid #E8E0E1 !important;
-  color: #8B1E2D !important;
+  border: 1.5px solid #E8DDE0 !important;
+  color: #A83245 !important;
   border-radius: 14px !important;
   padding: 12px 18px !important;
   font-size: 14px !important;
@@ -713,9 +713,9 @@ body:has(.tkd-page-scope),
 
 .tkd-page-scope .btn-gray:hover,
 .tkd-page-scope #backButton:hover {
-  background: #FAF8F6 !important;
-  border-color: #C62828 !important;
-  color: #C62828 !important;
+  background: #F7F5F2 !important;
+  border-color: #C65B69 !important;
+  color: #C65B69 !important;
   transform: translateY(-1px) !important;
 }
 
@@ -730,7 +730,7 @@ body:has(.tkd-page-scope),
 
 .tkd-page-scope .btn-ok,
 .tkd-page-scope #retryButton {
-  background: linear-gradient(135deg, #8B1E2D 0%, #C62828 100%) !important;
+  background: linear-gradient(135deg, #A83245 0%, #C65B69 100%) !important;
   color: #ffffff !important;
   border: none !important;
   border-radius: 14px !important;
@@ -741,7 +741,7 @@ body:has(.tkd-page-scope),
   align-items: center !important;
   justify-content: center !important;
   gap: 8px !important;
-  box-shadow: 0 6px 18px -3px rgba(198, 40, 40, 0.35) !important;
+  box-shadow: 0 6px 18px -3px rgba(198, 91, 105, 0.35) !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
   width: 100% !important;
@@ -758,7 +758,7 @@ body:has(.tkd-page-scope),
 .tkd-page-scope .btn-accent,
 .tkd-page-scope #startButton,
 #startOnlineExamForm button[type="submit"] {
-  background: linear-gradient(135deg, #8B1E2D 0%, #C62828 100%) !important;
+  background: linear-gradient(135deg, #A83245 0%, #C65B69 100%) !important;
   color: #ffffff !important;
   border: 1px solid rgba(114, 199, 213, 0.45) !important;
   border-radius: 16px !important;
@@ -766,7 +766,7 @@ body:has(.tkd-page-scope),
   font-size: 14px !important;
   font-weight: 800 !important;
   letter-spacing: 0.01em !important;
-  box-shadow: 0 6px 20px -3px rgba(139, 30, 45, 0.3) !important;
+  box-shadow: 0 6px 20px -3px rgba(168, 50, 69, 0.3) !important;
   cursor: pointer !important;
   transition: all 0.22s ease !important;
 }
@@ -774,13 +774,13 @@ body:has(.tkd-page-scope),
 .tkd-page-scope #startButton:hover,
 #startOnlineExamForm button[type="submit"]:hover {
   transform: translateY(-1.5px) !important;
-  box-shadow: 0 10px 24px -3px rgba(139, 30, 45, 0.4) !important;
+  box-shadow: 0 10px 24px -3px rgba(168, 50, 69, 0.4) !important;
   filter: brightness(1.06) !important;
 }
 
 /* Header badge Thi Online tùy chọn */
 .header-thi-online-btn {
-  background: linear-gradient(135deg, #8B1E2D 0%, #C62828 100%) !important;
+  background: linear-gradient(135deg, #A83245 0%, #C65B69 100%) !important;
   color: #ffffff !important;
   border-radius: 9999px !important;
   padding: 6px 16px !important;
@@ -798,9 +798,9 @@ body:has(.tkd-page-scope),
   text-align: center !important;
   padding: 32px 24px !important;
   border-radius: 20px !important;
-  border: 1.5px solid #E8E0E1 !important;
-  background: linear-gradient(180deg, #ffffff 0%, #FAF8F6 100%) !important;
-  box-shadow: 0 10px 28px -4px rgba(139, 30, 45, 0.1) !important;
+  border: 1.5px solid #E8DDE0 !important;
+  background: linear-gradient(180deg, #ffffff 0%, #F7F5F2 100%) !important;
+  box-shadow: 0 10px 28px -4px rgba(168, 50, 69, 0.1) !important;
 }
 .tkd-page-scope .score {
   width: 116px !important;
@@ -812,8 +812,8 @@ body:has(.tkd-page-scope),
   font-weight: 900 !important;
   font-family: 'Roboto Mono', monospace !important;
   color: #ffffff !important;
-  background: linear-gradient(135deg, #8B1E2D 0%, #C62828 100%) !important;
-  box-shadow: 0 8px 22px -2px rgba(139, 30, 45, 0.35) !important;
+  background: linear-gradient(135deg, #A83245 0%, #C65B69 100%) !important;
+  box-shadow: 0 8px 22px -2px rgba(168, 50, 69, 0.35) !important;
 }
 
 /* ==========================================================================

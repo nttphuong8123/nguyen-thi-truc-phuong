@@ -19,9 +19,9 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
   currentPath="/goc-chia-se"
 >
   <!-- Header Banner -->
-  <header class="w-full bg-gradient-to-br from-[#701824] via-[#8B1E2D] to-[#C62828] text-white py-8 sm:py-10 px-4 text-center shadow-sm">
+  <header class="w-full bg-gradient-to-br from-[#742D3A] via-[#A83245] to-[#C65B69] text-white py-8 sm:py-10 px-4 text-center shadow-sm">
     <div class="max-w-5xl mx-auto space-y-2.5">
-      <div class="inline-flex items-center gap-1.5 bg-[#8B1E2D] border border-[#FCEEEF]/40 rounded-full px-3.5 py-1 text-xs font-semibold text-[#FCEEEF] uppercase tracking-wide">
+      <div class="inline-flex items-center gap-1.5 bg-[#A83245] border border-[#F8EDEF]/40 rounded-full px-3.5 py-1 text-xs font-semibold text-[#F8EDEF] uppercase tracking-wide">
         <span>📰</span> Chuyên San Học Thuật &amp; Tri Thức Số
       </div>
       <h1 class="text-xl sm:text-3xl md:text-4xl font-extrabold tracking-tight uppercase leading-snug">
@@ -35,29 +35,29 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
 
   <main class="max-w-5xl mx-auto px-3 sm:px-6 py-6 sm:py-8 space-y-7">
     <!-- Thanh liên kết nhanh trong Góc chia sẻ -->
-    <div class="bg-white rounded-2xl border border-[#E8E0E1] p-4 shadow-2xs flex flex-wrap items-center justify-between gap-3">
-      <span class="text-xs sm:text-sm font-extrabold text-[#8B1E2D] flex items-center gap-2">
+    <div class="bg-white rounded-2xl border border-[#E8DDE0] p-4 shadow-2xs flex flex-wrap items-center justify-between gap-3">
+      <span class="text-xs sm:text-sm font-extrabold text-[#A83245] flex items-center gap-2">
         <span>📌</span> Chuyên đề học thuật nổi bật:
       </span>
       <div class="flex flex-wrap gap-2">
         <a
           href="/spss"
           title="Sổ tay hướng dẫn xử lý dữ liệu SPSS từ A đến Z"
-          class="bg-[#FAF8F6] hover:bg-[#FCEEEF] text-[#8B1E2D] border border-[#E8E0E1] hover:border-[#C62828] font-bold text-xs px-3.5 py-1.5 rounded-xl transition-all"
+          class="bg-[#F7F5F2] hover:bg-[#F8EDEF] text-[#A83245] border border-[#E8DDE0] hover:border-[#C65B69] font-bold text-xs px-3.5 py-1.5 rounded-xl transition-all"
         >
           <span>📊 Sổ tay SPSS A-Z</span>
         </a>
         <a
           href="/spss/nckhsv"
           title="Mẫu bảng khảo sát nghiên cứu khoa học sinh viên"
-          class="bg-[#FAF8F6] hover:bg-[#FCEEEF] text-[#8B1E2D] border border-[#E8E0E1] hover:border-[#C62828] font-bold text-xs px-3.5 py-1.5 rounded-xl transition-all"
+          class="bg-[#F7F5F2] hover:bg-[#F8EDEF] text-[#A83245] border border-[#E8DDE0] hover:border-[#C65B69] font-bold text-xs px-3.5 py-1.5 rounded-xl transition-all"
         >
           <span>📋 Mẫu Khảo Sát NCKH</span>
         </a>
         <a
           href="/home/marketing"
           title="Tổng hợp website và công cụ kiến thức Marketing"
-          class="bg-[#FAF8F6] hover:bg-[#FCEEEF] text-[#8B1E2D] border border-[#E8E0E1] hover:border-[#C62828] font-bold text-xs px-3.5 py-1.5 rounded-xl transition-all"
+          class="bg-[#F7F5F2] hover:bg-[#F8EDEF] text-[#A83245] border border-[#E8DDE0] hover:border-[#C65B69] font-bold text-xs px-3.5 py-1.5 rounded-xl transition-all"
         >
           <span>💡 Kho Kiến Thức Marketing</span>
         </a>
@@ -66,8 +66,8 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
 
     <!-- Bài viết Tiêu điểm (Featured Article) -->
     {featuredArticle && (
-      <section class="bg-white rounded-2xl border-2 border-[#C62828]/40 hover:border-[#C62828] shadow-sm overflow-hidden transition-all group">
-        <div class="bg-gradient-to-r from-[#8B1E2D] to-[#C62828] px-4 py-2.5 text-white flex items-center justify-between">
+      <section class="bg-white rounded-2xl border-2 border-[#C65B69]/40 hover:border-[#C65B69] shadow-sm overflow-hidden transition-all group">
+        <div class="bg-gradient-to-r from-[#A83245] to-[#C65B69] px-4 py-2.5 text-white flex items-center justify-between">
           <span class="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#72C7D5]">
             <span>⭐</span> BÀI VIẾT TIÊU ĐIỂM
           </span>
@@ -78,7 +78,7 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
 
         <div class="p-5 sm:p-7 space-y-3">
           <div class="flex flex-wrap items-center gap-2.5 text-xs">
-            <span class="px-3 py-1 rounded-full bg-[#FAF8F6] text-[#8B1E2D] font-extrabold border border-[#168AAD]/30">
+            <span class="px-3 py-1 rounded-full bg-[#F7F5F2] text-[#A83245] font-extrabold border border-[#168AAD]/30">
               {featuredArticle.category}
             </span>
             <span class="text-slate-400">•</span>
@@ -101,7 +101,7 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
             <a
               href={`/goc-chia-se/${featuredArticle.slug}`}
               title={`Đọc chi tiết: ${featuredArticle.title}`}
-              class="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#C62828] hover:bg-[#8B1E2D] text-white font-extrabold text-xs shadow-xs transition-colors"
+              class="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#C65B69] hover:bg-[#A83245] text-white font-extrabold text-xs shadow-xs transition-colors"
             >
               <span>Đọc toàn bộ bài viết</span>
               <span aria-hidden="true">→</span>
@@ -122,10 +122,10 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
         {regularArticles.map((art) => (
-          <article class="bg-white rounded-2xl border border-slate-200 hover:border-[#C62828] shadow-xs hover:shadow-md p-5 flex flex-col justify-between transition-all group">
+          <article class="bg-white rounded-2xl border border-slate-200 hover:border-[#C65B69] shadow-xs hover:shadow-md p-5 flex flex-col justify-between transition-all group">
             <div class="space-y-2.5">
               <div class="flex items-center justify-between gap-2">
-                <span class="text-xs font-bold uppercase px-2.5 py-0.5 rounded-full bg-[#FAF8F6] text-[#8B1E2D] border border-[#168AAD]/30">
+                <span class="text-xs font-bold uppercase px-2.5 py-0.5 rounded-full bg-[#F7F5F2] text-[#A83245] border border-[#168AAD]/30">
                   {art.category}
                 </span>
                 <span class="text-xs text-slate-400 num-font">👁️ {art.views} lượt xem</span>
@@ -143,7 +143,7 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
               <a
                 href={`/goc-chia-se/${art.slug}`}
                 title={`Đọc chi tiết bài viết: ${art.title}`}
-                class="inline-flex items-center gap-1 font-extrabold text-[#168AAD] group-hover:text-[#8B1E2D] transition-colors"
+                class="inline-flex items-center gap-1 font-extrabold text-[#168AAD] group-hover:text-[#A83245] transition-colors"
               >
                 <span>Đọc bài viết</span>
                 <span aria-hidden="true">→</span>
