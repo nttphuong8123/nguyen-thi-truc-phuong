@@ -15,6 +15,9 @@ if (cleanPath === '/home') {
 if (cleanPath === '/questionnaire/spss') {
   return Astro.redirect('/spss', 301);
 }
+if (cleanPath === '/dcct') {
+  return Astro.redirect('/study-corner/internships', 301);
+}
 if (decodedPath !== cleanPath) {
   return Astro.redirect(cleanPath, 301);
 }

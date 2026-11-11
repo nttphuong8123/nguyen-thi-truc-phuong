@@ -54,7 +54,6 @@ export const MAIN_NAVIGATION: NavItem[] = [
           { label: 'Biểu mẫu & Đề cương HCE', href: '/study-corner/internships/hcehdtt' },
           { label: 'Hướng dẫn báo cáo HCE', href: '/study-corner/internships/huong-dan-bao-cao-hce' },
           { label: 'Kho 19 mẫu báo cáo thực tập', href: '/study-corner/internships/sample' },
-          { label: 'Tra cứu đề cương chi tiết', href: '/dcct' },
           { label: 'Cách trích dẫn tài liệu tham khảo', href: '/study-corner/internships/tailieuthamkhao' },
         ],
       },

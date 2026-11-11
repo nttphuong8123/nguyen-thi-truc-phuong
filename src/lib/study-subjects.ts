@@ -51,7 +51,6 @@ export const STUDY_SUBJECTS: StudySubject[] = [
       { label: 'Bài giảng & Quy trình viết báo cáo thực tập', href: '/study-corner/internships', tag: 'Bài giảng' },
       { label: 'Biểu mẫu & Đề cương chi tiết', href: '/study-corner/internships/hcehdtt', tag: 'Biểu mẫu' },
       { label: 'Biểu mẫu trình bày báo cáo HCE & CTIM', href: '/study-corner/internships/huong-dan-bao-cao-hce', tag: 'Biểu mẫu' },
-      { label: 'Tra cứu đề cương chi tiết', href: '/dcct', tag: 'Đề cương', highlight: true },
       { label: 'Kho 19 Mẫu báo cáo thực tập hoàn chỉnh', href: '/study-corner/internships/sample', tag: 'Mẫu BC' },
     ],
   },

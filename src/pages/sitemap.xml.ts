@@ -19,7 +19,6 @@ export const GET: APIRoute = async () => {
     '/ngan-hang-de-thi',
     '/goc-chia-se',
     '/study-corner',
-    '/dcct',
     '/spss',
     '/software',
     '/contact',

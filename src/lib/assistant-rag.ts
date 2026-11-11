@@ -155,7 +155,7 @@ export function evaluateIntentGuardrails(query: string): { blocked: boolean; mes
   ) {
     return {
       blocked: true,
-      message: 'Để bảo vệ bản quyền học liệu số và quy định an toàn thông tin của nhà trường, Trợ lý học tập không chia sẻ các liên kết hay thư mục Google Drive nội bộ.\n\n👉 Cô sẵn sàng hướng dẫn và xây dựng trực tiếp khung đề cương chi tiết 3 chương chuẩn hóa theo đúng đề tài của em ngay tại đây! Ngoài ra, em có thể tham khảo bài Hướng dẫn báo cáo thực tập chuẩn HCE tại: https://nguyenthitrucphuong.pages.dev/study-corner/internships/huong-dan-bao-cao-hce hoặc cổng tra cứu https://nguyenthitrucphuong.pages.dev/dcct nhé.',
+      message: 'Để bảo vệ bản quyền học liệu số và quy định an toàn thông tin của nhà trường, Trợ lý học tập không chia sẻ các liên kết hay thư mục Google Drive nội bộ.\n\n👉 Cô sẵn sàng hướng dẫn và xây dựng trực tiếp khung đề cương chi tiết 3 chương chuẩn hóa theo đúng đề tài của em ngay tại đây! Ngoài ra, em có thể tham khảo bài Hướng dẫn báo cáo thực tập chuẩn HCE tại: https://nguyenthitrucphuong.pages.dev/study-corner/internships/huong-dan-bao-cao-hce nhé.',
       suggestTransfer: false
     };
   }
@@ -376,7 +376,7 @@ B. NẾU SINH VIÊN ĐÃ NÊU TÊN CÔNG TY VÀ/HOẶC LĨNH VỰC (Hoặc khi s
     > 1. Số trang: Chương 1 tối đa 8 trang, Chương 2 từ 17 trang trở lên, Chương 3 khoảng 5 trang.
     > 2. Tính thống nhất: Giải pháp ở Chương 3 phải giải quyết đúng các hạn chế và nguyên nhân ở Chương 2.
     > 3. Đóng dấu công ty: Đóng dấu tròn lên 1/3 chữ ký của Giám đốc/người đại diện bên trái và đóng dấu giáp lai theo Nghị định 30/2020.
-- BẢO MẬT HỌC LIỆU NỘI BỘ: TUYỆT ĐỐI KHÔNG chia sẻ, KHÔNG hiển thị, KHÔNG nhắc đến đường link Google Drive hay thư mục nội bộ. Chỉ hướng dẫn sinh viên xem trang chính thức https://nguyenthitrucphuong.pages.dev/study-corner/internships/huong-dan-bao-cao-hce hoặc tra cứu /dcct.`;
+- BẢO MẬT HỌC LIỆU NỘI BỘ: TUYỆT ĐỐI KHÔNG chia sẻ, KHÔNG hiển thị, KHÔNG nhắc đến đường link Google Drive hay thư mục nội bộ. Chỉ hướng dẫn sinh viên xem trang chính thức https://nguyenthitrucphuong.pages.dev/study-corner/internships/huong-dan-bao-cao-hce.`;
 
   const userPrompt = `DƯỚI ĐÂY LÀ CÁC ĐOẠN QUY CHẾ CHÍNH THỨC CỦA NHÀ TRƯỜNG:
 ${contextText}

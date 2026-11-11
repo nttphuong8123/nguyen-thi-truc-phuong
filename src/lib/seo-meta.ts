@@ -181,7 +181,6 @@ export const SILO_GROUPS: Record<string, SiloGroup> = {
       { label: 'Hướng dẫn báo cáo HCE', href: '/study-corner/internships/huong-dan-bao-cao-hce', icon: '🏛️', titleAttr: 'Hướng dẫn trình bày báo cáo thực tập tốt nghiệp chuẩn HCE' },
       { label: '19 Mẫu báo cáo thực tập', href: '/study-corner/internships/sample', icon: '📂', titleAttr: 'Kho 19 mẫu báo cáo thực tập tốt nghiệp ngành Quản trị kinh doanh & Marketing' },
       { label: 'Cách trích dẫn tài liệu', href: '/study-corner/internships/tailieuthamkhao', icon: '📚', titleAttr: 'Hướng dẫn cách viết và trích dẫn tài liệu tham khảo chuẩn học thuật' },
-      { label: 'Tra cứu Mã đề cương (/dcct)', href: '/dcct', icon: '🔍', titleAttr: 'Cổng tra cứu nhanh đề cương chi tiết theo mã số' },
     ],
     defaultFaqs: [
       {
@@ -339,28 +338,6 @@ export const PAGE_SEO_META: Record<string, PageSeoConfig> = {
     description: 'Hệ thống thi thử trắc nghiệm trực tuyến 50 câu trong 60 phút có chấm điểm tức thì các môn Marketing căn bản, Kinh tế vi mô và Khởi nghiệp.',
     breadcrumbLabel: 'Thi Online',
     schemaType: 'Quiz'
-  },
-  '/dcct': {
-    title: 'Tra Cứu Đề Cương Chi Tiết Báo Cáo Thực Tập & Học Phần HCE',
-    description: 'Công cụ tra cứu nhanh đề cương chi tiết báo cáo thực tập tốt nghiệp, tiểu luận và tài liệu học phần theo mã số dành cho sinh viên HCE và CTIM.',
-    breadcrumbLabel: 'Đề cương chi tiết',
-    siloKey: 'internships',
-    schemaType: 'LearningResource',
-    studyGuideTitle: 'Hướng Dẫn Tra Cứu Mã Đề Cương & Cấu Trúc Đề Cương Thực Tập Chuẩn',
-    studyGuidePoints: [
-      {
-        heading: '1. Cách sử dụng mã tra cứu đề cương chi tiết trên hệ thống',
-        content: 'Sinh viên nhập chính xác mã đề cương do giảng viên hướng dẫn cung cấp (ví dụ: MSV01, MSV02, HCE01...) vào ô tra cứu phía trên để mở trực tiếp file đề cương chi tiết tương ứng với chuyên đề thực tập của mình. Ngoài ra, danh sách các đề cương công khai phía dưới cho phép tải về ngay mà không cần nhập mã.'
-      },
-      {
-        heading: '2. Vai trò của đề cương chi tiết trong kỳ thực tập tốt nghiệp',
-        content: 'Đề cương chi tiết đóng vai trò là bản thiết kế khung sườn cho toàn bộ báo cáo thực tập 3 chương. Việc bám sát đề cương ngay từ tuần đầu tiên giúp sinh viên xác định đúng danh mục bảng biểu, số liệu kế toán - nhân sự - bán hàng cần xin tại doanh nghiệp, tránh tình trạng viết lan man hoặc thiếu hụt dữ liệu phân tích ở Chương 2.'
-      },
-      {
-        heading: '3. Quy trình duyệt đề cương với Giảng viên hướng dẫn',
-        content: 'Sau khi tải mẫu đề cương phù hợp với tên đề tài và đặc thù đơn vị thực tập, sinh viên cần điền đầy đủ thông tin doanh nghiệp, điều chỉnh các tiểu mục Chương 2 cho sát thực tế, sau đó gửi giảng viên hướng dẫn phê duyệt trước khi tiến hành viết bản thảo chi tiết.'
-      }
-    ]
   },
   '/goc-chia-se': {
     title: 'Góc Chia Sẻ Kiến Thức Quản Trị, Phương Pháp Học Đại Học & AI',
