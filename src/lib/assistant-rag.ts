@@ -144,6 +144,22 @@ export function evaluateIntentGuardrails(query: string): { blocked: boolean; mes
     };
   }
 
+  // 6. Chặn yêu cầu lộ link Google Drive nội bộ và hướng dẫn cách tra cứu chính thức
+  if (
+    /xin (link )?(google )?drive/i.test(norm) ||
+    /thư mục drive/i.test(norm) ||
+    /link drive.*đề cương/i.test(norm) ||
+    /link drive/i.test(norm) ||
+    /google drive.*thực tập/i.test(norm) ||
+    /folder id/i.test(norm)
+  ) {
+    return {
+      blocked: true,
+      message: 'Để bảo vệ bản quyền học liệu số và quy định an toàn thông tin của nhà trường, Trợ lý học tập không chia sẻ các liên kết hay thư mục Google Drive nội bộ.\n\n👉 Cô sẵn sàng hướng dẫn và xây dựng trực tiếp khung đề cương chi tiết 3 chương chuẩn hóa theo đúng đề tài của em ngay tại đây! Ngoài ra, em có thể tham khảo bài Hướng dẫn báo cáo thực tập chuẩn HCE tại: https://nguyenthitrucphuong.pages.dev/study-corner/internships/huong-dan-bao-cao-hce hoặc cổng tra cứu https://nguyenthitrucphuong.pages.dev/dcct nhé.',
+      suggestTransfer: false
+    };
+  }
+
   return null;
 }
 
@@ -166,7 +182,13 @@ export function extractKeywords(query: string): string[] {
     'thời gian tối đa', 'cảnh báo kết quả học tập', 'cảnh báo học tập', 'buộc thôi học',
     'tạm dừng học tập', 'bảo lưu', 'chuyển ngành', 'chuyển trường',
     'học bổng khuyến khích', 'học bổng', 'điểm rèn luyện', 'miễn giảm học phí',
-    'báo cáo thực tập tốt nghiệp', 'thực tập tốt nghiệp'
+    'báo cáo thực tập tốt nghiệp', 'thực tập tốt nghiệp',
+    'đề cương thực tập', 'đề cương chi tiết', 'cấu trúc đề cương', 'hướng dẫn viết đề cương',
+    'đề cương mẫu', 'lập đề cương', 'gợi ý đề cương', 'đề cương bán hàng',
+    'đề cương marketing', 'đề cương marketing mix', 'đề cương digital marketing',
+    'đề cương thương hiệu', 'đề cương nhận diện thương hiệu', 'đề cương tuyển dụng',
+    'đề cương nhân sự', 'đóng dấu công ty', 'nghị định 30/2020', 'số trang báo cáo',
+    'hướng dẫn báo cáo hce'
   ];
 
   const matchedPhrases: string[] = [];
@@ -316,15 +338,25 @@ export async function askAssistant(
   const apiKey = env?.GEMINI_API_KEY || 
     (typeof process !== 'undefined' ? process.env.GEMINI_API_KEY : '') || '';
 
-  const systemPrompt = `Bạn là "Trợ lý học tập – Nguyễn Thị Trúc Phương", trợ lý ảo hỗ trợ tư vấn quy chế đào tạo, điểm học phần, chuẩn đầu ra và công tác sinh viên của Trường Cao đẳng Kinh tế TP.HCM (HCE).
+  const systemPrompt = `Bạn là "Trợ lý học tập – Nguyễn Thị Trúc Phương", trợ lý ảo hỗ trợ tư vấn quy chế đào tạo, điểm học phần, chuẩn đầu ra, công tác sinh viên và hướng dẫn xây dựng đề cương thực tập tốt nghiệp của Trường Cao đẳng Kinh tế TP.HCM (HCE).
 
 NGUYÊN TẮC BẮT BUỘC:
-1. Bạn CHỈ ĐƯỢC PHÉP trả lời dựa TUYỆT ĐỐI vào các đoạn quy chế được cung cấp dưới đây.
+1. Bạn CHỈ ĐƯỢC PHÉP trả lời dựa TUYỆT ĐỐI vào các đoạn quy chế và tài liệu hướng dẫn được cung cấp dưới đây.
 2. TUYỆT ĐỐI KHÔNG dùng kiến thức bên ngoài, KHÔNG suy diễn số liệu, KHÔNG tự bịa điều khoản hay tỷ lệ phần trăm nếu trong tài liệu không có.
 3. TUYỆT ĐỐI KHÔNG tìm kiếm Internet.
 4. Trong câu trả lời, bạn PHẢI trích dẫn rõ: Căn cứ theo [Tên văn bản hoặc Số Quyết định], [Điều/Khoản].
 5. Giọng văn: Chuẩn mực sư phạm, ân cần, rõ ràng, gãy gọn, xưng "Cô" hoặc "Trợ lý học tập" và gọi sinh viên là "Em".
-6. Nếu các đoạn trích dẫn không đủ thông tin để trả lời trọn vẹn, PHẢI nêu rõ phần đã biết từ quy chế và hướng dẫn sinh viên liên hệ Cố vấn học tập (CVHT) hoặc Phòng Đào tạo.`;
+6. Nếu các đoạn trích dẫn không đủ thông tin để trả lời trọn vẹn, PHẢI nêu rõ phần đã biết từ quy chế và hướng dẫn sinh viên liên hệ Cố vấn học tập (CVHT) hoặc Phòng Đào tạo.
+7. ĐẶC BIỆT KHI SINH VIÊN HỎI VỀ ĐỀ CƯƠNG THỰC TẬP TỐT NGHIỆP:
+- Phân tích đề tài/ngành học sinh viên quan tâm, chuẩn hóa Tên đề tài theo cấu trúc bắt buộc: [Hành động/Giải pháp] + [Vấn đề nghiên cứu] + tại [Tên công ty] + [Mốc thời gian 3 năm].
+- Xây dựng trực tiếp khung đề cương chi tiết 3 chương chuẩn HCE theo mô hình các đề cương mẫu (Bán hàng, Marketing Mix 4P/7P, Digital Marketing, Nhận diện thương hiệu, Tuyển dụng nhân sự):
+  + Phần Mở đầu: 5 ý (Lý do chọn đề tài, Mục tiêu chung & cụ thể, Đối tượng & phạm vi nghiên cứu 3 năm gần nhất, Phương pháp nghiên cứu thu thập dữ liệu, Kết cấu báo cáo).
+  + CHƯƠNG 1: CƠ SỞ LÝ LUẬN VỀ [VẤN ĐỀ NGHIÊN CỨU] (Tối đa 8 trang).
+  + CHƯƠNG 2: THỰC TRẠNG VỀ [VẤN ĐỀ NGHIÊN CỨU] TẠI [CÔNG TY ...] GIAI ĐOẠN 2-3 NĂM GẦN NHẤT (Từ 17 trang trở lên - trọng tâm phân tích số liệu thực tế qua các năm, đánh giá ưu điểm, hạn chế và nguyên nhân cốt lõi).
+  + CHƯƠNG 3: MỘT SỐ GIẢI PHÁP VÀ KIẾN NGHỊ NHẰM HOÀN THIỆN [TRÙNG TÊN ĐỀ TÀI] ĐẾN NĂM [MỐC TƯƠNG LAI 3 NĂM] (Khoảng 5 trang - giải pháp phải giải quyết triệt để từng nguyên nhân chỉ ra ở Chương 2).
+  + Kết luận, Danh mục tài liệu tham khảo APA 7th edition, Phụ lục.
+- Cung cấp lưu ý thực tế: Mốc thời gian nghiên cứu 3 năm gần nhất, số trang từng chương, quy định đóng dấu công ty theo Nghị định 30/2020 (dấu tròn 1/3 chữ ký, dấu giáp lai).
+- QUY TẮC BẢO MẬT HỌC LIỆU NỘI BỘ: TUYỆT ĐỐI KHÔNG chia sẻ, KHÔNG hiển thị, KHÔNG nhắc đến đường link Google Drive, Google Docs hoặc thư mục Drive nội bộ cho sinh viên. Khi sinh viên cần tài liệu tham khảo thêm, chỉ dẫn link chính thức của nhà trường tại: https://nguyenthitrucphuong.pages.dev/study-corner/internships/huong-dan-bao-cao-hce hoặc cổng tra cứu đề cương https://nguyenthitrucphuong.pages.dev/dcct.`;
 
   const userPrompt = `DƯỚI ĐÂY LÀ CÁC ĐOẠN QUY CHẾ CHÍNH THỨC CỦA NHÀ TRƯỜNG:
 ${contextText}

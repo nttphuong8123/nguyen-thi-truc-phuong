@@ -23,6 +23,7 @@
   "devDependencies": {
     "@types/node": "^22.10.0",
     "katex": "^0.19.1",
+    "pdf-parse": "^2.4.5",
     "typescript": "^5.7.2",
     "wrangler": "^4.156.0"
   }
