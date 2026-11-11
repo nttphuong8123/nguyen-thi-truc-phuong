@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ChatbotWidget from '../components/assistant/ChatbotWidget.astro';
 import { MAIN_NAVIGATION } from '../lib/navigation';
 import { SILO_GROUPS, getSeoMetaForPath, type FaqItem } from '../lib/seo-meta';
 import { getSiteContactConfig } from '../lib/db';
@@ -1016,5 +1017,6 @@ function getLeafIcon(label: string): string {
         window.addEventListener('load', initAcademicEnhancements);
       })();
     </script>
+    <ChatbotWidget />
   </body>
 </html>
