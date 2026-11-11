@@ -29,7 +29,7 @@ const normPath = currentPath === '/' ? '/' : currentPath.toLowerCase().replace(/
 const seoMeta = getSeoMetaForPath(normPath, title);
 const finalTitle = title && !title.startsWith('NGUYỄN THỊ TRÚC PHƯƠNG -') ? title : seoMeta.title;
 const finalDescription =
-  description && !description.includes('TÃ i liá»‡u há»c táº­p, bÃ i táº­p thá»±c hÃ nh vÃ  cÃ´ng cá»¥ há»— trá»£ sinh viÃªn trÃªn cá»•ng thÃ´ng tin')
+  description && !description.includes('Tài liệu học tập, bài tập thực hành và công cụ hỗ trợ sinh viên trên cổng thông tin')
     ? description
     : seoMeta.description;
 
@@ -50,7 +50,7 @@ if (normPath.startsWith('/study-corner') && normPath !== '/study-corner') {
   breadcrumbItems.push({
     '@type': 'ListItem',
     position: breadcrumbItems.length + 1,
-    name: 'GÃ³c há»c táº­p',
+    name: 'Góc học tập',
     item: 'https://nguyenthitrucphuong.pages.dev/study-corner',
   });
 }
@@ -96,19 +96,19 @@ const graphNodes: Record<string, any>[] = [
     '@type': 'WebSite',
     '@id': 'https://nguyenthitrucphuong.pages.dev/#website',
     url: 'https://nguyenthitrucphuong.pages.dev/',
-    name: 'NGUYỄN THỊ TRÚC PHƯƠNG â€” Cá»•ng Há»c Táº­p - Tri Thá»©c Sá»‘',
+    name: 'NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập - Tri Thức Số',
     description: finalDescription,
     inLanguage: 'vi-VN',
-    publisher: { '@id': 'https://nguyenthitrucphuong.pages.dev/#person' }, image: { '@type': 'ImageObject', '@id': 'https://nguyenthitrucphuong.pages.dev/#logo', url: 'https://nguyenthitrucphuong.pages.dev/images/logo-tp.svg', contentUrl: 'https://nguyenthitrucphuong.pages.dev/images/logo-tp.svg', width: 512, height: 512, caption: 'Logo TP â€” NGUYỄN THỊ TRÚC PHƯƠNG â€” Cá»•ng Há»c Táº­p & Tri Thá»©c Sá»‘' },
+    publisher: { '@id': 'https://nguyenthitrucphuong.pages.dev/#person' }, image: { '@type': 'ImageObject', '@id': 'https://nguyenthitrucphuong.pages.dev/#logo', url: 'https://nguyenthitrucphuong.pages.dev/images/logo-tp.svg', contentUrl: 'https://nguyenthitrucphuong.pages.dev/images/logo-tp.svg', width: 512, height: 512, caption: 'Logo TP — NGUYỄN THỊ TRÚC PHƯƠNG — Cổng Học Tập & Tri Thức Số' },
   },
   {
     '@type': 'Person',
     '@id': 'https://nguyenthitrucphuong.pages.dev/#person',
     name: contactCfg.instructor_name,
-    jobTitle: 'Giảng viên Khoa Quáº£n trá»‹ - Kinh doanh',
+    jobTitle: 'Giảng viên Khoa Quản trị - Kinh doanh',
     worksFor: {
       '@type': 'CollegeOrUniversity',
-      name: 'TrÆ°á»ng Cao Ä‘áº³ng Kinh táº¿ TP. Há»“ ChÃ­ Minh (HCE)',
+      name: 'Trường Cao đẳng Kinh tế TP. Hồ Chí Minh (HCE)',
     },
     url: 'https://nguyenthitrucphuong.pages.dev/home/introduction',
     telephone: cleanPhone,
@@ -136,7 +136,7 @@ if (seoMeta.schemaType === 'Course') {
     inLanguage: 'vi-VN',
     provider: {
       '@type': 'CollegeOrUniversity',
-      name: 'Khoa Quáº£n trá»‹ - Kinh doanh, TrÆ°á»ng Cao Ä‘áº³ng Kinh táº¿ TP.HCM (HCE)',
+      name: 'Khoa Quản trị - Kinh doanh, Trường Cao đẳng Kinh tế TP.HCM (HCE)',
       sameAs: 'https://nguyenthitrucphuong.pages.dev/',
     },
     instructor: { '@id': 'https://nguyenthitrucphuong.pages.dev/#person' },
@@ -150,7 +150,7 @@ if (seoMeta.schemaType === 'Course') {
     description: finalDescription,
     url: canonicalUrl,
     inLanguage: 'vi-VN',
-    educationalLevel: 'Äáº¡i há»c / Cao Ä‘áº³ng',
+    educationalLevel: 'Đại học / Cao đẳng',
     author: { '@id': 'https://nguyenthitrucphuong.pages.dev/#person' },
     isAccessibleForFree: true,
   });
@@ -162,7 +162,7 @@ if (seoMeta.schemaType === 'Course') {
     description: finalDescription,
     url: canonicalUrl,
     inLanguage: 'vi-VN',
-    learningResourceType: 'BÃ i giáº£ng, HÆ°á»›ng dáº«n giáº£i bÃ i táº­p - Äá» cÆ°Æ¡ng há»c thuáº­t',
+    learningResourceType: 'Bài giảng, Hướng dẫn giải bài tập - Đề cương học thuật',
     author: { '@id': 'https://nguyenthitrucphuong.pages.dev/#person' },
     isAccessibleForFree: true,
   });
@@ -188,45 +188,45 @@ const schemaGraph = {
   '@graph': graphNodes,
 };
 
-// Cáº¥u hÃ¬nh giao diá»‡n Mobile Drawer sinh Ä‘á»™ng & hiá»‡n Ä‘áº¡i theo Design System
+// Cấu hình giao diện Mobile Drawer sinh động & hiện đại theo Design System
 const TOP_NAV_META: Record<string, { icon: string; bg: string; subtitle: string }> = {
-  'Trang chủ': { icon: 'ðŸ ', bg: 'bg-[#C65B69]', subtitle: 'ThÃ´ng tin Giảng viên & Hoáº¡t Ä‘á»™ng' },
-  'GÃ³c há»c táº­p': { icon: 'ðŸ“š', bg: 'bg-[#A83245] ring-1 ring-[#C65B69]/50', subtitle: 'BÃ i giáº£ng, Äá» cÆ°Æ¡ng & BÃ i táº­p' },
-  'Thi Online': { icon: 'âš¡', bg: 'bg-[#C65B69] text-white', subtitle: 'NgÃ¢n hÃ ng Äá» thi Tráº¯c nghiá»‡m Live' },
-  'SPSS - Pháº§n má»m': { icon: 'ðŸ“ˆ', bg: 'bg-[#A83245]', subtitle: 'Xá»­ lÃ½ Dá»¯ liá»‡u & Kho Pháº§n má»m' },
+  'Trang chủ': { icon: '🏠', bg: 'bg-[#C65B69]', subtitle: 'Thông tin Giảng viên & Hoạt động' },
+  'Góc học tập': { icon: '📚', bg: 'bg-[#A83245] ring-1 ring-[#C65B69]/50', subtitle: 'Bài giảng, Đề cương & Bài tập' },
+  'Thi Online': { icon: '⚡', bg: 'bg-[#C65B69] text-white', subtitle: 'Ngân hàng Đề thi Trắc nghiệm Live' },
+  'SPSS - Phần mềm': { icon: '📈', bg: 'bg-[#A83245]', subtitle: 'Xử lý Dữ liệu & Kho Phần mềm' },
   
   
-  'LiÃªn há»‡': { icon: 'ðŸ“¬', bg: 'bg-[#C65B69]', subtitle: 'LiÃªn há»‡ Giảng viên & GÃ³p Ã½' },
+  'Liên hệ': { icon: '📬', bg: 'bg-[#C65B69]', subtitle: 'Liên hệ Giảng viên & Góp ý' },
 };
 
 const SUB_NAV_ICONS: Record<string, string> = {
-  'Giá»›i thiá»‡u Giảng viên': 'ðŸ‘¨â€ðŸ«',
-  'Hoáº¡t Ä‘á»™ng Giáº£ng dáº¡y': 'ðŸ“–',
-  'Cá»‘ váº¥n há»c táº­p (CVHT)': 'ðŸ¤',
-  'Góc chia sẻ - Tin tá»©c': 'ðŸ“°',
-  'Kiáº¿n thá»©c Marketing - AI': 'ðŸ¤–',
-  '5. Marketing cÄƒn báº£n': 'ðŸ“£',
-  '6. Kinh táº¿ vi mÃ´': 'ðŸ“Š',
-  '7. HÆ°á»›ng dáº«n thá»±c táº­p': 'ðŸŽ“',
-  '8. Khá»Ÿi nghiá»‡p': 'ðŸš€',
-  'ChuyÃªn Ä‘á» IMC (Truyá»n thÃ´ng)': 'ðŸ“¢',
-  'HÆ°á»›ng dáº«n xá»­ lÃ½ dá»¯ liá»‡u SPSS': 'ðŸ“Š',
-  'Kháº£o sÃ¡t NCKH Sinh viÃªn': 'ðŸ“',
-  'Kho Pháº§n má»m (SPSS, POM-QM)': 'ðŸ’»',
-  'ThÃ´ng tin LiÃªn há»‡ - GÃ³p Ã½': 'ðŸ“®',
-  'Phiáº¿u ÄÃ¡nh giÃ¡ Giảng viên': 'â­',
+  'Giới thiệu Giảng viên': '👨‍🏫',
+  'Hoạt động Giảng dạy': '📖',
+  'Cố vấn học tập (CVHT)': '🤝',
+  'Góc chia sẻ - Tin tức': '📰',
+  'Kiến thức Marketing - AI': '🤖',
+  '5. Marketing căn bản': '📣',
+  '6. Kinh tế vi mô': '📊',
+  '7. Hướng dẫn thực tập': '🎓',
+  '8. Khởi nghiệp': '🚀',
+  'Chuyên đề IMC (Truyền thông)': '📢',
+  'Hướng dẫn xử lý dữ liệu SPSS': '📊',
+  'Khảo sát NCKH Sinh viên': '📝',
+  'Kho Phần mềm (SPSS, POM-QM)': '💻',
+  'Thông tin Liên hệ - Góp ý': '📮',
+  'Phiếu Đánh giá Giảng viên': '⭐',
   };
 
 function getLeafIcon(label: string): string {
   const l = label.toLowerCase();
-  if (l.includes('bÃ i giáº£ng') || l.includes('slide') || l.includes('Ä‘á» cÆ°Æ¡ng')) return 'ðŸ“–';
-  if (l.includes('Ä‘á» thi') || l.includes('tráº¯c nghiá»‡m') || l.includes('test')) return 'ðŸ“';
-  if (l.includes('bÃ i táº­p') || l.includes('hÆ°á»›ng dáº«n giáº£i') || l.includes('tá»± luáº­n')) return 'ðŸ’¡';
-  if (l.includes('pháº§n má»m') || l.includes('pom') || l.includes('casio') || l.includes('spss')) return 'ðŸ’»';
-  if (l.includes('bÃ¡o cÃ¡o') || l.includes('máº«u')) return 'ðŸ“‘';
-  if (l.includes('tra cá»©u') || l.includes('dcct')) return 'ðŸ”';
-  if (l.includes('trÃ­ch dáº«n')) return 'ðŸ“Œ';
-  return 'ðŸ”¹';
+  if (l.includes('bài giảng') || l.includes('slide') || l.includes('đề cương')) return '📖';
+  if (l.includes('đề thi') || l.includes('trắc nghiệm') || l.includes('test')) return '📝';
+  if (l.includes('bài tập') || l.includes('hướng dẫn giải') || l.includes('tự luận')) return '💡';
+  if (l.includes('phần mềm') || l.includes('pom') || l.includes('casio') || l.includes('spss')) return '💻';
+  if (l.includes('báo cáo') || l.includes('mẫu')) return '📑';
+  if (l.includes('tra cứu') || l.includes('dcct')) return '🔍';
+  if (l.includes('trích dẫn')) return '📌';
+  return '🔹';
 }
 
 ---
@@ -285,9 +285,9 @@ function getLeafIcon(label: string): string {
     <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
 
         <style is:inline>
-      /* Cá»‘ Ä‘á»‹nh tuyá»‡t Ä‘á»‘i thanh Ä‘iá»u hÆ°á»›ng chÃ­nh á»Ÿ Ä‘á»‰nh mÃ n hÃ¬nh, khÃ´ng trÃ´i khi cuá»™n */
+      /* Cố định tuyệt đối thanh điều hướng chính ở đỉnh màn hình, không trôi khi cuộn */
       #mainNavbar,
-      nav[aria-label="Äiá»u hÆ°á»›ng chÃ­nh"],
+      nav[aria-label="Điều hướng chính"],
       .site-sticky-navbar {
         position: fixed !important;
         top: 0 !important;
@@ -296,14 +296,11 @@ function getLeafIcon(label: string): string {
         width: 100% !important;
         z-index: 100 !important;
       }
-      html {
-        scroll-padding-top: 4.5rem !important;
-      }
       body {
-        padding-top: 4rem !important; /* 64px tÆ°Æ¡ng á»©ng Ä‘Ãºng chiá»u cao thanh Ä‘iá»u hÆ°á»›ng */
+        padding-top: 4rem !important; /* 64px tương ứng đúng chiều cao thanh điều hướng */
       }
 
-      /* Khoáº£ng Ä‘á»‡m an toÃ n dÆ°á»›i cÃ¹ng cho trang web */
+      /* Khoảng đệm an toàn dưới cùng cho trang web */
       main, .site-main-content, #mainContent {
         padding-bottom: 0 !important;
       }
@@ -311,23 +308,23 @@ function getLeafIcon(label: string): string {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous" />
     {customCss && <style is:inline set:html={customCss} />}
   </head>
-  <body class="min-h-screen flex flex-col bg-[#F7F5F2] text-[#303039] antialiased pt-14 sm:pt-16">
-    <!-- Top Academic Navigation Bar (Cá»‘ Ä‘á»‹nh á»Ÿ Ä‘á»‰nh mÃ n hÃ¬nh, khÃ´ng trÃ´i khi cuá»™n) -->
-    <nav id="mainNavbar" aria-label="Äiá»u hÆ°á»›ng chÃ­nh" class="site-sticky-navbar fixed top-0 left-0 right-0 w-full z-50 bg-[#A83245]/98 backdrop-blur-md text-white border-b border-[#C65B69]/40 shadow-sm">
-      <div class="max-w-7xl mx-auto px-2.5 sm:px-6">
+  <body class="min-h-screen flex flex-col bg-[#F7F5F2] text-[#303039] antialiased selection:bg-[#C65B69] selection:text-white pt-14 sm:pt-16">
+    <!-- Top Academic Navigation Bar (Cố định ở đỉnh màn hình, không trôi khi cuộn) -->
+    <nav id="mainNavbar" aria-label="Điều hướng chính" class="site-sticky-navbar fixed top-0 left-0 right-0 w-full z-50 bg-[#A83245]/98 backdrop-blur-md text-white border-b border-[#C65B69]/40 shadow-sm">
+      <div class="max-w-7xl mx-auto px-2 sm:px-6">
         <div class="flex items-center justify-between h-14 sm:h-16 gap-1 sm:gap-4">
-          <!-- Brand Logo TPÂ® -->
+          <!-- Brand Logo TP® -->
           <a
             href="/"
-            title="Vá» Trang chủ Cá»•ng Há»c Táº­p - Tri Thá»©c Sá»‘ NGUYỄN THỊ TRÚC PHƯƠNG"
+            title="Về Trang chủ Cổng Học Tập - Tri Thức Số NGUYỄN THỊ TRÚC PHƯƠNG"
             class="group flex items-center gap-1.5 sm:gap-2.5 font-extrabold text-xs sm:text-base tracking-tight text-white hover:text-[#F8EDEF] transition-colors min-w-0 shrink"
           >
-            <span class="inline-flex items-center justify-center w-7 h-7 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-gradient-to-br from-[#F7F5F2] via-[#FFFFFF] to-[#F8EDEF] border border-[#F8EDEF]/90 text-[#A83245] font-black text-sm sm:text-2xl shadow-sm tracking-tighter shrink-0 select-none group-hover:scale-105 transition-transform">
-              TP<sup class="text-[6.5px] sm:text-[10px] -top-1 ml-0.5 font-bold text-[#C65B69]">Â®</sup>
+            <span class="inline-flex items-center justify-center w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-gradient-to-br from-[#F7F5F2] via-[#FFFFFF] to-[#F8EDEF] border border-[#F8EDEF]/90 text-[#A83245] font-black text-base sm:text-2xl shadow-sm tracking-tighter shrink-0 select-none group-hover:scale-105 transition-transform">
+              TP<sup class="text-[7.5px] sm:text-[10px] -top-1.5 ml-0.5 font-bold text-[#C65B69]">®</sup>
             </span>
             <span class="leading-tight block min-w-0">
-              <span class="block text-[11px] sm:text-base font-extrabold tracking-tight sm:tracking-wide whitespace-nowrap">NGUYỄN THỊ TRÚC PHƯƠNG</span>
-              <span class="block text-[5.5px] sm:text-[7.2px] text-[#F8EDEF] font-semibold tracking-tight uppercase whitespace-nowrap">Cá»•ng Há»c Táº­p - Tri Thá»©c Sá»‘<sup class="text-[4px] sm:text-[5.5px] leading-none relative -top-[2px] ml-[0.5px] font-bold">Â®</sup></span>
+              <span class="block text-[12px] sm:text-base font-extrabold tracking-tight sm:tracking-wide whitespace-nowrap">NGUYỄN THỊ TRÚC PHƯƠNG</span>
+              <span class="block text-[5.8px] sm:text-[7.2px] text-[#F8EDEF] font-semibold tracking-tight uppercase whitespace-nowrap">Cổng Học Tập - Tri Thức Số<sup class="text-[4.5px] sm:text-[5.5px] leading-none relative -top-[2px] ml-[0.5px] font-bold">®</sup></span>
             </span>
           </a>
 
@@ -358,13 +355,13 @@ function getLeafIcon(label: string): string {
                   >
                     <a
                       href={item.href}
-                      title={`Truy cáº­p chuyÃªn má»¥c ${item.label} trÃªn cá»•ng há»c táº­p`}
+                      title={`Truy cập chuyên mục ${item.label} trên cổng học tập`}
                       class={`py-2 flex items-center gap-1.5 ${item.children ? 'pl-3 pr-1.5 desktop-nav-trigger' : 'px-3'}`}
                     >
                       <span>{item.label}</span>
                       {item.badge === 'LOCK' && (
                         <span aria-hidden="true" class="text-[11px] opacity-80 leading-none">
-                          ðŸ”’
+                          🔒
                         </span>
                       )}
                       {item.badge && item.badge !== 'LOCK' && (
@@ -376,7 +373,7 @@ function getLeafIcon(label: string): string {
                     {item.children && (
                       <button
                         type="button"
-                        aria-label={`Má»Ÿ danh má»¥c con ${item.label}`}
+                        aria-label={`Mở danh mục con ${item.label}`}
                         class="desktop-nav-toggle-btn pr-2.5 pl-1 py-2 flex items-center justify-center cursor-pointer focus:outline-none"
                       >
                         <svg aria-hidden="true" class="desktop-nav-chevron w-3.5 h-3.5 opacity-80 transition-transform duration-150 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -393,11 +390,11 @@ function getLeafIcon(label: string): string {
                           <div class="relative group/sub desktop-sub-item">
                             <a
                               href={sub.href}
-                              title={`Má»Ÿ há»c pháº§n vÃ  tÃ i liá»‡u ${sub.label}`}
+                              title={`Mở học phần và tài liệu ${sub.label}`}
                               class="flex items-center justify-between px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-[#F8EDEF] hover:text-[#A83245] transition-colors"
                             >
                               <span>{sub.label}</span>
-                              {sub.children && <span aria-hidden="true" class="text-slate-400 text-[10px] ml-2">â–¶</span>}
+                              {sub.children && <span aria-hidden="true" class="text-slate-400 text-[10px] ml-2">▶</span>}
                             </a>
                             {sub.children && (
                               <div class={`desktop-sub-dropdown absolute ${alignRight ? 'right-full pr-1' : 'left-full pl-1'} top-0 w-64 z-50`}>
@@ -405,7 +402,7 @@ function getLeafIcon(label: string): string {
                                   {sub.children.map((leaf) => (
                                     <a
                                       href={leaf.href}
-                                      title={`Xem chi tiáº¿t ${leaf.label} (${sub.label})`}
+                                      title={`Xem chi tiết ${leaf.label} (${sub.label})`}
                                       class="block px-3.5 py-1.5 text-xs font-medium text-slate-700 hover:bg-[#F8EDEF] hover:text-[#A83245]"
                                     >
                                       {leaf.label}
@@ -425,20 +422,20 @@ function getLeafIcon(label: string): string {
           </div>
 
           <!-- Mobile Hamburger Button & Quick Action -->
-          <div class="flex items-center gap-1 sm:gap-2 shrink-0 lg:hidden pl-1 pr-0.5">
+          <div class="flex items-center gap-1 sm:gap-2 shrink-0 lg:hidden">
             <a
               href="/ngan-hang-de-thi"
-              title="LÃ m bÃ i thi tráº¯c nghiá»‡m trá»±c tuyáº¿n 50 cÃ¢u trong 60 phÃºt"
-              class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#C65B69] hover:bg-[#A83245] border border-[#C65B69]/60 text-white font-extrabold text-[10.5px] sm:text-xs whitespace-nowrap shadow-sm active:scale-95 transition-all shrink-0"
+              title="Làm bài thi trắc nghiệm trực tuyến 50 câu trong 60 phút"
+              class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#C65B69] hover:bg-[#A83245] border border-[#C65B69]/60 text-white font-extrabold text-[11px] sm:text-xs whitespace-nowrap shadow-sm active:scale-95 transition-all shrink-0"
             >
-              <span class="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-[#742D3A] flex items-center justify-center text-[6.5px] sm:text-[8px] text-[#F8EDEF] pl-0.5 select-none font-bold">â–¶</span>
+              <span class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-[#742D3A] flex items-center justify-center text-[7px] sm:text-[8px] text-[#F8EDEF] pl-0.5 select-none font-bold">▶</span>
               <span>Thi Online</span>
             </a>
             <button
               id="mobileMenuBtn"
               type="button"
-              aria-label="Má»Ÿ menu Ä‘iá»u hÆ°á»›ng"
-              class="p-1 rounded-lg text-white hover:bg-[#C65B69]/50 focus:outline-none shrink-0 cursor-pointer"
+              aria-label="Mở menu điều hướng"
+              class="p-1.5 sm:p-2 rounded-lg text-white hover:bg-[#C65B69]/50 focus:outline-none shrink-0 cursor-pointer"
             >
               <svg aria-hidden="true" class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -448,7 +445,7 @@ function getLeafIcon(label: string): string {
         </div>
       </div>
 
-            <!-- Mobile Drawer Sang Trá»ng, Sinh Äá»™ng & Hiá»‡n Äáº¡i -->
+            <!-- Mobile Drawer Sang Trọng, Sinh Động & Hiện Đại -->
       <div
         id="mobileMenuDrawer"
         class="hidden lg:hidden bg-gradient-to-b from-[#742D3A] via-[#A83245] to-[#742D3A] border-t border-[#C65B69]/40 px-3 pt-3 pb-8 max-h-[85vh] overflow-y-auto shadow-2xl backdrop-blur-xl"
@@ -457,14 +454,14 @@ function getLeafIcon(label: string): string {
         <div class="flex items-center justify-between p-3 mb-3 rounded-2xl bg-gradient-to-r from-[#A83245] via-[#C65B69]/70 to-[#A83245] border border-[#F8EDEF]/40 shadow-md">
           <div class="flex items-center gap-2.5">
             <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#F7F5F2] via-[#FFFFFF] to-[#F8EDEF] border border-[#F8EDEF]/90 text-[#A83245] font-black text-xl shadow-sm tracking-tighter shrink-0 select-none">
-              TP<sup class="text-[8px] -top-1.5 ml-0.5 font-bold text-[#C65B69]">Â®</sup>
+              TP<sup class="text-[8px] -top-1.5 ml-0.5 font-bold text-[#C65B69]">®</sup>
             </span>
             <div>
               <div class="text-xs sm:text-sm font-black uppercase text-white tracking-wide flex items-center gap-1.5">
                 <span>NGUYỄN THỊ TRÚC PHƯƠNG</span>
                 <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               </div>
-              <div class="text-[6.5px] sm:text-[7.2px] text-[#F8EDEF] font-semibold tracking-tight uppercase">Cá»•ng Há»c Táº­p - Tri Thá»©c Sá»‘<sup class="text-[5.5px] leading-none relative -top-[2.5px] ml-[0.5px] font-bold">Â®</sup></div>
+              <div class="text-[6.5px] sm:text-[7.2px] text-[#F8EDEF] font-semibold tracking-tight uppercase">Cổng Học Tập - Tri Thức Số<sup class="text-[5.5px] leading-none relative -top-[2.5px] ml-[0.5px] font-bold">®</sup></div>
             </div>
           </div>
           <div class="flex items-center gap-1.5">
@@ -472,18 +469,18 @@ function getLeafIcon(label: string): string {
               href="/ngan-hang-de-thi"
               class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#C65B69] hover:bg-[#742D3A] border border-[#F8EDEF]/50 text-white font-extrabold text-xs shadow-sm active:scale-95 transition-transform"
             >
-              <span>âš¡</span>
+              <span>⚡</span>
               <span>Thi Online</span>
             </a>
           </div>
         </div>
 
-        <!-- Danh sÃ¡ch Accordion Cáº¥p 1 -->
+        <!-- Danh sách Accordion Cấp 1 -->
         <div class="space-y-2">
           {MAIN_NAVIGATION.map((item) => {
-            const meta = TOP_NAV_META[item.label] || { icon: 'ðŸ“Œ', bg: 'from-slate-700 to-slate-800', subtitle: '' };
+            const meta = TOP_NAV_META[item.label] || { icon: '📌', bg: 'from-slate-700 to-slate-800', subtitle: '' };
             const hasChildren = item.children && item.children.length > 0;
-            const isGocHocTap = item.label === 'GÃ³c há»c táº­p';
+            const isGocHocTap = item.label === 'Góc học tập';
 
             return (
               <div class="rounded-2xl border border-[#C65B69]/30 bg-[#A83245]/80 hover:border-[#F8EDEF]/50 transition-all overflow-hidden shadow-xs">
@@ -505,7 +502,7 @@ function getLeafIcon(label: string): string {
                             </span>
                             {item.badge === 'LOCK' ? (
                               <span class="px-2 py-0.2 rounded-full bg-[#742D3A] text-[#F8EDEF] border border-[#C65B69]/50 text-[10px] font-semibold">
-                                ðŸ”’ Ná»™i bá»™
+                                🔒 Nội bộ
                               </span>
                             ) : item.badge ? (
                               <span class="px-2 py-0.2 rounded-full bg-[#F8EDEF] text-[#A83245] text-[10px] font-extrabold shadow-2xs">
@@ -523,11 +520,11 @@ function getLeafIcon(label: string): string {
                       <div class="flex items-center gap-2">
                         <a
                           href={item.href}
-                          title={`Xem toÃ n bá»™ ${item.label}`}
+                          title={`Xem toàn bộ ${item.label}`}
                           class="p-1 rounded-lg bg-[#C65B69]/60 hover:bg-[#C65B69] text-slate-100 hover:text-white text-[11px] font-semibold px-2 transition-colors border border-[#C65B69]"
                           onclick="event.stopPropagation();"
                         >
-                          VÃ o trang
+                          Vào trang
                         </a>
                         <span class="mobile-chevron w-6 h-6 rounded-full bg-[#C65B69]/40 flex items-center justify-center text-slate-100 text-xs transition-transform duration-200">
                           {isGocHocTap ? '▲' : '▼'}
@@ -535,10 +532,10 @@ function getLeafIcon(label: string): string {
                       </div>
                     </button>
 
-                    <!-- Khá»‘i ná»™i dung con cáº¥p 2 (Accordion Panel) -->
+                    <!-- Khối nội dung con cấp 2 (Accordion Panel) -->
                     <div class={`mobile-accordion-content ${isGocHocTap ? '' : 'hidden'} px-2.5 pb-2.5 pt-1 space-y-2 border-t border-[#C65B69]/40 bg-[#742D3A]/95`}>
                       {item.children.map((sub) => {
-                        const subIcon = SUB_NAV_ICONS[sub.label] || 'ðŸ“';
+                        const subIcon = SUB_NAV_ICONS[sub.label] || '📁';
                         const hasLeaf = sub.children && sub.children.length > 0;
 
                         return (
@@ -546,7 +543,7 @@ function getLeafIcon(label: string): string {
                             <div class="flex items-center justify-between">
                               <a
                                 href={sub.href}
-                                title={`MÃ´n há»c: ${sub.label}`}
+                                title={`Môn học: ${sub.label}`}
                                 class="flex items-center gap-2 group flex-1"
                               >
                                 <span class="w-6 h-6 rounded-lg bg-[#742D3A] border border-[#C65B69]/50 flex items-center justify-center text-sm shrink-0">
@@ -561,7 +558,7 @@ function getLeafIcon(label: string): string {
                                   type="button"
                                   class="mobile-sub-toggle text-xs text-slate-100 hover:text-white font-bold px-2.5 py-1 rounded-lg bg-[#C65B69] hover:bg-[#A83245] border border-[#F8EDEF]/40 flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer shrink-0"
                                 >
-                                  <span>TÃ i liá»‡u</span>
+                                  <span>Tài liệu</span>
                                   <span class="mobile-sub-chevron text-[9px] transition-transform">▼</span>
                                 </button>
                               )}
@@ -575,7 +572,7 @@ function getLeafIcon(label: string): string {
                                     return (
                                       <a
                                         href={leaf.href}
-                                        title={`TÃ i liá»‡u ${leaf.label}`}
+                                        title={`Tài liệu ${leaf.label}`}
                                         class="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-[#742D3A] hover:bg-[#C65B69]/40 border border-[#C65B69]/30 hover:border-[#F8EDEF]/50 text-slate-100 hover:text-white text-[11px] font-medium transition-all group"
                                       >
                                         <span class="text-xs opacity-80 group-hover:scale-110 transition-transform">{leafIcon}</span>
@@ -594,7 +591,7 @@ function getLeafIcon(label: string): string {
                 ) : (
                   <a
                     href={item.href}
-                    title={`ChuyÃªn má»¥c ${item.label}`}
+                    title={`Chuyên mục ${item.label}`}
                     class="w-full flex items-center justify-between p-3 transition-colors group cursor-pointer"
                   >
                     <div class="flex items-center gap-3">
@@ -608,7 +605,7 @@ function getLeafIcon(label: string): string {
                           </span>
                           {item.badge === 'LOCK' ? (
                             <span class="px-2 py-0.2 rounded-full bg-[#742D3A] text-[#F8EDEF] border border-[#C65B69]/50 text-[10px] font-semibold">
-                              ðŸ”’ Ná»™i bá»™
+                              🔒 Nội bộ
                             </span>
                           ) : item.badge ? (
                             <span class="px-2 py-0.2 rounded-full bg-[#F8EDEF] text-[#A83245] text-[10px] font-extrabold shadow-2xs">
@@ -624,7 +621,7 @@ function getLeafIcon(label: string): string {
                       </div>
                     </div>
                     <span class="text-sky-400 text-xs font-bold group-hover:translate-x-1 transition-transform">
-                      âž”
+                      ➔
                     </span>
                   </a>
                 )}
@@ -633,25 +630,25 @@ function getLeafIcon(label: string): string {
           })}
         </div>
 
-        <!-- Quick Action & Support Cards á»Ÿ Ä‘Ã¡y Drawer -->
+        <!-- Quick Action & Support Cards ở đáy Drawer -->
         <div class="mt-4 pt-3 border-t border-[#C65B69]/30 space-y-2">
           <div class="w-full">
             <a
               href="/contact"
               class="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-gradient-to-r from-[#A83245] to-[#C65B69] text-white font-bold text-xs shadow-md hover:brightness-110 active:scale-95 transition-all text-center w-full"
             >
-              <span>ðŸ“ž</span>
-              <span>TÆ° Váº¥n Há»c Táº­p & GÃ³p Ã</span>
+              <span>📞</span>
+              <span>Tư Vấn Học Tập & Góp Ý</span>
             </a>
           </div>
 
           <div class="p-2.5 rounded-xl bg-slate-900/60 border border-[#C65B69]/30/80 text-[11px] text-slate-400 text-center space-y-1">
             <div>
-              <span class="text-slate-300 font-semibold">ThS. NGUYỄN THỊ TRÚC PHƯƠNG</span> â€” Khoa Quáº£n trá»‹ - Kinh doanh (HCE)
+              <span class="text-slate-300 font-semibold">ThS. NGUYỄN THỊ TRÚC PHƯƠNG</span> — Khoa Quản trị - Kinh doanh (HCE)
             </div>
             <div class="flex items-center justify-center gap-3 text-sky-400 font-medium">
               <span>Hotline: {contactCfg.hotline}</span>
-              <span>â€¢</span>
+              <span>•</span>
               <a href={`mailto:${contactCfg.email}`} class="hover:underline">{contactCfg.email}</a>
             </div>
           </div>
@@ -668,72 +665,76 @@ function getLeafIcon(label: string): string {
     <footer class="bg-[#A83245] text-slate-200 border-t border-[#C65B69]/40 mt-4 sm:mt-6">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xs sm:text-sm">
-          <!-- Column 1: About & ChÃ¢m ngÃ´n triáº¿t lÃ½ sá»‘ng -->
+          <!-- Column 1: About & Châm ngôn triết lý sống -->
           <div class="space-y-3">
             <div class="flex items-center gap-2.5 font-extrabold text-white text-base">
               <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-[#F7F5F2] via-[#FFFFFF] to-[#F8EDEF] border border-[#F8EDEF]/90 text-[#A83245] font-black text-lg shadow-sm tracking-tighter shrink-0 select-none">
-                TP<sup class="text-[8px] -top-1.5 ml-0.5 font-bold text-[#C65B69]">Â®</sup>
+                TP<sup class="text-[8px] -top-1.5 ml-0.5 font-bold text-[#C65B69]">®</sup>
               </span>
               <span class="tracking-tight">NGUYỄN THỊ TRÚC PHƯƠNG</span>
             </div>
             <p class="text-[#F8EDEF] text-xs sm:text-[12.5px] leading-relaxed italic border-l-2 border-[#C65B69] pl-3 py-1 my-1">
-              "NgÆ°á»i tháº§y giá»i khÃ´ng chá»‰ dáº¡y lÃ½ thuyáº¿t, há» má»Ÿ ra cÃ¡nh cá»­a thá»±c táº¿ vÃ  tháº¯p sÃ¡ng niá»m tin cho há»c trÃ²."
+              "Người thầy giỏi không chỉ dạy lý thuyết, họ mở ra cánh cửa thực tế và thắp sáng niềm tin cho học trò."
             </p>
           </div>
 
-          <!-- Column 2: LiÃªn káº¿t nhanh (Nháº¥t quÃ¡n Ä‘á» má»¥c & danh sÃ¡ch ngay ngáº¯n) -->
+          <!-- Column 2: Liên kết nhanh (Nhất quán đề mục & danh sách ngay ngắn) -->
           <div class="space-y-3">
             <h2 class="font-black text-white uppercase tracking-wider text-xs m-0 flex items-center gap-2">
               <span class="w-1.5 h-3.5 rounded-full bg-[#C65B69] shrink-0"></span>
-              <span>LiÃªn káº¿t nhanh</span>
+              <span>Liên kết nhanh</span>
             </h2>
             <ul class="grid grid-cols-2 gap-x-2 gap-y-2 text-xs text-[#F8EDEF]/90">
-              <li><a href="/study-corner" title="Danh má»¥c 11 há»c pháº§n trong GÃ³c há»c táº­p" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F8EDEF] font-bold">â€¢</span><span>GÃ³c há»c táº­p</span></a></li>
-              <li><a href="/ngan-hang-de-thi" title="Há»‡ thá»‘ng thi tráº¯c nghiá»‡m trá»±c tuyáº¿n 50 cÃ¢u" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F8EDEF] font-bold">â€¢</span><span>Thi Online</span></a></li>
-              <li><a href="/dcct" title="Tra cá»©u mÃ£ Ä‘á» cÆ°Æ¡ng chi tiáº¿t thá»±c táº­p tá»‘t nghiá»‡p" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F8EDEF] font-bold">â€¢</span><span>Äá» cÆ°Æ¡ng</span></a></li>
+              <li><a href="/study-corner" title="Danh mục 11 học phần trong Góc học tập" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F8EDEF] font-bold">•</span><span>Góc học tập</span></a></li>
+              <li><a href="/ngan-hang-de-thi" title="Hệ thống thi trắc nghiệm trực tuyến 50 câu" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F8EDEF] font-bold">•</span><span>Thi Online</span></a></li>
+              <li><a href="/dcct" title="Tra cứu mã đề cương chi tiết thực tập tốt nghiệp" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F8EDEF] font-bold">•</span><span>Đề cương</span></a></li>
               
-              <li><a href="/spss" title="HÆ°á»›ng dáº«n xá»­ lÃ½ dá»¯ liá»‡u kháº£o sÃ¡t báº±ng SPSS" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F8EDEF] font-bold">â€¢</span><span>HÆ°á»›ng dáº«n SPSS</span></a></li>
-              <li><a href="/software" title="Táº£i pháº§n má»m thá»‘ng kÃª SPSS vÃ  mÃ´ phá»ng POM-QM" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F8EDEF] font-bold">â€¢</span><span>Kho Pháº§n má»m</span></a></li>
-              <li><a href="/mentor" title="ThÃ´ng tin cÃ´ng tÃ¡c Cá»‘ váº¥n há»c táº­p sinh viÃªn" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F8EDEF] font-bold">â€¢</span><span>Cá»‘ váº¥n há»c táº­p</span></a></li>
-              <li><a href="/contact" title="ThÃ´ng tin liÃªn há»‡ Giảng viên ThS. NGUYỄN THỊ TRÚC PHƯƠNG" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F8EDEF] font-bold">â€¢</span><span>LiÃªn há»‡</span></a></li>
+              <li><a href="/spss" title="Hướng dẫn xử lý dữ liệu khảo sát bằng SPSS" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F8EDEF] font-bold">•</span><span>Hướng dẫn SPSS</span></a></li>
+              <li><a href="/software" title="Tải phần mềm thống kê SPSS và mô phỏng POM-QM" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F8EDEF] font-bold">•</span><span>Kho Phần mềm</span></a></li>
+              <li><a href="/mentor" title="Thông tin công tác Cố vấn học tập sinh viên" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F8EDEF] font-bold">•</span><span>Cố vấn học tập</span></a></li>
+              <li><a href="/contact" title="Thông tin liên hệ Giảng viên ThS. NGUYỄN THỊ TRÚC PHƯƠNG" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F8EDEF] font-bold">•</span><span>Liên hệ</span></a></li>
             </ul>
           </div>
 
-          <!-- Column 3: ThÃ´ng tin liÃªn há»‡ -->
+          <!-- Column 3: Thông tin liên hệ -->
           <div class="space-y-3">
             <h2 class="font-black text-white uppercase tracking-wider text-xs m-0 flex items-center gap-2">
               <span class="w-1.5 h-3.5 rounded-full bg-[#C65B69] shrink-0"></span>
-              <span>ThÃ´ng tin liÃªn há»‡</span>
+              <span>Thông tin liên hệ</span>
             </h2>
             <ul class="space-y-2.5 text-xs text-slate-200">
               <li class="flex items-center gap-2">
-                <span class="text-sm shrink-0">âœ‰ï¸</span>
-                <span><strong>Email:</strong> <a href="mailto:phuongntt@kthcm.edu.vn" title="Gá»­i thÆ° Ä‘iá»‡n tá»­ trao Ä‘á»•i há»c thuáº­t tá»›i phuongntt@kthcm.edu.vn" class="text-white hover:text-[#F8EDEF] font-semibold underline underline-offset-2">phuongntt@kthcm.edu.vn</a></span>
+                <span class="text-sm shrink-0">✉️</span>
+                <span><strong>Email:</strong> <a href="mailto:phuongntt@kthcm.edu.vn" title="Gửi thư điện tử trao đổi học thuật tới phuongntt@kthcm.edu.vn" class="text-white hover:text-[#F8EDEF] font-semibold underline underline-offset-2">phuongntt@kthcm.edu.vn</a></span>
               </li>
               <li class="flex items-start gap-2">
-                <span class="text-sm shrink-0 mt-0.5">ðŸ¢</span>
-                <span><strong>ÄÆ¡n vá»‹:</strong> Khoa Quáº£n trá»‹ - Kinh doanh (HCE)</span>
+                <span class="text-sm shrink-0 mt-0.5">🏢</span>
+                <span><strong>Đơn vị:</strong> Khoa Quản trị - Kinh doanh (HCE), Trường Cao đẳng Kinh tế TP.HCM</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-sm shrink-0 mt-0.5">📍</span>
+                <span><strong>Địa chỉ:</strong> 33 Vĩnh Viễn, Phường Vườn Lài, Quận 10, TP. Hồ Chí Minh</span>
               </li>
             </ul>
           </div>
 
-          <!-- Column 4: Thá»‘ng kÃª lÆ°á»£t truy cáº­p (Thiáº¿t káº¿ má»›i tá»± lÆ°u trá»¯, bá» nguá»“n cÅ©) -->
+          <!-- Column 4: Thống kê lượt truy cập (Thiết kế mới tự lưu trữ, bỏ nguồn cũ) -->
           <div class="space-y-3">
             <h2 class="font-black text-white uppercase tracking-wider text-xs m-0 flex items-center gap-2">
               <span class="w-1.5 h-3.5 rounded-full bg-emerald-400 shrink-0"></span>
-              <span>Thá»‘ng kÃª lÆ°á»£t truy cáº­p</span>
+              <span>Thống kê lượt truy cập</span>
             </h2>
             <div class="bg-[#742D3A]/90 border border-[#C65B69]/50 rounded-2xl p-4 flex flex-col justify-center gap-2.5 shadow-inner">
               <div class="flex items-center justify-between text-xs text-[#F8EDEF]">
-                <span class="flex items-center gap-1.5 font-medium"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Äang trá»±c tuyáº¿n:</span>
+                <span class="flex items-center gap-1.5 font-medium"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Đang trực tuyến:</span>
                 <span class="font-mono font-bold text-white text-sm">28</span>
               </div>
               <div class="flex items-center justify-between text-xs text-[#F8EDEF]">
-                <span class="font-medium">LÆ°á»£t truy cáº­p hÃ´m nay:</span>
+                <span class="font-medium">Lượt truy cập hôm nay:</span>
                 <span class="font-mono font-bold text-white text-sm">2.415</span>
               </div>
               <div class="pt-2 border-t border-[#C65B69]/40 flex items-center justify-between text-xs text-[#F8EDEF]">
-                <span class="font-medium">Tá»•ng lÆ°á»£t truy cáº­p:</span>
+                <span class="font-medium">Tổng lượt truy cập:</span>
                 <span class="font-mono font-black text-amber-300 text-sm tracking-wider">185.620</span>
               </div>
             </div>
@@ -742,7 +743,7 @@ function getLeafIcon(label: string): string {
 
         <div class="mt-6 pt-4 border-t border-[#C65B69]/30 flex flex-col sm:flex-row items-center justify-between text-xs text-[#F8EDEF]/90 gap-2">
           <p>Copyright © <span class="js-current-year">{currentYear}</span> NGUYỄN THỊ TRÚC PHƯƠNG - All rights reserved.</p>
-          <p class="text-[#F8EDEF] font-semibold">âœ¨ TÃ i liá»‡u Ä‘Æ°á»£c chia sáº» miá»…n phÃ­</p>
+          <p class="text-[#F8EDEF] font-semibold">✨ Tài liệu được chia sẻ miễn phí</p>
         </div>
       </div>
     </footer>
@@ -759,7 +760,7 @@ function getLeafIcon(label: string): string {
             drawer.classList.toggle('hidden');
           });
 
-          // Tá»± Ä‘á»™ng Ä‘Ã³ng drawer khi click ra ngoÃ i
+          // Tự động đóng drawer khi click ra ngoài
           document.addEventListener('click', (e) => {
             if (!drawer.classList.contains('hidden')) {
               if (!drawer.contains(e.target) && !btn.contains(e.target)) {
@@ -769,7 +770,7 @@ function getLeafIcon(label: string): string {
           });
         }
 
-        // Mobile Accordion Cáº¥p 1
+        // Mobile Accordion Cấp 1
         document.querySelectorAll('.mobile-accordion-btn').forEach((aBtn) => {
           aBtn.addEventListener('click', () => {
             const card = aBtn.closest('.rounded-2xl');
@@ -786,7 +787,7 @@ function getLeafIcon(label: string): string {
           });
         });
 
-        // Mobile Sub-Accordion Cáº¥p 2
+        // Mobile Sub-Accordion Cấp 2
         document.querySelectorAll('.mobile-sub-toggle').forEach((sBtn) => {
           sBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -905,17 +906,16 @@ function getLeafIcon(label: string): string {
         }
       })();
     </script>
-  
+
         <script is:inline>
-      /* Tự động thu nhỏ bảng biểu, sơ đồ, hình vẽ vừa khít màn hình điện thoại:
-         - Không xuống dòng trong ô bảng (white-space: nowrap)
-         - Không sử dụng thanh trượt ngang (overflow: hidden)
-         - Tự động co giãn theo tỷ lệ (transform: scale) */
+      /* Tu dong thu nho bang bieu, so do, hinh ve vua khit man hinh dien thoai:
+         - Khong xuong dong trong o bang (white-space: nowrap)
+         - Khong su dung thanh truot ngang (overflow: hidden)
+         - Tu dong co gian theo ty le (transform: scale) */
       (function () {
         function autoScaleAcademicMedia() {
           var isMobile = window.innerWidth <= 768;
 
-          // 1. Co giãn bảng biểu
           document.querySelectorAll('.tkd-page-scope table, .tkd-academic-subpage table, main table').forEach(function(tbl) {
             var wrapper = tbl.parentElement;
             if (!wrapper || !wrapper.classList.contains('tkd-auto-scale-wrapper')) {
@@ -929,34 +929,25 @@ function getLeafIcon(label: string): string {
               wrap.appendChild(tbl);
               wrapper = wrap;
             }
-
             if (!isMobile) {
               tbl.style.transform = '';
-              tbl.style.transformOrigin = '';
               tbl.style.width = '100%';
               wrapper.style.height = '';
-              wrapper.style.overflow = '';
               return;
             }
-
-            // Mobile: giữ ô không xuống dòng
             tbl.querySelectorAll('th, td').forEach(function(c) {
               c.style.setProperty('white-space', 'nowrap', 'important');
               c.style.setProperty('word-break', 'normal', 'important');
             });
             tbl.style.width = 'max-content';
             tbl.style.maxWidth = 'none';
-            tbl.style.transform = 'none';
-
             var containerWidth = wrapper.clientWidth || (window.innerWidth - 32);
             var tableWidth = tbl.scrollWidth || tbl.offsetWidth;
-
             if (tableWidth > containerWidth && containerWidth > 0) {
               var scale = containerWidth / tableWidth;
               tbl.style.transform = 'scale(' + scale + ')';
               tbl.style.transformOrigin = 'top left';
-              var scaledHeight = Math.ceil(tbl.offsetHeight * scale);
-              wrapper.style.height = scaledHeight + 'px';
+              wrapper.style.height = Math.ceil(tbl.offsetHeight * scale) + 'px';
               wrapper.style.overflow = 'hidden';
             } else {
               tbl.style.transform = '';
@@ -965,29 +956,23 @@ function getLeafIcon(label: string): string {
             }
           });
 
-          // 2. Co giãn biểu đồ, sơ đồ, SVG, hình ảnh
-          document.querySelectorAll('.tkd-page-scope svg, .tkd-academic-subpage svg, .diagram, .flowchart, .svg-container svg, .tkd-page-scope img, .tkd-academic-subpage img').forEach(function(el) {
+          document.querySelectorAll('.tkd-page-scope svg, .tkd-academic-subpage svg, .tkd-page-scope img, .tkd-academic-subpage img').forEach(function(el) {
             el.style.maxWidth = '100%';
             el.style.height = 'auto';
-            el.style.boxSizing = 'border-box';
             if (el.parentElement) {
               el.parentElement.style.overflowX = 'hidden';
               el.parentElement.style.maxWidth = '100%';
             }
           });
 
-          // 3. Khử hoàn toàn thanh trượt ngang trên toàn bộ container
-          document.querySelectorAll('.table-responsive, .table-container, .table-responsive-wrapper, .overflow-x-auto').forEach(function(c) {
+          document.querySelectorAll('.table-responsive, .table-container, .overflow-x-auto').forEach(function(c) {
             c.style.overflowX = 'hidden';
             c.style.maxWidth = '100%';
           });
         }
 
         var resizeTimer;
-        window.addEventListener('resize', function () {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(autoScaleAcademicMedia, 150);
-        });
+        window.addEventListener('resize', function () { clearTimeout(resizeTimer); resizeTimer = setTimeout(autoScaleAcademicMedia, 150); });
         window.addEventListener('load', autoScaleAcademicMedia);
         document.addEventListener('DOMContentLoaded', autoScaleAcademicMedia);
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
