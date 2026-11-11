@@ -391,11 +391,6 @@ for (const sub of enabledSubjects) {
                     <div class="min-w-0 flex-1">
                       <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
                         <p class="font-extrabold text-slate-900 text-xs sm:text-sm truncate">{r.student_name}</p>
-                        {r.class_name && (
-                          <span class="text-[10px] font-semibold text-slate-500 bg-slate-200/70 px-2 py-0.5 rounded-md truncate max-w-[180px]">
-                            {r.class_name}
-                          </span>
-                        )}
                       </div>
                       <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5 text-[11px] text-slate-500">
                         <span class="font-semibold text-[#A83245] truncate max-w-full">📘 {r.subject_title}</span>
@@ -504,11 +499,6 @@ for (const sub of enabledSubjects) {
                 <div class="min-w-0 flex-1">
                   <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
                     <p class="font-extrabold text-slate-900 text-xs sm:text-sm truncate">${escapeHtml(r.student_name)}</p>
-                    ${
-                      r.class_name
-                        ? `<span class="text-[10px] font-semibold text-slate-500 bg-slate-200/70 px-2 py-0.5 rounded-md truncate max-w-[180px]">${escapeHtml(r.class_name)}</span>`
-                        : ''
-                    }
                   </div>
                   <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5 text-[11px] text-slate-500">
                     <span class="font-semibold text-[#A83245] truncate max-w-full">📘 ${escapeHtml(r.subject_title)}</span>
@@ -862,7 +852,7 @@ if (startForm) {
           body: JSON.stringify({
             student_name: currentSession.studentName,
             student_id: currentSession.studentId,
-            class_name: `${currentSession.className} (${currentSession.studentId})`,
+            class_name: currentSession.className,
             subject_path: '/ngan-hang-de-thi?subject=' + currentSession.subKey,
             subject_title: currentSession.subjectTitle,
             exam_mode: `Đề thi Online (${totalQ} câu)`,

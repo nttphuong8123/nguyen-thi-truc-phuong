@@ -52,7 +52,7 @@ export const GET: APIRoute = async ({ url, cookies }) => {
   if (url.searchParams.get('public') === '1') {
     const limit = Math.min(100, Math.max(1, Number(url.searchParams.get('limit') || 100)));
     const recentRows = db
-      .prepare('SELECT id, student_name, student_id, class_name, subject_title, exam_mode, test_code, score, max_score, duration_text, submitted_at FROM exam_submissions ORDER BY id DESC LIMIT ?')
+      .prepare('SELECT id, student_name, subject_title, exam_mode, test_code, score, max_score, duration_text, submitted_at FROM exam_submissions ORDER BY id DESC LIMIT ?')
       .all(limit);
     return new Response(JSON.stringify({ ok: true, rows: recentRows }), {
       status: 200,

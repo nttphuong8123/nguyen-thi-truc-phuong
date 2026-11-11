@@ -310,6 +310,8 @@ function getLeafIcon(label: string): string {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous" />
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+    <!-- Privacy-friendly Web Analytics & Visitor Counter Plugin -->
+    <script is:inline defer src="https://cdn.counter.dev/script.js" data-id="nguyenthitrucphuong" data-utcoffset="7"></script>
     {customCss && <style is:inline set:html={customCss} />}
   </head>
   <body class="min-h-screen flex flex-col bg-[#F7F5F2] text-[#303039] antialiased selection:bg-[#C65B69] selection:text-white pt-14 sm:pt-16">
@@ -726,16 +728,12 @@ function getLeafIcon(label: string): string {
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-sm shrink-0 mt-0.5">🏢</span>
-                <span><strong>Đơn vị:</strong> Khoa Quản trị - Kinh doanh (HCE), Trường Cao đẳng Kinh tế TP.HCM</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-sm shrink-0 mt-0.5">📍</span>
-                <span><strong>Địa chỉ:</strong> 33 Vĩnh Viễn, Phường Vườn Lài, Quận 10, TP. Hồ Chí Minh</span>
+                <span><strong>Đơn vị:</strong> Khoa Quản trị - Kinh doanh</span>
               </li>
             </ul>
           </div>
 
-          <!-- Column 4: Thống kê lượt truy cập (Thiết kế mới tự lưu trữ, bỏ nguồn cũ) -->
+          <!-- Column 4: Thống kê lượt truy cập (Tự động cập nhật thời gian thực qua Plugin Analytics) -->
           <div class="space-y-3">
             <h2 class="font-black text-white uppercase tracking-wider text-xs m-0 flex items-center gap-2">
               <span class="w-1.5 h-3.5 rounded-full bg-emerald-400 shrink-0"></span>
@@ -744,15 +742,15 @@ function getLeafIcon(label: string): string {
             <div class="bg-[#742D3A]/90 border border-[#C65B69]/50 rounded-2xl p-4 flex flex-col justify-center gap-2.5 shadow-inner">
               <div class="flex items-center justify-between text-xs text-[#F8EDEF]">
                 <span class="flex items-center gap-1.5 font-medium"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Đang trực tuyến:</span>
-                <span class="font-mono font-bold text-white text-sm">28</span>
+                <span class="font-mono font-bold text-white text-sm" id="statOnline">28</span>
               </div>
               <div class="flex items-center justify-between text-xs text-[#F8EDEF]">
                 <span class="font-medium">Lượt truy cập hôm nay:</span>
-                <span class="font-mono font-bold text-white text-sm">2.415</span>
+                <span class="font-mono font-bold text-white text-sm" id="statToday">2.415</span>
               </div>
               <div class="pt-2 border-t border-[#C65B69]/40 flex items-center justify-between text-xs text-[#F8EDEF]">
                 <span class="font-medium">Tổng lượt truy cập:</span>
-                <span class="font-mono font-black text-amber-300 text-sm tracking-wider">185.620</span>
+                <span class="font-mono font-black text-amber-300 text-sm tracking-wider" id="statTotal">185.620</span>
               </div>
             </div>
           </div>
@@ -977,18 +975,37 @@ function getLeafIcon(label: string): string {
           });
         }
 
+        // --- 3. CẬP NHẬT SỐ LIỆU THỐNG KÊ TRUY CẬP THỰC TẾ QUA PLUGIN API ---
+        function updateLiveVisitorStats() {
+          fetch('/api/visitor-counter')
+            .then(function (res) { return res.json(); })
+            .then(function (data) {
+              if (data && data.ok) {
+                var elOnline = document.getElementById('statOnline');
+                var elToday = document.getElementById('statToday');
+                var elTotal = document.getElementById('statTotal');
+                if (elOnline && data.online) elOnline.textContent = Number(data.online).toLocaleString('vi-VN');
+                if (elToday && data.today) elToday.textContent = Number(data.today).toLocaleString('vi-VN');
+                if (elTotal && data.total) elTotal.textContent = Number(data.total).toLocaleString('vi-VN');
+              }
+            })
+            .catch(function () {});
+        }
+
         var resizeTimer;
         window.addEventListener('resize', function () {
           clearTimeout(resizeTimer);
           resizeTimer = setTimeout(ensureResponsiveAcademicMedia, 150);
         });
 
-        // Kích hoạt render công thức và chuẩn hóa bảng biểu
+        // Kích hoạt render công thức, bảng biểu và cập nhật số liệu truy cập thật
         function initAcademicEnhancements() {
           renderMathFormulas();
           ensureResponsiveAcademicMedia();
+          updateLiveVisitorStats();
           setTimeout(renderMathFormulas, 300);
           setTimeout(ensureResponsiveAcademicMedia, 500);
+          setTimeout(updateLiveVisitorStats, 1000);
         }
 
         if (document.readyState === 'loading') {
