@@ -329,6 +329,119 @@ function getLeafIcon(label: string): string {
         filter: contrast(1.18) saturate(1.25) brightness(1.02) !important;
         object-fit: contain !important;
       }
+
+      /* ==========================================================================
+         BẢO ĐẢM TẤT CẢ CÁC BẢNG GIÁO TRÌNH KHÔNG CÓ THANH CUỘN NGANG (NO SCROLLBAR)
+         ĐỒNG NHẤT BỐ CỤC CỘT SONG SONG, THU NHỎ FONT VÀ TỰ ĐỘNG XUỐNG DÒNG TRÊN MOBILE
+         ========================================================================== */
+      .table-responsive,
+      .table-container,
+      .table-responsive-wrapper,
+      .overflow-x-auto,
+      .tkd-auto-scale-wrapper,
+      .tkd-q-table-wrap,
+      .academic-table-wrap,
+      div:has(> table) {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+        overflow: hidden !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+      }
+
+      .table-responsive::-webkit-scrollbar,
+      .table-container::-webkit-scrollbar,
+      .table-responsive-wrapper::-webkit-scrollbar,
+      .overflow-x-auto::-webkit-scrollbar,
+      .tkd-auto-scale-wrapper::-webkit-scrollbar,
+      .tkd-q-table-wrap::-webkit-scrollbar,
+      div:has(> table)::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+      }
+
+      table,
+      .table-responsive table,
+      .table-container table,
+      .table-responsive-wrapper table,
+      .overflow-x-auto table,
+      .tkd-auto-scale-wrapper table,
+      .tkd-q-table,
+      .academic-table,
+      .tkd-page-scope table,
+      .tkd-academic-subpage table {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        table-layout: fixed !important;
+        border-collapse: collapse !important;
+      }
+
+      table th,
+      table td,
+      .table-responsive table th,
+      .table-responsive table td,
+      .table-container table th,
+      .table-container table td,
+      .table-responsive-wrapper table th,
+      .table-responsive-wrapper table td,
+      .overflow-x-auto table th,
+      .overflow-x-auto table td,
+      .tkd-auto-scale-wrapper table th,
+      .tkd-auto-scale-wrapper table td,
+      .tkd-q-table th,
+      .tkd-q-table td,
+      .academic-table th,
+      .academic-table td,
+      .tkd-page-scope table th,
+      .tkd-page-scope table td {
+        white-space: normal !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto;
+        box-sizing: border-box !important;
+        line-height: 1.4 !important;
+      }
+
+      @media (max-width: 768px) {
+        .table-responsive table th,
+        .table-responsive table td,
+        .table-container table th,
+        .table-container table td,
+        .table-responsive-wrapper table th,
+        .table-responsive-wrapper table td,
+        .overflow-x-auto table th,
+        .overflow-x-auto table td,
+        .tkd-auto-scale-wrapper table th,
+        .tkd-auto-scale-wrapper table td,
+        .tkd-q-table th,
+        .tkd-q-table td,
+        .academic-table th,
+        .academic-table td,
+        .tkd-page-scope table th,
+        .tkd-page-scope table td {
+          padding: 5px 6px !important;
+          font-size: clamp(10px, 2.7vw, 12px) !important;
+          line-height: 1.35 !important;
+          letter-spacing: -0.01em;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .table-responsive table th,
+        .table-responsive table td,
+        .academic-table th,
+        .academic-table td,
+        .tkd-page-scope table th,
+        .tkd-page-scope table td {
+          padding: 4px 4px !important;
+          font-size: clamp(9px, 2.4vw, 11px) !important;
+          line-height: 1.25 !important;
+        }
+      }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous" />
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
@@ -972,21 +1085,33 @@ function getLeafIcon(label: string): string {
           }
         }
 
-        // --- 2. TỰ ĐỘNG BẢO ĐẢM BẢNG BIỂU & MEDIA VỪA VẶN MÀN HÌNH (RESPONSIVE) ---
+        // --- 2. TỰ ĐỘNG BẢO ĐẢM BẢNG BIỂU & MEDIA VỪA VẶN MÀN HÌNH (RESPONSIVE, ZERO SCROLLBAR) ---
         function ensureResponsiveAcademicMedia() {
-          // Xử lý tất cả các bảng trong trang: bọc wrapper cuộn ngang mượt mà trên mobile, không bao giờ bị cắt xén
+          // Xử lý tất cả các bảng trong trang: triệt tiêu hoàn toàn thanh cuộn ngang, bố cục song song vừa khít màn hình
           document.querySelectorAll('.tkd-page-scope table, .tkd-academic-subpage table, main table, article table').forEach(function(tbl) {
-            var existingWrapper = tbl.closest('.overflow-x-auto, .table-responsive, .table-container, .table-responsive-wrapper');
+            tbl.style.width = '100%';
+            tbl.style.maxWidth = '100%';
+            tbl.style.minWidth = '0';
+            tbl.style.tableLayout = 'fixed';
+            tbl.style.borderCollapse = 'collapse';
+
+            var existingWrapper = tbl.closest('.overflow-x-auto, .table-responsive, .table-container, .table-responsive-wrapper, .tkd-q-table-wrap, .academic-table-wrap');
             if (!existingWrapper) {
               var wrap = document.createElement('div');
-              wrap.className = 'overflow-x-auto my-3 w-full rounded-xl border border-slate-200 bg-white shadow-2xs';
-              wrap.style.webkitOverflowScrolling = 'touch';
+              wrap.className = 'table-responsive my-3 w-full rounded-xl border border-slate-200 bg-white shadow-2xs overflow-hidden';
+              wrap.style.overflowX = 'hidden';
+              wrap.style.overflowY = 'hidden';
+              wrap.style.overflow = 'hidden';
+              wrap.style.maxWidth = '100%';
+              wrap.style.width = '100%';
               tbl.parentNode.insertBefore(wrap, tbl);
               wrap.appendChild(tbl);
             } else {
-              existingWrapper.style.overflowX = 'auto';
-              existingWrapper.style.webkitOverflowScrolling = 'touch';
+              existingWrapper.style.overflowX = 'hidden';
+              existingWrapper.style.overflowY = 'hidden';
+              existingWrapper.style.overflow = 'hidden';
               existingWrapper.style.maxWidth = '100%';
+              existingWrapper.style.width = '100%';
             }
 
             // Đảm bảo chữ trong ô tự xuống dòng hợp lý, không ép dồn hàng và không bị tràn
@@ -994,6 +1119,7 @@ function getLeafIcon(label: string): string {
               c.style.whiteSpace = 'normal';
               c.style.wordBreak = 'break-word';
               c.style.overflowWrap = 'break-word';
+              c.style.boxSizing = 'border-box';
             });
           });
 

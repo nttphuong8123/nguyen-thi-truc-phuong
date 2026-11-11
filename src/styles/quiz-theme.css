@@ -323,14 +323,25 @@ body:has(.tkd-page-scope),
 .tkd-page-scope #questionContainer div:has(> table) {
   width: 100% !important;
   max-width: 100% !important;
-  overflow-x: auto !important;
-  overflow-y: visible !important;
-  -webkit-overflow-scrolling: touch !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
   margin: 10px 0 !important;
   border-radius: 12px !important;
   border: 1px solid #E8DDE0 !important;
   background: #ffffff !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03) !important;
+}
+
+.tkd-q-table-wrap::-webkit-scrollbar,
+.tkd-page-scope .table-responsive::-webkit-scrollbar,
+.tkd-page-scope .question div:has(> table)::-webkit-scrollbar,
+.tkd-page-scope #questionContainer div:has(> table)::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .tkd-q-table,
@@ -340,8 +351,9 @@ body:has(.tkd-page-scope),
 .tkd-page-scope .data-table {
   display: table !important;
   width: 100% !important;
-  max-width: none !important;
-  table-layout: auto !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  table-layout: fixed !important;
   border-collapse: collapse !important;
   margin: 0 !important;
   border: none !important;

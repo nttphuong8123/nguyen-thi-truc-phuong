@@ -126,7 +126,7 @@ const seoMeta = getSeoMetaForPath(cleanPath, pageData?.title);
                     const thHtml = headers.map((c, cIdx) => `<th class="${cIdx === 0 ? 'tkd-q-th-first text-left font-bold pl-3 pr-2.5' : 'tkd-q-th-num text-center font-bold px-2.5 min-w-[42px]'} py-2 text-xs sm:text-[13px] text-white bg-[#A83245] border border-[#E8DDE0] whitespace-nowrap">${formatQuizString(c, true)}</th>`).join('');
                     const trHtml = rows.map((r, rIdx) => `<tr class="${rIdx % 2 === 1 ? 'bg-[#F7F5F2]' : 'bg-white'} hover:bg-[#F8EDEF]/50 transition-colors">${r.map((c, cIdx) => `<td class="${cIdx === 0 ? 'tkd-q-td-first text-left font-bold text-[#303039] bg-[#F7F5F2] pl-3 pr-2.5 whitespace-normal leading-snug min-w-[110px]' : 'tkd-q-td-num text-center font-semibold num-font text-[#303039] px-2.5 whitespace-nowrap'} py-2 text-xs sm:text-[13px] border border-[#E8DDE0]">${formatQuizString(c, true)}</td>`).join('')}</tr>`).join('');
                     const beforeHtml = before ? `<div class="tkd-q-lead">${formatQuizString(before, true)}</div>` : '';
-                    const tableHtml = `<div class="table-responsive tkd-q-table-wrap overflow-x-auto my-3 w-full max-w-full rounded-xl border border-[#E8DDE0] bg-white shadow-2xs -webkit-overflow-scrolling-touch"><table class="tkd-q-table data-table w-full text-xs sm:text-[13px] border-collapse table-auto"><thead><tr>${thHtml}</tr></thead><tbody>${trHtml}</tbody></table></div>`;
+                    const tableHtml = `<div class="table-responsive tkd-q-table-wrap overflow-hidden my-3 w-full max-w-full rounded-xl border border-[#E8DDE0] bg-white shadow-2xs"><table class="tkd-q-table data-table w-full text-xs sm:text-[13px] border-collapse table-fixed"><thead><tr>${thHtml}</tr></thead><tbody>${trHtml}</tbody></table></div>`;
                     const afterHtml = after ? `<div class="tkd-q-prompt">${formatQuizString(after, false)}</div>` : '';
                     return `<div class="tkd-q-structured">${beforeHtml}${tableHtml}${afterHtml}</div>`;
                   }
@@ -298,9 +298,29 @@ const seoMeta = getSeoMetaForPath(cleanPath, pageData?.title);
 
             function enhanceAllTables() {
               document.querySelectorAll('.tkd-academic-subpage table, main table').forEach(tbl => {
-                if (tbl.closest('.table-responsive') || tbl.closest('.table-container') || tbl.parentElement?.classList.contains('table-responsive') || tbl.classList.contains('no-scroll') || tbl.classList.contains('table-fixed')) return;
+                tbl.style.width = '100%';
+                tbl.style.maxWidth = '100%';
+                tbl.style.minWidth = '0';
+                tbl.style.tableLayout = 'fixed';
+                tbl.style.borderCollapse = 'collapse';
+
+                const existing = tbl.closest('.table-responsive, .table-container, .table-responsive-wrapper, .tkd-q-table-wrap, .academic-table-wrap');
+                if (existing) {
+                  existing.style.overflowX = 'hidden';
+                  existing.style.overflowY = 'hidden';
+                  existing.style.overflow = 'hidden';
+                  existing.style.width = '100%';
+                  existing.style.maxWidth = '100%';
+                  return;
+                }
+
                 const wrapper = document.createElement('div');
-                wrapper.className = 'table-responsive my-3 w-full rounded-xl border border-slate-200 bg-white shadow-2xs';
+                wrapper.className = 'table-responsive my-3 w-full rounded-xl border border-slate-200 bg-white shadow-2xs overflow-hidden';
+                wrapper.style.overflowX = 'hidden';
+                wrapper.style.overflowY = 'hidden';
+                wrapper.style.overflow = 'hidden';
+                wrapper.style.width = '100%';
+                wrapper.style.maxWidth = '100%';
                 tbl.parentNode?.insertBefore(wrapper, tbl);
                 wrapper.appendChild(tbl);
               });

@@ -1500,68 +1500,149 @@ a:hover span[class*="rounded-lg"][class*="text-[#A83245]"],
   }
 }
 
-/* 5. Responsive Academic Tables & Media (Full width, smooth touch scroll on mobile, no cut-off) */
+/* 5. Responsive Academic Tables & Media (Triệt tiêu hoàn toàn thanh cuộn ngang, tối ưu hiển thị vừa khít trên Mobile) */
 .table-responsive,
 .table-container,
 .table-responsive-wrapper,
 .overflow-x-auto,
-.tkd-auto-scale-wrapper {
+.tkd-auto-scale-wrapper,
+.tkd-q-table-wrap,
+.academic-table-wrap,
+div:has(> table) {
   width: 100% !important;
   max-width: 100% !important;
-  overflow-x: auto !important;
+  overflow-x: hidden !important;
   overflow-y: hidden !important;
-  -webkit-overflow-scrolling: touch !important;
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
   display: block;
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
   border-radius: 0.5rem;
 }
 
+.table-responsive::-webkit-scrollbar,
+.table-container::-webkit-scrollbar,
+.table-responsive-wrapper::-webkit-scrollbar,
+.overflow-x-auto::-webkit-scrollbar,
+.tkd-auto-scale-wrapper::-webkit-scrollbar,
+.tkd-q-table-wrap::-webkit-scrollbar,
+div:has(> table)::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+table,
 .table-responsive table,
 .table-container table,
 .table-responsive-wrapper table,
 .overflow-x-auto table,
-.tkd-auto-scale-wrapper table {
+.tkd-auto-scale-wrapper table,
+.tkd-q-table,
+.academic-table,
+.tkd-page-scope table,
+.tkd-academic-subpage table {
   width: 100% !important;
-  min-width: 560px;
-  border-collapse: collapse;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
 }
 
+table th,
+table td,
 .table-responsive table th,
 .table-responsive table td,
 .table-container table th,
 .table-container table td,
+.table-responsive-wrapper table th,
+.table-responsive-wrapper table td,
 .overflow-x-auto table th,
 .overflow-x-auto table td,
 .tkd-auto-scale-wrapper table th,
-.tkd-auto-scale-wrapper table td {
+.tkd-auto-scale-wrapper table td,
+.tkd-q-table th,
+.tkd-q-table td,
+.academic-table th,
+.academic-table td,
+.tkd-page-scope table th,
+.tkd-page-scope table td {
   white-space: normal !important;
   word-break: break-word !important;
   overflow-wrap: break-word !important;
-  line-height: 1.45;
+  hyphens: auto;
+  box-sizing: border-box !important;
+  line-height: 1.4;
 }
 
 @media (max-width: 768px) {
+  table,
+  .table-responsive table,
+  .table-container table,
+  .table-responsive-wrapper table,
+  .overflow-x-auto table,
+  .tkd-auto-scale-wrapper table,
+  .tkd-q-table,
+  .academic-table,
+  .tkd-page-scope table,
+  .tkd-academic-subpage table {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed !important;
+  }
+
+  table th,
+  table td,
   .table-responsive table th,
   .table-responsive table td,
+  .table-container table th,
+  .table-container table td,
+  .table-responsive-wrapper table th,
+  .table-responsive-wrapper table td,
   .overflow-x-auto table th,
   .overflow-x-auto table td,
   .tkd-auto-scale-wrapper table th,
-  .tkd-auto-scale-wrapper table td {
-    padding: 8px 10px !important;
-    font-size: 12px !important;
+  .tkd-auto-scale-wrapper table td,
+  .tkd-q-table th,
+  .tkd-q-table td,
+  .academic-table th,
+  .academic-table td,
+  .tkd-page-scope table th,
+  .tkd-page-scope table td {
+    padding: 5px 6px !important;
+    font-size: clamp(10px, 2.7vw, 12px) !important;
+    line-height: 1.35 !important;
+    letter-spacing: -0.01em;
   }
-  
-  /* Biểu đồ, sơ đồ, hình vẽ tự co giãn vừa khít chiều ngang màn hình */
-  .tkd-page-scope svg,
-  .tkd-academic-subpage svg,
-  .diagram,
-  .flowchart,
-  .svg-container svg,
-  .tkd-page-scope img,
-  .tkd-academic-subpage img {
-    max-width: 100% !important;
-    height: auto !important;
-    object-fit: contain !important;
+}
+
+@media (max-width: 480px) {
+  table th,
+  table td,
+  .table-responsive table th,
+  .table-responsive table td,
+  .academic-table th,
+  .academic-table td,
+  .tkd-page-scope table th,
+  .tkd-page-scope table td {
+    padding: 4px 4px !important;
+    font-size: clamp(9px, 2.4vw, 11px) !important;
+    line-height: 1.25 !important;
   }
+}
+
+/* Biểu đồ, sơ đồ, hình vẽ tự co giãn vừa khít chiều ngang màn hình */
+.tkd-page-scope svg,
+.tkd-academic-subpage svg,
+.diagram,
+.flowchart,
+.svg-container svg,
+.tkd-page-scope img,
+.tkd-academic-subpage img {
+  max-width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
 }
