@@ -261,11 +261,11 @@ export interface EvaluationCriterion {
 
 export const DEFAULT_SITE_CONTACT_CONFIG: SiteContactConfig = {
   instructor_name: 'ThS. NGUYỄN THỊ TRÚC PHƯƠNG',
-  department: 'Khoa Quản trị - Kinh doanh (HCE)',
+  department: 'Khoa Quản trị - Kinh doanh',
   email: 'phuongntt@kthcm.edu.vn',
   hotline: '',
   zalo_url: '',
-  address: '33 Vĩnh Viễn, Phường Vườn Lài, Quận 10, Tp.HCM',
+  address: '',
   youtube_url: '',
   tiktok_url: '',
   office_hours: 'Thứ Ba & Thứ Năm: 08:30 – 11:30 | Thứ Sáu: 13:30 – 16:30 (Hẹn trước qua Email)',
