@@ -297,32 +297,32 @@ const seoMeta = getSeoMetaForPath(cleanPath, pageData?.title);
             });
 
             function enhanceAllTables() {
-              document.querySelectorAll('.tkd-academic-subpage table, main table').forEach(tbl => {
+              document.querySelectorAll('table').forEach(tbl => {
                 tbl.style.width = '100%';
                 tbl.style.maxWidth = '100%';
                 tbl.style.minWidth = '0';
                 tbl.style.tableLayout = 'fixed';
                 tbl.style.borderCollapse = 'collapse';
 
-                const existing = tbl.closest('.table-responsive, .table-container, .table-responsive-wrapper, .tkd-q-table-wrap, .academic-table-wrap');
-                if (existing) {
-                  existing.style.overflowX = 'hidden';
-                  existing.style.overflowY = 'hidden';
-                  existing.style.overflow = 'hidden';
-                  existing.style.width = '100%';
-                  existing.style.maxWidth = '100%';
-                  return;
+                let cur = tbl.parentElement;
+                while (cur && cur !== document.body && cur !== document.documentElement) {
+                  const s = window.getComputedStyle(cur);
+                  if (s.overflowX === 'auto' || s.overflowX === 'scroll' || s.overflow === 'auto' || s.overflow === 'scroll' || cur.classList.contains('table-responsive-wrapper') || cur.classList.contains('table-responsive') || cur.classList.contains('overflow-x-auto') || cur.classList.contains('tkd-table-wrapper')) {
+                    cur.style.overflowX = 'hidden';
+                    cur.style.overflowY = 'hidden';
+                    cur.style.overflow = 'hidden';
+                    cur.style.width = '100%';
+                    cur.style.maxWidth = '100%';
+                  }
+                  cur = cur.parentElement;
                 }
 
-                const wrapper = document.createElement('div');
-                wrapper.className = 'table-responsive my-3 w-full rounded-xl border border-slate-200 bg-white shadow-2xs overflow-hidden';
-                wrapper.style.overflowX = 'hidden';
-                wrapper.style.overflowY = 'hidden';
-                wrapper.style.overflow = 'hidden';
-                wrapper.style.width = '100%';
-                wrapper.style.maxWidth = '100%';
-                tbl.parentNode?.insertBefore(wrapper, tbl);
-                wrapper.appendChild(tbl);
+                tbl.querySelectorAll('th, td').forEach(c => {
+                  c.style.whiteSpace = 'normal';
+                  c.style.wordBreak = 'break-word';
+                  c.style.overflowWrap = 'break-word';
+                  c.style.boxSizing = 'border-box';
+                });
               });
             }
 

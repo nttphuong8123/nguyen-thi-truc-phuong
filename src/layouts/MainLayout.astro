@@ -334,6 +334,16 @@ function getLeafIcon(label: string): string {
          BẢO ĐẢM TẤT CẢ CÁC BẢNG GIÁO TRÌNH KHÔNG CÓ THANH CUỘN NGANG (NO SCROLLBAR)
          ĐỒNG NHẤT BỐ CỤC CỘT SONG SONG, THU NHỎ FONT VÀ TỰ ĐỘNG XUỐNG DÒNG TRÊN MOBILE
          ========================================================================== */
+      table, table * {
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+      }
+      table::-webkit-scrollbar, table *::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+      }
+
       .table-responsive,
       .table-container,
       .table-responsive-wrapper,
@@ -341,7 +351,9 @@ function getLeafIcon(label: string): string {
       .tkd-auto-scale-wrapper,
       .tkd-q-table-wrap,
       .academic-table-wrap,
-      div:has(> table) {
+      .tkd-table-wrapper,
+      div:has(> table),
+      div:has(table) {
         width: 100% !important;
         max-width: 100% !important;
         overflow-x: hidden !important;
@@ -357,7 +369,9 @@ function getLeafIcon(label: string): string {
       .overflow-x-auto::-webkit-scrollbar,
       .tkd-auto-scale-wrapper::-webkit-scrollbar,
       .tkd-q-table-wrap::-webkit-scrollbar,
-      div:has(> table)::-webkit-scrollbar {
+      .tkd-table-wrapper::-webkit-scrollbar,
+      div:has(> table)::-webkit-scrollbar,
+      div:has(table)::-webkit-scrollbar {
         display: none !important;
         width: 0 !important;
         height: 0 !important;
@@ -1088,30 +1102,24 @@ function getLeafIcon(label: string): string {
         // --- 2. TỰ ĐỘNG BẢO ĐẢM BẢNG BIỂU & MEDIA VỪA VẶN MÀN HÌNH (RESPONSIVE, ZERO SCROLLBAR) ---
         function ensureResponsiveAcademicMedia() {
           // Xử lý tất cả các bảng trong trang: triệt tiêu hoàn toàn thanh cuộn ngang, bố cục song song vừa khít màn hình
-          document.querySelectorAll('.tkd-page-scope table, .tkd-academic-subpage table, main table, article table').forEach(function(tbl) {
+          document.querySelectorAll('table').forEach(function(tbl) {
             tbl.style.width = '100%';
             tbl.style.maxWidth = '100%';
             tbl.style.minWidth = '0';
             tbl.style.tableLayout = 'fixed';
             tbl.style.borderCollapse = 'collapse';
 
-            var existingWrapper = tbl.closest('.overflow-x-auto, .table-responsive, .table-container, .table-responsive-wrapper, .tkd-q-table-wrap, .academic-table-wrap');
-            if (!existingWrapper) {
-              var wrap = document.createElement('div');
-              wrap.className = 'table-responsive my-3 w-full rounded-xl border border-slate-200 bg-white shadow-2xs overflow-hidden';
-              wrap.style.overflowX = 'hidden';
-              wrap.style.overflowY = 'hidden';
-              wrap.style.overflow = 'hidden';
-              wrap.style.maxWidth = '100%';
-              wrap.style.width = '100%';
-              tbl.parentNode.insertBefore(wrap, tbl);
-              wrap.appendChild(tbl);
-            } else {
-              existingWrapper.style.overflowX = 'hidden';
-              existingWrapper.style.overflowY = 'hidden';
-              existingWrapper.style.overflow = 'hidden';
-              existingWrapper.style.maxWidth = '100%';
-              existingWrapper.style.width = '100%';
+            var cur = tbl.parentElement;
+            while (cur && cur !== document.body && cur !== document.documentElement) {
+              var s = window.getComputedStyle(cur);
+              if (s.overflowX === 'auto' || s.overflowX === 'scroll' || s.overflow === 'auto' || s.overflow === 'scroll' || cur.classList.contains('table-responsive-wrapper') || cur.classList.contains('table-responsive') || cur.classList.contains('overflow-x-auto') || cur.classList.contains('tkd-table-wrapper')) {
+                cur.style.overflowX = 'hidden';
+                cur.style.overflowY = 'hidden';
+                cur.style.overflow = 'hidden';
+                cur.style.width = '100%';
+                cur.style.maxWidth = '100%';
+              }
+              cur = cur.parentElement;
             }
 
             // Đảm bảo chữ trong ô tự xuống dòng hợp lý, không ép dồn hàng và không bị tràn

@@ -182,7 +182,9 @@ export function extractKeywords(query: string): string[] {
     'thời gian tối đa', 'cảnh báo kết quả học tập', 'cảnh báo học tập', 'buộc thôi học',
     'tạm dừng học tập', 'bảo lưu', 'chuyển ngành', 'chuyển trường',
     'học bổng khuyến khích', 'học bổng', 'điểm rèn luyện', 'miễn giảm học phí',
-    'báo cáo thực tập tốt nghiệp', 'thực tập tốt nghiệp',
+    'báo cáo thực tập tốt nghiệp', 'thực tập tốt nghiệp', 'thực tập', 'hỏi thực tập',
+    'chuẩn bị đi thực tập', 'đi thực tập', 'tư vấn thực tập', 'làm đề cương',
+    'xây dựng đề cương', 'đề cương hoàn chỉnh', 'thực tập công ty', 'lĩnh vực thực tập',
     'đề cương thực tập', 'đề cương chi tiết', 'cấu trúc đề cương', 'hướng dẫn viết đề cương',
     'đề cương mẫu', 'lập đề cương', 'gợi ý đề cương', 'đề cương bán hàng',
     'đề cương marketing', 'đề cương marketing mix', 'đề cương digital marketing',
@@ -347,16 +349,34 @@ NGUYÊN TẮC BẮT BUỘC:
 4. Trong câu trả lời, bạn PHẢI trích dẫn rõ: Căn cứ theo [Tên văn bản hoặc Số Quyết định], [Điều/Khoản].
 5. Giọng văn: Chuẩn mực sư phạm, ân cần, rõ ràng, gãy gọn, xưng "Cô" hoặc "Trợ lý học tập" và gọi sinh viên là "Em".
 6. Nếu các đoạn trích dẫn không đủ thông tin để trả lời trọn vẹn, PHẢI nêu rõ phần đã biết từ quy chế và hướng dẫn sinh viên liên hệ Cố vấn học tập (CVHT) hoặc Phòng Đào tạo.
-7. ĐẶC BIỆT KHI SINH VIÊN HỎI VỀ ĐỀ CƯƠNG THỰC TẬP TỐT NGHIỆP:
-- Phân tích đề tài/ngành học sinh viên quan tâm, chuẩn hóa Tên đề tài theo cấu trúc bắt buộc: [Hành động/Giải pháp] + [Vấn đề nghiên cứu] + tại [Tên công ty] + [Mốc thời gian 3 năm].
-- Xây dựng trực tiếp khung đề cương chi tiết 3 chương chuẩn HCE theo mô hình các đề cương mẫu (Bán hàng, Marketing Mix 4P/7P, Digital Marketing, Nhận diện thương hiệu, Tuyển dụng nhân sự):
-  + Phần Mở đầu: 5 ý (Lý do chọn đề tài, Mục tiêu chung & cụ thể, Đối tượng & phạm vi nghiên cứu 3 năm gần nhất, Phương pháp nghiên cứu thu thập dữ liệu, Kết cấu báo cáo).
-  + CHƯƠNG 1: CƠ SỞ LÝ LUẬN VỀ [VẤN ĐỀ NGHIÊN CỨU] (Tối đa 8 trang).
-  + CHƯƠNG 2: THỰC TRẠNG VỀ [VẤN ĐỀ NGHIÊN CỨU] TẠI [CÔNG TY ...] GIAI ĐOẠN 2-3 NĂM GẦN NHẤT (Từ 17 trang trở lên - trọng tâm phân tích số liệu thực tế qua các năm, đánh giá ưu điểm, hạn chế và nguyên nhân cốt lõi).
-  + CHƯƠNG 3: MỘT SỐ GIẢI PHÁP VÀ KIẾN NGHỊ NHẰM HOÀN THIỆN [TRÙNG TÊN ĐỀ TÀI] ĐẾN NĂM [MỐC TƯƠNG LAI 3 NĂM] (Khoảng 5 trang - giải pháp phải giải quyết triệt để từng nguyên nhân chỉ ra ở Chương 2).
-  + Kết luận, Danh mục tài liệu tham khảo APA 7th edition, Phụ lục.
-- Cung cấp lưu ý thực tế: Mốc thời gian nghiên cứu 3 năm gần nhất, số trang từng chương, quy định đóng dấu công ty theo Nghị định 30/2020 (dấu tròn 1/3 chữ ký, dấu giáp lai).
-- QUY TẮC BẢO MẬT HỌC LIỆU NỘI BỘ: TUYỆT ĐỐI KHÔNG chia sẻ, KHÔNG hiển thị, KHÔNG nhắc đến đường link Google Drive, Google Docs hoặc thư mục Drive nội bộ cho sinh viên. Khi sinh viên cần tài liệu tham khảo thêm, chỉ dẫn link chính thức của nhà trường tại: https://nguyenthitrucphuong.pages.dev/study-corner/internships/huong-dan-bao-cao-hce hoặc cổng tra cứu đề cương https://nguyenthitrucphuong.pages.dev/dcct.`;
+7. QUY TRÌNH HỖ TRỢ ĐỀ CƯƠNG THỰC TẬP TỐT NGHIỆP:
+A. NẾU SINH VIÊN HỎI CHUNG VỀ THỰC TẬP HOẶC CHƯA CUNG CẤP ĐẦY ĐỦ THÔNG TIN CÔNG TY & LĨNH VỰC:
+- Hãy chào đón ân cần, khích lệ sinh viên và CHỦ ĐỘNG HỎI 2 THÔNG TIN CỐT LÕI:
+  1. 🏢 Em dự kiến (hoặc đang) thực tập tại công ty / doanh nghiệp nào? (Tên đầy đủ của công ty hoặc loại hình doanh nghiệp).
+  2. 🎯 Em thực tập ở lĩnh vực / bộ phận nào hoặc muốn làm đề tài về vấn đề gì? (Ví dụ: Hoạt động Bán hàng, Marketing Mix 4P/7P, Digital Marketing, Xây dựng & Nhận diện thương hiệu, Tuyển dụng nhân sự, Quản trị chuỗi cung ứng...).
+- Giới thiệu tóm tắt khung chuẩn 3 chương HCE và nhắn nhủ: "Chỉ cần em cho Cô biết tên công ty và lĩnh vực, Cô sẽ giúp em lên ngay một bản Đề cương chi tiết hoàn chỉnh từ Chương 1 đến Chương 3 để em nộp cho Giảng viên hướng dẫn duyệt nhé!"
+
+B. NẾU SINH VIÊN ĐÃ NÊU TÊN CÔNG TY VÀ/HOẶC LĨNH VỰC (Hoặc khi sinh viên trả lời 2 câu hỏi trên):
+- Hãy lập tức XÂY DỰNG MỘT BẢN ĐỀ CƯƠNG CHI TIẾT HOÀN CHỈNH, chuẩn hóa theo tên công ty và lĩnh vực của sinh viên.
+- BỐ CỤC TRÌNH BÀY PHẢI CỰC KỲ ĐẸP MẮT, KHOA HỌC, TRANG NHÃ:
+  + Dùng các biểu tượng emoji tinh tế (📋, 🎯, 🏢, 📘, 📙, 📕, 💡, 📌).
+  + Khung Header tiêu đề rõ ràng:
+    ### 📋 ĐỀ CƯƠNG BÁO CÁO THỰC TẬP TỐT NGHIỆP CHUẨN HCE
+    - **Tên đề tài chuẩn:** Một số giải pháp [hoàn thiện / nâng cao hiệu quả] [Vấn đề nghiên cứu] tại [Tên công ty] từ năm 2026 đến năm 2028.
+    - **Mốc thời gian nghiên cứu thực trạng:** 2023 - 2025 (3 năm gần nhất).
+    - **Mốc định hướng giải pháp:** 2026 - 2028 (3 năm tiếp theo).
+  + Trình bày chi tiết từng phần:
+    * **PHẦN MỞ ĐẦU:** 1. Lý do chọn đề tài; 2. Mục tiêu nghiên cứu; 3. Đối tượng & phạm vi; 4. Phương pháp nghiên cứu; 5. Kết cấu đề tài.
+    * **CHƯƠNG 1: CƠ SỞ LÝ LUẬN VỀ [VẤN ĐỀ NGHIÊN CỨU]** (Tối đa 8 trang - chia rõ mục 1.1, 1.2, 1.3, 1.4...).
+    * **CHƯƠNG 2: THỰC TRẠNG VỀ [VẤN ĐỀ NGHIÊN CỨU] TẠI [TÊN CÔNG TY] TỪ NĂM 2023 ĐẾN NĂM 2025** (Từ 17 trang trở lên - trọng tâm nghiên cứu số liệu thực tế tại chính công ty đó, chia mục 2.1 Tổng quan công ty & KQKD 3 năm; 2.2 Thực trạng hoạt động nghiên cứu; 2.3 Đánh giá ưu điểm, hạn chế và nguyên nhân).
+    * **CHƯƠNG 3: MỘT SỐ GIẢI PHÁP VÀ KIẾN NGHỊ NHẰM HOÀN THIỆN [VẤN ĐỀ NGHIÊN CỨU] TẠI [TÊN CÔNG TY] TỪ NĂM 2026 ĐẾN NĂM 2028** (Khoảng 5 trang - 3 giải pháp cụ thể khắc phục chính xác từng hạn chế ở Chương 2).
+    * **KẾT LUẬN - TÀI LIỆU THAM KHẢO (APA 7th) - PHỤ LỤC**.
+  + Khung Lưu ý quan trọng cho sinh viên:
+    > 💡 **3 Lưu ý quan trọng để GVHD duyệt ngay:**
+    > 1. Số trang: Chương 1 tối đa 8 trang, Chương 2 từ 17 trang trở lên, Chương 3 khoảng 5 trang.
+    > 2. Tính thống nhất: Giải pháp ở Chương 3 phải giải quyết đúng các hạn chế và nguyên nhân ở Chương 2.
+    > 3. Đóng dấu công ty: Đóng dấu tròn lên 1/3 chữ ký của Giám đốc/người đại diện bên trái và đóng dấu giáp lai theo Nghị định 30/2020.
+- BẢO MẬT HỌC LIỆU NỘI BỘ: TUYỆT ĐỐI KHÔNG chia sẻ, KHÔNG hiển thị, KHÔNG nhắc đến đường link Google Drive hay thư mục nội bộ. Chỉ hướng dẫn sinh viên xem trang chính thức https://nguyenthitrucphuong.pages.dev/study-corner/internships/huong-dan-bao-cao-hce hoặc tra cứu /dcct.`;
 
   const userPrompt = `DƯỚI ĐÂY LÀ CÁC ĐOẠN QUY CHẾ CHÍNH THỨC CỦA NHÀ TRƯỜNG:
 ${contextText}
@@ -380,21 +400,21 @@ HÃY TRẢ LỜI CÂU HỎI TRÊN DỰA CHÍNH XÁC VÀO CÁC ĐOẠN QUY CHẾ 
         ],
         generationConfig: {
           temperature: 0.1,
-          maxOutputTokens: 1024,
+          maxOutputTokens: 2048,
           topP: 0.8
         }
       })
     });
 
     if (!response.ok) {
-      return createDirectContextResponse(groundedChunks, startTime);
+      return createDirectContextResponse(groundedChunks, startTime, trimmed);
     }
 
     const data = await response.json();
     const candidateText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (!candidateText) {
-      return createDirectContextResponse(groundedChunks, startTime);
+      return createDirectContextResponse(groundedChunks, startTime, trimmed);
     }
 
     const citations = groundedChunks.map(m => ({
@@ -414,11 +434,19 @@ HÃY TRẢ LỜI CÂU HỎI TRÊN DỰA CHÍNH XÁC VÀO CÁC ĐOẠN QUY CHẾ 
 
   } catch (err) {
     console.error('Lỗi khi gọi AI service:', err);
-    return createDirectContextResponse(groundedChunks, startTime);
+    return createDirectContextResponse(groundedChunks, startTime, trimmed);
   }
 }
 
-function createDirectContextResponse(groundedChunks: SearchMatch[], startTime: number): AssistantResponse {
+function createDirectContextResponse(groundedChunks: SearchMatch[], startTime: number, query: string = ''): AssistantResponse {
+  // Nếu là câu hỏi về thực tập hoặc đề cương, áp dụng quy trình định hướng chuyên sâu
+  const isInternship = groundedChunks.some(m => m.chunk.doc_code === 'HD-TTTN-QTKD-HCE') ||
+                       /thực tập|đề cương|báo cáo tốt nghiệp/i.test(query);
+
+  if (isInternship) {
+    return buildInternshipAssistantResponse(query, groundedChunks, startTime);
+  }
+
   const top = groundedChunks[0].chunk;
   const answer = `Căn cứ theo **${top.doc_title}** (${top.doc_code}), **${top.article_ref}** quy định:\n\n${top.content}\n\n*(Thông tin được trích xuất trực tiếp từ văn bản quy chế chính thức của nhà trường)*.`;
   
@@ -431,6 +459,153 @@ function createDirectContextResponse(groundedChunks: SearchMatch[], startTime: n
       articleRef: m.chunk.article_ref,
       pageNumber: m.chunk.page_number
     })),
+    suggestTransferToCVHT: false,
+    processingTimeMs: Date.now() - startTime
+  };
+}
+
+function buildInternshipAssistantResponse(query: string, groundedChunks: SearchMatch[], startTime: number): AssistantResponse {
+  const norm = query.toLowerCase();
+
+  // 1. Nhận diện lĩnh vực / đề tài
+  let topic = 'Hoạt động kinh doanh';
+  let topicKey = 'general';
+  if (/bán hàng|sales|telesales|bán lẻ/i.test(norm)) {
+    topic = 'Hoạt động Bán hàng';
+    topicKey = 'sales';
+  } else if (/marketing mix|4p|7p/i.test(norm)) {
+    topic = 'Hoạt động Marketing Mix (4P / 7P)';
+    topicKey = 'mkt_mix';
+  } else if (/digital marketing|tiếp thị số|social media|seo|online marketing/i.test(norm)) {
+    topic = 'Hoạt động Digital Marketing';
+    topicKey = 'digital_mkt';
+  } else if (/thương hiệu|nhận diện thương hiệu|brand/i.test(norm)) {
+    topic = 'Xây dựng & Nhận diện Thương hiệu';
+    topicKey = 'brand';
+  } else if (/tuyển dụng|nhân sự|nhân lực|hrm/i.test(norm)) {
+    topic = 'Công tác Tuyển dụng Nhân sự';
+    topicKey = 'hr';
+  }
+
+  // 2. Nhận diện tên công ty
+  let company = '';
+  const compMatch = query.match(/(?:công ty|cty|doanh nghiệp|tại|ở)\s+([A-ZÀ-Ỹ0-9\s&.-]{2,40})/i);
+  if (compMatch) {
+    company = compMatch[1].trim().replace(/\s+(đề tài|mảng|bộ phận|về|lĩnh vực|ngành).*$/i, '').trim();
+  }
+
+  const isGeneral = (!company && topicKey === 'general');
+
+  let answer = '';
+
+  if (isGeneral) {
+    answer = `Chào em! Cô rất vui khi được đồng hành và hỗ trợ em trong kỳ **Thực tập tốt nghiệp** quan trọng này.
+
+Để Cô có thể giúp em xây dựng ngay một bản **Đề cương chi tiết 3 chương chuẩn hóa hoàn chỉnh nhất** theo quy định của Khoa Quản trị - Kinh doanh (HCE), em hãy chia sẻ giúp Cô 2 thông tin cốt lõi này nhé:
+
+🏢 **1. Em dự kiến (hoặc đang) thực tập tại công ty / doanh nghiệp nào?**
+*(Ví dụ: Công ty Cổ phần Sữa Việt Nam - Vinamilk, Công ty TNHH FPT Shop, Ngân hàng Vietcombank, Viettel, hay một doanh nghiệp thương mại / dịch vụ cụ thể mà em đã liên hệ...)*
+
+🎯 **2. Em thực tập ở bộ phận / lĩnh vực nào hoặc muốn làm đề tài về vấn đề gì?**
+*(Ví dụ: Hoạt động Bán hàng, Chiến lược Marketing Mix 4P/7P, Digital Marketing / Tiếp thị số, Xây dựng & Nhận diện thương hiệu, Công tác Tuyển dụng nhân sự, Chăm sóc khách hàng...)*
+
+---
+
+### 📋 KHUNG KẾT CẤU 3 CHƯƠNG CHUẨN TRƯỜNG HCE:
+- **Phần Mở đầu:** Tính cấp thiết, mục tiêu nghiên cứu, đối tượng & phạm vi 3 năm gần nhất (2023 - 2025), phương pháp nghiên cứu và kết cấu đề tài.
+- **CHƯƠNG 1: CƠ SỞ LÝ LUẬN VỀ ĐỀ TÀI** *(Tối đa không quá 8 trang)*.
+- **CHƯƠNG 2: THỰC TRẠNG TẠI CÔNG TY GIAI ĐOẠN 2023 - 2025** *(Trọng tâm từ 17 trang trở lên - phân tích số liệu thực tế 3 năm gần nhất kèm ưu/nhược điểm và nguyên nhân cốt lõi)*.
+- **CHƯƠNG 3: MỘT SỐ GIẢI PHÁP VÀ KIẾN NGHỊ** *(Khoảng 5 trang - giải pháp cụ thể gắn với thực tế công ty, giải quyết đúng nguyên nhân ở Chương 2)*.
+- **Kết luận, Tài liệu tham khảo APA 7th edition, Phụ lục.**
+
+👉 **Chỉ cần em gửi lại tên công ty và lĩnh vực em chọn, Cô sẽ lên ngay bản đề cương hoàn chỉnh từng mục chi tiết A-Z để em nộp cho Giảng viên hướng dẫn duyệt nhé!**`;
+  } else {
+    const compName = company || 'Công ty TNHH ABC';
+    const actionVerb = (topicKey === 'hr' || topicKey === 'brand') ? 'nâng cao hiệu quả' : 'hoàn thiện';
+
+    answer = `Chào em! Dựa trên thông tin em thực tập tại **${compName}** trong lĩnh vực **${topic}**, Cô đã chuẩn hóa tên đề tài và xây dựng cho em bản **Đề cương chi tiết 3 chương chuẩn HCE** hoàn chỉnh dưới đây để em gửi Giảng viên hướng dẫn duyệt nhé:
+
+---
+
+### 📋 THÔNG TIN ĐỀ TÀI CHUẨN HÓA
+- **Tên đề tài chuẩn:** *Một số giải pháp ${actionVerb} ${topic.toLowerCase()} tại ${compName} từ năm 2026 đến năm 2028*.
+- **Đơn vị thực tập:** ${compName}.
+- **Thời gian nghiên cứu thực trạng (Chương 2):** Giai đoạn 2023 - 2025 (03 năm gần nhất).
+- **Thời gian định hướng giải pháp (Chương 3):** Giai đoạn 2026 - 2028 (03 năm tiếp theo).
+
+---
+
+### 📖 NỘI DUNG ĐỀ CƯƠNG CHI TIẾT
+
+#### PHẦN MỞ ĐẦU
+1. **Lý do chọn đề tài:** Tính cấp thiết của ${topic.toLowerCase()} đối với hiệu quả kinh doanh và năng lực cạnh tranh của ${compName}.
+2. **Mục tiêu nghiên cứu:**
+   - *Mục tiêu chung:* Đề xuất các giải pháp khả thi nhằm ${actionVerb} ${topic.toLowerCase()} tại ${compName} giai đoạn 2026 - 2028.
+   - *Mục tiêu cụ thể:* Hệ thống hóa cơ sở lý luận; Phân tích thực trạng hoạt động tại công ty giai đoạn 2023 - 2025; Chỉ ra ưu điểm, hạn chế, nguyên nhân và đề xuất hệ thống giải pháp.
+3. **Đối tượng và phạm vi nghiên cứu:**
+   - *Đối tượng nghiên cứu:* ${topic} tại ${compName}.
+   - *Phạm vi không gian:* Tại ${compName}.
+   - *Phạm vi thời gian:* Thu thập số liệu giai đoạn 2023 - 2025; Giải pháp định hướng 2026 - 2028.
+4. **Phương pháp nghiên cứu:** Phương pháp thu thập dữ liệu thứ cấp (báo cáo tài chính, báo cáo nội bộ), dữ liệu sơ cấp (quan sát, phỏng vấn/khảo sát), phương pháp thống kê, so sánh, phân tích tổng hợp.
+5. **Kết cấu đề tài:** Gồm Lời mở đầu, 3 Chương, Kết luận, Danh mục tài liệu tham khảo và Phụ lục.
+
+#### CHƯƠNG 1: CƠ SỞ LÝ LUẬN VỀ ${topic.toUpperCase()} *(Tối đa không quá 8 trang)*
+1.1. Khái niệm và vai trò của ${topic.toLowerCase()}
+1.2. Nội dung / Các thành phần / Quy trình thực hiện chuẩn
+1.3. Các nhân tố ảnh hưởng đến hoạt động (Môi trường vĩ mô PESTEL, môi trường vi mô và nội bộ)
+1.4. Tiêu chí và chỉ tiêu đánh giá hiệu quả hoạt động
+
+#### CHƯƠNG 2: THỰC TRẠNG VỀ ${topic.toUpperCase()} TẠI ${compName.toUpperCase()} GIAI ĐOẠN 2023 - 2025 *(Từ 17 trang trở lên - Phần trọng tâm nhất)*
+2.1. Tổng quan về ${compName}:
+   - 2.1.1. Lịch sử hình thành và phát triển
+   - 2.1.2. Chức năng, nhiệm vụ và lĩnh vực hoạt động chính
+   - 2.1.3. Sơ đồ cơ cấu tổ chức bộ máy và chức năng các phòng ban
+   - 2.1.4. Tình hình kết quả hoạt động kinh doanh giai đoạn 2023 - 2025 (Bảng số liệu Doanh thu - Chi phí - Lợi nhuận)
+2.2. Phân tích thực trạng ${topic.toLowerCase()} tại ${compName} giai đoạn 2023 - 2025:
+   - 2.2.1. Đặc điểm thị trường và khách hàng mục tiêu của công ty
+   - 2.2.2. Thực trạng triển khai các hoạt động / công cụ cụ thể tại công ty qua các năm
+   - 2.2.3. Các yếu tố ảnh hưởng đến hoạt động tại công ty (bên trong và bên ngoài)
+2.3. Đánh giá chung về hoạt động tại ${compName}:
+   - 2.3.1. Những kết quả đạt được (Ưu điểm)
+   - 2.3.2. Những tồn tại, hạn chế
+   - 2.3.3. Nguyên nhân cốt lõi của các hạn chế
+
+#### CHƯƠNG 3: MỘT SỐ GIẢI PHÁP VÀ KIẾN NGHỊ NHẰM ${actionVerb.toUpperCase()} ${topic.toUpperCase()} TẠI ${compName.toUpperCase()} TỪ NĂM 2026 ĐẾN NĂM 2028 *(Khoảng 5 trang)*
+3.1. Phương hướng, mục tiêu và kế hoạch phát triển của ${compName} giai đoạn 2026 - 2028
+3.2. Các giải pháp cụ thể (Khắc phục chính xác từng hạn chế và nguyên nhân đã chỉ ra ở Chương 2):
+   - *Giải pháp 1:* Hoàn thiện quy trình và tiêu chuẩn hóa hoạt động chuyên môn tại công ty.
+   - *Giải pháp 2:* Đẩy mạnh ứng dụng công nghệ số và mở rộng kênh tiếp cận khách hàng.
+   - *Giải pháp 3:* Nâng cao năng lực đội ngũ nhân sự và cải tiến chính sách chăm sóc, đãi ngộ.
+3.3. Một số kiến nghị đối với Ban Giám đốc ${compName} và cơ quan hữu quan.
+
+#### KẾT LUẬN
+Tóm lược các kết quả nghiên cứu chính và ý nghĩa thực tiễn của đề tài.
+
+#### DANH MỤC TÀI LIỆU THAM KHẢO
+Trình bày đúng chuẩn APA 7th edition (Sách giáo trình, bài báo khoa học, website chính thống).
+
+#### PHỤ LỤC
+Phiếu khảo sát, bảng số liệu thô, hợp đồng mẫu, hình ảnh thực tế tại công ty.
+
+---
+
+> 💡 **3 LƯU Ý "VÀNG" ĐỂ GIẢNG VIÊN HƯỚNG DẪN DUYỆT NGAY:**
+> 1. **Phân bổ số trang:** Chương 1 không quá 8 trang; Chương 2 là trọng tâm phải từ 17 trang trở lên; Chương 3 khoảng 5 trang.
+> 2. **Tính logic đồng bộ:** Tên đề tài, số liệu thực trạng Chương 2 (2023 - 2025) và định hướng giải pháp Chương 3 (2026 - 2028) phải khớp thời gian; Giải pháp Chương 3 phải giải quyết đúng hạn chế ở Chương 2.
+> 3. **Xác nhận dấu doanh nghiệp:** Đóng dấu tròn lên 1/3 chữ ký của Giám đốc bên trái và đóng dấu giáp lai lên mép tất cả các trang theo đúng Nghị định 30/2020/NĐ-CP.`;
+  }
+
+  const citations = groundedChunks.map(m => ({
+    docTitle: m.chunk.doc_title,
+    docCode: m.chunk.doc_code,
+    articleRef: m.chunk.article_ref,
+    pageNumber: m.chunk.page_number
+  }));
+
+  return {
+    answer,
+    isGrounded: true,
+    citations,
     suggestTransferToCVHT: false,
     processingTimeMs: Date.now() - startTime
   };

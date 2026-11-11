@@ -296,7 +296,7 @@
           <div class="w-7 h-7 rounded-full bg-red-800 text-amber-200 text-xs font-bold flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5">
             TP
           </div>
-          <div class="bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm border border-gray-100 max-w-[85%] text-xs sm:text-sm text-gray-800 space-y-1.5">
+          <div class="bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm border border-gray-100 max-w-[95%] sm:max-w-[88%] text-xs sm:text-sm text-gray-800 space-y-1.5">
             <div class="prose-chat leading-relaxed">${formattedText}</div>
             ${citationsHtml}
             ${transferHtml}
@@ -326,12 +326,58 @@
 
     function renderSimpleMarkdown(text) {
       if (!text) return '';
-      return text
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\*(.*?)\*/g, '<em>$1</em>')
-        .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-red-700 text-xs font-mono">$1</code>')
-        .replace(/\n\n/g, '<br/><br/>')
-        .replace(/\n/g, '<br/>');
+      const lines = text.split(/\r?\n/);
+      const out = [];
+      for (let i = 0; i < lines.length; i++) {
+        const l = lines[i];
+        if (l.startsWith('### ')) {
+          out.push(`<div class="font-extrabold text-[#742D3A] text-xs sm:text-[13px] uppercase pb-1 border-b border-[#E8DDE0] mt-3 mb-1.5 tracking-tight">${renderInline(l.slice(4))}</div>`);
+          continue;
+        }
+        if (l.startsWith('#### ')) {
+          out.push(`<div class="font-bold text-[#A83245] text-xs sm:text-[12.5px] mt-2 mb-1 flex items-center gap-1.5">${renderInline(l.slice(5))}</div>`);
+          continue;
+        }
+        if (l.startsWith('> ')) {
+          out.push(`<div class="border-l-3 border-[#A83245] bg-[#F7F5F2] pl-2.5 py-1.5 my-2 rounded-r-md text-slate-800 text-xs sm:text-[12.5px] shadow-2xs">${renderInline(l.slice(2))}</div>`);
+          continue;
+        }
+        if (/^(\-{3,}|\*{3,}|_{3,})$/.test(l.trim())) {
+          out.push('<hr class="my-2 border-t border-[#E8DDE0]" />');
+          continue;
+        }
+        if (l.startsWith('   - ') || l.startsWith('   * ') || l.startsWith('  - ') || l.startsWith('  * ') || l.startsWith('    - ')) {
+          const content = l.replace(/^[\s\t]*[\-\*]\s+/, '');
+          out.push(`<div class="pl-4 text-slate-700 text-xs sm:text-[12.5px] flex items-start gap-1.5 my-0.5"><span class="text-[#C65B69] leading-tight select-none">◦</span><span>${renderInline(content)}</span></div>`);
+          continue;
+        }
+        if (l.startsWith('- ') || l.startsWith('* ')) {
+          out.push(`<div class="pl-1 text-slate-800 text-xs sm:text-[12.5px] flex items-start gap-1.5 my-0.5"><span class="text-[#A83245] font-black leading-tight select-none">•</span><span>${renderInline(l.slice(2))}</span></div>`);
+          continue;
+        }
+        const numMatch = l.match(/^(\d+)\.\s+(.*)$/);
+        if (numMatch) {
+          out.push(`<div class="pl-1 text-slate-800 text-xs sm:text-[12.5px] flex items-start gap-1.5 my-0.5"><strong class="num-font text-[#742D3A] shrink-0 font-bold">${numMatch[1]}.</strong><span>${renderInline(numMatch[2])}</span></div>`);
+          continue;
+        }
+        if (l.trim() === '') {
+          out.push('<div class="h-1"></div>');
+          continue;
+        }
+        out.push(`<p class="my-1 leading-relaxed">${renderInline(l)}</p>`);
+      }
+      return out.join('');
+    }
+
+    function renderInline(str) {
+      if (!str) return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\*\*(.*?)\*\*/g, '<strong class="font-extrabold text-slate-900">$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em class="italic text-slate-700">$1</em>')
+        .replace(/`([^`]+)`/g, '<code class="bg-[#F8EDEF] px-1 py-0.5 rounded text-[#742D3A] text-2xs sm:text-xs font-mono border border-[#E8DDE0]">$1</code>');
     }
 
     async function submitQuestion(question) {

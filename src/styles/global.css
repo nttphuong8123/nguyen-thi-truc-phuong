@@ -324,16 +324,20 @@ nav[aria-label="Äiá»u hÆ°á»›ng chÃ­nh"],
 /* Ensure tables inside migrated content never cause horizontal viewport overflow on mobile */
 @media (max-width: 640px) {
   .tkd-page-scope table {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    display: table !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+    overflow: hidden !important;
+    overflow-x: hidden !important;
   }
 
-  /* Tables already wrapped in a scroll container keep real table layout (full width) */
+  /* Tables already wrapped in a container keep real table layout (full width) */
   .tkd-page-scope .table-container > table {
-    display: table;
-    width: 100%;
+    display: table !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
   }
 
   .tkd-page-scope .compact-table th,
@@ -549,8 +553,9 @@ html, body {
   .table-responsive {
     width: 100% !important;
     max-width: 100% !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+    overflow: hidden !important;
   }
 
   /* Header vÃ  TiÃªu Ä‘á» khÃ´ng bá»‹ cáº¯t chá»¯ */
@@ -613,8 +618,8 @@ html, body {
 
   /* Báº£ng biá»ƒu nhiá»u cá»™t trÃªn tablet váº«n giá»¯ thanh cuá»™n an toÃ n */
   .table-responsive {
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
+    overflow-x: hidden !important;
+    overflow: hidden !important;
   }
 }
 
@@ -1008,7 +1013,7 @@ footer.bg-\[\#142B49\] {
 
 /* 5. TABLES */
 .tkd-table-wrapper {
-  overflow-x: auto;
+  overflow-x: hidden;
   border: 1px solid var(--color-border-soft);
   border-radius: var(--radius-card);
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
