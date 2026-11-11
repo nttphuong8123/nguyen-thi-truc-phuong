@@ -296,6 +296,9 @@ function getLeafIcon(label: string): string {
         width: 100% !important;
         z-index: 100 !important;
       }
+      html {
+        scroll-padding-top: 4.5rem !important;
+      }
       body {
         padding-top: 4rem !important; /* 64px tương ứng đúng chiều cao thanh điều hướng */
       }
@@ -311,7 +314,7 @@ function getLeafIcon(label: string): string {
   <body class="min-h-screen flex flex-col bg-[#F7F5F2] text-[#303039] antialiased selection:bg-[#C65B69] selection:text-white pt-14 sm:pt-16">
     <!-- Top Academic Navigation Bar (Cố định ở đỉnh màn hình, không trôi khi cuộn) -->
     <nav id="mainNavbar" aria-label="Điều hướng chính" class="site-sticky-navbar fixed top-0 left-0 right-0 w-full z-50 bg-[#A83245]/98 backdrop-blur-md text-white border-b border-[#C65B69]/40 shadow-sm">
-      <div class="max-w-7xl mx-auto px-2 sm:px-6">
+      <div class="max-w-7xl mx-auto px-2.5 sm:px-6">
         <div class="flex items-center justify-between h-14 sm:h-16 gap-1 sm:gap-4">
           <!-- Brand Logo TP® -->
           <a
@@ -319,12 +322,12 @@ function getLeafIcon(label: string): string {
             title="Về Trang chủ Cổng Học Tập - Tri Thức Số NGUYỄN THỊ TRÚC PHƯƠNG"
             class="group flex items-center gap-1.5 sm:gap-2.5 font-extrabold text-xs sm:text-base tracking-tight text-white hover:text-[#F8EDEF] transition-colors min-w-0 shrink"
           >
-            <span class="inline-flex items-center justify-center w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-gradient-to-br from-[#F7F5F2] via-[#FFFFFF] to-[#F8EDEF] border border-[#F8EDEF]/90 text-[#A83245] font-black text-base sm:text-2xl shadow-sm tracking-tighter shrink-0 select-none group-hover:scale-105 transition-transform">
-              TP<sup class="text-[7.5px] sm:text-[10px] -top-1.5 ml-0.5 font-bold text-[#C65B69]">®</sup>
+            <span class="inline-flex items-center justify-center w-7 h-7 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-gradient-to-br from-[#F7F5F2] via-[#FFFFFF] to-[#F8EDEF] border border-[#F8EDEF]/90 text-[#A83245] font-black text-sm sm:text-2xl shadow-sm tracking-tighter shrink-0 select-none group-hover:scale-105 transition-transform">
+              TP<sup class="text-[6.5px] sm:text-[10px] -top-1 ml-0.5 font-bold text-[#C65B69]">®</sup>
             </span>
             <span class="leading-tight block min-w-0">
-              <span class="block text-[12px] sm:text-base font-extrabold tracking-tight sm:tracking-wide whitespace-nowrap">NGUYỄN THỊ TRÚC PHƯƠNG</span>
-              <span class="block text-[5.8px] sm:text-[7.2px] text-[#F8EDEF] font-semibold tracking-tight uppercase whitespace-nowrap">Cổng Học Tập - Tri Thức Số<sup class="text-[4.5px] sm:text-[5.5px] leading-none relative -top-[2px] ml-[0.5px] font-bold">®</sup></span>
+              <span class="block text-[11px] sm:text-base font-extrabold tracking-tight sm:tracking-wide whitespace-nowrap">NGUYỄN THỊ TRÚC PHƯƠNG</span>
+              <span class="block text-[5.5px] sm:text-[7.2px] text-[#F8EDEF] font-semibold tracking-tight uppercase whitespace-nowrap">Cổng Học Tập - Tri Thức Số<sup class="text-[4px] sm:text-[5.5px] leading-none relative -top-[2px] ml-[0.5px] font-bold">®</sup></span>
             </span>
           </a>
 
@@ -422,20 +425,20 @@ function getLeafIcon(label: string): string {
           </div>
 
           <!-- Mobile Hamburger Button & Quick Action -->
-          <div class="flex items-center gap-1 sm:gap-2 shrink-0 lg:hidden">
+          <div class="flex items-center gap-1 sm:gap-2 shrink-0 lg:hidden pl-1 pr-0.5">
             <a
               href="/ngan-hang-de-thi"
               title="Làm bài thi trắc nghiệm trực tuyến 50 câu trong 60 phút"
-              class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#C65B69] hover:bg-[#A83245] border border-[#C65B69]/60 text-white font-extrabold text-[11px] sm:text-xs whitespace-nowrap shadow-sm active:scale-95 transition-all shrink-0"
+              class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#C65B69] hover:bg-[#A83245] border border-[#C65B69]/60 text-white font-extrabold text-[10.5px] sm:text-xs whitespace-nowrap shadow-sm active:scale-95 transition-all shrink-0"
             >
-              <span class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-[#742D3A] flex items-center justify-center text-[7px] sm:text-[8px] text-[#F8EDEF] pl-0.5 select-none font-bold">▶</span>
+              <span class="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-[#742D3A] flex items-center justify-center text-[6.5px] sm:text-[8px] text-[#F8EDEF] pl-0.5 select-none font-bold">▶</span>
               <span>Thi Online</span>
             </a>
             <button
               id="mobileMenuBtn"
               type="button"
               aria-label="Mở menu điều hướng"
-              class="p-1.5 sm:p-2 rounded-lg text-white hover:bg-[#C65B69]/50 focus:outline-none shrink-0 cursor-pointer"
+              class="p-1 rounded-lg text-white hover:bg-[#C65B69]/50 focus:outline-none shrink-0 cursor-pointer"
             >
               <svg aria-hidden="true" class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />

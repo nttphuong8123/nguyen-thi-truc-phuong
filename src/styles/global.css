@@ -813,14 +813,15 @@ footer.bg-\[\#142B49\] {
 }
 
 .tkd-btn-secondary {
-  background-color: var(--color-secondary);
-  color: #ffffff !important;
-  border: 1px solid rgba(198, 91, 105, 0.5);
-  box-shadow: 0 2px 6px rgba(22, 138, 173, 0.2);
+  background-color: #ffffff !important;
+  color: var(--color-primary) !important;
+  border: 1.5px solid var(--color-primary) !important;
+  box-shadow: 0 1px 3px rgba(168, 50, 69, 0.12);
 }
 .tkd-btn-secondary:hover {
-  background-color: var(--color-secondary-hover);
-  color: #ffffff !important;
+  background-color: var(--color-accent-light) !important;
+  color: var(--color-primary-hover) !important;
+  border-color: var(--color-primary-hover) !important;
 }
 
 .tkd-btn-accent {
@@ -1070,6 +1071,28 @@ footer.bg-\[\#142B49\] {
 /* ==========================================================================
    HIGH CONTRAST & WCAG AAA ENFORCEMENT FOR BRAND COLORS & DARK CONTAINERS
    ========================================================================== */
+
+/* Explicit Brand Text Utilities — Guaranteed Color Enforcement */
+.text-\[\#742D3A\],
+.text-\[\#742d3a\],
+[class*="text-[#742D3A]"],
+[class*="text-[#742d3a]"] {
+  color: #742D3A !important;
+}
+
+.text-\[\#A83245\],
+.text-\[\#a83245\],
+[class*="text-[#A83245]"],
+[class*="text-[#a83245]"] {
+  color: #A83245 !important;
+}
+
+.text-\[\#C65B69\],
+.text-\[\#c65b69\],
+[class*="text-[#C65B69]"],
+[class*="text-[#c65b69]"] {
+  color: #C65B69 !important;
+}
 
 /* 1. Explicit Light Text Utilities — MUST ALWAYS REMAIN LIGHT & CRISP */
 .text-white,
