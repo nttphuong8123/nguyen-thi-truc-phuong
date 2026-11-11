@@ -45,17 +45,17 @@ const officeHourLines = contactCfg.office_hours
             </div>
             <div>
               <h2 class="text-lg font-extrabold text-slate-900">{contactCfg.instructor_name}</h2>
-              <p class="text-xs text-slate-500">Giảng viên {contactCfg.department}</p>
+              <p class="text-xs text-slate-700 font-medium">Giảng viên {contactCfg.department}</p>
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs sm:text-sm">
             <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
-              <div class="text-slate-400 font-bold uppercase text-[11px] mb-1">📧 Email Học Vụ</div>
+              <div class="text-slate-700 font-bold uppercase text-[11px] mb-1">📧 Email Học Vụ</div>
               <a href={`mailto:${contactCfg.email}`} class="font-bold text-[#C65B69] hover:underline break-all">{contactCfg.email}</a>
             </div>
             <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
-              <div class="text-slate-400 font-bold uppercase text-[11px] mb-1">📞 Zalo / Hotline</div>
+              <div class="text-slate-700 font-bold uppercase text-[11px] mb-1">📞 Zalo / Hotline</div>
               <div class="flex items-center gap-2">
                 <a href={`tel:${cleanPhone}`} class="font-bold text-slate-800 hover:text-[#C65B69]">{contactCfg.hotline}</a>
                 <a href={contactCfg.zalo_url} target="_blank" rel="noopener" class="px-2 py-0.5 rounded-md bg-[#F8EDEF] text-[#A83245] text-[11px] font-bold hover:bg-[#F8EDEF]">
@@ -64,11 +64,11 @@ const officeHourLines = contactCfg.office_hours
               </div>
             </div>
             <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
-              <div class="text-slate-400 font-bold uppercase text-[11px] mb-1">📍 Địa Chỉ Công Tác</div>
+              <div class="text-slate-700 font-bold uppercase text-[11px] mb-1">📍 Địa Chỉ Công Tác</div>
               <span class="font-semibold text-slate-800">{contactCfg.address}</span>
             </div>
             <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
-              <div class="text-slate-400 font-bold uppercase text-[11px] mb-1">🌐 Kênh Học Thuật</div>
+              <div class="text-slate-700 font-bold uppercase text-[11px] mb-1">🌐 Kênh Học Thuật</div>
               <div class="flex items-center gap-3 font-bold">
                 <a href={contactCfg.youtube_url} target="_blank" rel="noopener" class="text-rose-600 hover:underline">YouTube</a>
                 <span class="text-slate-300">•</span>

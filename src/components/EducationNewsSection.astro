@@ -52,7 +52,7 @@ const sources = EDUCATION_SOURCES;
       <!-- Thống kê & Nút làm mới dữ liệu -->
       <div class="flex flex-wrap items-center gap-2.5">
         <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-xs">
-          <span class="text-slate-400">Cập nhật:</span>
+          <span class="text-slate-200">Cập nhật:</span>
           <span id="edNewsUpdatedAtLabel" class="font-extrabold text-amber-300 num-font">{initialUpdatedAt}</span>
         </div>
 
@@ -107,7 +107,7 @@ const sources = EDUCATION_SOURCES;
       </div>
 
       <!-- Thanh trạng thái kết nối 6 nguồn tin (Source Health Bar) -->
-      <div id="edNewsSourceHealthBar" class="flex flex-wrap items-center gap-1.5 text-[11px] text-slate-400 pt-0.5">
+      <div id="edNewsSourceHealthBar" class="flex flex-wrap items-center gap-1.5 text-[11px] text-slate-300 pt-0.5">
         <span class="font-bold text-slate-300">Nguồn tin chính thức:</span>
         {sources.map((s) => (
           <a

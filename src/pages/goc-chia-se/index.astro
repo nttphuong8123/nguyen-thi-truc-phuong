@@ -125,7 +125,7 @@ const categories = ['Tất cả', ...new Set(articles.map((a) => a.category).fil
                 <span class="text-xs font-bold uppercase px-2.5 py-0.5 rounded-full bg-[#F7F5F2] text-[#A83245] border border-[#C65B69]/30">
                   {art.category}
                 </span>
-                <span class="text-xs text-slate-400 num-font">👁️ {art.views} lượt xem</span>
+                <span class="text-xs text-slate-600 font-medium num-font">👁️ {art.views} lượt xem</span>
               </div>
               <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#C65B69] transition-colors leading-snug">
                 <a href={`/goc-chia-se/${art.slug}`} title={`Xem bài viết chuyên đề: ${art.title}`}>

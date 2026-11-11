@@ -1128,17 +1128,19 @@ table thead th {
 
 /* 2B. CÁC NÚT TABS & BỘ LỌC DANH MỤC: Nền trắng chữ đen/chàm đậm tuyệt đối rõ nét, đang chọn nền đỏ chữ trắng */
 .news-filter-btn,
-button.news-filter-btn {
+button.news-filter-btn,
+.ed-source-filter-btn {
   font-weight: 700 !important;
 }
 
 .news-filter-btn.bg-white,
 .news-filter-btn:not([class*="text-white"]):not([class*="bg-[#A83245]"]),
 button.news-filter-btn:not([class*="text-white"]):not([class*="bg-[#A83245]"]),
-.news-filter-btn[class*="bg-white"] {
+.news-filter-btn[class*="bg-white"],
+button.news-filter-btn[class*="bg-white"] {
   background-color: #ffffff !important;
-  color: #1e293b !important;
-  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important; /* text-slate-900 tuyệt đối rõ nét */
+  border: 1px solid #94a3b8 !important;
 }
 
 .news-filter-btn.bg-white:hover,
@@ -1155,6 +1157,29 @@ button.news-filter-btn[class*="bg-[#A83245]"][class*="text-white"] {
   background-color: #A83245 !important;
   color: #ffffff !important;
   border-color: #A83245 !important;
+}
+
+/* 2C. CHÚ THÍCH PHỤ VÀ DẪN NGUỒN TRÊN NỀN SÁNG: Đảm bảo độ đậm rõ nét tối thiểu WCAG AA/AAA */
+.tkd-page-scope .text-slate-500:not([class*="from-"]):not([class*="bg-[#"]):not([class*="text-white"]):not([class*="text-[#F8EDEF]"]),
+.tkd-page-scope .text-slate-400:not([class*="from-"]):not([class*="bg-[#"]):not([class*="text-white"]):not([class*="text-[#F8EDEF]"]),
+.tkd-page-scope .text-gray-500:not([class*="from-"]):not([class*="bg-[#"]):not([class*="text-white"]):not([class*="text-[#F8EDEF]"]),
+.tkd-page-scope .text-gray-400:not([class*="from-"]):not([class*="bg-[#"]):not([class*="text-white"]):not([class*="text-[#F8EDEF]"]) {
+  color: #334155 !important; /* text-slate-700 chuẩn tương phản cao trên nền trắng/kem */
+  font-weight: 500;
+}
+
+/* 2D. NHÃN PHỤ, NGÀY THÁNG, THÔNG TIN CẬP NHẬT TRÊN NỀN TỐI */
+[class*="from-[#742D3A]"] [class*="text-slate-400"],
+[class*="from-[#742D3A]"] [class*="text-slate-500"],
+[class*="from-[#742D3A]"] [class*="text-gray-400"],
+[class*="from-[#742D3A]"] [class*="text-gray-500"],
+[class*="bg-[#742D3A]"] [class*="text-slate-400"],
+[class*="bg-[#742D3A]"] [class*="text-slate-500"],
+[class*="bg-[#A83245]"] [class*="text-slate-400"],
+[class*="bg-[#A83245]"] [class*="text-slate-500"],
+header.bg-gradient-to-br [class*="text-slate-400"],
+header.bg-gradient-to-br [class*="text-slate-500"] {
+  color: #e2e8f0 !important;
 }
 
 /* Headings inside all dark containers MUST BE crisp white */

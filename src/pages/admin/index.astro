@@ -160,7 +160,7 @@ if (isAuthenticated) {
                 {currentAdmin.role === 'super_admin' ? '👑 Super Admin' : currentAdmin.role === 'editor' ? '✍️ Biên Tập Viên' : '👁️ Quan Sát Viên'}
               </span>
             </div>
-            <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
+            <p class="text-xs sm:text-sm text-slate-700 mt-0.5">
               Xin chào <strong>{currentAdmin.displayName}</strong> (<span class="font-mono text-sky-700">@{currentAdmin.username}</span>) • Cơ sở dữ liệu: <code class="font-mono text-[11px] bg-slate-100 px-1 py-0.5 rounded">nguyenthitrucphuong-db</code>
             </p>
           </div>
@@ -372,7 +372,7 @@ if (isAuthenticated) {
                   <span>📇</span>
                   <span>Cấu Hình Thông Tin Liên Hệ Giảng Viên (Toàn Website &amp; Trang /contact)</span>
                 </h3>
-                <p class="text-xs text-slate-500 mt-0.5">
+                <p class="text-xs text-slate-700 mt-0.5">
                   Thay đổi Email, Zalo/Hotline, Địa chỉ, Lịch tiếp sinh viên và Mạng xã hội hiển thị đồng bộ trên Footer, Schema SEO và trang Liên hệ
                 </p>
               </div>
@@ -692,7 +692,7 @@ if (isAuthenticated) {
                   <h3 class="font-extrabold text-base text-sky-950 flex items-center gap-2">
                     <span>🎂</span> Quản Lý Sinh Nhật &amp; Kho Lời Chúc (Trang Chủ)
                   </h3>
-                  <p class="text-xs text-slate-500 mt-0.5">
+                  <p class="text-xs text-slate-700 mt-0.5">
                     Hệ thống phân phối ngẫu nhiên lời chúc riêng biệt cho từng sinh viên trong tháng. Lưu cố định vào DB, tuyệt đối không cấp trùng lặp.
                   </p>
                 </div>
@@ -1007,7 +1007,7 @@ if (isAuthenticated) {
                     <div class="p-3 rounded-xl bg-white border border-dashed border-rose-300 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                       <div>
                         <p class="font-bold text-rose-950">Tải lên trực tiếp File Excel danh sách lớp (.xlsx, .xls, .csv)</p>
-                        <p id="excelFileStatus" class="text-[11px] text-slate-500 mt-0.5">
+                        <p id="excelFileStatus" class="text-[11px] text-slate-700 mt-0.5">
                           Hệ thống tự động nhận diện cột Họ tên, Ngày sinh (DD/MM/YYYY) và Lớp học phần.
                         </p>
                       </div>
@@ -1809,7 +1809,7 @@ if (isAuthenticated) {
                   <span>⚙️</span>
                   <span>Cấu Hình Tiêu Chí Đánh Giá Giảng Viên ({evalCriteria.length} tiêu chí Likert)</span>
                 </h3>
-                <p class="text-xs text-slate-500 mt-0.5">
+                <p class="text-xs text-slate-700 mt-0.5">
                   Chỉnh sửa nội dung các câu hỏi đánh giá hiển thị trên form khảo sát tại trang /contact (lưu trữ trên Cloudflare D1)
                 </p>
               </div>
@@ -1919,7 +1919,7 @@ if (isAuthenticated) {
                   <span>📋</span>
                   <span>Danh Sách Phiếu Đánh Giá Chất Lượng Giảng Viên ({evaluations.length} phiếu đã nhận)</span>
                 </h3>
-                <p class="text-xs text-slate-500 mt-0.5">
+                <p class="text-xs text-slate-700 mt-0.5">
                   Dữ liệu được bảo mật danh tính sinh viên, lưu trữ vĩnh viễn trên Cloudflare D1
                 </p>
               </div>
@@ -2000,7 +2000,7 @@ if (isAuthenticated) {
                   <span>✉️</span>
                   <span>Tin Nhắn / Thắc Mắc Nhanh Từ Sinh Viên ({contactMessages.length} tin nhắn)</span>
                 </h3>
-                <p class="text-xs text-slate-500 mt-0.5">
+                <p class="text-xs text-slate-700 mt-0.5">
                   Dữ liệu gửi từ biểu mẫu "Gửi Tin Nhắn / Thắc Mắc Nhanh Đến Giảng Viên" tại trang /contact
                 </p>
               </div>
@@ -2014,7 +2014,7 @@ if (isAuthenticated) {
               </div>
             </div>
             {contactMessages.length === 0 ? (
-              <div class="text-center py-8 text-slate-400 text-xs italic">
+              <div class="text-center py-8 text-slate-600 text-xs italic">
                 ✉️ Chưa có tin nhắn / thắc mắc nào từ sinh viên.
               </div>
             ) : (
@@ -2076,7 +2076,7 @@ if (isAuthenticated) {
                   <span>🔬</span>
                   <span>Dữ Liệu Khảo Sát Nghiên Cứu Khoa Học Sinh Viên ({nckhSurveys.length} phản hồi)</span>
                 </h3>
-                <p class="text-xs text-slate-500 mt-0.5">
+                <p class="text-xs text-slate-700 mt-0.5">
                   Dữ liệu phục vụ phân tích SPSS từ bảng câu hỏi tại /spss/nckhsv
                 </p>
               </div>
@@ -2099,7 +2099,7 @@ if (isAuthenticated) {
               </div>
             </div>
             {nckhSurveys.length === 0 ? (
-              <div class="text-center py-10 text-slate-400 text-xs italic">
+              <div class="text-center py-10 text-slate-600 text-xs italic">
                 🌸 Chưa có sinh viên nào nộp khảo sát NCKH.
               </div>
             ) : (
@@ -2154,7 +2154,7 @@ if (isAuthenticated) {
                 <h2 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
                   <span>📅</span> Quản Lý Lịch Giảng Dạy &amp; Nhóm Lớp Học Phần
                 </h2>
-                <p class="text-xs text-slate-500 mt-0.5">
+                <p class="text-xs text-slate-700 mt-0.5">
                   Cấu hình Thứ, Ca học, Tiết học, Phòng học và Link nhóm Zalo hiển thị ngay sau Danh mục học phần tại trang <a href="/elearning" target="_blank" class="text-sky-700 underline font-semibold">/elearning</a>.
                 </p>
               </div>
@@ -2438,7 +2438,7 @@ if (isAuthenticated) {
                 <h2 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
                   <span>👥</span> Quản Lý Tài Khoản Quản Trị &amp; Phân Quyền (Admin Role-Based Access)
                 </h2>
-                <p class="text-xs text-slate-500 mt-0.5">
+                <p class="text-xs text-slate-700 mt-0.5">
                   Tạo tài khoản quản trị riêng biệt cho Trợ giảng, Thư ký hoặc Cộng tác viên. Mật khẩu được mã hóa SHA-256 an toàn, hoàn toàn độc lập với Production.
                 </p>
               </div>
@@ -2601,7 +2601,7 @@ if (isAuthenticated) {
                 <h2 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
                   <span>📜</span> Nhật Ký Thao Tác Hệ Thống (Audit Logs)
                 </h2>
-                <p class="text-xs text-slate-500 mt-0.5">
+                <p class="text-xs text-slate-700 mt-0.5">
                   Ghi lại toàn bộ hành vi đăng nhập, thêm/sửa/xóa mã đề cương, bài viết, cập nhật cấu hình cổng truy cập trên môi trường nguyenthitrucphuong.
                 </p>
               </div>

@@ -60,7 +60,7 @@ const relatedSilos = allSilos.filter((g) => g.key !== meta.siloKey).slice(0, 4);
   <div class="bg-white border-b border-slate-200/90 shadow-2xs">
       <div class="max-w-5xl mx-auto px-4 py-2.5 flex flex-col gap-2">
         <!-- Breadcrumb Row -->
-        <nav aria-label="Breadcrumb" class="flex items-center flex-wrap gap-1.5 text-xs text-slate-500">
+        <nav aria-label="Breadcrumb" class="flex items-center flex-wrap gap-1.5 text-xs text-slate-600 font-medium">
           {crumbs.map((c, idx) => {
             const isLast = idx === crumbs.length - 1;
             return (
@@ -85,7 +85,7 @@ const relatedSilos = allSilos.filter((g) => g.key !== meta.siloKey).slice(0, 4);
         <!-- Silo Switcher Tabs (if page belongs to a Subject Silo) -->
         {silo && (
           <div class="pt-1.5 border-t border-slate-100 flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5">
-            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 shrink-0 mr-1">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-600 font-extrabold shrink-0 mr-1">
               Chuyên đề {silo.name}:
             </span>
             {silo.tabs.map((tab) => {
@@ -182,7 +182,7 @@ const relatedSilos = allSilos.filter((g) => g.key !== meta.siloKey).slice(0, 4);
             <h2 class="text-sm sm:text-base font-extrabold text-slate-900 uppercase tracking-tight m-0">
               Công Cụ Học Tập
             </h2>
-            <p class="text-xs text-slate-500 mt-0.5 m-0">
+            <p class="text-xs text-slate-700 mt-0.5 m-0">
               Khám phá trọn bộ bài giảng, đề cương thực tập và ngân hàng đề thi trực tuyến
             </p>
           </div>
