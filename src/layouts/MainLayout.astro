@@ -259,9 +259,9 @@ function getLeafIcon(label: string): string {
     <meta name="twitter:description" content={finalDescription} />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=5" />
-    <link rel="icon" type="image/png" href="/images/logo-tp.png?v=5" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=5" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=6" />
+    <link rel="icon" type="image/png" href="/images/logo-tp.png?v=6" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=6" />
 
     <!-- Google Fonts: Non-blocking Preload with Display Swap (Be Vietnam Pro, Noto Serif, Roboto Mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -307,6 +307,28 @@ function getLeafIcon(label: string): string {
       main, .site-main-content, #mainContent {
         padding-bottom: 0 !important;
       }
+
+      /* Nâng cấp màu sắc hiển thị Logo TP: Đỏ Ruby #A60018 + Viền Vàng Champagne #F2C45D trên Nền Kem #FFF9EC */
+      .tp-logo-badge {
+        background: #FFF9EC !important;
+        border: 1.5px solid #F2C45D !important;
+        border-radius: 9999px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(242, 196, 93, 0.45) !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 2.5px !important;
+        transition: all 0.25s ease-in-out !important;
+        flex-shrink: 0 !important;
+      }
+      .tp-logo-badge:hover {
+        transform: scale(1.06) !important;
+        box-shadow: 0 4px 14px rgba(166, 0, 24, 0.25), 0 0 0 2px #F2C45D !important;
+      }
+      .tp-logo-img {
+        filter: contrast(1.18) saturate(1.25) brightness(1.02) !important;
+        object-fit: contain !important;
+      }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous" />
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
@@ -328,7 +350,7 @@ function getLeafIcon(label: string): string {
           >
             <span class="tp-logo-badge w-8 h-8 sm:w-11 sm:h-11">
               <img
-                src="/images/logo-tp.png"
+                src="/images/logo-tp.png?v=6"
                 alt="Logo TP NGUYỄN THỊ TRÚC PHƯƠNG"
                 class="tp-logo-img w-full h-full object-contain select-none"
                 width="44"
@@ -469,7 +491,7 @@ function getLeafIcon(label: string): string {
           <div class="flex items-center gap-2.5">
             <span class="tp-logo-badge w-10 h-10">
               <img
-                src="/images/logo-tp.png"
+                src="/images/logo-tp.png?v=6"
                 alt="Logo TP NGUYỄN THỊ TRÚC PHƯƠNG"
                 class="tp-logo-img w-full h-full object-contain select-none"
                 width="40"
@@ -690,7 +712,7 @@ function getLeafIcon(label: string): string {
             <div class="flex items-center gap-2.5 font-extrabold text-white text-base">
               <span class="tp-logo-badge w-9 h-9 sm:w-10 sm:h-10">
                 <img
-                  src="/images/logo-tp.png"
+                  src="/images/logo-tp.png?v=6"
                   alt="Logo TP NGUYỄN THỊ TRÚC PHƯƠNG"
                   class="tp-logo-img w-full h-full object-contain select-none"
                   width="40"

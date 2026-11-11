@@ -72,15 +72,10 @@ const sources = EDUCATION_SOURCES;
   <div class="p-3.5 sm:p-6 space-y-5 relative z-10">
     <!-- 2. THANH BỘ LỌC NGUỒN BÁO CHÍ (CUỘN NGANG TRÊN MOBILE) -->
     <div class="space-y-2.5">
-      <!-- Ẩn hoàn toàn thanh tiêu đề theo yêu cầu người dùng, giữ ID để script JS không lỗi -->
-      <div class="hidden items-center justify-between gap-2" aria-hidden="true">
-        <div class="text-xs font-black uppercase tracking-wider text-[#F8EDEF] flex items-center gap-1.5">
-          <span>🔍 CHỌN NGUỒN TIN BÁO CHÍ:</span>
-          <span id="edNewsActiveFilterName" class="text-amber-300 font-extrabold normal-case">Tất cả nguồn</span>
-        </div>
-        <div class="text-xs font-bold text-slate-400">
-          Tổng cộng: <strong id="edNewsTotalCountBadge" class="text-amber-300 font-black num-font">{initialTotal}</strong> bài viết
-        </div>
+      <!-- Ẩn vĩnh viễn tiêu đề thừa theo yêu cầu người dùng, giữ ID ẩn trong DOM để script JS không lỗi -->
+      <div style="display: none !important;" aria-hidden="true">
+        <span id="edNewsActiveFilterName"></span>
+        <span id="edNewsTotalCountBadge">{initialTotal}</span>
       </div>
 
       <div class="flex items-center gap-2 overflow-x-auto pb-1.5 pt-0.5 no-scrollbar select-none">
