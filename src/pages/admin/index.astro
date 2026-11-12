@@ -192,15 +192,12 @@ if (isAuthenticated) {
         </div>
 
         <!-- Quick Stats -->
-        <div class="grid grid-cols-2 lg:grid-cols-6 gap-3.5">
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-3.5">
           <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
             <span class="text-xs font-bold uppercase text-slate-400">Lượt nộp bài / Mở đề</span>
             <p class="text-2xl font-extrabold text-sky-700 num-font mt-1">{submissions.length}</p>
           </div>
-          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
-            <span class="text-xs font-bold uppercase text-slate-400">Mã đề cương (/DCCT)</span>
-            <p class="text-2xl font-extrabold text-emerald-700 num-font mt-1">{syllabusCodes.length}</p>
-          </div>
+          
           <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
             <span class="text-xs font-bold uppercase text-slate-400">Trang học liệu</span>
             <p class="text-2xl font-extrabold text-indigo-700 num-font mt-1">{pages.length}</p>
@@ -237,45 +234,45 @@ if (isAuthenticated) {
           </button>
           <button
             type="button"
-            data-tab="tab-dcct"
-            class="admin-tab-btn bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-slate-200 cursor-pointer transition-colors"
-          >
-            📘 3. Mã Đề Cương Thực Tập (/DCCT)
-          </button>
-          <button
-            type="button"
             data-tab="tab-pages"
             class="admin-tab-btn bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-slate-200 cursor-pointer transition-colors"
           >
-            📄 4. Danh Sách Trang Học Liệu ({pages.length})
+            📄 3. Danh Sách Trang Học Liệu ({pages.length})
           </button>
           <button
             type="button"
             data-tab="tab-news-bday"
             class="admin-tab-btn bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-slate-200 cursor-pointer transition-colors"
           >
-            🎂 5. Tin Tức &amp; Sinh Nhật ({newsArticles.length + birthdays.length})
+            🎂 4. Tin Tức &amp; Sinh Nhật ({newsArticles.length + birthdays.length})
           </button>
           <button
             type="button"
             data-tab="tab-quiz-bank"
             class="admin-tab-btn bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-slate-200 cursor-pointer transition-colors"
           >
-            🎯 6. Ngân Hàng Đề Thi &amp; Câu Hỏi ({quizTargets.length} bộ đề)
+            🎯 5. Ngân Hàng Đề Thi &amp; Câu Hỏi ({quizTargets.length} bộ đề)
           </button>
           <button
             type="button"
             data-tab="tab-evaluations"
             class="admin-tab-btn bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-slate-200 cursor-pointer transition-colors"
           >
-            ⭐ 7. Đánh Giá Giảng Viên &amp; Khảo Sát ({evaluations.length + contactMessages.length + nckhSurveys.length})
+            ⭐ 6. Đánh Giá Giảng Viên &amp; Khảo Sát ({evaluations.length + contactMessages.length + nckhSurveys.length})
           </button>
           <button
             type="button"
-            data-tab="tab-teaching-schedule"
+            data-tab="tab-accounts"
             class="admin-tab-btn bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-slate-200 cursor-pointer transition-colors"
           >
-            📅 8. Lịch Giảng &amp; Nhóm Lớp ({teachingSchedule.length})
+            👥 7. Tài Khoản Quản Trị ({adminAccounts.length})
+          </button>
+          <button
+            type="button"
+            data-tab="tab-audit-logs"
+            class="admin-tab-btn bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-slate-200 cursor-pointer transition-colors"
+          >
+            📜 8. Nhật Ký Thao Tác ({auditLogs.length})
           </button>
         </div>
 
@@ -487,102 +484,7 @@ if (isAuthenticated) {
           <!-- Khối Video Bài Giảng đã được loại bỏ theo yêu cầu thiết kế mới -->
         </section>
 
-        <!-- TAB 3: DCCT SYLLABUS CODES -->
-        <section id="tab-dcct" class="admin-tab-panel hidden space-y-6">
-          <!-- Form thêm/sửa mã -->
-          <div class="bg-white p-5 rounded-2xl border border-sky-200 shadow-xs space-y-4">
-            <h3 class="font-bold text-base text-sky-950">➕ Thêm Mới hoặc Cập Nhật Mã Đề Cương (/DCCT)</h3>
-            <form id="upsertDcctForm" class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
-              <div class="sm:col-span-2">
-                <label class="block text-xs font-bold text-slate-700 mb-1">Mã số (VD: U040221)</label>
-                <input
-                  type="text"
-                  id="dcctCode"
-                  required
-                  placeholder="A040201"
-                  class="w-full px-3 py-2 rounded-xl border border-slate-300 num-font uppercase font-bold text-xs"
-                />
-              </div>
-              <div class="sm:col-span-4">
-                <label class="block text-xs font-bold text-slate-700 mb-1">Tên tài liệu / Đề tài</label>
-                <input
-                  type="text"
-                  id="dcctTitle"
-                  required
-                  placeholder="Đề cương chi tiết đề tài..."
-                  class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs"
-                />
-              </div>
-              <div class="sm:col-span-4">
-                <label class="block text-xs font-bold text-slate-700 mb-1">Link Google Docs / Drive</label>
-                <input
-                  type="url"
-                  id="dcctUrl"
-                  required
-                  placeholder="https://docs.google.com/..."
-                  class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-mono"
-                />
-              </div>
-              <div class="sm:col-span-2">
-                <button
-                  type="submit"
-                  class="w-full py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs cursor-pointer"
-                >
-                  Lưu Mã Đề Cương
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <!-- Bảng danh sách 22 mã -->
-          <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-            <div class="overflow-x-auto">
-              <table class="w-full text-xs sm:text-sm text-left">
-                <thead class="bg-slate-100 text-slate-700 uppercase text-xs font-bold">
-                  <tr>
-                    <th class="py-3 px-4 w-28">Mã Số</th>
-                    <th class="py-3 px-4">Tên Tài Liệu / Đề Tài</th>
-                    <th class="py-3 px-4">Link Google Docs / Drive</th>
-                    <th class="py-3 px-4 text-center w-36">Thao Tác</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-200">
-                  {syllabusCodes.map((c) => (
-                    <tr class="hover:bg-slate-50">
-                      <td class="py-3 px-4 num-font font-extrabold text-sky-800">{c.code}</td>
-                      <td class="py-3 px-4 font-medium text-slate-800">{c.title}</td>
-                      <td class="py-3 px-4 font-mono text-xs text-slate-500 truncate max-w-xs">
-                        <a href={c.url} target="_blank" rel="noopener noreferrer" title={`Mở tài liệu mã ${c.code}`} class="text-sky-600 hover:underline">
-                          {c.url}
-                        </a>
-                      </td>
-                      <td class="py-3 px-4 text-center space-x-2">
-                        <button
-                          type="button"
-                          data-edit-code={c.code}
-                          data-edit-title={c.title}
-                          data-edit-url={c.url}
-                          class="edit-dcct-btn text-sky-700 hover:underline font-bold text-xs cursor-pointer"
-                        >
-                          Sửa
-                        </button>
-                        <button
-                          type="button"
-                          data-del-code={c.code}
-                          class="del-dcct-btn text-rose-600 hover:underline font-bold text-xs cursor-pointer"
-                        >
-                          Xóa
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        <!-- TAB 4: ALL 55 SITE PAGES -->
+        <!-- TAB 3: ALL 55 SITE PAGES -->
         <section id="tab-pages" class="admin-tab-panel hidden bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
           <div class="p-4 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <h2 class="font-bold text-base text-slate-900">Toàn bộ {pages.length} Trang Học Liệu & Ngân Hàng Câu Hỏi</h2>
@@ -2146,288 +2048,6 @@ if (isAuthenticated) {
           </div>
         </section>
       
-        <!-- TAB 8: TEACHING SCHEDULE & CLASS GROUPS -->
-        <section id="tab-teaching-schedule" class="admin-tab-panel hidden space-y-6">
-          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
-              <div>
-                <h2 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
-                  <span>📅</span> Quản Lý Lịch Giảng Dạy &amp; Nhóm Lớp Học Phần
-                </h2>
-                <p class="text-xs text-slate-700 mt-0.5">
-                  Cấu hình Thứ, Ca học, Tiết học, Phòng học và Link nhóm Zalo hiển thị ngay sau Danh mục học phần tại trang <a href="/elearning" target="_blank" class="text-sky-700 underline font-semibold">/elearning</a>.
-                </p>
-              </div>
-              <div class="flex flex-wrap items-center gap-2">
-                <button
-                  type="button"
-                  id="openAddScheduleModalBtn"
-                  class="inline-flex items-center gap-1.5 bg-sky-700 hover:bg-sky-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-xs transition-colors cursor-pointer"
-                >
-                  <span>➕</span>
-                  <span>Thêm Lịch Giảng Mới</span>
-                </button>
-                <button
-                  type="button"
-                  id="resetScheduleBtn"
-                  class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 transition-colors cursor-pointer"
-                >
-                  Khôi phục mẫu
-                </button>
-              </div>
-            </div>
-
-            <!-- Bảng danh sách các lớp -->
-            {teachingSchedule.length === 0 ? (
-              <div class="p-8 text-center bg-slate-50 rounded-xl border border-dashed border-slate-300 space-y-3">
-                <p class="text-slate-500 text-sm">Chưa có buổi học nào trong lịch giảng dạy.</p>
-                <button
-                  type="button"
-                  class="btn-add-schedule-empty px-4 py-2 bg-sky-700 text-white rounded-xl text-xs font-bold"
-                >
-                  ➕ Thêm lớp học phần đầu tiên
-                </button>
-              </div>
-            ) : (
-              <div class="overflow-x-auto rounded-xl border border-slate-200">
-                <table class="w-full text-left border-collapse text-xs">
-                  <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
-                    <tr>
-                      <th class="p-3 w-28 whitespace-nowrap">Thứ &amp; Ca</th>
-                      <th class="p-3 w-40 whitespace-nowrap">Tiết &amp; Thời gian</th>
-                      <th class="p-3 min-w-[200px]">Môn học &amp; Mã lớp</th>
-                      <th class="p-3 w-36 whitespace-nowrap">Phòng học</th>
-                      <th class="p-3 w-48 whitespace-nowrap">Nhóm Zalo lớp</th>
-                      <th class="p-3 min-w-[150px]">Ghi chú</th>
-                      <th class="p-3 w-24 text-center whitespace-nowrap">Trạng thái</th>
-                      <th class="p-3 w-28 text-center whitespace-nowrap">Hành động</th>
-                    </tr>
-                  </thead>
-                  <tbody class="divide-y divide-slate-100 text-slate-800">
-                    {teachingSchedule.map((item) => {
-                      const isMorning = item.session === 'Sáng';
-                      const isEvening = item.session === 'Tối';
-                      const badgeClass = isMorning
-                        ? 'bg-amber-100 text-amber-900 border-amber-200'
-                        : isEvening
-                        ? 'bg-indigo-100 text-indigo-900 border-indigo-200'
-                        : 'bg-sky-100 text-sky-900 border-sky-200';
-
-                      return (
-                        <tr class="hover:bg-slate-50/80 transition-colors">
-                          <td class="p-3 align-top whitespace-nowrap">
-                            <span class="font-extrabold text-slate-900 block">{item.day_of_week}</span>
-                            <span class={`inline-block mt-0.5 px-2 py-0.5 rounded text-[10.5px] font-bold border ${badgeClass}`}>
-                              Ca {item.session}
-                            </span>
-                          </td>
-                          <td class="p-3 align-top whitespace-nowrap font-mono font-semibold text-slate-700">
-                            {item.periods || '—'}
-                          </td>
-                          <td class="p-3 align-top">
-                            <span class="font-bold text-slate-900 block text-[13px]">{item.subject}</span>
-                            {item.class_code && (
-                              <span class="inline-block mt-1 font-mono text-[11px] font-bold px-2 py-0.5 bg-slate-100 text-slate-700 rounded border border-slate-200">
-                                {item.class_code}
-                              </span>
-                            )}
-                          </td>
-                          <td class="p-3 align-top whitespace-nowrap font-semibold text-slate-800">
-                            📍 {item.room || '—'}
-                          </td>
-                          <td class="p-3 align-top">
-                            {item.group_url ? (
-                              <a
-                                href={item.group_url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="inline-flex items-center gap-1 text-sky-700 hover:text-sky-900 font-semibold underline truncate max-w-[180px]"
-                                title={item.group_url}
-                              >
-                                <span>💬</span>
-                                <span>Mở nhóm Zalo ↗</span>
-                              </a>
-                            ) : (
-                              <span class="text-slate-400 italic">Chưa có link</span>
-                            )}
-                          </td>
-                          <td class="p-3 align-top text-slate-600 italic text-[11.5px]">
-                            {item.notes || '—'}
-                          </td>
-                          <td class="p-3 align-top text-center whitespace-nowrap">
-                            {item.is_active !== false ? (
-                              <span class="inline-block px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
-                                Hiển thị
-                              </span>
-                            ) : (
-                              <span class="inline-block px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-slate-100 text-slate-600 border border-slate-200">
-                                Ẩn
-                              </span>
-                            )}
-                          </td>
-                          <td class="p-3 align-top text-center whitespace-nowrap space-x-1.5">
-                            <button
-                              type="button"
-                              class="edit-sched-btn px-2.5 py-1 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-800 font-bold border border-sky-200 transition-colors cursor-pointer"
-                              data-schedule={JSON.stringify(item)}
-                            >
-                              Sửa
-                            </button>
-                            <button
-                              type="button"
-                              class="delete-sched-btn px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold border border-rose-200 transition-colors cursor-pointer"
-                              data-schedule-id={item.id}
-                              data-schedule-title={item.subject}
-                            >
-                              Xóa
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-        </section>
-
-        <!-- MODAL THÊM / SỬA LỊCH GIẢNG DẠY -->
-        <div
-          id="scheduleModal"
-          class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 hidden"
-        >
-          <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-lg w-full overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="bg-gradient-to-r from-sky-800 to-sky-700 text-white px-5 py-4 flex items-center justify-between">
-              <h3 id="scheduleModalTitle" class="font-extrabold text-sm sm:text-base flex items-center gap-2">
-                <span>📅</span> Thêm Lịch Giảng Dạy Mới
-              </h3>
-              <button
-                type="button"
-                id="closeScheduleModalBtn"
-                class="text-white/80 hover:text-white font-bold text-lg p-1"
-              >
-                ✕
-              </button>
-            </div>
-
-            <form id="scheduleForm" class="p-5 space-y-3.5 overflow-y-auto flex-1 text-xs">
-              <input type="hidden" id="schedId" value="" />
-
-              <div class="grid grid-cols-2 gap-3">
-                <div>
-                  <label class="block font-bold text-slate-700 uppercase text-[10px] mb-1">Thứ trong tuần *</label>
-                  <select id="schedDayOfWeek" class="w-full px-3 py-2 rounded-xl border border-slate-300 font-semibold bg-white" required>
-                    <option value="Thứ 2">Thứ 2</option>
-                    <option value="Thứ 3">Thứ 3</option>
-                    <option value="Thứ 4">Thứ 4</option>
-                    <option value="Thứ 5">Thứ 5</option>
-                    <option value="Thứ 6">Thứ 6</option>
-                    <option value="Thứ 7">Thứ 7</option>
-                    <option value="Chủ nhật">Chủ nhật</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block font-bold text-slate-700 uppercase text-[10px] mb-1">Ca học *</label>
-                  <select id="schedSession" class="w-full px-3 py-2 rounded-xl border border-slate-300 font-semibold bg-white" required>
-                    <option value="Sáng">🌅 Sáng (07:00 – 11:15)</option>
-                    <option value="Chiều">☀️ Chiều (13:00 – 17:15)</option>
-                    <option value="Tối">🌙 Tối (17:45 – 20:45)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label class="block font-bold text-slate-700 uppercase text-[10px] mb-1">Tiết học &amp; Khung giờ *</label>
-                <input
-                  type="text"
-                  id="schedPeriods"
-                  placeholder="VD: Tiết 1 – 5 (07:00 – 11:15)"
-                  class="w-full px-3 py-2 rounded-xl border border-slate-300 font-medium"
-                  required
-                />
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label class="block font-bold text-slate-700 uppercase text-[10px] mb-1">Tên môn học *</label>
-                  <input
-                    type="text"
-                    id="schedSubject"
-                    placeholder="VD: Marketing căn bản"
-                    class="w-full px-3 py-2 rounded-xl border border-slate-300 font-bold"
-                    required
-                  />
-                </div>
-                <div>
-                  <label class="block font-bold text-slate-700 uppercase text-[10px] mb-1">Mã lớp học phần</label>
-                  <input
-                    type="text"
-                    id="schedClassCode"
-                    placeholder="VD: 24DQTSX01"
-                    class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono font-semibold"
-                  />
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label class="block font-bold text-slate-700 uppercase text-[10px] mb-1">Phòng học *</label>
-                  <input
-                    type="text"
-                    id="schedRoom"
-                    placeholder="VD: A.302 (CS Vĩnh Viễn) hoặc Online"
-                    class="w-full px-3 py-2 rounded-xl border border-slate-300 font-semibold"
-                    required
-                  />
-                </div>
-                <div>
-                  <label class="block font-bold text-slate-700 uppercase text-[10px] mb-1">Link Nhóm Zalo lớp</label>
-                  <input
-                    type="text"
-                    id="schedGroupUrl"
-                    placeholder="VD: https://zalo.me/g/..."
-                    class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-[11px]"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label class="block font-bold text-slate-700 uppercase text-[10px] mb-1">Ghi chú hướng dẫn thêm</label>
-                <textarea
-                  id="schedNotes"
-                  rows="2"
-                  placeholder="VD: Học lý thuyết & bài tập mô phỏng, sinh viên mang theo tài liệu..."
-                  class="w-full px-3 py-2 rounded-xl border border-slate-300"
-                ></textarea>
-              </div>
-
-              <div class="flex items-center gap-2 pt-1">
-                <input type="checkbox" id="schedIsActive" class="w-4 h-4 rounded text-sky-700" checked />
-                <label for="schedIsActive" class="font-bold text-slate-800 cursor-pointer">
-                  Kích hoạt hiển thị lớp này trên trang Học liệu (/elearning)
-                </label>
-              </div>
-
-              <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-200">
-                <button
-                  type="button"
-                  id="cancelScheduleBtn"
-                  class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition-colors cursor-pointer"
-                >
-                  Hủy
-                </button>
-                <button
-                  type="submit"
-                  class="px-5 py-2 rounded-xl bg-sky-700 hover:bg-sky-800 text-white font-bold shadow-xs transition-colors cursor-pointer"
-                >
-                  Lưu Lịch Giảng
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-
         <!-- TAB 9: LỊCH SỬ CÂU HỎI & CÂU TRẢ LỜI TRỢ LÝ AI (TỰ ĐỘNG XÓA TRONG 30 NGÀY) -->
 
       <!-- TAB 10: TÀI KHOẢN & PHÂN QUYỀN ADMIN (MODULE 10) -->
@@ -2886,48 +2506,6 @@ if (isAuthenticated) {
         });
         const data = await resp.json();
         alert(data.message || 'Đã lưu!');
-      });
-    });
-
-    // Upsert DCCT code
-    const upsertDcctForm = document.getElementById('upsertDcctForm');
-    if (upsertDcctForm) {
-      upsertDcctForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const code = document.getElementById('dcctCode').value.trim();
-        const title = document.getElementById('dcctTitle').value.trim();
-        const url = document.getElementById('dcctUrl').value.trim();
-        const isPublic = code === '00' || code === '01';
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'upsert_dcct', code, title, url, is_public: isPublic }),
-        });
-        const data = await resp.json();
-        alert(data.message || 'Đã lưu!');
-        if (resp.ok) window.location.reload();
-      });
-    }
-
-    document.querySelectorAll('.edit-dcct-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        document.getElementById('dcctCode').value = btn.getAttribute('data-edit-code');
-        document.getElementById('dcctTitle').value = btn.getAttribute('data-edit-title');
-        document.getElementById('dcctUrl').value = btn.getAttribute('data-edit-url');
-        document.getElementById('dcctCode').focus();
-      });
-    });
-
-    document.querySelectorAll('.del-dcct-btn').forEach((btn) => {
-      btn.addEventListener('click', async () => {
-        const code = btn.getAttribute('data-del-code');
-        if (!confirm(`Xóa mã đề cương ${code}?`)) return;
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'delete_dcct', code }),
-        });
-        if (resp.ok) window.location.reload();
       });
     });
 
@@ -3881,146 +3459,6 @@ if (isAuthenticated) {
 
     // YouTube Videos Admin Management: removed
   
-    // Teaching Schedule Admin Logic
-    const schedModal = document.getElementById('scheduleModal');
-    const schedForm = document.getElementById('scheduleForm');
-    const schedModalTitle = document.getElementById('scheduleModalTitle');
-    const openAddSchedBtn = document.getElementById('openAddScheduleModalBtn');
-    const closeSchedBtn = document.getElementById('closeScheduleModalBtn');
-    const cancelSchedBtn = document.getElementById('cancelScheduleBtn');
-    const resetSchedBtn = document.getElementById('resetScheduleBtn');
-
-    function openScheduleModal(data) {
-      if (!schedModal) return;
-      if (data) {
-        if (schedModalTitle) schedModalTitle.innerHTML = '<span>✏️</span> Chỉnh Sửa Lịch Giảng Dạy';
-        document.getElementById('schedId').value = data.id || '';
-        document.getElementById('schedDayOfWeek').value = data.day_of_week || 'Thứ 2';
-        document.getElementById('schedSession').value = data.session || 'Sáng';
-        document.getElementById('schedPeriods').value = data.periods || '';
-        document.getElementById('schedSubject').value = data.subject || '';
-        document.getElementById('schedClassCode').value = data.class_code || '';
-        document.getElementById('schedRoom').value = data.room || '';
-        document.getElementById('schedGroupUrl').value = data.group_url || '';
-        document.getElementById('schedNotes').value = data.notes || '';
-        document.getElementById('schedIsActive').checked = data.is_active !== false;
-      } else {
-        if (schedModalTitle) schedModalTitle.innerHTML = '<span>➕</span> Thêm Lịch Giảng Dạy Mới';
-        document.getElementById('schedId').value = 'sched-' + Date.now();
-        document.getElementById('schedDayOfWeek').value = 'Thứ 2';
-        document.getElementById('schedSession').value = 'Sáng';
-        document.getElementById('schedPeriods').value = 'Tiết 1 – 5 (07:00 – 11:15)';
-        document.getElementById('schedSubject').value = '';
-        document.getElementById('schedClassCode').value = '';
-        document.getElementById('schedRoom').value = 'A.302 (CS Vĩnh Viễn)';
-        document.getElementById('schedGroupUrl').value = '';
-        document.getElementById('schedNotes').value = '';
-        document.getElementById('schedIsActive').checked = true;
-      }
-      schedModal.classList.remove('hidden');
-    }
-
-    function closeScheduleModal() {
-      if (schedModal) schedModal.classList.add('hidden');
-    }
-
-    if (openAddSchedBtn) openAddSchedBtn.onclick = () => openScheduleModal(null);
-    document.querySelectorAll('.btn-add-schedule-empty').forEach((btn) => {
-      btn.onclick = () => openScheduleModal(null);
-    });
-    if (closeSchedBtn) closeSchedBtn.onclick = closeScheduleModal;
-    if (cancelSchedBtn) cancelSchedBtn.onclick = closeScheduleModal;
-
-    document.querySelectorAll('.edit-sched-btn').forEach((btn) => {
-      btn.onclick = () => {
-        try {
-          const data = JSON.parse(btn.getAttribute('data-schedule') || '{}');
-          openScheduleModal(data);
-        } catch (err) {
-          console.error(err);
-        }
-      };
-    });
-
-    document.querySelectorAll('.delete-sched-btn').forEach((btn) => {
-      btn.onclick = async () => {
-        const id = btn.getAttribute('data-schedule-id');
-        const title = btn.getAttribute('data-schedule-title') || 'lớp này';
-        if (!confirm('Bạn có chắc chắn muốn xóa lịch giảng của môn: "' + title + '" không?')) return;
-        try {
-          const resp = await fetch('/api/admin/action', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'delete_schedule_item', id }),
-          });
-          const res = await resp.json();
-          alert(res.message || 'Đã xóa thành công!');
-          if (resp.ok) {
-            sessionStorage.setItem('adminActiveTab', 'tab-teaching-schedule');
-            window.location.reload();
-          }
-        } catch (e) {
-          alert('Lỗi: ' + e);
-        }
-      };
-    });
-
-    if (resetSchedBtn) {
-      resetSchedBtn.onclick = async () => {
-        if (!confirm('Bạn có chắc muốn khôi phục danh sách lịch giảng dạy mẫu mặc định không?')) return;
-        try {
-          const resp = await fetch('/api/admin/action', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'reset_teaching_schedule' }),
-          });
-          const res = await resp.json();
-          alert(res.message || 'Đã khôi phục thành công!');
-          if (resp.ok) {
-            sessionStorage.setItem('adminActiveTab', 'tab-teaching-schedule');
-            window.location.reload();
-          }
-        } catch (e) {
-          alert('Lỗi: ' + e);
-        }
-      };
-    }
-
-    if (schedForm) {
-      schedForm.onsubmit = async (e) => {
-        e.preventDefault();
-        const item = {
-          id: document.getElementById('schedId').value || ('sched-' + Date.now()),
-          day_of_week: document.getElementById('schedDayOfWeek').value,
-          session: document.getElementById('schedSession').value,
-          periods: document.getElementById('schedPeriods').value.trim(),
-          subject: document.getElementById('schedSubject').value.trim(),
-          class_code: document.getElementById('schedClassCode').value.trim(),
-          room: document.getElementById('schedRoom').value.trim(),
-          group_url: document.getElementById('schedGroupUrl').value.trim(),
-          notes: document.getElementById('schedNotes').value.trim(),
-          is_active: document.getElementById('schedIsActive').checked,
-        };
-
-        try {
-          const resp = await fetch('/api/admin/action', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'upsert_schedule_item', item }),
-          });
-          const res = await resp.json();
-          alert(res.message || 'Đã lưu lịch giảng thành công!');
-          if (resp.ok) {
-            sessionStorage.setItem('adminActiveTab', 'tab-teaching-schedule');
-            window.location.reload();
-          }
-        } catch (err) {
-          alert('Lỗi khi lưu: ' + err);
-        }
-      };
-    }
-
-
     // Tab 9: Chat Logs filter & delete handlers
     const filterChatLogsInput = document.getElementById('filterChatLogsInput');
     if (filterChatLogsInput) {
