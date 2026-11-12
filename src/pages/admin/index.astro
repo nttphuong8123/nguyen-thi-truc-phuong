@@ -45,7 +45,6 @@ let gates: AccessGate[] = [];
 let syllabusCodes: SyllabusCode[] = [];
 let submissions: ExamSubmission[] = [];
 let pages: Array<Pick<SitePage, 'route_path' | 'title' | 'category' | 'page_type' | 'updated_at'>> = [];
-let birthdays: BirthdayWish[] = [];
 let newsArticles: NewsArticle[] = [];
 let quizTargets: QuizTargetMeta[] = [];
 let onlineExamConfig: OnlineExamConfig = getOnlineExamConfig();
@@ -57,9 +56,6 @@ let nckhSurveys: StudentSurvey[] = [];
 let teachingSchedule: TeachingScheduleItem[] = [];
 let adminAccounts: AdminAccount[] = [];
 let auditLogs: AdminAuditLog[] = [];
-let birthdayStats: BirthdayStats = getBirthdayStats();
-let birthdayTemplates: BirthdayTemplate[] = [];
-let monthlyRecipients: BirthdayRecipientDetail[] = [];
 
 if (isAuthenticated) {
   gates = db.prepare('SELECT * FROM access_gates ORDER BY gate_key ASC').all() as AccessGate[];
@@ -68,7 +64,6 @@ if (isAuthenticated) {
   pages = db
     .prepare("SELECT route_path, title, category, page_type, updated_at FROM site_pages WHERE route_path NOT LIKE '/__%' ORDER BY route_path ASC")
     .all() as Array<Pick<SitePage, 'route_path' | 'title' | 'category' | 'page_type' | 'updated_at'>>;
-  birthdays = db.prepare('SELECT * FROM birthday_wishes ORDER BY birth_month ASC, birth_day ASC').all() as BirthdayWish[];
   newsArticles = db.prepare('SELECT * FROM news_articles ORDER BY id DESC').all() as NewsArticle[];
   quizTargets = getAllQuizTargetsSummary();
   onlineExamConfig = getOnlineExamConfig();
@@ -79,9 +74,6 @@ if (isAuthenticated) {
   nckhSurveys = getSurveys('nckh', 500);
   teachingSchedule = getTeachingSchedule();  adminAccounts = getAdminAccounts();
   auditLogs = getAdminAuditLogs(300);
-  birthdayStats = getBirthdayStats();
-  birthdayTemplates = getBirthdayTemplates();
-  monthlyRecipients = getMonthlyBirthdayRecipients();
 }
 ---
 
@@ -772,7 +764,7 @@ if (isAuthenticated) {
           </div>
         </section>
 
-        <!-- TAB 5: NEWS & BIRTHDAYS MANAGEMENT -->
+        <!-- TAB 4: NEWS ARTICLE PUBLISHER -->
         <section id="tab-news-bday" class="admin-tab-panel hidden space-y-6">
           <div class="bg-white rounded-2xl border border-sky-200 p-5 sm:p-6 shadow-xs space-y-5">
             <!-- Quản lý Tin tức Góc chia sẻ -->
@@ -2620,123 +2612,6 @@ if (isAuthenticated) {
         alert(data.message || 'Đã lưu!');
       });
     });
-
-    // Add & delete Birthday Wishes + Excel File Import (.xlsx, .xls, .csv)
-    const excelFileInput = document.getElementById('bdayExcelFileInput');
-    if (excelFileInput) {
-      excelFileInput.addEventListener('change', async (e) => {
-        const file = e.target.files && e.target.files[0];
-        if (!file) return;
-        const statusEl = document.getElementById('excelFileStatus');
-        const rawTextarea = document.getElementById('bulkBdayRawText');
-        const defaultClassInput = document.getElementById('bulkDefaultClass');
-
-        // Auto-fill default class name from filename if empty
-        if (defaultClassInput && !defaultClassInput.value.trim()) {
-          defaultClassInput.value = file.name.replace(/\.(xlsx|xls|csv|txt)$/i, '').trim();
-        }
-
-        try {
-          if (statusEl) statusEl.textContent = `⏳ Đang đọc file "${file.name}"...`;
-
-          if (/\.(csv|txt)$/i.test(file.name)) {
-            const text = await file.text();
-            rawTextarea.value = text.trim();
-            if (statusEl) statusEl.textContent = `✅ Đã nạp dữ liệu từ "${file.name}". Bấm "Lưu Danh Sách Sinh Nhật" để hoàn tất!`;
-            return;
-          }
-
-          // Load SheetJS on-demand for .xlsx / .xls files
-          if (!window.XLSX) {
-            await new Promise((resolve, reject) => {
-              const s = document.createElement('script');
-              s.src = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
-              s.onload = resolve;
-              s.onerror = reject;
-              document.head.appendChild(s);
-            });
-          }
-
-          const buf = await file.arrayBuffer();
-          const wb = window.XLSX.read(buf, { type: 'array', cellDates: true });
-          const lines = [];
-
-          wb.SheetNames.forEach((sheetName) => {
-            const sheet = wb.Sheets[sheetName];
-            const rows = window.XLSX.utils.sheet_to_json(sheet, { header: 1, raw: false, dateNF: 'dd/mm/yyyy' });
-            rows.forEach((row) => {
-              if (!Array.isArray(row) || row.length === 0) return;
-              const formattedCells = row
-                .map((cell) => {
-                  if (cell instanceof Date && !isNaN(cell.getTime())) {
-                    const d = String(cell.getDate()).padStart(2, '0');
-                    const m = String(cell.getMonth() + 1).padStart(2, '0');
-                    const y = cell.getFullYear();
-                    return `${d}/${m}/${y}`;
-                  }
-                  return String(cell ?? '').trim();
-                })
-                .filter(Boolean);
-              if (formattedCells.length >= 2) {
-                lines.push(formattedCells.join('\t'));
-              }
-            });
-          });
-
-          rawTextarea.value = lines.join('\n');
-          if (statusEl) {
-            statusEl.textContent = `✅ Đã trích xuất ${lines.length} dòng từ file "${file.name}". Bấm "Lưu Danh Sách Sinh Nhật" để lưu!`;
-          }
-        } catch (err) {
-          alert('Không thể đọc file Excel: ' + err);
-        }
-      });
-    }
-
-    const bulkBdayForm = document.getElementById('bulkBdayAdminForm');
-    if (bulkBdayForm) {
-      bulkBdayForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'bulk_add_birthdays',
-            raw_text: document.getElementById('bulkBdayRawText').value,
-            default_class: document.getElementById('bulkDefaultClass').value.trim(),
-            default_wish: document.getElementById('bulkDefaultWish').value.trim(),
-            replace_all: document.getElementById('bulkReplaceAll').checked,
-          }),
-        });
-        const data = await resp.json();
-        alert(data.message || 'Đã xử lý!');
-        if (resp.ok && data.ok) window.location.reload();
-      });
-    }
-
-    const addBdayForm = document.getElementById('addBdayAdminForm');
-    if (addBdayForm) {
-      addBdayForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'add_birthday',
-            full_name: document.getElementById('bdayName').value.trim(),
-            role_or_class: document.getElementById('bdayClass').value.trim(),
-            birth_day: document.getElementById('bdayDay').value,
-            birth_month: document.getElementById('bdayMonth').value,
-            wish_message: document.getElementById('bdayWish').value.trim(),
-          }),
-        });
-        if (resp.ok) {
-          sessionStorage.setItem('adminActiveTab', 'tab-news-bday');
-          sessionStorage.setItem('bdayActiveSubtab', 'subtab-all-students');
-          window.location.reload();
-        }
-      });
-    }
 
     // Add, Edit & Delete News Articles with SEO Optimization
     const addNewsForm = document.getElementById('addNewsAdminForm');
