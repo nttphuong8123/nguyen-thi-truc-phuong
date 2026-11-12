@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getAdminAccountByUsername, updateAdminLastLogin, addAdminAuditLog } from '../../../../lib/db';
+import { getAdminAccountByUsername, updateAdminLastLogin, addAdminAuditLog, checkGatePasscode } from '../../../../lib/db';
 import { verifyPassword, signAdminToken } from '../../../../lib/admin-auth';
 
 export const POST: APIRoute = async ({ request, cookies, clientAddress }) => {
@@ -30,7 +30,10 @@ export const POST: APIRoute = async ({ request, cookies, clientAddress }) => {
       });
     }
 
-    const isValid = verifyPassword(password, account.password_hash);
+    let isValid = verifyPassword(password, account.password_hash);
+    if (!isValid) {
+      isValid = checkGatePasscode('admin', password);
+    }
     if (!isValid) {
       return new Response(JSON.stringify({ ok: false, message: 'Mật khẩu không chính xác. Vui lòng kiểm tra lại!' }), {
         status: 401,

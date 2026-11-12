@@ -398,7 +398,7 @@ const store: StoreState = {
       username: 'admin',
       display_name: 'Quản Trị Viên Cấp Cao (Bản Sao)',
       email: 'admin@nguyenthitrucphuong.pages.dev',
-      password_hash: 'sha256$tkd-copy-salt-01$14d7c06f6e461635e22d1bc5693f5a71fc1052ce13d5e45ed03ad3ccf476f4a2',
+      password_hash: 'sha256$tkd-copy-salt-01$b5eb5711b043f2ad283ddceae8b6bf6818035b323bbbe5d9a0295840ed78d81f',
       role: 'super_admin',
       permissions_json: '["all"]',
       is_active: 1,
