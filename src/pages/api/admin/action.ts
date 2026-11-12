@@ -42,6 +42,8 @@ import { buildArticle } from '../../../lib/article-builder';
 import {
   getOnlineExamConfig,
   saveOnlineExamConfig,
+  addOnlineExamSubject,
+  deleteOnlineExamSubject,
   extractQuestionBankFromJs,
   extractModeCardsFromHtml,
   updateSitePageQuizData,
@@ -1059,6 +1061,64 @@ export const POST: APIRoute = async ({ request, cookies, clientAddress }) => {
           ok: true,
           message: 'Đã lưu cấu hình Cổng Thi Online (/ngan-hang-de-thi) lên Cloudflare D1!',
         }),
+        { status: 200 }
+      );
+    }
+
+    if (action === 'add_online_exam_subject') {
+      const rawLabel = String(body.label || '').trim();
+      if (!rawLabel) {
+        return new Response(JSON.stringify({ ok: false, error: 'Vui lòng nhập tên môn thi trắc nghiệm!' }), { status: 400 });
+      }
+      let key = String(body.key || '').trim().toLowerCase();
+      if (!key) {
+        key = rawLabel
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/đ/gi, 'd')
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+      }
+      const linkedRoute = String(body.linked_route || '').trim();
+      const useLinked = Boolean(body.use_linked_bank ?? (linkedRoute ? true : false));
+      let questions: QuizQuestionItem[] = [];
+      if (typeof body.questions_raw === 'string' && body.questions_raw.trim()) {
+        questions = parseBulkQuestionsText(body.questions_raw);
+      } else if (Array.isArray(body.questions)) {
+        questions = body.questions;
+      }
+
+      addOnlineExamSubject({
+        key,
+        label: rawLabel,
+        linked_route: linkedRoute || undefined,
+        use_linked_bank: useLinked,
+        enabled: body.enabled !== false,
+        questions,
+      });
+
+      logAdminAudit(adminUser, 'add_online_exam_subject', 'quiz_bank', `Thêm môn thi online mới: ${rawLabel} (${key}) - ${questions.length} câu hỏi`, clientIp);
+
+      return new Response(
+        JSON.stringify({
+          ok: true,
+          message: `Đã thêm thành công môn thi "${rawLabel}" vào Ngân hàng Đề thi Online!`,
+          subject: { key, label: rawLabel, questionCount: questions.length },
+        }),
+        { status: 200 }
+      );
+    }
+
+    if (action === 'delete_online_exam_subject') {
+      const key = String(body.key || '').trim();
+      if (!key) {
+        return new Response(JSON.stringify({ ok: false, error: 'Thiếu mã môn thi cần xóa!' }), { status: 400 });
+      }
+      deleteOnlineExamSubject(key);
+      logAdminAudit(adminUser, 'delete_online_exam_subject', 'quiz_bank', `Xóa môn thi online: ${key}`, clientIp);
+      return new Response(
+        JSON.stringify({ ok: true, message: 'Đã xóa môn thi khỏi Ngân hàng Đề thi Online!' }),
         { status: 200 }
       );
     }

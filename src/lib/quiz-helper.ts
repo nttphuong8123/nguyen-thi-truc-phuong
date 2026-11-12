@@ -790,6 +790,26 @@ export function getOnlineExamConfig(): OnlineExamConfig {
   if (!raw || !raw.trim()) return def;
   try {
     const parsed = JSON.parse(raw) as Partial<OnlineExamConfig>;
+    const defaultSubjects = def.subjects || [];
+
+    const mappedSubjects: OnlineExamSubjectConfig[] = Array.isArray(parsed.subjects) && parsed.subjects.length > 0
+      ? parsed.subjects.map((s) => {
+          const defSub = defaultSubjects.find((d) => d.key === s.key);
+          const mergedQuestions =
+            Array.isArray(s.questions) && s.questions.length > 0
+              ? s.questions
+              : (defSub?.questions || []);
+          return {
+            key: s.key,
+            label: s.label || defSub?.label || s.key,
+            enabled: s.enabled !== false,
+            linked_route: s.linked_route !== undefined ? s.linked_route : defSub?.linked_route,
+            use_linked_bank: (s.linked_route || defSub?.linked_route) ? (s.use_linked_bank ?? true) : false,
+            questions: mergedQuestions,
+          };
+        })
+      : defaultSubjects;
+
     return {
       header_badge: parsed.header_badge || def.header_badge,
       header_title: parsed.header_title || def.header_title,
@@ -797,22 +817,7 @@ export function getOnlineExamConfig(): OnlineExamConfig {
       step1_title: parsed.step1_title || def.step1_title,
       show_detailed_answers: parsed.show_detailed_answers !== undefined ? Boolean(parsed.show_detailed_answers) : false,
       modes: Array.isArray(parsed.modes) && parsed.modes.length > 0 ? parsed.modes : def.modes,
-      subjects:
-        Array.isArray(parsed.subjects) && parsed.subjects.length > 0
-          ? parsed.subjects.map((s) => {
-              const defSub = def.subjects.find((d) => d.key === s.key);
-              const mergedQuestions =
-                Array.isArray(s.questions) && s.questions.length >= (defSub?.questions.length || 50)
-                  ? s.questions
-                  : defSub?.questions || s.questions || [];
-              return {
-                ...defSub,
-                ...s,
-                use_linked_bank: s.linked_route || defSub?.linked_route ? (s.use_linked_bank ?? true) : false,
-                questions: mergedQuestions,
-              };
-            })
-          : def.subjects,
+      subjects: mappedSubjects,
     };
   } catch {
     return def;
@@ -821,6 +826,27 @@ export function getOnlineExamConfig(): OnlineExamConfig {
 
 export function saveOnlineExamConfig(cfg: OnlineExamConfig): void {
   saveOnlineExamConfigRaw(JSON.stringify(cfg));
+}
+
+export function addOnlineExamSubject(newSub: OnlineExamSubjectConfig): void {
+  const cfg = getOnlineExamConfig();
+  const existingIdx = cfg.subjects.findIndex((s) => s.key === newSub.key);
+  if (existingIdx !== -1) {
+    cfg.subjects[existingIdx] = {
+      ...cfg.subjects[existingIdx],
+      ...newSub,
+      questions: newSub.questions && newSub.questions.length > 0 ? newSub.questions : cfg.subjects[existingIdx].questions,
+    };
+  } else {
+    cfg.subjects.push(newSub);
+  }
+  saveOnlineExamConfig(cfg);
+}
+
+export function deleteOnlineExamSubject(key: string): void {
+  const cfg = getOnlineExamConfig();
+  cfg.subjects = cfg.subjects.filter((s) => s.key !== key);
+  saveOnlineExamConfig(cfg);
 }
 
 export function extractQuestionBankFromJs(js: string): QuizQuestionItem[] {

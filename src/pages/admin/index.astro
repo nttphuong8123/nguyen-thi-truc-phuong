@@ -10,13 +10,7 @@ import db, {
   type SyllabusCode,
   type ExamSubmission,
   type SitePage,
-  getBirthdayTemplates,
-  getBirthdayStats,
-  getMonthlyBirthdayRecipients,
-  type BirthdayWish,
-  type BirthdayTemplate,
-  type BirthdayStats,
-  type BirthdayRecipientDetail,
+
   type NewsArticle,
   type SiteContactConfig,
   type EvaluationCriterion,
@@ -244,7 +238,7 @@ if (isAuthenticated) {
             data-tab="tab-news-bday"
             class="admin-tab-btn bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-slate-200 cursor-pointer transition-colors"
           >
-            🎂 4. Tin Tức &amp; Sinh Nhật ({newsArticles.length + birthdays.length})
+            📰 4. Tin Tức &amp; Góc Chia Sẻ ({newsArticles.length})
           </button>
           <button
             type="button"
@@ -780,525 +774,7 @@ if (isAuthenticated) {
 
         <!-- TAB 5: NEWS & BIRTHDAYS MANAGEMENT -->
         <section id="tab-news-bday" class="admin-tab-panel hidden space-y-6">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Quản lý Chúc mừng sinh nhật -->
-            <div class="bg-white rounded-2xl border border-sky-200 p-5 shadow-xs space-y-4">
-              <!-- Header -->
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 border-b border-slate-100">
-                <div>
-                  <h3 class="font-extrabold text-base text-sky-950 flex items-center gap-2">
-                    <span>🎂</span> Quản Lý Sinh Nhật &amp; Kho Lời Chúc (Trang Chủ)
-                  </h3>
-                  <p class="text-xs text-slate-700 mt-0.5">
-                    Hệ thống phân phối ngẫu nhiên lời chúc riêng biệt cho từng sinh viên trong tháng. Lưu cố định vào DB, tuyệt đối không cấp trùng lặp.
-                  </p>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-xs bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full border border-sky-200">
-                    Tháng {birthdayStats.currentMonth}/{birthdayStats.currentYear}
-                  </span>
-                </div>
-              </div>
-
-              <!-- 4 Thẻ Thống Kê Kho & Trạng Thái Cấp Phát -->
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
-                <div class="p-3 rounded-xl bg-purple-50/70 border border-purple-200">
-                  <span class="text-[11px] font-bold text-purple-700 block uppercase">📦 Tổng kho lời chúc</span>
-                  <span class="text-xl font-extrabold text-purple-900 num-font mt-0.5 block">{birthdayStats.totalTemplates} câu</span>
-                </div>
-                <div class="p-3 rounded-xl bg-sky-50/70 border border-sky-200">
-                  <span class="text-[11px] font-bold text-sky-700 block uppercase">🎯 Đã dùng tháng {birthdayStats.currentMonth}</span>
-                  <span class="text-xl font-extrabold text-sky-900 num-font mt-0.5 block">{birthdayStats.usedThisMonth}</span>
-                </div>
-                <div class={`p-3 rounded-xl border ${birthdayStats.remainingThisMonth > 0 ? 'bg-emerald-50/70 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'}`}>
-                  <span class="text-[11px] font-bold block uppercase">🟢 Khả dụng còn lại</span>
-                  <span class="text-xl font-extrabold num-font mt-0.5 block">{birthdayStats.remainingThisMonth}</span>
-                </div>
-                <div class="p-3 rounded-xl bg-amber-50/70 border border-amber-200">
-                  <span class="text-[11px] font-bold text-amber-700 block uppercase">👥 Sinh nhật tháng {birthdayStats.currentMonth}</span>
-                  <span class="text-xl font-extrabold text-amber-900 num-font mt-0.5 block">{birthdayStats.monthPersonsCount} SV</span>
-                </div>
-              </div>
-
-              <!-- Cảnh Báo Trạng Thái Kho -->
-              {!birthdayStats.isSufficient ? (
-                <div class="p-3.5 rounded-xl bg-rose-50 border border-rose-300 text-rose-900 text-xs flex items-center justify-between gap-3">
-                  <div class="flex items-center gap-2 font-medium">
-                    <span class="text-lg">⚠️</span>
-                    <span>
-                      <strong>Kho lời chúc không đủ!</strong> Cần thêm <strong>{birthdayStats.missingCount}</strong> câu cho sinh viên tháng này. Hệ thống đã dừng cấp trùng.
-                    </span>
-                  </div>
-                  <button
-                    type="button"
-                    class="switch-to-bday-tab px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shrink-0 cursor-pointer"
-                    data-target-subtab="subtab-templates"
-                  >
-                    ➕ Bổ sung kho
-                  </button>
-                </div>
-              ) : birthdayStats.unassignedPersonsCount === 0 && birthdayStats.monthPersonsCount > 0 ? (
-                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs flex items-center gap-2 font-medium">
-                  <span class="text-base">✅</span>
-                  <span>100% sinh viên có sinh nhật trong tháng {birthdayStats.currentMonth} ({birthdayStats.monthPersonsCount} bạn) đã được cấp lời chúc cố định riêng biệt!</span>
-                </div>
-              ) : null}
-
-              <!-- Nút Thao Tác Phân Phối -->
-              <div class="flex flex-wrap items-center justify-between gap-2 pt-1 pb-1">
-                <div class="flex flex-wrap items-center gap-2">
-                  <button
-                    type="button"
-                    id="distributeNewBdaysBtn"
-                    class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-sky-700 hover:bg-sky-800 text-white font-bold text-xs cursor-pointer shadow-2xs transition-colors"
-                  >
-                    <span>🎲</span>
-                    <span>Phân Phối Cho Người Mới ({birthdayStats.unassignedPersonsCount})</span>
-                  </button>
-                  <button
-                    type="button"
-                    id="forceRedistributeBdaysBtn"
-                    class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs cursor-pointer shadow-2xs transition-colors"
-                  >
-                    <span>🔄</span>
-                    <span>Phân Phối Lại Toàn Bộ (Có Xác Nhận)</span>
-                  </button>
-                </div>
-                <span class="text-[11px] text-slate-500 italic">Múi giờ Việt Nam (Asia/Ho_Chi_Minh)</span>
-              </div>
-
-              <!-- Thanh Điều Hướng 3 Sub-Tabs -->
-              <div class="flex border-b border-slate-200 text-xs font-bold gap-2 pt-2">
-                <button
-                  type="button"
-                  data-subtab="subtab-recipients"
-                  class="bday-subtab-btn pb-2.5 px-2 text-sky-800 border-b-2 border-sky-700 cursor-pointer"
-                >
-                  🎯 1. Đã Cấp Tháng {birthdayStats.currentMonth} ({monthlyRecipients.length})
-                </button>
-                <button
-                  type="button"
-                  data-subtab="subtab-templates"
-                  class="bday-subtab-btn pb-2.5 px-2 text-slate-500 hover:text-slate-800 border-b-2 border-transparent cursor-pointer"
-                >
-                  📚 2. Kho Lời Chúc ({birthdayStats.totalTemplates})
-                </button>
-                <button
-                  type="button"
-                  data-subtab="subtab-all-students"
-                  class="bday-subtab-btn pb-2.5 px-2 text-slate-500 hover:text-slate-800 border-b-2 border-transparent cursor-pointer"
-                >
-                  👥 3. Sinh Viên Toàn Trường ({birthdays.length})
-                </button>
-              </div>
-
-              <!-- SUB-TAB 1: DANH SÁCH NGƯỜI NHẬN THÁNG NÀY & LỜI CHÚC ĐƯỢC CẤP -->
-              <div id="subtab-recipients" class="bday-subtab-panel space-y-3">
-                <div class="overflow-x-auto rounded-xl border border-slate-200 max-h-80 overflow-y-auto">
-                  <table class="w-full text-left border-collapse text-xs">
-                    <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200 sticky top-0">
-                      <tr>
-                        <th class="p-2.5 w-10 text-center">STT</th>
-                        <th class="p-2.5">Họ và tên</th>
-                        <th class="p-2.5">Lớp / Đơn vị</th>
-                        <th class="p-2.5 text-center">Ngày sinh</th>
-                        <th class="p-2.5 text-center w-24">ID Lời chúc</th>
-                        <th class="p-2.5">Nội dung lời chúc được cấp</th>
-                      </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-100 text-slate-800">
-                      {monthlyRecipients.map((r, idx) => (
-                        <tr class="hover:bg-slate-50/70 transition-colors">
-                          <td class="p-2.5 text-center font-bold text-slate-400">#{idx + 1}</td>
-                          <td class="p-2.5 font-bold text-slate-900">{r.full_name}</td>
-                          <td class="p-2.5 text-slate-600">{r.role_or_class}</td>
-                          <td class="p-2.5 text-center font-mono font-bold text-rose-600">
-                            {String(r.birth_day).padStart(2, '0')}/{String(r.birth_month).padStart(2, '0')}
-                          </td>
-                          <td class="p-2.5 text-center">
-                            {r.template_id ? (
-                              <span class="inline-block px-2 py-0.5 rounded font-mono font-bold text-[10.5px] bg-purple-100 text-purple-800">
-                                #{r.template_id}
-                              </span>
-                            ) : (
-                              <span class="inline-block px-2 py-0.5 rounded text-[10px] bg-rose-100 text-rose-700 font-bold">
-                                Chưa cấp
-                              </span>
-                            )}
-                          </td>
-                          <td class="p-2.5 italic text-slate-700">{r.wish_content}</td>
-                        </tr>
-                      ))}
-                      {monthlyRecipients.length === 0 && (
-                        <tr>
-                          <td colspan="6" class="p-6 text-center text-slate-400 italic">Tháng này chưa có sinh viên nào có ngày sinh.</td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              <!-- SUB-TAB 2: KHO LỜI CHÚC (TEMPLATES REPOSITORY) -->
-              <div id="subtab-templates" class="bday-subtab-panel hidden space-y-4">
-                <!-- Form thêm lời chúc đơn -->
-                <form id="addTemplateForm" class="flex flex-col sm:flex-row gap-2">
-                  <input
-                    type="text"
-                    id="newTemplateContent"
-                    required
-                    placeholder="Nhập nội dung lời chúc mới vào kho (hệ thống tự kiểm tra trùng)..."
-                    class="flex-1 px-3 py-2 rounded-xl border border-slate-300 text-xs"
-                  />
-                  <input
-                    type="text"
-                    id="newTemplateCategory"
-                    value="Chung"
-                    placeholder="Danh mục..."
-                    class="sm:w-28 px-3 py-2 rounded-xl border border-slate-300 text-xs"
-                  />
-                  <button
-                    type="submit"
-                    class="px-4 py-2 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs cursor-pointer shrink-0 transition-colors"
-                  >
-                    ➕ Thêm Vào Kho
-                  </button>
-                </form>
-
-                <!-- Form Bulk Import Lời Chúc (Excel / Dán) -->
-                <details class="bg-purple-50/50 border border-purple-200 rounded-xl p-3 group">
-                  <summary class="font-bold text-xs text-purple-950 cursor-pointer flex items-center justify-between">
-                    <span>📥 Nhập Hàng Loạt Lời Chúc (Excel / Dán Văn Bản - Tự Động Lọc Trùng)</span>
-                    <span class="text-[11px] text-purple-700 underline group-open:hidden">Mở khung Import ▼</span>
-                  </summary>
-                  <form id="bulkTemplateForm" class="mt-3 space-y-2.5 text-xs">
-                    <div class="flex items-center justify-between gap-2 p-2.5 rounded-lg bg-white border border-dashed border-purple-300">
-                      <span class="text-slate-600 text-[11px]">Chọn file Excel/CSV chứa danh sách lời chúc:</span>
-                      <label class="px-3 py-1.5 rounded-lg bg-purple-700 hover:bg-purple-800 text-white font-bold cursor-pointer shrink-0">
-                        <span>📂 Tải File Excel</span>
-                        <input type="file" id="templateExcelInput" accept=".xlsx,.xls,.csv,.txt" class="hidden" />
-                      </label>
-                    </div>
-                    <textarea
-                      id="bulkTemplateRawText"
-                      rows="3"
-                      required
-                      placeholder="Hoặc dán trực tiếp danh sách lời chúc vào đây (mỗi câu 1 dòng)..."
-                      class="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white font-mono text-xs"
-                    ></textarea>
-                    <div class="flex items-center justify-end">
-                      <button
-                        type="submit"
-                        class="px-4 py-2 rounded-lg bg-purple-700 hover:bg-purple-800 text-white font-bold cursor-pointer"
-                      >
-                        📥 Nạp Vào Kho Lời Chúc
-                      </button>
-                    </div>
-                  </form>
-                </details>
-
-                <!-- Thanh công cụ & Bảng danh sách lời chúc trong kho -->
-                <div class="space-y-2.5">
-                  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                    <div class="flex items-center gap-2 flex-1">
-                      <input
-                        type="text"
-                        id="templateSearchInput"
-                        placeholder="🔍 Tìm kiếm lời chúc trong kho..."
-                        class="w-full sm:w-72 px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-xs focus:outline-none focus:border-purple-600"
-                      />
-                      <span id="selectedTemplatesBadge" class="hidden text-xs font-bold text-purple-900 bg-purple-100 px-2.5 py-1 rounded-lg shrink-0">
-                        Đã chọn: <span id="selectedTemplatesCount">0</span>
-                      </span>
-                    </div>
-                    <div class="flex items-center gap-1.5 flex-wrap justify-end">
-                      <button
-                        type="button"
-                        id="toggleSelectAllTemplatesBtn"
-                        class="px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs border border-slate-300 cursor-pointer shadow-2xs transition-colors"
-                      >
-                        ☑️ Chọn tất cả
-                      </button>
-                      <button
-                        type="button"
-                        id="bulkDeleteTemplatesBtn"
-                        class="hidden px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs cursor-pointer shadow-2xs transition-colors"
-                      >
-                        🗑️ Xóa đã chọn (<span id="bulkDeleteTemplatesCount">0</span>)
-                      </button>
-                      {birthdayTemplates.length > 0 && (
-                        <button
-                          type="button"
-                          id="clearAllTemplatesBtn"
-                          class="px-2.5 py-1.5 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-800 font-bold text-xs cursor-pointer transition-colors"
-                        >
-                          ⚠️ Xóa toàn bộ kho
-                        </button>
-                      )}
-                    </div>
-                  </div>
-
-                  <div class="overflow-x-auto rounded-xl border border-slate-200 max-h-80 overflow-y-auto">
-                    <table class="w-full text-left border-collapse text-xs" id="templatesTable">
-                      <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200 sticky top-0 z-10">
-                        <tr>
-                          <th class="p-2.5 w-10 text-center">
-                            <input
-                              type="checkbox"
-                              id="selectAllTemplatesHeaderCheckbox"
-                              title="Chọn / Bỏ chọn tất cả"
-                              class="w-4 h-4 cursor-pointer accent-purple-700 rounded"
-                            />
-                          </th>
-                          <th class="p-2.5 w-14 text-center">ID</th>
-                          <th class="p-2.5">Nội dung lời chúc</th>
-                          <th class="p-2.5 w-24">Danh mục</th>
-                          <th class="p-2.5 text-center w-16">Thao tác</th>
-                        </tr>
-                      </thead>
-                      <tbody class="divide-y divide-slate-100 text-slate-800" id="templatesTableBody">
-                        {birthdayTemplates.map((t) => (
-                          <tr class="template-row hover:bg-slate-50/70 transition-colors" data-search={`${t.id} ${t.content.toLowerCase()} ${(t.category || '').toLowerCase()}`}>
-                            <td class="p-2.5 text-center">
-                              <input
-                                type="checkbox"
-                                class="tmpl-select-cb w-4 h-4 cursor-pointer accent-purple-700 rounded"
-                                data-tmpl-id={t.id}
-                              />
-                            </td>
-                            <td class="p-2.5 text-center font-mono font-bold text-purple-900">#{t.id}</td>
-                            <td class="p-2.5 text-slate-800 template-content">{t.content}</td>
-                            <td class="p-2.5 text-slate-500">{t.category || 'Chung'}</td>
-                            <td class="p-2.5 text-center">
-                              <button
-                                type="button"
-                                class="del-template-btn text-rose-600 hover:text-rose-800 font-bold text-xs cursor-pointer p-1"
-                                data-tmpl-id={t.id}
-                                title="Xóa lời chúc khỏi kho"
-                              >
-                                🗑️
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                        {birthdayTemplates.length === 0 && (
-                          <tr>
-                            <td colspan="5" class="p-6 text-center text-slate-400 italic">Chưa có lời chúc nào trong kho.</td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-
-              <!-- SUB-TAB 3: DANH SÁCH SINH VIÊN TOÀN TRƯỜNG -->
-              <div id="subtab-all-students" class="bday-subtab-panel hidden space-y-4">
-                <!-- Nhập nhanh danh sách lớp từ File Excel (.xlsx, .xls, .csv) hoặc Copy/Paste -->
-                <details class="bg-rose-50/50 border border-rose-200 rounded-xl p-3.5 group">
-                  <summary class="font-bold text-xs sm:text-sm text-rose-900 cursor-pointer flex items-center justify-between">
-                    <span>📂 Import File Excel Danh Sách Lớp (.xlsx, .xls, .csv) / Dán Nhanh</span>
-                    <span class="text-[11px] text-rose-600 underline group-open:hidden">Mở khung Import Excel ▼</span>
-                  </summary>
-                  <form id="bulkBdayAdminForm" class="mt-3 space-y-2.5 text-xs">
-                    <div class="p-3 rounded-xl bg-white border border-dashed border-rose-300 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-                      <div>
-                        <p class="font-bold text-rose-950">Tải lên trực tiếp File Excel danh sách lớp (.xlsx, .xls, .csv)</p>
-                        <p id="excelFileStatus" class="text-[11px] text-slate-700 mt-0.5">
-                          Hệ thống tự động nhận diện cột Họ tên, Ngày sinh (DD/MM/YYYY) và Lớp học phần.
-                        </p>
-                      </div>
-                      <label class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold cursor-pointer shrink-0 shadow-2xs transition-colors">
-                        <span>📂 Chọn File Excel</span>
-                        <input type="file" id="bdayExcelFileInput" accept=".xlsx,.xls,.csv,.txt" class="hidden" />
-                      </label>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      <input
-                        type="text"
-                        id="bulkDefaultClass"
-                        placeholder="Tên lớp mặc định (VD: CĐ QTKD K26A)"
-                        class="px-3 py-2 rounded-lg border border-slate-300 bg-white font-semibold"
-                      />
-                      <input
-                        type="text"
-                        id="bulkDefaultWish"
-                        placeholder="Để trống sẽ tự động phân phối từ kho lời chúc"
-                        class="px-3 py-2 rounded-lg border border-slate-300 bg-white"
-                      />
-                    </div>
-                    <textarea
-                      id="bulkBdayRawText"
-                      rows="3"
-                      required
-                      placeholder="Hoặc dán trực tiếp danh sách từ Excel vào đây (Họ tên [Tab] Ngày sinh [Tab] Lớp)..."
-                      class="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white font-mono text-xs"
-                    ></textarea>
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1">
-                      <label class="inline-flex items-center gap-2 text-slate-700 font-medium cursor-pointer">
-                        <input type="checkbox" id="bulkReplaceAll" class="rounded border-slate-300 text-rose-600" />
-                        <span>Xóa danh sách cũ trước khi Import danh sách mới</span>
-                      </label>
-                      <button
-                        type="submit"
-                        class="px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold cursor-pointer shrink-0"
-                      >
-                        📥 Lưu Danh Sách Sinh Nhật
-                      </button>
-                    </div>
-                  </form>
-                </details>
-
-                <form id="addBdayAdminForm" class="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
-                  <input
-                    type="text"
-                    id="bdayName"
-                    required
-                    placeholder="Họ và tên..."
-                    class="sm:col-span-5 px-3 py-2 rounded-xl border border-slate-300 text-xs font-semibold"
-                  />
-                  <input
-                    type="text"
-                    id="bdayClass"
-                    required
-                    placeholder="Lớp / Đơn vị..."
-                    class="sm:col-span-4 px-3 py-2 rounded-xl border border-slate-300 text-xs"
-                  />
-                  <input
-                    type="number"
-                    id="bdayDay"
-                    min="1"
-                    max="31"
-                    required
-                    placeholder="Ngày"
-                    class="sm:col-span-1 px-2 py-2 rounded-xl border border-slate-300 text-xs num-font text-center"
-                  />
-                  <input
-                    type="number"
-                    id="bdayMonth"
-                    min="1"
-                    max="12"
-                    required
-                    placeholder="Tháng"
-                    class="sm:col-span-2 px-2 py-2 rounded-xl border border-slate-300 text-xs num-font text-center"
-                  />
-                  <input
-                    type="text"
-                    id="bdayWish"
-                    placeholder="Để trống sẽ tự động cấp từ kho lời chúc..."
-                    class="sm:col-span-9 px-3 py-2 rounded-xl border border-slate-300 text-xs"
-                  />
-                  <button
-                    type="submit"
-                    class="sm:col-span-3 py-2 rounded-xl bg-sky-700 hover:bg-sky-800 text-white font-bold text-xs cursor-pointer"
-                  >
-                    ➕ Thêm Sinh Nhật
-                  </button>
-                </form>
-
-                <!-- Thanh công cụ & Bảng danh sách sinh viên toàn trường -->
-                <div class="space-y-2.5">
-                  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                    <div class="flex items-center gap-2 flex-1">
-                      <input
-                        type="text"
-                        id="studentSearchInput"
-                        placeholder="🔍 Tìm sinh viên theo tên, lớp, ngày sinh..."
-                        class="w-full sm:w-72 px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-xs focus:outline-none focus:border-rose-600"
-                      />
-                      <span id="selectedStudentsBadge" class="hidden text-xs font-bold text-rose-900 bg-rose-100 px-2.5 py-1 rounded-lg shrink-0">
-                        Đã chọn: <span id="selectedStudentsCount">0</span>
-                      </span>
-                    </div>
-                    <div class="flex items-center gap-1.5 flex-wrap justify-end">
-                      <button
-                        type="button"
-                        id="toggleSelectAllStudentsBtn"
-                        class="px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs border border-slate-300 cursor-pointer shadow-2xs transition-colors"
-                      >
-                        ☑️ Chọn tất cả
-                      </button>
-                      <button
-                        type="button"
-                        id="bulkDeleteStudentsBtn"
-                        class="hidden px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs cursor-pointer shadow-2xs transition-colors"
-                      >
-                        🗑️ Xóa đã chọn (<span id="bulkDeleteStudentsCount">0</span>)
-                      </button>
-                      {birthdays.length > 0 && (
-                        <button
-                          type="button"
-                          id="clearAllBdaysBtn"
-                          class="px-2.5 py-1.5 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-800 font-bold text-xs cursor-pointer transition-colors"
-                        >
-                          ⚠️ Xóa tất cả sinh viên
-                        </button>
-                      )}
-                    </div>
-                  </div>
-
-                  <div class="overflow-x-auto rounded-xl border border-slate-200 max-h-80 overflow-y-auto">
-                    <table class="w-full text-left border-collapse text-xs" id="studentsTable">
-                      <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200 sticky top-0 z-10">
-                        <tr>
-                          <th class="p-2.5 w-10 text-center">
-                            <input
-                              type="checkbox"
-                              id="selectAllStudentsHeaderCheckbox"
-                              title="Chọn / Bỏ chọn tất cả"
-                              class="w-4 h-4 cursor-pointer accent-rose-600 rounded"
-                            />
-                          </th>
-                          <th class="p-2.5 w-12 text-center">STT</th>
-                          <th class="p-2.5">Họ và tên</th>
-                          <th class="p-2.5">Lớp / Đơn vị</th>
-                          <th class="p-2.5 text-center w-24">Ngày sinh</th>
-                          <th class="p-2.5">Lời chúc gán riêng</th>
-                          <th class="p-2.5 text-center w-16">Thao tác</th>
-                        </tr>
-                      </thead>
-                      <tbody class="divide-y divide-slate-100 text-slate-800" id="studentsTableBody">
-                        {birthdays.map((b, idx) => (
-                          <tr class="student-row hover:bg-slate-50/70 transition-colors" data-search={`${b.full_name.toLowerCase()} ${b.role_or_class.toLowerCase()} ${String(b.birth_day).padStart(2, '0')}/${String(b.birth_month).padStart(2, '0')}`}>
-                            <td class="p-2.5 text-center">
-                              <input
-                                type="checkbox"
-                                class="student-select-cb w-4 h-4 cursor-pointer accent-rose-600 rounded"
-                                data-bday-id={b.id}
-                              />
-                            </td>
-                            <td class="p-2.5 text-center font-bold text-slate-400">#{idx + 1}</td>
-                            <td class="p-2.5 font-bold text-slate-900">{b.full_name}</td>
-                            <td class="p-2.5 text-slate-600">{b.role_or_class}</td>
-                            <td class="p-2.5 text-center font-mono font-bold text-rose-600">
-                              {String(b.birth_day).padStart(2, '0')}/{String(b.birth_month).padStart(2, '0')}
-                            </td>
-                            <td class="p-2.5 text-slate-500 italic max-w-xs truncate">{b.wish_message || '—'}</td>
-                            <td class="p-2.5 text-center">
-                              <button
-                                type="button"
-                                data-del-bday={b.id}
-                                class="del-bday-btn text-rose-600 hover:text-rose-800 font-bold text-xs cursor-pointer p-1"
-                                title="Xóa sinh viên này"
-                              >
-                                🗑️
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                        {birthdays.length === 0 && (
-                          <tr>
-                            <td colspan="7" class="p-6 text-center text-slate-400 italic">Chưa có sinh viên nào trong danh sách.</td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+          <div class="bg-white rounded-2xl border border-sky-200 p-5 sm:p-6 shadow-xs space-y-5">
             <!-- Quản lý Tin tức Góc chia sẻ -->
             <div class="bg-white rounded-2xl border border-sky-200 p-5 shadow-xs space-y-4">
               <div class="flex items-center justify-between gap-2">
@@ -1592,8 +1068,23 @@ if (isAuthenticated) {
               </div>
 
               <!-- Danh sách 10 môn học trên Cổng Thi Online -->
-              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5">
-                <h3 class="font-extrabold text-slate-900">📚 Danh Sách Môn Học Dự Thi Trên /ngan-hang-de-thi</h3>
+              <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3.5">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
+                  <div>
+                    <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                      <span>📚</span>
+                      <span>Danh Sách Môn Học Dự Thi Trên /ngan-hang-de-thi ({onlineExamConfig.subjects.length} môn)</span>
+                    </h3>
+                    <p class="text-2xs sm:text-xs text-slate-600 mt-0.5">Sinh viên chỉ thấy các môn có trạng thái Bật và có câu hỏi trắc nghiệm</p>
+                  </div>
+                  <button
+                    type="button"
+                    id="openAddOnlineSubjectBtn"
+                    class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#742D3A] to-[#A83245] hover:opacity-95 text-white font-extrabold text-xs shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
+                  >
+                    <span>➕</span> Thêm Môn Thi Trắc Nghiệm Mới
+                  </button>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                   {onlineExamConfig.subjects.map((sub) => (
                     <div
@@ -1623,6 +1114,15 @@ if (isAuthenticated) {
                           <span>Dùng kho lớn ({sub.linked_route.split('/').pop()})</span>
                         </label>
                       )}
+                      <button
+                        type="button"
+                        class="del-online-subject-btn p-1.5 text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer shrink-0"
+                        data-key={sub.key}
+                        data-label={sub.label}
+                        title="Xóa môn thi này khỏi ngân hàng đề thi online"
+                      >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                      </button>
                     </div>
                   ))}
                 </div>
@@ -4347,518 +3847,264 @@ if (isAuthenticated) {
       };
     }
   
-    // Sub-tabs in Birthday Section
-    const bdaySubtabBtns = document.querySelectorAll('.bday-subtab-btn');
-    const bdaySubtabPanels = document.querySelectorAll('.bday-subtab-panel');
+    
+    // ==========================================
+    // Quản lý Môn Thi Trắc Nghiệm Online (/ngan-hang-de-thi)
+    // ==========================================
+    const addOnlineSubjectModal = document.getElementById('addOnlineSubjectModal');
+    const openAddOnlineSubjectBtn = document.getElementById('openAddOnlineSubjectBtn');
+    const closeAddOnlineSubjectModalBtn = document.getElementById('closeAddOnlineSubjectModalBtn');
+    const cancelAddOnlineSubjectBtn = document.getElementById('cancelAddOnlineSubjectBtn');
+    const addOnlineSubjectForm = document.getElementById('addOnlineSubjectForm');
+    const newSubLabel = document.getElementById('newSubLabel');
+    const newSubKey = document.getElementById('newSubKey');
 
-    function switchBdaySubtab(tabId) {
-      bdaySubtabBtns.forEach((btn) => {
-        const isCurrent = btn.getAttribute('data-subtab') === tabId;
-        if (isCurrent) {
-          btn.className = 'bday-subtab-btn pb-2.5 px-2 text-sky-800 border-b-2 border-sky-700 font-bold cursor-pointer';
-        } else {
-          btn.className = 'bday-subtab-btn pb-2.5 px-2 text-slate-500 hover:text-slate-800 border-b-2 border-transparent font-bold cursor-pointer';
-        }
-      });
-      bdaySubtabPanels.forEach((p) => {
-        if (p.id === tabId) {
-          p.classList.remove('hidden');
-        } else {
-          p.classList.add('hidden');
-        }
-      });
-      sessionStorage.setItem('bdayActiveSubtab', tabId);
+    function openSubjectModal() {
+      if (addOnlineSubjectModal) {
+        addOnlineSubjectModal.classList.remove('hidden');
+        newSubLabel?.focus();
+      }
     }
 
-    bdaySubtabBtns.forEach((btn) => {
-      btn.onclick = () => {
-        const target = btn.getAttribute('data-subtab');
-        if (target) switchBdaySubtab(target);
-      };
+    function closeSubjectModal() {
+      if (addOnlineSubjectModal) {
+        addOnlineSubjectModal.classList.add('hidden');
+        addOnlineSubjectForm?.reset();
+      }
+    }
+
+    openAddOnlineSubjectBtn?.addEventListener('click', openSubjectModal);
+    closeAddOnlineSubjectModalBtn?.addEventListener('click', closeSubjectModal);
+    cancelAddOnlineSubjectBtn?.addEventListener('click', closeSubjectModal);
+
+    // Auto slug generator
+    newSubLabel?.addEventListener('input', () => {
+      if (newSubKey && !newSubKey.dataset.userEdited) {
+        const val = newSubLabel.value.trim();
+        const slug = val
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/đ/gi, 'd')
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+        newSubKey.value = slug;
+      }
     });
 
-    document.querySelectorAll('.switch-to-bday-tab').forEach((btn) => {
-      btn.onclick = () => {
-        const target = btn.getAttribute('data-target-subtab');
-        if (target) switchBdaySubtab(target);
-      };
+    newSubKey?.addEventListener('input', () => {
+      newSubKey.dataset.userEdited = 'true';
     });
 
-    const savedBdaySubtab = sessionStorage.getItem('bdayActiveSubtab');
-    if (savedBdaySubtab && document.getElementById(savedBdaySubtab)) {
-      switchBdaySubtab(savedBdaySubtab);
-    }
+    // Submit Thêm môn thi mới
+    addOnlineSubjectForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const label = newSubLabel?.value.trim();
+      const key = newSubKey?.value.trim();
+      if (!label) {
+        alert('Vui lòng nhập tên môn học dự thi!');
+        return;
+      }
 
-    // Phân phối cho người mới
-    const distributeNewBdaysBtn = document.getElementById('distributeNewBdaysBtn');
-    if (distributeNewBdaysBtn) {
-      distributeNewBdaysBtn.onclick = async () => {
+      const sourceRadio = document.querySelector('input[name="newSubSource"]:checked');
+      const isLinked = sourceRadio?.value === 'linked';
+      const linkedRoute = isLinked ? document.getElementById('newSubLinkedRoute')?.value : '';
+      const questionsRaw = !isLinked ? document.getElementById('newSubQuestionsRaw')?.value : '';
+      const enabled = document.getElementById('newSubEnabled')?.checked ?? true;
+
+      const submitBtn = document.getElementById('submitAddOnlineSubjectBtn');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '⏳ Đang lưu...';
+      }
+
+      try {
         const resp = await fetch('/api/admin/action', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'distribute_birthday_wishes', force_redistribute: false }),
+          body: JSON.stringify({
+            action: 'add_online_exam_subject',
+            label,
+            key,
+            linked_route: linkedRoute,
+            use_linked_bank: Boolean(linkedRoute),
+            questions_raw: questionsRaw,
+            enabled,
+          }),
         });
         const res = await resp.json();
-        alert(res.message || 'Đã xử lý!');
         if (resp.ok && res.ok) {
-          sessionStorage.setItem('adminActiveTab', 'tab-news-bday');
+          alert(res.message || 'Đã thêm môn thi thành công!');
+          sessionStorage.setItem('adminActiveTab', 'tab-quiz-bank');
           window.location.reload();
+        } else {
+          alert('Lỗi: ' + (res.error || res.message || 'Không thể thêm môn thi'));
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>💾</span> Lưu &amp; Thêm Môn Thi';
+          }
         }
-      };
-    }
-
-    // Phân phối lại toàn bộ có xác nhận
-    const forceRedistributeBdaysBtn = document.getElementById('forceRedistributeBdaysBtn');
-    if (forceRedistributeBdaysBtn) {
-      forceRedistributeBdaysBtn.onclick = async () => {
-        const ok = confirm('⚠️ BẠN CÓ CHẮC CHẮN MUỐN PHÂN PHỐI LẠI TOÀN BỘ?\n\nThao tác này sẽ xóa các lời chúc đã cấp trong tháng hiện tại và xáo trộn ngẫu nhiên cấp lại từ kho lời chúc. Kết quả mới sẽ được lưu cố định vào cơ sở dữ liệu.');
-        if (!ok) return;
-
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'distribute_birthday_wishes', force_redistribute: true }),
-        });
-        const res = await resp.json();
-        alert(res.message || 'Đã xử lý!');
-        if (resp.ok && res.ok) {
-          sessionStorage.setItem('adminActiveTab', 'tab-news-bday');
-          window.location.reload();
+      } catch (err) {
+        alert('Lỗi kết nối máy chủ!');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>💾</span> Lưu &amp; Thêm Môn Thi';
         }
-      };
-    }
+      }
+    });
 
-    // Thêm lời chúc mới đơn lẻ vào kho
-    const addTemplateForm = document.getElementById('addTemplateForm');
-    if (addTemplateForm) {
-      addTemplateForm.onsubmit = async (e) => {
-        e.preventDefault();
-        const content = document.getElementById('newTemplateContent')?.value.trim();
-        const category = document.getElementById('newTemplateCategory')?.value.trim() || 'Chung';
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'upsert_birthday_template', content, category }),
-        });
-        const res = await resp.json();
-        alert(res.message || 'Đã xử lý!');
-        if (resp.ok && res.ok) {
-          sessionStorage.setItem('adminActiveTab', 'tab-news-bday');
-          sessionStorage.setItem('bdayActiveSubtab', 'subtab-templates');
-          window.location.reload();
+    // Delete môn thi trắc nghiệm
+    document.querySelectorAll('.del-online-subject-btn').forEach((btn) => {
+      btn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const key = btn.getAttribute('data-key');
+        const label = btn.getAttribute('data-label') || key;
+        if (!confirm(`⚠️ Bạn có chắc chắn muốn XÓA môn thi "${label}" (${key}) khỏi Ngân hàng Đề thi Online không?`)) {
+          return;
         }
-      };
-    }
 
-    // Bulk Import Templates từ Excel / Text
-    const templateExcelInput = document.getElementById('templateExcelInput');
-    if (templateExcelInput) {
-      templateExcelInput.onchange = async (e) => {
-        const file = e.target.files && e.target.files[0];
-        if (!file) return;
-        const rawEl = document.getElementById('bulkTemplateRawText');
         try {
-          if (/.(csv|txt)$/i.test(file.name)) {
-            const txt = await file.text();
-            if (rawEl) rawEl.value = txt.trim();
-            alert('Đã đọc nội dung từ file! Bấm "Nạp Vào Kho Lời Chúc" để hoàn tất.');
-            return;
-          }
-          if (!window.XLSX) {
-            await new Promise((resolve, reject) => {
-              const s = document.createElement('script');
-              s.src = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
-              s.onload = resolve;
-              s.onerror = reject;
-              document.head.appendChild(s);
-            });
-          }
-          const buf = await file.arrayBuffer();
-          const wb = window.XLSX.read(buf, { type: 'array' });
-          const lines = [];
-          wb.SheetNames.forEach((name) => {
-            const sheet = wb.Sheets[name];
-            const rows = window.XLSX.utils.sheet_to_json(sheet, { header: 1 });
-            rows.forEach((r) => {
-              if (Array.isArray(r) && r[0]) {
-                const text = String(r[0]).trim();
-                if (text && text.length > 5) lines.push(text);
-              }
-            });
+          const resp = await fetch('/api/admin/action', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action: 'delete_online_exam_subject',
+              key,
+            }),
           });
-          if (rawEl) rawEl.value = lines.join('\n');
-          alert('Đã trích xuất ' + lines.length + ' lời chúc từ file Excel! Bấm "Nạp Vào Kho Lời Chúc" để lưu.');
+          const res = await resp.json();
+          if (resp.ok && res.ok) {
+            alert(res.message || 'Đã xóa môn thi thành công!');
+            sessionStorage.setItem('adminActiveTab', 'tab-quiz-bank');
+            window.location.reload();
+          } else {
+            alert('Lỗi: ' + (res.error || res.message));
+          }
         } catch (err) {
-          alert('Không thể đọc file: ' + err);
+          alert('Lỗi kết nối máy chủ!');
         }
-      };
-    }
-
-    const bulkTemplateForm = document.getElementById('bulkTemplateForm');
-    if (bulkTemplateForm) {
-      bulkTemplateForm.onsubmit = async (e) => {
-        e.preventDefault();
-        const rawText = document.getElementById('bulkTemplateRawText')?.value.trim();
-        if (!rawText) return;
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'bulk_import_birthday_templates', raw_text: rawText }),
-        });
-        const res = await resp.json();
-        alert(res.message || 'Đã xử lý!');
-        if (resp.ok && res.ok) {
-          sessionStorage.setItem('adminActiveTab', 'tab-news-bday');
-          sessionStorage.setItem('bdayActiveSubtab', 'subtab-templates');
-          window.location.reload();
-        }
-      };
-    }
-
-    // =========================================================================
-    // QUẢN LÝ KHO LỜI CHÚC (TÌM KIẾM, CHỌN TỪNG CÂU / CHỌN TẤT CẢ, XÓA ĐÃ CHỌN, XÓA TẤT CẢ)
-    // =========================================================================
-    const templateSearchInput = document.getElementById('templateSearchInput');
-    const templateRows = Array.from(document.querySelectorAll('.template-row'));
-    const selectAllTemplatesHeaderCheckbox = document.getElementById('selectAllTemplatesHeaderCheckbox');
-    const toggleSelectAllTemplatesBtn = document.getElementById('toggleSelectAllTemplatesBtn');
-    const bulkDeleteTemplatesBtn = document.getElementById('bulkDeleteTemplatesBtn');
-    const selectedTemplatesBadge = document.getElementById('selectedTemplatesBadge');
-    const selectedTemplatesCountEl = document.getElementById('selectedTemplatesCount');
-    const bulkDeleteTemplatesCountEl = document.getElementById('bulkDeleteTemplatesCount');
-    const clearAllTemplatesBtn = document.getElementById('clearAllTemplatesBtn');
-
-    function getVisibleTemplateCheckboxes() {
-      return templateRows
-        .filter((row) => row.style.display !== 'none')
-        .map((row) => row.querySelector('.tmpl-select-cb'))
-        .filter(Boolean);
-    }
-
-    function updateTemplateSelectionState() {
-      const visibleCbs = getVisibleTemplateCheckboxes();
-      const checkedCbs = visibleCbs.filter((cb) => cb.checked);
-      const count = checkedCbs.length;
-
-      if (selectedTemplatesCountEl) selectedTemplatesCountEl.textContent = String(count);
-      if (bulkDeleteTemplatesCountEl) bulkDeleteTemplatesCountEl.textContent = String(count);
-
-      if (count > 0) {
-        if (selectedTemplatesBadge) selectedTemplatesBadge.classList.remove('hidden');
-        if (bulkDeleteTemplatesBtn) bulkDeleteTemplatesBtn.classList.remove('hidden');
-      } else {
-        if (selectedTemplatesBadge) selectedTemplatesBadge.classList.add('hidden');
-        if (bulkDeleteTemplatesBtn) bulkDeleteTemplatesBtn.classList.add('hidden');
-      }
-
-      if (selectAllTemplatesHeaderCheckbox) {
-        if (visibleCbs.length === 0) {
-          selectAllTemplatesHeaderCheckbox.checked = false;
-          selectAllTemplatesHeaderCheckbox.indeterminate = false;
-        } else if (count === visibleCbs.length) {
-          selectAllTemplatesHeaderCheckbox.checked = true;
-          selectAllTemplatesHeaderCheckbox.indeterminate = false;
-        } else if (count > 0) {
-          selectAllTemplatesHeaderCheckbox.checked = false;
-          selectAllTemplatesHeaderCheckbox.indeterminate = true;
-        } else {
-          selectAllTemplatesHeaderCheckbox.checked = false;
-          selectAllTemplatesHeaderCheckbox.indeterminate = false;
-        }
-      }
-
-      if (toggleSelectAllTemplatesBtn) {
-        toggleSelectAllTemplatesBtn.textContent = count === visibleCbs.length && count > 0 ? '❌ Bỏ chọn tất cả' : '☑️ Chọn tất cả';
-      }
-    }
-
-    // Tìm kiếm lời chúc trong kho
-    if (templateSearchInput) {
-      templateSearchInput.addEventListener('input', () => {
-        const q = templateSearchInput.value.trim().toLowerCase();
-        templateRows.forEach((row) => {
-          const searchData = (row.getAttribute('data-search') || '').toLowerCase();
-          row.style.display = searchData.includes(q) ? '' : 'none';
-        });
-        updateTemplateSelectionState();
       });
-    }
-
-    // Tick chọn trên header
-    if (selectAllTemplatesHeaderCheckbox) {
-      selectAllTemplatesHeaderCheckbox.addEventListener('change', () => {
-        const isChecked = selectAllTemplatesHeaderCheckbox.checked;
-        getVisibleTemplateCheckboxes().forEach((cb) => {
-          cb.checked = isChecked;
-        });
-        updateTemplateSelectionState();
-      });
-    }
-
-    // Nút toggle chọn tất cả
-    if (toggleSelectAllTemplatesBtn) {
-      toggleSelectAllTemplatesBtn.addEventListener('click', () => {
-        const visibleCbs = getVisibleTemplateCheckboxes();
-        const allChecked = visibleCbs.length > 0 && visibleCbs.every((cb) => cb.checked);
-        visibleCbs.forEach((cb) => {
-          cb.checked = !allChecked;
-        });
-        updateTemplateSelectionState();
-      });
-    }
-
-    // Tick chọn từng hàng
-    document.querySelectorAll('.tmpl-select-cb').forEach((cb) => {
-      cb.addEventListener('change', updateTemplateSelectionState);
     });
-
-    // Xóa từng lời chúc lẻ
-    document.querySelectorAll('.del-template-btn').forEach((btn) => {
-      btn.onclick = async () => {
-        const id = Number(btn.getAttribute('data-tmpl-id'));
-        if (!confirm('Bạn có chắc chắn muốn xóa lời chúc #' + id + ' khỏi kho không?')) return;
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'delete_birthday_template', id }),
-        });
-        const res = await resp.json();
-        alert(res.message || 'Đã xử lý!');
-        if (resp.ok && res.ok) {
-          sessionStorage.setItem('adminActiveTab', 'tab-news-bday');
-          sessionStorage.setItem('bdayActiveSubtab', 'subtab-templates');
-          window.location.reload();
-        }
-      };
-    });
-
-    // Xóa hàng loạt lời chúc đã tick chọn
-    if (bulkDeleteTemplatesBtn) {
-      bulkDeleteTemplatesBtn.addEventListener('click', async () => {
-        const checkedCbs = Array.from(document.querySelectorAll('.tmpl-select-cb:checked'));
-        const ids = checkedCbs.map((cb) => Number(cb.getAttribute('data-tmpl-id'))).filter(Boolean);
-        if (ids.length === 0) {
-          alert('Vui lòng tick chọn ít nhất một lời chúc để xóa!');
-          return;
-        }
-        if (!confirm('⚠️ BẠN CÓ CHẮC CHẮN MUỐN XÓA ' + ids.length + ' LỜI CHÚC ĐÃ CHỌN?\n\nThao tác này sẽ xóa vĩnh viễn các lời chúc được chọn khỏi kho.')) return;
-
-        bulkDeleteTemplatesBtn.disabled = true;
-        bulkDeleteTemplatesBtn.textContent = '⏳ Đang xóa...';
-
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'bulk_delete_birthday_templates', ids }),
-        });
-        const res = await resp.json();
-        alert(res.message || 'Đã xóa thành công!');
-        if (resp.ok && res.ok) {
-          sessionStorage.setItem('adminActiveTab', 'tab-news-bday');
-          sessionStorage.setItem('bdayActiveSubtab', 'subtab-templates');
-          window.location.reload();
-        } else {
-          bulkDeleteTemplatesBtn.disabled = false;
-          updateTemplateSelectionState();
-        }
-      });
-    }
-
-    // Xóa toàn bộ kho lời chúc
-    if (clearAllTemplatesBtn) {
-      clearAllTemplatesBtn.addEventListener('click', async () => {
-        if (!confirm('⚠️ CẢNH BÁO QUAN TRỌNG: Bạn có chắc chắn muốn XÓA TOÀN BỘ KHO LỜI CHÚC?\n\nToàn bộ lời chúc hiện có sẽ bị xóa vĩnh viễn để bạn nhập kho mới.')) return;
-        clearAllTemplatesBtn.disabled = true;
-        clearAllTemplatesBtn.textContent = '⏳ Đang xóa...';
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'bulk_delete_birthday_templates', delete_all: true }),
-        });
-        const res = await resp.json();
-        alert(res.message || 'Đã xử lý!');
-        if (resp.ok && res.ok) {
-          sessionStorage.setItem('adminActiveTab', 'tab-news-bday');
-          sessionStorage.setItem('bdayActiveSubtab', 'subtab-templates');
-          window.location.reload();
-        } else {
-          clearAllTemplatesBtn.disabled = false;
-          clearAllTemplatesBtn.textContent = '⚠️ Xóa toàn bộ kho';
-        }
-      });
-    }
-
-    // =========================================================================
-    // QUẢN LÝ SINH VIÊN (TÌM KIẾM, CHỌN TỪNG NGƯỜI / CHỌN TẤT CẢ, XÓA ĐÃ CHỌN, XÓA TẤT CẢ)
-    // =========================================================================
-    const studentSearchInput = document.getElementById('studentSearchInput');
-    const studentRows = Array.from(document.querySelectorAll('.student-row'));
-    const selectAllStudentsHeaderCheckbox = document.getElementById('selectAllStudentsHeaderCheckbox');
-    const toggleSelectAllStudentsBtn = document.getElementById('toggleSelectAllStudentsBtn');
-    const bulkDeleteStudentsBtn = document.getElementById('bulkDeleteStudentsBtn');
-    const selectedStudentsBadge = document.getElementById('selectedStudentsBadge');
-    const selectedStudentsCountEl = document.getElementById('selectedStudentsCount');
-    const bulkDeleteStudentsCountEl = document.getElementById('bulkDeleteStudentsCount');
-    const clearAllBdaysBtn = document.getElementById('clearAllBdaysBtn');
-
-    function getVisibleStudentCheckboxes() {
-      return studentRows
-        .filter((row) => row.style.display !== 'none')
-        .map((row) => row.querySelector('.student-select-cb'))
-        .filter(Boolean);
-    }
-
-    function updateStudentSelectionState() {
-      const visibleCbs = getVisibleStudentCheckboxes();
-      const checkedCbs = visibleCbs.filter((cb) => cb.checked);
-      const count = checkedCbs.length;
-
-      if (selectedStudentsCountEl) selectedStudentsCountEl.textContent = String(count);
-      if (bulkDeleteStudentsCountEl) bulkDeleteStudentsCountEl.textContent = String(count);
-
-      if (count > 0) {
-        if (selectedStudentsBadge) selectedStudentsBadge.classList.remove('hidden');
-        if (bulkDeleteStudentsBtn) bulkDeleteStudentsBtn.classList.remove('hidden');
-      } else {
-        if (selectedStudentsBadge) selectedStudentsBadge.classList.add('hidden');
-        if (bulkDeleteStudentsBtn) bulkDeleteStudentsBtn.classList.add('hidden');
-      }
-
-      if (selectAllStudentsHeaderCheckbox) {
-        if (visibleCbs.length === 0) {
-          selectAllStudentsHeaderCheckbox.checked = false;
-          selectAllStudentsHeaderCheckbox.indeterminate = false;
-        } else if (count === visibleCbs.length) {
-          selectAllStudentsHeaderCheckbox.checked = true;
-          selectAllStudentsHeaderCheckbox.indeterminate = false;
-        } else if (count > 0) {
-          selectAllStudentsHeaderCheckbox.checked = false;
-          selectAllStudentsHeaderCheckbox.indeterminate = true;
-        } else {
-          selectAllStudentsHeaderCheckbox.checked = false;
-          selectAllStudentsHeaderCheckbox.indeterminate = false;
-        }
-      }
-
-      if (toggleSelectAllStudentsBtn) {
-        toggleSelectAllStudentsBtn.textContent = count === visibleCbs.length && count > 0 ? '❌ Bỏ chọn tất cả' : '☑️ Chọn tất cả';
-      }
-    }
-
-    // Tìm kiếm sinh viên
-    if (studentSearchInput) {
-      studentSearchInput.addEventListener('input', () => {
-        const q = studentSearchInput.value.trim().toLowerCase();
-        studentRows.forEach((row) => {
-          const searchData = (row.getAttribute('data-search') || '').toLowerCase();
-          row.style.display = searchData.includes(q) ? '' : 'none';
-        });
-        updateStudentSelectionState();
-      });
-    }
-
-    // Tick chọn trên header
-    if (selectAllStudentsHeaderCheckbox) {
-      selectAllStudentsHeaderCheckbox.addEventListener('change', () => {
-        const isChecked = selectAllStudentsHeaderCheckbox.checked;
-        getVisibleStudentCheckboxes().forEach((cb) => {
-          cb.checked = isChecked;
-        });
-        updateStudentSelectionState();
-      });
-    }
-
-    // Nút toggle chọn tất cả sinh viên
-    if (toggleSelectAllStudentsBtn) {
-      toggleSelectAllStudentsBtn.addEventListener('click', () => {
-        const visibleCbs = getVisibleStudentCheckboxes();
-        const allChecked = visibleCbs.length > 0 && visibleCbs.every((cb) => cb.checked);
-        visibleCbs.forEach((cb) => {
-          cb.checked = !allChecked;
-        });
-        updateStudentSelectionState();
-      });
-    }
-
-    // Tick chọn từng sinh viên
-    document.querySelectorAll('.student-select-cb').forEach((cb) => {
-      cb.addEventListener('change', updateStudentSelectionState);
-    });
-
-    // Xóa từng sinh viên lẻ
-    document.querySelectorAll('.del-bday-btn').forEach((btn) => {
-      btn.onclick = async () => {
-        const id = Number(btn.getAttribute('data-del-bday'));
-        if (!confirm('Bạn có chắc chắn muốn xóa sinh viên #' + id + ' khỏi danh sách không?')) return;
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'delete_birthday', id }),
-        });
-        const res = await resp.json();
-        alert(res.message || 'Đã xóa sinh viên thành công!');
-        if (resp.ok && res.ok) {
-          sessionStorage.setItem('adminActiveTab', 'tab-news-bday');
-          sessionStorage.setItem('bdayActiveSubtab', 'subtab-all-students');
-          window.location.reload();
-        }
-      };
-    });
-
-    // Xóa hàng loạt sinh viên đã tick chọn
-    if (bulkDeleteStudentsBtn) {
-      bulkDeleteStudentsBtn.addEventListener('click', async () => {
-        const checkedCbs = Array.from(document.querySelectorAll('.student-select-cb:checked'));
-        const ids = checkedCbs.map((cb) => Number(cb.getAttribute('data-bday-id'))).filter(Boolean);
-        if (ids.length === 0) {
-          alert('Vui lòng tick chọn ít nhất một sinh viên để xóa!');
-          return;
-        }
-        if (!confirm('⚠️ BẠN CÓ CHẮC CHẮN MUỐN XÓA ' + ids.length + ' SINH VIÊN ĐÃ CHỌN?\n\nThao tác này sẽ xóa các sinh viên được chọn khỏi danh sách sinh nhật.')) return;
-
-        bulkDeleteStudentsBtn.disabled = true;
-        bulkDeleteStudentsBtn.textContent = '⏳ Đang xóa...';
-
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'bulk_delete_birthdays', ids }),
-        });
-        const res = await resp.json();
-        alert(res.message || 'Đã xóa thành công!');
-        if (resp.ok && res.ok) {
-          sessionStorage.setItem('adminActiveTab', 'tab-news-bday');
-          sessionStorage.setItem('bdayActiveSubtab', 'subtab-all-students');
-          window.location.reload();
-        } else {
-          bulkDeleteStudentsBtn.disabled = false;
-          updateStudentSelectionState();
-        }
-      });
-    }
-
-    // Xóa toàn bộ sinh viên
-    if (clearAllBdaysBtn) {
-      clearAllBdaysBtn.addEventListener('click', async () => {
-        if (!confirm('⚠️ CẢNH BÁO: Bạn có chắc chắn muốn XÓA TOÀN BỘ danh sách sinh nhật hiện tại không?\n\nHành động này sẽ xóa toàn bộ sinh viên. Bạn có chắc chắn muốn tiếp tục?')) return;
-        clearAllBdaysBtn.disabled = true;
-        clearAllBdaysBtn.textContent = '⏳ Đang xóa...';
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'bulk_delete_birthdays', delete_all: true }),
-        });
-        const res = await resp.json();
-        alert(res.message || 'Đã xử lý!');
-        if (resp.ok && res.ok) {
-          sessionStorage.setItem('adminActiveTab', 'tab-news-bday');
-          sessionStorage.setItem('bdayActiveSubtab', 'subtab-all-students');
-          window.location.reload();
-        } else {
-          clearAllBdaysBtn.disabled = false;
-          clearAllBdaysBtn.textContent = '🗑️ Xóa toàn bộ';
-        }
-      });
-    }
+  
 </script>
+
+        <!-- MODAL: THÊM MÔN THI TRẮC NGHIỆM MỚI VÀO CỔNG THI ONLINE -->
+        <div
+          id="addOnlineSubjectModal"
+          class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 hidden"
+        >
+          <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden border border-slate-200 animate-in fade-in zoom-in duration-150">
+            <!-- Modal Header -->
+            <div class="px-5 py-4 bg-gradient-to-r from-[#742D3A] via-[#A83245] to-[#742D3A] text-white flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-xl bg-white/15 flex items-center justify-center text-base">➕</span>
+                <div>
+                  <h3 class="font-extrabold text-sm sm:text-base text-white m-0">Thêm Môn Thi Trắc Nghiệm Mới</h3>
+                  <p class="text-2xs text-[#F8EDEF] m-0">Tạo môn thi mới trên Cổng Ngân Hàng Đề Thi Online (/ngan-hang-de-thi)</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                id="closeAddOnlineSubjectModalBtn"
+                class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors text-sm cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            <!-- Modal Body Form -->
+            <form id="addOnlineSubjectForm" class="p-5 sm:p-6 overflow-y-auto space-y-4 text-xs">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label class="block font-bold text-slate-800 mb-1">
+                    Tên Môn Học Dự Thi <span class="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="newSubLabel"
+                    required
+                    placeholder="VD: Quản trị chuỗi cung ứng"
+                    class="w-full px-3.5 py-2 rounded-xl border border-slate-300 font-bold text-slate-900 text-xs focus:border-[#A83245] focus:outline-none"
+                  />
+                  <p class="text-2xs text-slate-500 mt-1">Tên hiển thị trên thẻ chọn môn thi của sinh viên</p>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-800 mb-1">
+                    Mã Định Danh (Slug / Key)
+                  </label>
+                  <input
+                    type="text"
+                    id="newSubKey"
+                    placeholder="VD: quan-tri-chuoi-cung-ung"
+                    class="w-full px-3.5 py-2 rounded-xl border border-slate-300 font-mono text-xs text-slate-700 bg-slate-50 focus:border-[#A83245] focus:outline-none"
+                  />
+                  <p class="text-2xs text-slate-500 mt-1">Mã duy nhất, dùng trên link URL và kết quả thi</p>
+                </div>
+              </div>
+
+              <!-- Nguồn Ngân Hàng Câu Hỏi -->
+              <div class="p-4 rounded-2xl bg-[#F7F5F2]/70 border border-[#E8DDE0] space-y-3">
+                <label class="block font-extrabold text-[#742D3A] text-xs uppercase tracking-wide">
+                  Nguồn Ngân Hàng Câu Hỏi Trắc Nghiệm:
+                </label>
+                
+                <div class="space-y-2.5">
+                  <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-[#A83245] transition-colors">
+                    <input type="radio" name="newSubSource" value="linked" checked class="mt-0.5 text-[#A83245]" />
+                    <div class="flex-1">
+                      <strong class="text-slate-800 block text-xs">Cách 1: Liên kết với trang học liệu / đề thi có sẵn</strong>
+                      <p class="text-2xs text-slate-500 mt-0.5">Hệ thống sẽ tự động đồng bộ ngân hàng câu hỏi từ trang học liệu đã có.</p>
+                      <select id="newSubLinkedRoute" class="mt-2 w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold bg-slate-50">
+                        <option value="">-- Chọn trang đề thi thử liên kết --</option>
+                        {pages.filter(p => p.route_path.includes('test') || p.page_type === 'quiz' || p.category === 'Study-Corner').map(p => (
+                          <option value={p.route_path}>{p.title} ({p.route_path})</option>
+                        ))}
+                      </select>
+                    </div>
+                  </label>
+
+                  <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-[#A83245] transition-colors">
+                    <input type="radio" name="newSubSource" value="raw" class="mt-0.5 text-[#A83245]" />
+                    <div class="flex-1">
+                      <strong class="text-slate-800 block text-xs">Cách 2: Nhập trực tiếp ngân hàng câu hỏi mới</strong>
+                      <p class="text-2xs text-slate-500 mt-0.5">Dán câu hỏi dạng văn bản thông minh (Câu 1... A/B/C/D... Đáp án: A) hoặc mảng JSON.</p>
+                      <textarea
+                        id="newSubQuestionsRaw"
+                        rows="5"
+                        placeholder="VD:&#10;Câu 1: Chiến lược kéo là chiến lược gì?&#10;A. Nhắm vào người tiêu dùng cuối cùng&#10;B. Nhắm vào đại lý trung gian&#10;C. Giảm giá đại trà&#10;D. Cả A và B đều đúng&#10;Đáp án: A&#10;&#10;Câu 2: ..."
+                        class="mt-2 w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-2xs focus:border-[#A83245] focus:outline-none"
+                      ></textarea>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2 pt-1">
+                <input type="checkbox" id="newSubEnabled" checked class="rounded text-[#A83245] w-4 h-4 cursor-pointer" />
+                <label for="newSubEnabled" class="font-bold text-slate-800 cursor-pointer">
+                  Kích hoạt hiển thị môn thi ngay trên Cổng Thi Online
+                </label>
+              </div>
+
+              <!-- Footer Buttons -->
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-3">
+                <button
+                  type="button"
+                  id="cancelAddOnlineSubjectBtn"
+                  class="px-4 py-2 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold transition-colors cursor-pointer"
+                >
+                  Hủy Bỏ
+                </button>
+                <button
+                  type="submit"
+                  id="submitAddOnlineSubjectBtn"
+                  class="px-5 py-2 rounded-xl bg-gradient-to-r from-[#742D3A] to-[#A83245] hover:opacity-95 text-white font-extrabold shadow-sm transition-all cursor-pointer flex items-center gap-1.5"
+                >
+                  <span>💾</span> Lưu &amp; Thêm Môn Thi
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
 </MainLayout>
