@@ -69,18 +69,29 @@ export function evaluateIntentGuardrails(query: string): { blocked: boolean; mes
     };
   }
 
-  // 2. Chặn tra cứu điểm / dữ liệu cá nhân (SIS_ENABLED = false)
+  // 2. Chặn tra cứu điểm / dữ liệu cá nhân / suy đoán điểm sinh viên
   if (
-    /tra cứu bảng điểm/i.test(norm) ||
+    /tra cứu (bảng )?điểm/i.test(norm) ||
+    /xem điểm/i.test(norm) ||
+    /điểm của em/i.test(norm) ||
+    /điểm thi của em/i.test(norm) ||
+    /em được mấy điểm/i.test(norm) ||
+    /điểm rèn luyện của em/i.test(norm) ||
+    /kết quả học tập cá nhân/i.test(norm) ||
+    /gpa của em/i.test(norm) ||
+    /em nợ bao nhiêu tín chỉ/i.test(norm) ||
+    /em có bị cấm thi không/i.test(norm) ||
     /mssv/i.test(norm) ||
+    /mã số sinh viên/i.test(norm) ||
     /bảng điểm chi tiết/i.test(norm) ||
     /xem họ tên/i.test(norm) ||
     /số điện thoại và điểm/i.test(norm) ||
-    /thông tin cá nhân/i.test(norm)
+    /thông tin cá nhân/i.test(norm) ||
+    /dữ liệu sinh viên/i.test(norm)
   ) {
     return {
       blocked: true,
-      message: 'Hệ thống tra cứu điểm điện tử trực tuyến hiện chưa được kích hoạt (SIS_ENABLED=false) để bảo vệ an toàn thông tin cá nhân của sinh viên. Em vui lòng đăng nhập Cổng thông tin đào tạo chính thức daotao.kthcm.edu.vn hoặc liên hệ Cố vấn học tập (CVHT).',
+      message: 'Để bảo vệ an toàn thông tin cá nhân và dữ liệu kết quả học tập của sinh viên theo quy định, Trợ lý học tập không tra cứu, không lưu trữ và không suy đoán điểm thi hay dữ liệu cá nhân của từng sinh viên.\n\n👉 **Hướng dẫn:** Em vui lòng đăng nhập Cổng thông tin đào tạo chính thức của Trường Cao đẳng Kinh tế TP.HCM tại: **https://online.kthcm.edu.vn** (hoặc liên hệ Phòng Quản lý Đào tạo / Cố vấn học tập) để tra cứu bảng điểm và hồ sơ sinh viên chính xác nhất nhé!',
       suggestTransfer: true
     };
   }
@@ -385,7 +396,8 @@ QUY CHUẨN ĐỒNG BỘ TRẢ LỜI CỦA TRỢ LÝ HỌC TẬP (BẮT BUỘC T
 4. BẢO MẬT & TRUNG THỰC HỌC THUẬT:
    - TUYỆT ĐỐI KHÔNG chia sẻ, KHÔNG hiển thị, KHÔNG nhắc đến đường link Google Drive, Google Docs hay thư mục Drive nội bộ.
    - Chỉ dẫn liên kết chính thức trên website: https://nguyenthitrucphuong.pages.dev/study-corner/internships/huong-dan-bao-cao-hce.
-   - Trả lời trung thực dựa trên tài liệu cung cấp, không bịa đặt số liệu hay quy chế không có thật.`;
+   - Trả lời trung thực dựa trên tài liệu cung cấp, không bịa đặt số liệu hay quy chế không có thật.
+   - TUYỆT ĐỐI KHÔNG suy đoán dữ liệu cá nhân hoặc điểm sinh viên; không cung cấp điểm thi, GPA hay dữ liệu cá nhân của bất kỳ ai. Khi sinh viên hỏi về điểm số cá nhân, hướng dẫn sinh viên đăng nhập cổng thông tin chính thức: https://online.kthcm.edu.vn để tra cứu bảo mật.`;
 
   const userPrompt = `DƯỚI ĐÂY LÀ CÁC ĐOẠN QUY CHẾ CHÍNH THỨC CỦA NHÀ TRƯỜNG:
 ${contextText}

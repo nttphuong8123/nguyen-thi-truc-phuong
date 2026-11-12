@@ -106,9 +106,9 @@ export const DEFAULT_HCE_CENTER_NEWS: NewsFeedItem[] = [
 ];
 
 export const DEFAULT_STOCKS: StockIndexItem[] = [
-  { code: 'VNINDEX', label: 'VN-INDEX', price: '1,268.45', changePoint: '+6.12 điểm', changePercent: '▲ +0.48%', isUp: true },
-  { code: 'VN30', label: 'VN30-INDEX', price: '1,334.20', changePoint: '+7.85 điểm', changePercent: '▲ +0.59%', isUp: true },
-  { code: 'HNX', label: 'HNX-INDEX', price: '228.15', changePoint: '+1.04 điểm', changePercent: '▲ +0.46%', isUp: true },
+  { code: 'VNINDEX', label: 'VN-INDEX', price: '1,746.90', changePoint: '+3.83 điểm', changePercent: '▲ +0.22%', isUp: true },
+  { code: 'VN30', label: 'VN30-INDEX', price: '1,855.27', changePoint: '-5.66 điểm', changePercent: '▼ -0.30%', isUp: false },
+  { code: 'HNX', label: 'HNX-INDEX', price: '255.73', changePoint: '-0.53 điểm', changePercent: '▼ -0.21%', isUp: false },
 ];
 
 export const DEFAULT_STOCK_NEWS: NewsFeedItem[] = [
@@ -277,8 +277,7 @@ async function fetchLiveStocks(): Promise<StockIndexItem[]> {
     })
   );
 
-  const valid = results.filter(Boolean) as StockIndexItem[];
-  return valid.length === 3 ? valid : DEFAULT_STOCKS;
+  return defs.map((d, i) => results[i] || DEFAULT_STOCKS[i]);
 }
 
 async function fetchLiveFootballMatches(): Promise<FootballMatchItem[]> {
