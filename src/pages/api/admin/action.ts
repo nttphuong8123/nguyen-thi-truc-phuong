@@ -37,6 +37,8 @@ import db, {
   distributeBirthdayWishes,
 } from '../../../lib/db';
 import { verifyAdminToken, hashPassword } from '../../../lib/admin-auth';
+import { buildTextbook, parseRawTextbook } from '../../../lib/textbook-builder';
+import { buildArticle } from '../../../lib/article-builder';
 import {
   getOnlineExamConfig,
   saveOnlineExamConfig,
@@ -570,29 +572,152 @@ export const POST: APIRoute = async ({ request, cookies, clientAddress }) => {
       );
     }
 
-    if (action === 'add_news') {
+    // THÊM GIÁO TRÌNH MỚI CHUẨN SƯ PHẠM VÀ CHUẨN SEO
+    if (action === 'add_textbook') {
       const title = String(body.title || '').trim();
+      if (!title) {
+        return new Response(JSON.stringify({ ok: false, message: 'Vui lòng nhập tên giáo trình.' }), { status: 400 });
+      }
+
+      const built = buildTextbook({
+        title,
+        slug: body.slug ? String(body.slug).trim() : undefined,
+        courseCode: body.course_code ? String(body.course_code).trim() : undefined,
+        credits: body.credits ? String(body.credits).trim() : undefined,
+        instructor: body.instructor ? String(body.instructor).trim() : 'ThS. NGUYỄN THỊ TRÚC PHƯƠNG',
+        department: body.department ? String(body.department).trim() : 'Khoa Quản trị - Kinh doanh',
+        description: body.description ? String(body.description).trim() : undefined,
+        chapters: Array.isArray(body.chapters) ? body.chapters : [],
+      });
+
+      db.prepare(`
+        INSERT OR REPLACE INTO site_pages (route_path, title, category, page_type, html_content, custom_css, custom_js, requires_gate)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      `).run(
+        built.route_path,
+        built.title,
+        built.category,
+        built.page_type,
+        built.html_content,
+        built.custom_css,
+        built.custom_js,
+        null
+      );
+
+      // Lưu đĩa mềm vào seed-db.json nếu có
+      try {
+        const fsModule = await import('node:fs');
+        const pathModule = await import('node:path');
+        const seedPath = pathModule.resolve(process.cwd(), 'src/data/seed-db.json');
+        if (fsModule.existsSync(seedPath)) {
+          const rawDb = JSON.parse(fsModule.readFileSync(seedPath, 'utf8'));
+          if (Array.isArray(rawDb.site_pages)) {
+            const existingIdx = rawDb.site_pages.findIndex((p: any) => p.route_path === built.route_path);
+            const pageObj = { ...built, updated_at: new Date().toISOString() };
+            if (existingIdx >= 0) {
+              rawDb.site_pages[existingIdx] = pageObj;
+            } else {
+              rawDb.site_pages.push(pageObj);
+            }
+            fsModule.writeFileSync(seedPath, JSON.stringify(rawDb, null, 2), 'utf8');
+          }
+        }
+      } catch (e) {
+        // ignore filesystem in edge runtime
+      }
+
+      addAdminAuditLog({
+        actor_username: 'admin',
+        actor_role: 'super_admin',
+        action_type: 'ADD_TEXTBOOK',
+        target_module: 'SITE_PAGES',
+        details: `Thêm giáo trình mới chuẩn SEO: ${built.title} (${built.route_path})`,
+        ip_address: clientAddress || '',
+      });
+
+      return new Response(JSON.stringify({
+        ok: true,
+        message: `Đã xuất bản giáo trình mới "${built.title}" chuẩn SEO thành công!`,
+        route_path: built.route_path,
+      }), { status: 200 });
+    }
+
+    // PHÂN TÍCH VĂN BẢN THÔ GIÁO TRÌNH
+    if (action === 'parse_raw_textbook') {
+      const rawText = String(body.raw_text || '').trim();
+      const defaultTitle = String(body.default_title || 'Giáo trình mới').trim();
+      const parsed = parseRawTextbook(rawText, defaultTitle);
+      return new Response(JSON.stringify({ ok: true, data: parsed }), { status: 200 });
+    }
+
+    // THÊM BÀI VIẾT MỚI CHUẨN SEO
+    if (action === 'add_article' || action === 'add_news') {
+      const title = String(body.title || '').trim();
+      const author = String(body.author || 'ThS. NGUYỄN THỊ TRÚC PHƯƠNG').trim();
       const category = String(body.category || 'Góc chia sẻ').trim();
       const summary = String(body.summary || '').trim();
-      const contentHtml = String(body.content_html || '').trim();
-      if (!title || !summary) {
-        return new Response(JSON.stringify({ ok: false, message: 'Vui lòng nhập tiêu đề và tóm tắt.' }), { status: 400 });
+      const rawContent = String(body.content || body.content_html || '').trim();
+      const imageUrl = String(body.image_url || '').trim();
+      const imageCaption = String(body.image_caption || '').trim();
+      const customSlug = String(body.slug || '').trim();
+
+      if (!title) {
+        return new Response(JSON.stringify({ ok: false, message: 'Vui lòng nhập tiêu đề bài viết.' }), { status: 400 });
       }
-      const slug =
-        title
-          .toLowerCase()
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .replace(/đ/g, 'd')
-          .replace(/[^a-z0-9]+/g, '-')
-          .replace(/^-|-$/g, '') +
-        '-' +
-        Date.now().toString().slice(-4);
+
+      const built = buildArticle({
+        title,
+        slug: customSlug,
+        author,
+        category,
+        summary,
+        imageUrl,
+        imageCaption,
+        content: rawContent,
+      });
+
+      const nextId = Date.now();
       db.prepare(`
-        INSERT INTO news_articles (slug, title, category, summary, content_html, author, views)
-        VALUES (?, ?, ?, ?, ?, 'ThS. NGUYỄN THỊ TRÚC PHƯƠNG', 1)
-      `).run(slug, title, category, summary, `<p>${contentHtml.replace(/\n/g, '</p><p>')}</p>`);
-      return new Response(JSON.stringify({ ok: true, message: 'Đã đăng bài viết mới vào Góc chia sẻ!' }), { status: 200 });
+        INSERT INTO news_articles (slug, title, category, summary, content_html, author)
+        VALUES (?, ?, ?, ?, ?, ?)
+      `).run(built.slug, built.title, built.category, built.summary, built.content_html, built.author);
+
+      // Lưu đĩa mềm vào seed-db.json nếu có
+      try {
+        const fsModule = await import('node:fs');
+        const pathModule = await import('node:path');
+        const seedPath = pathModule.resolve(process.cwd(), 'src/data/seed-db.json');
+        if (fsModule.existsSync(seedPath)) {
+          const rawDb = JSON.parse(fsModule.readFileSync(seedPath, 'utf8'));
+          if (Array.isArray(rawDb.news_articles)) {
+            rawDb.news_articles.unshift({
+              id: nextId,
+              ...built,
+              published_at: new Date().toISOString().replace('T', ' ').slice(0, 19),
+              views: 1,
+            });
+            fsModule.writeFileSync(seedPath, JSON.stringify(rawDb, null, 2), 'utf8');
+          }
+        }
+      } catch (e) {
+        // ignore filesystem in edge runtime
+      }
+
+      addAdminAuditLog({
+        actor_username: 'admin',
+        actor_role: 'super_admin',
+        action_type: 'ADD_ARTICLE',
+        target_module: 'NEWS_ARTICLES',
+        details: `Đăng bài viết mới chuẩn SEO: ${built.title} (Tác giả: ${built.author})`,
+        ip_address: clientAddress || '',
+      });
+
+      return new Response(JSON.stringify({
+        ok: true,
+        message: `Đã xuất bản bài viết "${built.title}" chuẩn SEO thành công!`,
+        slug: built.slug,
+        url: `/goc-chia-se/${built.slug}`,
+      }), { status: 200 });
     }
 
     if (action === 'edit_news') {

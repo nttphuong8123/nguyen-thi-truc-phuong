@@ -636,10 +636,12 @@ export function getSeoMetaForPath(cleanPath: string, fallbackTitle?: string): Pa
   const cleanFallback = (fallbackTitle || 'Tài liệu học thuật')
     .replace(/^NGUYỄN THỊ TRÚC PHƯƠNG\s*-\s*/i, '')
     .trim();
+  const isTextbook = norm.startsWith('/study-corner/') && cleanFallback.toUpperCase().includes('GIÁO TRÌNH');
+  const isArticle = norm.startsWith('/goc-chia-se/');
   return {
     title: `${cleanFallback} — Cổng Học Liệu NGUYỄN THỊ TRÚC PHƯƠNG`,
     description: `Tài liệu học tập, hướng dẫn giải bài tập và đề cương chuyên đề ${cleanFallback} dành cho sinh viên trên cổng học thuật của Giảng viên NGUYỄN THỊ TRÚC PHƯƠNG.`,
     breadcrumbLabel: cleanFallback,
-    schemaType: 'LearningResource'
+    schemaType: isTextbook ? 'Course' : isArticle ? 'Article' : 'LearningResource'
   };
 }

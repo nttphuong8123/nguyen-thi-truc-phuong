@@ -167,6 +167,29 @@ if (seoMeta.schemaType === 'Course') {
     author: { '@id': 'https://nguyenthitrucphuong.pages.dev/#person' },
     isAccessibleForFree: true,
   });
+} else if (seoMeta.schemaType === 'Article' || currentPath.startsWith('/goc-chia-se/')) {
+  graphNodes.push({
+    '@type': 'Article',
+    '@id': `${canonicalUrl}#article`,
+    headline: finalTitle,
+    description: finalDescription,
+    url: canonicalUrl,
+    inLanguage: 'vi-VN',
+    author: {
+      '@type': 'Person',
+      name: 'ThS. Nguyễn Thị Trúc Phương',
+      url: 'https://nguyenthitrucphuong.pages.dev/#person',
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'ThS. Nguyễn Thị Trúc Phương',
+      url: 'https://nguyenthitrucphuong.pages.dev/#person',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+    },
+  });
 }
 
 if (activeFaqs.length > 0 && !noindex) {

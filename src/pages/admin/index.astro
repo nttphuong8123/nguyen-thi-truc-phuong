@@ -487,13 +487,28 @@ if (isAuthenticated) {
         <!-- TAB 3: ALL 55 SITE PAGES -->
         <section id="tab-pages" class="admin-tab-panel hidden bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
           <div class="p-4 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <h2 class="font-bold text-base text-slate-900">Toàn bộ {pages.length} Trang Học Liệu & Ngân Hàng Câu Hỏi</h2>
-            <input
-              type="text"
-              id="filterPageInput"
-              placeholder="Tìm nhanh theo đường dẫn URL hoặc tiêu đề trang..."
-              class="w-full sm:w-80 px-3.5 py-2 rounded-xl border border-slate-300 text-xs focus:outline-none focus:border-sky-600"
-            />
+            <div>
+              <h2 class="font-bold text-base text-slate-900 flex items-center gap-2">
+                <span>📄</span> Toàn bộ {pages.length} Trang Học Liệu &amp; Ngân Hàng Câu Hỏi
+              </h2>
+              <p class="text-xs text-slate-500 mt-0.5">Quản lý hệ thống giáo trình, bài giảng và ngân hàng đề thi</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2.5">
+              <button
+                type="button"
+                id="openAddTextbookBtn"
+                class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#A83245] to-[#742D3A] hover:opacity-95 text-white font-extrabold text-xs shadow-xs flex items-center gap-2 cursor-pointer transition-all"
+              >
+                <span>📚</span>
+                <span>+ Thêm Giáo Trình Mới (Chuẩn SEO)</span>
+              </button>
+              <input
+                type="text"
+                id="filterPageInput"
+                placeholder="Tìm nhanh theo URL hoặc tiêu đề..."
+                class="w-full sm:w-72 px-3.5 py-2 rounded-xl border border-slate-300 text-xs focus:outline-none focus:border-[#A83245]"
+              />
+            </div>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full text-xs sm:text-sm text-left">
@@ -577,6 +592,186 @@ if (isAuthenticated) {
                   <button type="submit" class="px-5 py-2 rounded-xl bg-sky-700 hover:bg-sky-800 text-white font-bold cursor-pointer">
                     💾 Lưu Thay Đổi Trang
                   </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- MODAL THÊM GIÁO TRÌNH MỚI (CHUẨN SƯ PHẠM & SEO TỰ ĐỘNG) -->
+          <div id="addTextbookModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-5xl w-full max-h-[92vh] flex flex-col overflow-hidden">
+              <!-- Modal Header Luxury Red Tone -->
+              <div class="px-5 py-4 bg-gradient-to-r from-[#742D3A] via-[#A83245] to-[#C65B69] text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <span class="text-xl">📚</span>
+                  <div>
+                    <h3 class="font-extrabold text-sm sm:text-base leading-tight">
+                      Soạn Thảo &amp; Thêm Giáo Trình Mới (Tự Động Canh Chỉnh &amp; Chuẩn SEO)
+                    </h3>
+                    <p class="text-[11px] text-white/90 m-0">Tự động kế thừa bố cục sang trọng, mục tiêu chuẩn đầu ra, đề mục khoa học và tối ưu SEO cho môn học</p>
+                  </div>
+                </div>
+                <button type="button" id="closeAddTextbookModalBtn" class="text-white/80 hover:text-white font-bold text-xl p-1 cursor-pointer">✕</button>
+              </div>
+
+              <!-- Modal Body -->
+              <form id="saveTextbookForm" class="p-4 sm:p-6 overflow-y-auto space-y-5 text-xs flex-1 bg-slate-50/60">
+                <!-- Mode Switcher -->
+                <div class="flex items-center justify-between gap-3 p-1 bg-slate-200/80 rounded-xl w-fit">
+                  <button type="button" id="modeBuilderBtn" class="px-3.5 py-1.5 rounded-lg font-bold text-xs bg-white text-[#A83245] shadow-xs cursor-pointer">
+                    📝 Soạn Từng Chương &amp; Đề Mục
+                  </button>
+                  <button type="button" id="modeRawBtn" class="px-3.5 py-1.5 rounded-lg font-bold text-xs text-slate-700 hover:text-slate-900 cursor-pointer">
+                    ⚡ Dán Văn Bản Thô (Phân Tích Tự Động)
+                  </button>
+                </div>
+
+                <!-- Thông Tin Cơ Bản Môn Học -->
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs space-y-3">
+                  <h4 class="font-bold text-xs uppercase text-slate-500 tracking-wider flex items-center gap-1.5">
+                    <span>📌</span> Thông Tin Chung Của Học Phần
+                  </h4>
+                  <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+                    <div class="sm:col-span-8">
+                      <label class="block font-bold text-slate-700 mb-1">Tên Giáo Trình / Học Phần <span class="text-rose-500">*</span></label>
+                      <input
+                        type="text"
+                        id="tbTitle"
+                        required
+                        placeholder="VD: Quản Trị Chuỗi Cung Ứng, Kinh Doanh Quốc Tế..."
+                        class="w-full px-3 py-2 rounded-xl border border-slate-300 font-bold text-slate-900 focus:border-[#A83245] focus:outline-none"
+                      />
+                    </div>
+                    <div class="sm:col-span-4">
+                      <label class="block font-bold text-slate-700 mb-1">Đường Dẫn URL (Tự Sinh SEO) <span class="text-rose-500">*</span></label>
+                      <input
+                        type="text"
+                        id="tbSlug"
+                        required
+                        placeholder="/study-corner/quan-tri-chuoi-cung-ung"
+                        class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-xs text-sky-800 font-semibold focus:border-[#A83245] focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                    <div>
+                      <label class="block font-semibold text-slate-600 mb-1">Mã Học Phần</label>
+                      <input
+                        type="text"
+                        id="tbCourseCode"
+                        placeholder="VD: MH30, QTKD02..."
+                        class="w-full px-3 py-2 rounded-xl border border-slate-300 font-semibold text-slate-800"
+                      />
+                    </div>
+                    <div>
+                      <label class="block font-semibold text-slate-600 mb-1">Khối Lượng</label>
+                      <input
+                        type="text"
+                        id="tbCredits"
+                        value="3 Tín Chỉ (45 Tiết)"
+                        class="w-full px-3 py-2 rounded-xl border border-slate-300 font-semibold text-slate-800"
+                      />
+                    </div>
+                    <div>
+                      <label class="block font-semibold text-slate-600 mb-1">Chủ Biên / Giảng Viên</label>
+                      <input
+                        type="text"
+                        id="tbInstructor"
+                        value="ThS. NGUYỄN THỊ TRÚC PHƯƠNG"
+                        class="w-full px-3 py-2 rounded-xl border border-slate-300 font-semibold text-slate-800"
+                      />
+                    </div>
+                    <div>
+                      <label class="block font-semibold text-slate-600 mb-1">Đơn Vị Quản Lý</label>
+                      <input
+                        type="text"
+                        id="tbDepartment"
+                        value="Khoa Quản trị - Kinh doanh"
+                        class="w-full px-3 py-2 rounded-xl border border-slate-300 font-semibold text-slate-800"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block font-semibold text-slate-600 mb-1">Mô Tả Tổng Quan Môn Học (Tối Ưu Thẻ Meta SEO Description &amp; Banner)</label>
+                    <textarea
+                      id="tbDescription"
+                      rows="2"
+                      placeholder="Mô tả tóm tắt nội dung chính, đối tượng học và giá trị môn học..."
+                      class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs text-slate-700"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <!-- Chế độ 1: Soạn Từng Chương (Interactive Chapter Builder) -->
+                <div id="sectionBuilderWrapper" class="space-y-4">
+                  <div class="flex items-center justify-between">
+                    <h4 class="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+                      <span>📑</span> Danh Sách Các Chương Học &amp; Đề Mục Chi Tiết
+                    </h4>
+                    <button
+                      type="button"
+                      id="addNewChapterBtn"
+                      class="px-3 py-1.5 rounded-xl bg-sky-700 hover:bg-sky-800 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-xs"
+                    >
+                      <span>➕</span>
+                      <span>Thêm Chương Mới</span>
+                    </button>
+                  </div>
+
+                  <!-- Danh sách các chương container -->
+                  <div id="chaptersListContainer" class="space-y-4">
+                    <!-- Dynamic Chapters will be appended here -->
+                  </div>
+                </div>
+
+                <!-- Chế độ 2: Dán Văn Bản Thô (Raw Importer) -->
+                <div id="sectionRawWrapper" class="hidden bg-white p-4 rounded-xl border border-slate-200 shadow-2xs space-y-3">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <h4 class="font-bold text-xs uppercase text-slate-600 tracking-wider">⚡ Nhập Nhanh Toàn Bộ Giáo Trình</h4>
+                      <p class="text-[11px] text-slate-500 mt-0.5">Dán văn bản có cấu trúc: hệ thống sẽ tự động bóc tách các chương, mục tiêu 🎯 và đề mục tương ứng.</p>
+                    </div>
+                    <button
+                      type="button"
+                      id="triggerParseRawBtn"
+                      class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-xs"
+                    >
+                      <span>⚡</span>
+                      <span>Phân Tích &amp; Điền Tự Động</span>
+                    </button>
+                  </div>
+                  <textarea
+                    id="tbRawTextarea"
+                    rows="12"
+                    placeholder="Chương 1: Tổng Quan Về Môn Học&#10;Mục tiêu:&#10;- Hiểu các định nghĩa cốt lõi&#10;- Nắm vững 5 nguyên lý cơ bản&#10;1.1 Khái niệm cơ bản&#10;Nội dung đề mục 1.1...&#10;1.2 Vai trò và ứng dụng&#10;Nội dung đề mục 1.2...&#10;&#10;Chương 2: ...&#10;"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-mono text-xs text-slate-800 leading-relaxed"
+                  ></textarea>
+                </div>
+
+                <!-- Modal Action Footer -->
+                <div class="pt-3 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+                  <span class="text-[11px] text-slate-500 italic">
+                    💡 Giáo trình được tạo sẽ tự động canh lề chuẩn luxury tone, tích hợp nút in ấn A4, mục tiêu chuẩn đầu ra và chuẩn SEO Course.
+                  </span>
+                  <div class="flex items-center gap-2.5">
+                    <button
+                      type="button"
+                      id="cancelAddTextbookBtn"
+                      class="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs cursor-pointer"
+                    >
+                      Đóng
+                    </button>
+                    <button
+                      type="submit"
+                      id="saveTextbookSubmitBtn"
+                      class="px-5 py-2 rounded-xl bg-gradient-to-r from-[#A83245] to-[#742D3A] hover:opacity-95 text-white font-extrabold text-xs shadow-xs flex items-center gap-2 cursor-pointer"
+                    >
+                      <span>🚀</span>
+                      <span>Xuất Bản Giáo Trình Chuẩn SEO</span>
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
@@ -1116,44 +1311,118 @@ if (isAuthenticated) {
                   Hủy sửa (Tạo bài mới)
                 </button>
               </div>
-              <form id="addNewsAdminForm" class="space-y-2.5">
+              <form id="addNewsAdminForm" class="space-y-3">
                 <input type="hidden" id="newsEditId" value="" />
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                
+                <div>
+                  <label class="block font-bold text-slate-700 text-xs mb-1">Tiêu Đề Bài Viết <span class="text-rose-500">*</span></label>
                   <input
                     type="text"
                     id="newsTitle"
                     required
-                    placeholder="Tiêu đề bài viết tin tức..."
-                    class="sm:col-span-2 px-3 py-2 rounded-xl border border-slate-300 text-xs font-semibold"
-                  />
-                  <input
-                    type="text"
-                    id="newsCategory"
-                    value="Góc chia sẻ"
-                    placeholder="Chuyên mục..."
-                    class="px-3 py-2 rounded-xl border border-slate-300 text-xs"
+                    placeholder="VD: Cẩm Nang Thực Tập Tốt Nghiệp Doanh Nghiệp Đạt Điểm Cao..."
+                    class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-semibold focus:border-[#A83245] focus:outline-none"
                   />
                 </div>
-                <input
-                  type="text"
-                  id="newsSummary"
-                  required
-                  placeholder="Tóm tắt ngắn (hiển thị ngoài danh sách)..."
-                  class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs"
-                />
-                <textarea
-                  id="newsContent"
-                  rows="3"
-                  required
-                  placeholder="Nội dung chi tiết bài viết..."
-                  class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs"
-                ></textarea>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block font-bold text-slate-700 text-xs mb-1">Đường Dẫn Tĩnh (Slug URL SEO)</label>
+                    <input
+                      type="text"
+                      id="newsSlug"
+                      placeholder="cam-nang-thuc-tap-tot-nghiep..."
+                      class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-mono text-sky-800"
+                    />
+                  </div>
+                  <div>
+                    <label class="block font-bold text-slate-700 text-xs mb-1">Tác Giả Bài Viết</label>
+                    <input
+                      type="text"
+                      id="newsAuthor"
+                      value="ThS. NGUYỄN THỊ TRÚC PHƯƠNG"
+                      class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-medium text-slate-800"
+                    />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block font-bold text-slate-700 text-xs mb-1">Chuyên Mục Bài Viết</label>
+                    <input
+                      type="text"
+                      id="newsCategory"
+                      value="Góc chia sẻ"
+                      list="categorySuggestions"
+                      placeholder="Góc chia sẻ, Hướng nghiệp..."
+                      class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs"
+                    />
+                    <datalist id="categorySuggestions">
+                      <option value="Góc chia sẻ"></option>
+                      <option value="Kinh nghiệm thực tập"></option>
+                      <option value="Nghiên cứu khoa học SPSS"></option>
+                      <option value="Phương pháp ôn thi"></option>
+                      <option value="Kinh tế &amp; Quản trị"></option>
+                    </datalist>
+                  </div>
+                  <div>
+                    <label class="block font-bold text-slate-700 text-xs mb-1">URL Hình Ảnh Minh Họa (Tùy chọn)</label>
+                    <input
+                      type="url"
+                      id="newsImageUrl"
+                      placeholder="https://... (link ảnh bài viết)"
+                      class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-bold text-slate-700 text-xs mb-1">Chú Thích Cho Hình Ảnh (Image Caption)</label>
+                  <input
+                    type="text"
+                    id="newsImageCaption"
+                    placeholder="VD: Sinh viên Khoa QTKD tham gia buổi báo cáo thực tập tại doanh nghiệp..."
+                    class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs italic"
+                  />
+                </div>
+
+                <div>
+                  <label class="block font-bold text-slate-700 text-xs mb-1">Tóm Tắt Ngắn (Meta Description SEO) <span class="text-rose-500">*</span></label>
+                  <input
+                    type="text"
+                    id="newsSummary"
+                    required
+                    placeholder="Tóm tắt ngắn gọn 1-2 câu hiển thị ở danh sách bài viết và thẻ mô tả Google..."
+                    class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs"
+                  />
+                </div>
+
+                <div>
+                  <label class="block font-bold text-slate-700 text-xs mb-1">Nội Dung Chi Tiết Bài Viết <span class="text-rose-500">*</span></label>
+                  <textarea
+                    id="newsContent"
+                    rows="6"
+                    required
+                    placeholder="Nhập nội dung bài viết. Hỗ trợ xuống dòng thành các đoạn văn, tiêu đề ##, trích dẫn >, gạch đầu dòng -..."
+                    class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs leading-relaxed"
+                  ></textarea>
+                </div>
+
+                <!-- Google Search Live Preview Box -->
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                  <div class="text-[10px] font-bold uppercase text-slate-400">Xem trước hiển thị tìm kiếm Google (SEO Snippet)</div>
+                  <div id="seoPreviewTitle" class="text-xs sm:text-sm font-semibold text-[#1a0dab] truncate">Tiêu đề bài viết — Góc Chia Sẻ NGUYỄN THỊ TRÚC PHƯƠNG</div>
+                  <div id="seoPreviewUrl" class="text-[11px] text-[#006621] truncate font-mono">https://nguyenthitrucphuong.pages.dev/goc-chia-se/bai-viet</div>
+                  <div id="seoPreviewDesc" class="text-xs text-[#545454] line-clamp-2">Tóm tắt ngắn gọn hiển thị trên kết quả tìm kiếm Google...</div>
+                </div>
+
                 <button
                   type="submit"
                   id="newsSubmitBtn"
-                  class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs cursor-pointer"
+                  class="w-full py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:opacity-95 text-white font-extrabold text-xs shadow-xs flex items-center justify-center gap-2 cursor-pointer transition-all"
                 >
-                  📝 Đăng Bài Viết Mới
+                  <span>🚀</span>
+                  <span>Đăng Bài Viết Chuẩn SEO</span>
                 </button>
               </form>
 
@@ -2494,6 +2763,349 @@ if (isAuthenticated) {
       });
     }
 
+    // =========================================================================
+    // SOẠN THẢO VÀ THÊM GIÁO TRÌNH MỚI (CHUẨN SƯ PHẠM & SEO TỰ ĐỘNG)
+    // =========================================================================
+    
+    function slugifyVietnamese(str) {
+      return (str || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .trim();
+    }
+
+
+    const addTextbookModal = document.getElementById('addTextbookModal');
+    const openAddTextbookBtn = document.getElementById('openAddTextbookBtn');
+    const closeAddTextbookModalBtn = document.getElementById('closeAddTextbookModalBtn');
+    const cancelAddTextbookBtn = document.getElementById('cancelAddTextbookBtn');
+    const saveTextbookForm = document.getElementById('saveTextbookForm');
+    const tbTitleInput = document.getElementById('tbTitle');
+    const tbSlugInput = document.getElementById('tbSlug');
+    const chaptersContainer = document.getElementById('chaptersListContainer');
+    const addNewChapterBtn = document.getElementById('addNewChapterBtn');
+    const modeBuilderBtn = document.getElementById('modeBuilderBtn');
+    const modeRawBtn = document.getElementById('modeRawBtn');
+    const sectionBuilderWrapper = document.getElementById('sectionBuilderWrapper');
+    const sectionRawWrapper = document.getElementById('sectionRawWrapper');
+    const triggerParseRawBtn = document.getElementById('triggerParseRawBtn');
+    const tbRawTextarea = document.getElementById('tbRawTextarea');
+
+    let textbookChapters = [];
+
+    function openTextbookModal() {
+      if (!addTextbookModal) return;
+      if (textbookChapters.length === 0) {
+        textbookChapters = [
+          {
+            title: 'Tổng Quan Về Môn Học',
+            description: 'Khái niệm, bản chất, vai trò và phạm vi ứng dụng thực tiễn.',
+            objectives: ['Nắm vững định nghĩa cốt lõi và các nguyên lý cơ bản', 'Phân tích các yếu tố tác động đến hoạt động quản trị'],
+            sections: [
+              { number: '1.1', title: 'Khái niệm và bản chất', content: 'Trình bày định nghĩa cơ bản và phạm vi nghiên cứu của học phần...' },
+              { number: '1.2', title: 'Vai trò và mục tiêu', content: 'Phân tích tầm quan trọng đối với hoạt động của doanh nghiệp hiện đại...' }
+            ]
+          }
+        ];
+      }
+      renderChapterList();
+      addTextbookModal.classList.remove('hidden');
+    }
+
+    function closeTextbookModal() {
+      if (addTextbookModal) addTextbookModal.classList.add('hidden');
+    }
+
+    openAddTextbookBtn?.addEventListener('click', openTextbookModal);
+    closeAddTextbookModalBtn?.addEventListener('click', closeTextbookModal);
+    cancelAddTextbookBtn?.addEventListener('click', closeTextbookModal);
+
+    // Auto-generate slug when typing textbook title
+    tbTitleInput?.addEventListener('input', () => {
+      const clean = tbTitleInput.value.trim().replace(/^giáo trình\s+/i, '');
+      const s = slugifyVietnamese(clean);
+      if (s) {
+        tbSlugInput.value = '/study-corner/' + s;
+      }
+    });
+
+    // Switch between builder mode and raw importer mode
+    modeBuilderBtn?.addEventListener('click', () => {
+      sectionBuilderWrapper?.classList.remove('hidden');
+      sectionRawWrapper?.classList.add('hidden');
+      modeBuilderBtn.className = 'px-3.5 py-1.5 rounded-lg font-bold text-xs bg-white text-[#A83245] shadow-xs cursor-pointer';
+      modeRawBtn.className = 'px-3.5 py-1.5 rounded-lg font-bold text-xs text-slate-700 hover:text-slate-900 cursor-pointer';
+    });
+
+    modeRawBtn?.addEventListener('click', () => {
+      sectionBuilderWrapper?.classList.add('hidden');
+      sectionRawWrapper?.classList.remove('hidden');
+      modeRawBtn.className = 'px-3.5 py-1.5 rounded-lg font-bold text-xs bg-white text-[#A83245] shadow-xs cursor-pointer';
+      modeBuilderBtn.className = 'px-3.5 py-1.5 rounded-lg font-bold text-xs text-slate-700 hover:text-slate-900 cursor-pointer';
+    });
+
+    // Render Chapters in Interactive Builder
+    function renderChapterList() {
+      if (!chaptersContainer) return;
+      chaptersContainer.innerHTML = '';
+
+      textbookChapters.forEach((ch, chIdx) => {
+        const chDiv = document.createElement('div');
+        chDiv.className = 'bg-white p-4 rounded-xl border border-slate-200 shadow-2xs space-y-3';
+        chDiv.setAttribute('data-ch-idx', chIdx);
+
+        chDiv.innerHTML = `
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <span class="inline-flex items-center gap-1.5 bg-[#A83245]/10 text-[#A83245] border border-[#A83245]/20 font-black text-xs px-2.5 py-0.5 rounded-md uppercase">
+              Chương ${String(chIdx + 1).padStart(2, '0')}
+            </span>
+            ${textbookChapters.length > 1 ? `
+            <button type="button" class="del-ch-btn text-rose-600 hover:underline font-bold text-xs cursor-pointer" data-idx="${chIdx}">
+              🗑️ Xóa Chương
+            </button>
+            ` : ''}
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block font-bold text-slate-700 text-xs mb-1">Tên Chương ${chIdx + 1} <span class="text-rose-500">*</span></label>
+              <input type="text" class="ch-title-input w-full px-3 py-1.5 rounded-lg border border-slate-300 font-bold text-slate-900 text-xs" value="${escapeAttr(ch.title)}" placeholder="VD: Tổng Quan Về Chuỗi Cung Ứng..." required />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-600 text-xs mb-1">Mô Tả Ngắn Chương</label>
+              <input type="text" class="ch-desc-input w-full px-3 py-1.5 rounded-lg border border-slate-300 text-slate-700 text-xs" value="${escapeAttr(ch.description || '')}" placeholder="Khái quát nội dung cốt lõi của chương..." />
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-600 text-xs mb-1">
+              Mục Tiêu Trọng Tâm Chương (Chuẩn đầu ra 🎯 — Mỗi dòng 1 mục tiêu):
+            </label>
+            <textarea class="ch-obj-input w-full px-3 py-1.5 rounded-lg border border-slate-300 text-slate-700 text-xs" rows="2" placeholder="Mỗi dòng là một mục tiêu, hệ thống tự động sinh số thứ tự 01, 02... và card bo góc sang trọng">${(ch.objectives || []).join('\n')}</textarea>
+          </div>
+
+          <!-- Danh Sách Đề Mục -->
+          <div class="space-y-2.5 pt-2 border-t border-slate-100">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-slate-700 text-xs">Các Đề Mục Nội Dung:</span>
+              <button type="button" class="add-sec-btn text-sky-700 hover:underline font-bold text-xs cursor-pointer" data-ch-idx="${chIdx}">
+                ➕ Thêm Đề Mục
+              </button>
+            </div>
+            <div class="sections-wrapper space-y-2.5">
+              ${(ch.sections || []).map((sec, sIdx) => `
+                <div class="p-3 bg-slate-50/80 rounded-lg border border-slate-200/90 space-y-2" data-sec-idx="${sIdx}">
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2 flex-1">
+                      <input type="text" class="sec-num-input w-16 px-2 py-1 rounded border border-slate-300 font-mono text-xs font-bold text-slate-700" value="${escapeAttr(sec.number || `${chIdx + 1}.${sIdx + 1}`)}" placeholder="1.1" />
+                      <input type="text" class="sec-title-input flex-1 px-2.5 py-1 rounded border border-slate-300 font-bold text-slate-800 text-xs" value="${escapeAttr(sec.title)}" placeholder="Tiêu đề đề mục..." required />
+                    </div>
+                    ${ch.sections.length > 1 ? `
+                    <button type="button" class="del-sec-btn text-rose-500 hover:text-rose-700 text-xs font-bold cursor-pointer" data-ch-idx="${chIdx}" data-sec-idx="${sIdx}">
+                      ✕
+                    </button>
+                    ` : ''}
+                  </div>
+                  <textarea class="sec-content-input w-full px-2.5 py-1.5 rounded border border-slate-300 text-xs text-slate-700 leading-relaxed font-sans" rows="3" placeholder="Nhập nội dung chi tiết của đề mục. Hỗ trợ xuống dòng, công thức, gạch đầu dòng...">${escapeAttr(sec.content || '')}</textarea>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+
+        chaptersContainer.appendChild(chDiv);
+      });
+
+      // Bind dynamic events
+      chaptersContainer.querySelectorAll('.del-ch-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.getAttribute('data-idx'), 10);
+          syncChaptersFromDom();
+          textbookChapters.splice(idx, 1);
+          renderChapterList();
+        });
+      });
+
+      chaptersContainer.querySelectorAll('.add-sec-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const chIdx = parseInt(btn.getAttribute('data-ch-idx'), 10);
+          syncChaptersFromDom();
+          const sCount = textbookChapters[chIdx].sections.length + 1;
+          textbookChapters[chIdx].sections.push({
+            number: `${chIdx + 1}.${sCount}`,
+            title: '',
+            content: ''
+          });
+          renderChapterList();
+        });
+      });
+
+      chaptersContainer.querySelectorAll('.del-sec-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const chIdx = parseInt(btn.getAttribute('data-ch-idx'), 10);
+          const secIdx = parseInt(btn.getAttribute('data-sec-idx'), 10);
+          syncChaptersFromDom();
+          textbookChapters[chIdx].sections.splice(secIdx, 1);
+          renderChapterList();
+        });
+      });
+    }
+
+    function syncChaptersFromDom() {
+      if (!chaptersContainer) return;
+      const chDivs = chaptersContainer.querySelectorAll('[data-ch-idx]');
+      const updated = [];
+
+      chDivs.forEach((chDiv) => {
+        const title = chDiv.querySelector('.ch-title-input')?.value || '';
+        const description = chDiv.querySelector('.ch-desc-input')?.value || '';
+        const objRaw = chDiv.querySelector('.ch-obj-input')?.value || '';
+        const objectives = objRaw.split('\n').map(s => s.trim()).filter(Boolean);
+
+        const sections = [];
+        chDiv.querySelectorAll('[data-sec-idx]').forEach((secDiv) => {
+          const sNum = secDiv.querySelector('.sec-num-input')?.value || '';
+          const sTitle = secDiv.querySelector('.sec-title-input')?.value || '';
+          const sContent = secDiv.querySelector('.sec-content-input')?.value || '';
+          sections.push({ number: sNum, title: sTitle, content: sContent });
+        });
+
+        updated.push({ title, description, objectives, sections });
+      });
+
+      if (updated.length > 0) {
+        textbookChapters = updated;
+      }
+    }
+
+    addNewChapterBtn?.addEventListener('click', () => {
+      syncChaptersFromDom();
+      const nextNum = textbookChapters.length + 1;
+      textbookChapters.push({
+        title: `Chương ${nextNum}`,
+        description: '',
+        objectives: [],
+        sections: [{ number: `${nextNum}.1`, title: '', content: '' }]
+      });
+      renderChapterList();
+    });
+
+    // Parse raw text button handler
+    triggerParseRawBtn?.addEventListener('click', async () => {
+      const rawText = tbRawTextarea?.value || '';
+      if (!rawText.trim()) {
+        alert('Vui lòng dán văn bản giáo trình vào ô để hệ thống phân tích.');
+        return;
+      }
+
+      try {
+        const resp = await fetch('/api/admin/action', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'parse_raw_textbook',
+            raw_text: rawText,
+            default_title: tbTitleInput?.value || 'Giáo trình mới'
+          })
+        });
+        const resData = await resp.json();
+        if (resData.ok && resData.data) {
+          if (resData.data.title && (!tbTitleInput.value || tbTitleInput.value === 'Giáo trình mới')) {
+            tbTitleInput.value = resData.data.title;
+            tbSlugInput.value = '/study-corner/' + slugifyVietnamese(resData.data.title);
+          }
+          if (resData.data.description && !document.getElementById('tbDescription').value) {
+            document.getElementById('tbDescription').value = resData.data.description;
+          }
+          if (Array.isArray(resData.data.chapters) && resData.data.chapters.length > 0) {
+            textbookChapters = resData.data.chapters;
+            renderChapterList();
+            // Switch back to builder tab to see results
+            modeBuilderBtn?.click();
+            alert(`⚡ Đã phân tích thành công ${textbookChapters.length} chương! Bạn có thể xem và chỉnh sửa chi tiết.`);
+          } else {
+            alert('Hệ thống chưa tìm thấy cấu trúc Chương trong văn bản. Hãy đảm bảo có các dòng như "Chương 1: ...", "1.1 ...".');
+          }
+        }
+      } catch (err) {
+        alert('Lỗi phân tích: ' + err);
+      }
+    });
+
+    function escapeAttr(str) {
+      return (str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    // Submit save textbook
+    saveTextbookForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      syncChaptersFromDom();
+
+      const title = tbTitleInput?.value.trim();
+      const slug = tbSlugInput?.value.trim();
+      if (!title || !slug) {
+        alert('Vui lòng nhập đầy đủ tên giáo trình và đường dẫn URL.');
+        return;
+      }
+
+      if (textbookChapters.length === 0) {
+        alert('Vui lòng nhập ít nhất 1 chương cho giáo trình.');
+        return;
+      }
+
+      const payload = {
+        action: 'add_textbook',
+        title,
+        slug,
+        course_code: document.getElementById('tbCourseCode')?.value.trim(),
+        credits: document.getElementById('tbCredits')?.value.trim(),
+        instructor: document.getElementById('tbInstructor')?.value.trim(),
+        department: document.getElementById('tbDepartment')?.value.trim(),
+        description: document.getElementById('tbDescription')?.value.trim(),
+        chapters: textbookChapters
+      };
+
+      const submitBtn = document.getElementById('saveTextbookSubmitBtn');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>⏳</span><span>Đang xuất bản...</span>';
+      }
+
+      try {
+        const resp = await fetch('/api/admin/action', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await resp.json();
+        if (resp.ok && data.ok) {
+          alert('🎉 ' + (data.message || 'Đã xuất bản giáo trình chuẩn SEO thành công!'));
+          sessionStorage.setItem('adminActiveTab', 'tab-pages');
+          window.location.reload();
+        } else {
+          alert('Lỗi: ' + (data.message || 'Không thể lưu giáo trình.'));
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>🚀</span><span>Xuất Bản Giáo Trình Chuẩn SEO</span>';
+          }
+        }
+      } catch (err) {
+        alert('Lỗi kết nối: ' + err);
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>🚀</span><span>Xuất Bản Giáo Trình Chuẩn SEO</span>';
+        }
+      }
+    });
+
     // Save gate passcode
     document.querySelectorAll('.save-gate-btn').forEach((btn) => {
       btn.addEventListener('click', async () => {
@@ -2626,32 +3238,78 @@ if (isAuthenticated) {
       });
     }
 
-    // Add, Edit & Delete News Articles
+    // Add, Edit & Delete News Articles with SEO Optimization
     const addNewsForm = document.getElementById('addNewsAdminForm');
     const newsEditIdInput = document.getElementById('newsEditId');
+    const newsTitleInput = document.getElementById('newsTitle');
+    const newsSlugInput = document.getElementById('newsSlug');
+    const newsAuthorInput = document.getElementById('newsAuthor');
+    const newsCategoryInput = document.getElementById('newsCategory');
+    const newsSummaryInput = document.getElementById('newsSummary');
+    const newsImageUrlInput = document.getElementById('newsImageUrl');
+    const newsImageCaptionInput = document.getElementById('newsImageCaption');
+    const newsContentInput = document.getElementById('newsContent');
     const newsSubmitBtn = document.getElementById('newsSubmitBtn');
     const resetNewsFormBtn = document.getElementById('resetNewsFormBtn');
 
+    // Live SEO Google Snippet Preview
+    const seoPreviewTitle = document.getElementById('seoPreviewTitle');
+    const seoPreviewUrl = document.getElementById('seoPreviewUrl');
+    const seoPreviewDesc = document.getElementById('seoPreviewDesc');
+
+    function updateArticleSeoPreview() {
+      const title = newsTitleInput?.value.trim() || 'Tiêu đề bài viết';
+      const slug = newsSlugInput?.value.trim() || slugifyVietnamese(title) || 'bai-viet';
+      const summary = newsSummaryInput?.value.trim() || 'Tóm tắt ngắn gọn hiển thị trên kết quả tìm kiếm Google...';
+
+      if (seoPreviewTitle) seoPreviewTitle.textContent = title + ' — Góc Chia Sẻ NGUYỄN THỊ TRÚC PHƯƠNG';
+      if (seoPreviewUrl) seoPreviewUrl.textContent = 'https://nguyenthitrucphuong.pages.dev/goc-chia-se/' + slug;
+      if (seoPreviewDesc) seoPreviewDesc.textContent = summary;
+    }
+
+    newsTitleInput?.addEventListener('input', () => {
+      if (!newsEditIdInput?.value) {
+        const slug = slugifyVietnamese(newsTitleInput.value);
+        if (newsSlugInput) newsSlugInput.value = slug;
+      }
+      updateArticleSeoPreview();
+    });
+
+    newsSlugInput?.addEventListener('input', updateArticleSeoPreview);
+    newsSummaryInput?.addEventListener('input', updateArticleSeoPreview);
+
+    newsContentInput?.addEventListener('input', () => {
+      // Suggest summary from first 160 characters if empty
+      if (newsSummaryInput && !newsSummaryInput.value.trim() && newsContentInput.value.trim().length > 30) {
+        const clean = newsContentInput.value.replace(/<[^>]*>/g, '').replace(/[#>*_\-]/g, '').replace(/\s+/g, ' ').trim();
+        newsSummaryInput.value = clean.slice(0, 160) + (clean.length > 160 ? '...' : '');
+        updateArticleSeoPreview();
+      }
+    });
+
     document.querySelectorAll('.edit-news-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
-        newsEditIdInput.value = btn.getAttribute('data-edit-news-id');
-        document.getElementById('newsTitle').value = btn.getAttribute('data-edit-news-title') || '';
-        document.getElementById('newsCategory').value = btn.getAttribute('data-edit-news-cat') || 'Góc chia sẻ';
-        document.getElementById('newsSummary').value = btn.getAttribute('data-edit-news-sum') || '';
+        if (newsEditIdInput) newsEditIdInput.value = btn.getAttribute('data-edit-news-id') || '';
+        if (newsTitleInput) newsTitleInput.value = btn.getAttribute('data-edit-news-title') || '';
+        if (newsCategoryInput) newsCategoryInput.value = btn.getAttribute('data-edit-news-cat') || 'Góc chia sẻ';
+        if (newsSummaryInput) newsSummaryInput.value = btn.getAttribute('data-edit-news-sum') || '';
         const rawHtml = btn.getAttribute('data-edit-news-html') || '';
-        document.getElementById('newsContent').value = rawHtml.replace(/<\/p><p>/g, '\n').replace(/^<p>|<\/p>$/g, '');
-        newsSubmitBtn.textContent = '💾 Lưu Cập Nhật Bài Viết';
+        if (newsContentInput) newsContentInput.value = rawHtml.replace(/<\/p><p>/g, '\n').replace(/^<p>|<\/p>$/g, '');
+        if (newsSubmitBtn) newsSubmitBtn.innerHTML = '<span>💾</span><span>Lưu Cập Nhật Bài Viết</span>';
         if (resetNewsFormBtn) resetNewsFormBtn.classList.remove('hidden');
-        document.getElementById('newsTitle').focus();
+        if (newsSlugInput) newsSlugInput.value = slugifyVietnamese(newsTitleInput?.value || '');
+        updateArticleSeoPreview();
+        newsTitleInput?.focus();
       });
     });
 
     if (resetNewsFormBtn) {
       resetNewsFormBtn.addEventListener('click', () => {
-        newsEditIdInput.value = '';
-        addNewsForm.reset();
-        newsSubmitBtn.textContent = '📝 Đăng Bài Viết Mới';
+        if (newsEditIdInput) newsEditIdInput.value = '';
+        addNewsForm?.reset();
+        if (newsSubmitBtn) newsSubmitBtn.innerHTML = '<span>🚀</span><span>Đăng Bài Viết Chuẩn SEO</span>';
         resetNewsFormBtn.classList.add('hidden');
+        updateArticleSeoPreview();
       });
     }
 
@@ -2659,19 +3317,47 @@ if (isAuthenticated) {
       addNewsForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const editId = newsEditIdInput ? newsEditIdInput.value.trim() : '';
-        const resp = await fetch('/api/admin/action', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: editId ? 'edit_news' : 'add_news',
-            id: editId ? Number(editId) : undefined,
-            title: document.getElementById('newsTitle').value.trim(),
-            category: document.getElementById('newsCategory').value.trim(),
-            summary: document.getElementById('newsSummary').value.trim(),
-            content_html: document.getElementById('newsContent').value.trim(),
-          }),
-        });
-        if (resp.ok) window.location.reload();
+
+        const payload = {
+          action: editId ? 'edit_news' : 'add_article',
+          id: editId ? Number(editId) : undefined,
+          title: newsTitleInput?.value.trim(),
+          slug: newsSlugInput?.value.trim(),
+          author: newsAuthorInput?.value.trim() || 'ThS. NGUYỄN THỊ TRÚC PHƯƠNG',
+          category: newsCategoryInput?.value.trim() || 'Góc chia sẻ',
+          summary: newsSummaryInput?.value.trim(),
+          image_url: newsImageUrlInput?.value.trim(),
+          image_caption: newsImageCaptionInput?.value.trim(),
+          content: newsContentInput?.value.trim()
+        };
+
+        if (newsSubmitBtn) {
+          newsSubmitBtn.disabled = true;
+          newsSubmitBtn.innerHTML = '<span>⏳</span><span>Đang xuất bản...</span>';
+        }
+
+        try {
+          const resp = await fetch('/api/admin/action', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const data = await resp.json();
+          alert(data.message || 'Đã lưu bài viết!');
+          if (resp.ok && data.ok) {
+            sessionStorage.setItem('adminActiveTab', 'tab-news-bday');
+            window.location.reload();
+          } else if (newsSubmitBtn) {
+            newsSubmitBtn.disabled = false;
+            newsSubmitBtn.innerHTML = '<span>🚀</span><span>Đăng Bài Viết Chuẩn SEO</span>';
+          }
+        } catch (err) {
+          alert('Lỗi: ' + err);
+          if (newsSubmitBtn) {
+            newsSubmitBtn.disabled = false;
+            newsSubmitBtn.innerHTML = '<span>🚀</span><span>Đăng Bài Viết Chuẩn SEO</span>';
+          }
+        }
       });
     }
 
@@ -2684,7 +3370,10 @@ if (isAuthenticated) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action: 'delete_news', id }),
         });
-        if (resp.ok) window.location.reload();
+        if (resp.ok) {
+          sessionStorage.setItem('adminActiveTab', 'tab-news-bday');
+          window.location.reload();
+        }
       });
     });
 

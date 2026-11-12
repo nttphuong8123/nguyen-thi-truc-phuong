@@ -1816,6 +1816,7 @@ const db = {
         // 8. INSERT INTO news_articles
         if (normUpper.startsWith('INSERT INTO NEWS_ARTICLES')) {
           const nextId = store.news_articles.reduce((max, r) => Math.max(max, Number(r.id) || 0), 0) + 1;
+          const author = params[5] ? String(params[5]) : 'ThS. NGUYỄN THỊ TRÚC PHƯƠNG';
           const art: NewsArticle = {
             id: nextId,
             slug: String(params[0] ?? ''),
@@ -1823,15 +1824,15 @@ const db = {
             category: String(params[2] ?? 'Góc chia sẻ'),
             summary: String(params[3] ?? ''),
             content_html: String(params[4] ?? ''),
-            author: 'ThS. NGUYỄN THỊ TRÚC PHƯƠNG',
+            author: author,
             published_at: ts,
             views: 1,
           };
           store.news_articles.unshift(art);
           queueD1Write(
             `INSERT INTO news_articles (slug, title, category, summary, content_html, author, published_at, views)
-             VALUES (?, ?, ?, ?, ?, 'ThS. NGUYỄN THỊ TRÚC PHƯƠNG', ?, 1)`,
-            [art.slug, art.title, art.category, art.summary, art.content_html, ts]
+             VALUES (?, ?, ?, ?, ?, ?, ?, 1)`,
+            [art.slug, art.title, art.category, art.summary, art.content_html, author, ts]
           );
           return { lastInsertRowid: nextId, changes: 1 };
         }
@@ -1895,6 +1896,57 @@ const db = {
             page.custom_js = custom_js;
             page.updated_at = ts;
           }
+          queueD1Write(
+            `INSERT OR REPLACE INTO site_pages_overrides (route_path, title, html_content, custom_css, custom_js, updated_at)
+             VALUES (?, ?, ?, ?, ?, ?)`,
+            [route_path, title, html_content, custom_css, custom_js, ts]
+          );
+          return { lastInsertRowid: 0, changes: 1 };
+        }
+
+        // 12. INSERT INTO site_pages / INSERT OR REPLACE INTO site_pages
+        if (normUpper.startsWith('INSERT INTO SITE_PAGES') || normUpper.startsWith('INSERT OR REPLACE INTO SITE_PAGES')) {
+          const route_path = normalizeRoutePath(String(params[0] ?? ''));
+          const title = String(params[1] ?? '');
+          const category = String(params[2] ?? 'Study-Corner');
+          const page_type = String(params[3] ?? 'content');
+          const html_content = String(params[4] ?? '');
+          const custom_css = String(params[5] ?? '');
+          const custom_js = String(params[6] ?? '');
+          const requires_gate = params[7] ? String(params[7]) : null;
+
+          const existing =
+            pageExactMap.get(route_path) ||
+            pageLowerMap.get(route_path.toLowerCase()) ||
+            pageNormMap.get(route_path);
+
+          if (existing) {
+            existing.title = title;
+            existing.category = category;
+            existing.page_type = page_type;
+            existing.html_content = html_content;
+            existing.custom_css = custom_css;
+            existing.custom_js = custom_js;
+            existing.requires_gate = requires_gate;
+            existing.updated_at = ts;
+          } else {
+            const newPage: SitePage = {
+              route_path,
+              title,
+              category,
+              page_type,
+              html_content,
+              custom_css,
+              custom_js,
+              requires_gate,
+              updated_at: ts,
+            };
+            store.site_pages.push(newPage);
+            pageExactMap.set(route_path, newPage);
+            pageLowerMap.set(route_path.toLowerCase(), newPage);
+            pageNormMap.set(route_path, newPage);
+          }
+
           queueD1Write(
             `INSERT OR REPLACE INTO site_pages_overrides (route_path, title, html_content, custom_css, custom_js, updated_at)
              VALUES (?, ?, ?, ?, ?, ?)`,
